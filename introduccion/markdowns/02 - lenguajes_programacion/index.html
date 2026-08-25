@@ -1,0 +1,2611 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Manuel Sánchez Gomis">
+      
+      
+      
+        <link rel="prev" href="../01%20-%20index/">
+      
+      
+        <link rel="next" href="../03%20-%20herramientas/">
+      
+      
+      <link rel="icon" href="../../../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.46">
+    
+    
+      
+        <title>Lenguajes de programación - Desarrollo Web en entorno servidor</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/_markdown_exec_pyodide.css">
+    
+      <link rel="stylesheet" href="../../../_static/css/notebook.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lenguajes-de-programacion" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Desarrollo Web en entorno servidor" class="md-header__button md-logo" aria-label="Desarrollo Web en entorno servidor" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Desarrollo Web en entorno servidor
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lenguajes de programación
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber"  aria-label="Cambiar a modo brillante"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo brillante" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="amber"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Bienvenido
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Introduccion
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../php/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Php
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../aplicaciones_web/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Aplicaciones Web con Php
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../laravel/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Laravel
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../servicios_web/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Servicios Web
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../webs_dinamicas/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Webs Dinámicas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../aplicaciones_web_hibridas/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Aplicaciones Web Híbridas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../bibliografia/" class="md-tabs__link">
+        
+  
+    
+  
+  Bibliografia
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Desarrollo Web en entorno servidor" class="md-nav__button md-logo" aria-label="Desarrollo Web en entorno servidor" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    Desarrollo Web en entorno servidor
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bienvenido
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Introduccion
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Introduccion
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Conceptos básicos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Lenguajes de programación
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Lenguajes de programación
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#php-el-lenguaje-pragmatico-de-la-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      PHP: El Lenguaje Pragmático de la Web
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python-el-lenguaje-versatil-y-elegante" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python: El Lenguaje Versátil y Elegante
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#javascript-y-nodejs-un-lenguaje-para-dominarlos-a-todos" class="md-nav__link">
+    <span class="md-ellipsis">
+      JavaScript y Node.js: Un Lenguaje para Dominarlos a Todos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java-el-gigante-robusto-y-empresarial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Java: El Gigante Robusto y Empresarial
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rubi-la-joya-de-la-productividad-del-desarrollador" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rubi: La Joya de la Productividad del Desarrollador
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c-y-net-la-solucion-empresarial-de-microsoft" class="md-nav__link">
+    <span class="md-ellipsis">
+      C# y .NET: La Solución Empresarial de Microsoft
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integrando-codigo-de-servidor-y-lenguajes-de-marcas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integrando Código de Servidor y Lenguajes de Marcas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integrando Código de Servidor y Lenguajes de Marcas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#codigo-embebido" class="md-nav__link">
+    <span class="md-ellipsis">
+      Código Embebido
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#motores-de-plantillas-templating-engines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Motores de Plantillas (Templating Engines)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apis-y-aplicaciones-de-cliente-spas" class="md-nav__link">
+    <span class="md-ellipsis">
+      APIs y Aplicaciones de Cliente (SPAs)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabla-comparativa-de-arquitecturas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tabla Comparativa de Arquitecturas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03%20-%20herramientas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Herramientas y frameworks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Php
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Php
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/02%20-%20primeros_pasos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primeros pasos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/03%20-%20estructuras_control/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Estructuras de Control en PHP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/04%20-%20arrays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Arrays
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/05%20-%20funciones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Funciones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/06%20-%20poo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Programación orientada a objetos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/07%20-%20excepciones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Excepciones y errores
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/08%20-%20directivas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Directivas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/09%20-%20codigo_embebido/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Código embebido
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Aplicaciones Web con Php
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Aplicaciones Web con Php
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/02%20-%20formularios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Formularios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/03%20-%20sesiones_cookies/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cookies y Sesiones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/04%20-%20seguridad/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Seguridad
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/05%20-%20ficheros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ficheros
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/06%20-%20bases_datos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bases de datos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/07%20-%20estructura_proyecto/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Organizando el código
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/98%20-%20ejercicios_persistencia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios persistencia
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Laravel
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Laravel
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/02%20-%20instalacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instalación y primeros pasos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/03%20-%20rutas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rutas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/04%20-%20controladores/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Controladores
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/05%20-%20vistas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vistas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/06%20-%20formularios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Formularios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/07%20-%20modelos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modelos de Eloquent
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/14%20-%20response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Respuestas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/08%20-%20cookies_sesiones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cookies y Sesiones en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/09%20-%20servicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Servicios en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/10%20-%20seguridad/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Seguridad en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/11%20-%20inyeccion_dependencias/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inyección de Dependencias en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/12%20-%20testing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pruebas y documentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/13%20-%20fechas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fechas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/15%20-%20migrations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Migraciones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Servicios Web
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Servicios Web
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/02%20-%20tecnologias/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tecnologías y Estándares
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/03%20-%20creando_servicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creando un Servicio Web
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/04%20-%20probando_servicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Probando el Servicio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/05%20-%20documentando_servicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Documentando un Servicio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Webs Dinámicas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Webs Dinámicas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/02%20-%20ajax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AJAX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/03%20-%20validacion_formularios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Validación de Formularios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/04%20-%20modificacion_dom/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modificación del DOM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/05%20-%20async_patrones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Patrones Async
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Aplicaciones Web Híbridas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Aplicaciones Web Híbridas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/02%20-%20apis_terceros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    APIs de Terceros
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/03%20-%20creando_apis_propias/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creando APIs Propias
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/04%20-%20sdks_frameworks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SDKs y Frameworks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/05%20-%20big_data_ia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Big Data e IA
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/06%20-%20testing_depuracion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Testing y Depuración
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/07%20-%20autenticacion_apis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Autenticación de APIs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/08%20-%20versionado_webhooks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Versionado y Webhooks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../bibliografia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bibliografia
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#php-el-lenguaje-pragmatico-de-la-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      PHP: El Lenguaje Pragmático de la Web
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python-el-lenguaje-versatil-y-elegante" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python: El Lenguaje Versátil y Elegante
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#javascript-y-nodejs-un-lenguaje-para-dominarlos-a-todos" class="md-nav__link">
+    <span class="md-ellipsis">
+      JavaScript y Node.js: Un Lenguaje para Dominarlos a Todos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java-el-gigante-robusto-y-empresarial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Java: El Gigante Robusto y Empresarial
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rubi-la-joya-de-la-productividad-del-desarrollador" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rubi: La Joya de la Productividad del Desarrollador
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c-y-net-la-solucion-empresarial-de-microsoft" class="md-nav__link">
+    <span class="md-ellipsis">
+      C# y .NET: La Solución Empresarial de Microsoft
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integrando-codigo-de-servidor-y-lenguajes-de-marcas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integrando Código de Servidor y Lenguajes de Marcas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integrando Código de Servidor y Lenguajes de Marcas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#codigo-embebido" class="md-nav__link">
+    <span class="md-ellipsis">
+      Código Embebido
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#motores-de-plantillas-templating-engines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Motores de Plantillas (Templating Engines)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apis-y-aplicaciones-de-cliente-spas" class="md-nav__link">
+    <span class="md-ellipsis">
+      APIs y Aplicaciones de Cliente (SPAs)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabla-comparativa-de-arquitecturas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tabla Comparativa de Arquitecturas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="lenguajes-de-programacion">Lenguajes de programación</h1>
+<p>Hasta ahora, hemos explorado la arquitectura y la mecánica que hacen posible la web dinámica. Entendemos el rol del servidor web, los modelos de ejecución y las funcionalidades de un servidor de aplicaciones. En esencia, hemos montado el "motor". Ahora, es el momento de estudiar los diferentes tipos de "combustible" que pueden hacer funcionar ese motor: los <strong>lenguajes de programación en entorno servidor</strong>.</p>
+<p>Un lenguaje de servidor es la herramienta fundamental con la que un desarrollador implementa la <strong>lógica de negocio</strong> de una aplicación. Es el código que se ejecuta tras bambalinas para procesar formularios, interactuar con bases de datos, autenticar usuarios y, en última instancia, tomar las decisiones que determinan el contenido que se enviará de vuelta al navegador del cliente.</p>
+<p>No existe un único lenguaje "mejor" para el desarrollo backend; el ecosistema es rico y diverso. Lenguajes como <strong>PHP</strong>, <strong>Python</strong>, <strong>Java</strong> y <strong>JavaScript</strong> (a través de <strong>Node.js</strong>) dominan el panorama actual, pero otros como Ruby, C# o Go también ocupan nichos importantes. Cada uno de ellos nació con una filosofía diferente, posee sus propias fortalezas y debilidades, y cuenta con un ecosistema único de herramientas, librerías y frameworks que lo hacen más o menos adecuado para ciertos tipos de proyectos.</p>
+<p>En esta sección, realizaremos un recorrido por los lenguajes más influyentes del desarrollo web del lado del servidor. Analizaremos sus características principales, su sintaxis distintiva y los casos de uso donde cada uno tiende a brillar, proporcionándote una base sólida para entender el panorama tecnológico actual.</p>
+<h2 id="php-el-lenguaje-pragmatico-de-la-web">PHP: El Lenguaje Pragmático de la Web</h2>
+<p><strong>PHP (acrónimo recursivo de <em>PHP: Hypertext Preprocessor</em>)</strong> es, sin lugar a dudas, uno de los lenguajes más influyentes en la historia del desarrollo web. Nació en 1994 de la mano de Rasmus Lerdorf, no como un lenguaje de programación formal, sino como un conjunto de herramientas personales para gestionar su página web. Esta génesis pragmática y orientada a resolver problemas web concretos es la clave para entender su filosofía y su enorme éxito.</p>
+<p>La principal fortaleza de PHP y la razón de su rápida adopción es su <strong>simplicidad y su baja curva de aprendizaje</strong>. El modelo de <strong>código embebido</strong> que ya estudiamos es su forma nativa de operar. Un desarrollador puede tomar una página HTML funcional y simplemente "rociar" la lógica del servidor donde sea necesaria utilizando las etiquetas <code>&lt;?php ... ?&gt;</code>. Esta inmediatez lo hace extremadamente accesible para los principiantes. Además, PHP fue diseñado específicamente para la web, y muchas de las tareas más comunes están integradas en su núcleo de forma muy directa. La gestión de datos de formularios (<code>$_POST</code>, <code>$_GET</code>), las cookies (<code>$_COOKIE</code>) o las sesiones de usuario (<code>$_SESSION</code>) se manejan a través de variables "superglobales", que están disponibles en cualquier parte del script sin necesidad de importar librerías.</p>
+<p>Su sintaxis, heredada en gran parte de C, es familiar para muchos programadores. Las variables se prefijan con un símbolo de dólar (<code>$miVariable</code>), las sentencias terminan en punto y coma, y su sistema de tipos es dinámico, lo que significa que el lenguaje gestiona las conversiones de tipo automáticamente, ofreciendo flexibilidad a costa de un menor rigor.</p>
+<p>Debido a su larga historia, PHP impulsa un porcentaje masivo de los sitios web de internet, en gran parte gracias a sistemas de gestión de contenido como <strong>WordPress</strong>, Drupal y Joomla, y plataformas de e-commerce como Magento, todos construidos sobre él. Este ecosistema maduro significa que existe una cantidad inmensa de documentación, tutoriales y foros de ayuda. La introducción de <strong>Composer</strong>, su gestor de dependencias, modernizó por completo el desarrollo en PHP, facilitando la incorporación de librerías de terceros. Hoy en día, el desarrollo profesional en PHP se realiza sobre frameworks potentes como <strong>Laravel</strong> o <strong>Symfony</strong>, que promueven prácticas de desarrollo modernas como la arquitectura Modelo-Vista-Controlador (MVC) y la programación orientada a objetos.</p>
+<p>A pesar de haber recibido críticas en el pasado por inconsistencias y problemas de seguridad en versiones antiguas, PHP ha experimentado una evolución espectacular. A partir de su versión 7 y ahora con la 8, el lenguaje ha introducido mejoras drásticas de rendimiento, un sistema de tipos más estricto (tipado estático opcional) y características modernas que lo colocan como una opción competitiva, robusta y relevante para el desarrollo web actual.</p>
+<h2 id="python-el-lenguaje-versatil-y-elegante">Python: El Lenguaje Versátil y Elegante</h2>
+<p>A diferencia de PHP, que nació por y para la web, <strong>Python</strong> es un lenguaje de programación de <strong>propósito general</strong>. Su filosofía de diseño, resumida en el "Zen de Python", prioriza la <strong>legibilidad, la simplicidad y la elegancia</strong> del código por encima de todo. Su sintaxis limpia y el uso de la indentación para definir bloques de código lo hacen extremadamente fácil de leer y mantener, lo que ha impulsado su popularidad en una enorme variedad de campos, desde la ciencia de datos y la inteligencia artificial hasta el desarrollo web.</p>
+<p>En el contexto del backend, la fortaleza de Python no reside en un modelo nativo para la web, sino en su poder como lenguaje robusto y en su ecosistema de frameworks. La comunicación entre un servidor web y una aplicación Python se estandariza a través de una especificación llamada <strong>WSGI (Web Server Gateway Interface)</strong>. Esta interfaz define un contrato simple que permite que cualquier servidor web compatible (como Apache o Nginx, con un módulo como Gunicorn o uWSGI) pueda comunicarse con cualquier framework o aplicación Python compatible.</p>
+<p>El desarrollo web en Python casi siempre se realiza utilizando un <strong>framework</strong>, que proporciona las herramientas y la estructura necesarias para construir aplicaciones de manera eficiente. El ecosistema se divide principalmente en dos grandes enfoques:</p>
+<ol>
+<li>
+<p><strong>Frameworks "Full-Stack" (o "con pilas incluidas")</strong>: El rey indiscutible en esta categoría es <strong>Django</strong>. Django sigue la filosofía de "baterías incluidas", proporcionando una solución completa e integrada para casi todas las necesidades de una aplicación web moderna. Incluye un potente <strong>ORM (Object-Relational Mapper)</strong> para interactuar con bases de datos, un sistema de autenticación, un panel de administración generado automáticamente, un motor de plantillas y mucho más. Esta naturaleza opinada y completa permite un desarrollo muy rápido y estructurado, ideal para proyectos grandes y complejos.</p>
+</li>
+<li>
+<p><strong>Microframeworks</strong>: En el lado opuesto se encuentra <strong>Flask</strong>. Flask es un microframework minimalista y altamente extensible. Proporciona solo el núcleo esencial para gestionar rutas y peticiones, dejando que el desarrollador tenga total libertad para elegir las librerías y herramientas que desee para otras tareas (como el acceso a bases de datos o la validación de formularios). Esta flexibilidad lo hace perfecto para aplicaciones más pequeñas, microservicios, APIs o proyectos donde el desarrollador quiere un control total sobre los componentes que utiliza.</p>
+</li>
+</ol>
+<p>Gracias a su versatilidad, Python es la elección predilecta para aplicaciones cuyo componente web es solo una parte de un sistema más grande que puede incluir análisis de datos, tareas de machine learning o automatización de scripts. Grandes plataformas como Instagram, Spotify y Dropbox utilizan Python de forma intensiva en sus servicios de backend.</p>
+<h2 id="javascript-y-nodejs-un-lenguaje-para-dominarlos-a-todos">JavaScript y Node.js: Un Lenguaje para Dominarlos a Todos</h2>
+<p>La irrupción de <strong>Node.js</strong> en 2009 supuso un cambio de paradigma en el desarrollo web. La idea era revolucionaria: tomar <strong>JavaScript</strong>, el lenguaje que hasta entonces vivía exclusivamente en el navegador del cliente, y darle la capacidad de ejecutarse en el servidor. Esto permitió por primera vez a los desarrolladores utilizar un único lenguaje para toda la aplicación (tanto frontend como backend), simplificando el proceso de desarrollo y la composición de los equipos.</p>
+<p>El corazón técnico de Node.js y su principal diferencia con otros entornos es su <strong>modelo de E/S (Entrada/Salida) no bloqueante</strong>, gestionado por un componente llamado <strong>bucle de eventos (event loop)</strong>. En un modelo tradicional multi-hilo (como el de Apache), cada petición entrante puede ser asignada a un hilo de ejecución diferente. Si una de esas peticiones tiene que esperar por una operación lenta (como una consulta a una base de datos), ese hilo se queda "bloqueado" esperando. Node.js, en cambio, opera sobre un único hilo principal. Cuando se encuentra con una operación de E/S, en lugar de esperar, delega esa tarea al sistema operativo y sigue ejecutando otras tareas. Una vez que la operación lenta ha terminado, el sistema operativo emite un evento y el bucle de eventos lo recoge para ejecutar la función de "callback" asociada.</p>
+<p>Este modelo de ejecución asíncrona hace que Node.js sea extraordinariamente eficiente para gestionar un gran número de conexiones concurrentes con un bajo consumo de recursos. Es ideal para aplicaciones donde el servidor pasa mucho tiempo esperando respuestas de bases de datos o de otras APIs.</p>
+<p>El ecosistema de Node.js es, posiblemente, el más grande del mundo gracias a su gestor de paquetes, <strong>npm (Node Package Manager)</strong>, que alberga millones de librerías y herramientas reutilizables. A diferencia de PHP, Node.js no tiene un modelo de ejecución embebido, y a diferencia de Python, no se basa en un estándar como WSGI. Node.js en sí mismo puede actuar como un servidor web.</p>
+<p>Al igual que en Python, el desarrollo se apoya en frameworks. El más icónico y fundamental es <strong>Express.js</strong>, un framework minimalista y flexible que proporciona una capa delgada de funcionalidades web esenciales, muy similar en espíritu a Flask. Su popularidad es tal que sirve de base para innumerables frameworks de más alto nivel. En el espectro más moderno y estructurado, encontramos frameworks como <strong>NestJS</strong>, que utiliza TypeScript (un superset de JavaScript con tipos estáticos) y promueve una arquitectura fuertemente inspirada en Angular, o <strong>AdonisJS</strong>, que ofrece una experiencia de desarrollo "todo incluido" similar a la de Laravel en el mundo PHP.</p>
+<p>Node.js brilla especialmente en la construcción de <strong>APIs rápidas y escalables</strong>, <strong>microservicios</strong> y <strong>aplicaciones en tiempo real</strong> (como chats, juegos online o plataformas colaborativas) que se benefician enormemente de tecnologías como los WebSockets.</p>
+<h2 id="java-el-gigante-robusto-y-empresarial">Java: El Gigante Robusto y Empresarial</h2>
+<p><strong>Java</strong> es un lenguaje de programación de propósito general, orientado a objetos y fuertemente tipado que ha sido una fuerza dominante en el mundo del software durante décadas. Su filosofía se resume en el lema "Write Once, Run Anywhere" (Escribe una vez, ejecuta en cualquier lugar), gracias a la <strong>JVM (Java Virtual Machine)</strong>, una máquina virtual que permite que el mismo código Java se ejecute sin cambios en diferentes sistemas operativos. En el desarrollo web, Java es sinónimo de <strong>robustez, rendimiento y escalabilidad</strong>, siendo la elección predilecta para grandes sistemas empresariales.</p>
+<p>Como ya hemos adelantado, el modelo de desarrollo web en Java no se basa en scripts individuales, sino en componentes de software gestionados por un <strong>Servidor de Aplicaciones</strong> o un <strong>Contenedor de Servlets</strong> (como Apache Tomcat). La base de todo es la <strong>API de Servlets</strong>, que proporciona el contrato estándar para que los componentes Java puedan manejar peticiones y respuestas HTTP. Este enfoque, aunque más estructurado y con una curva de entrada más pronunciada, ofrece un control y una eficiencia inmensos para aplicaciones complejas.</p>
+<p>El desarrollo moderno en Java ha sido revolucionado por el <strong>Spring Framework</strong> y, más concretamente, por <strong>Spring Boot</strong>. Spring es un ecosistema masivo que proporciona soluciones para casi todos los problemas del desarrollo de software. Su principio fundamental es la <strong>inversión de control (IoC)</strong> y la <strong>inyección de dependencias</strong>, que permiten construir aplicaciones modulares y desacopladas. <strong>Spring Boot</strong> es una capa por encima de Spring que simplifica radicalmente la creación de aplicaciones. Con Spring Boot, es posible crear una aplicación web completa y auto-ejecutable con un mínimo de configuración, ya que viene con un servidor web (como Tomcat) embebido y auto-configura gran parte del entorno basándose en las dependencias del proyecto.</p>
+<p>El <strong>tipado estático</strong> de Java es una de sus mayores fortalezas en proyectos grandes. Al obligar a declarar los tipos de todas las variables, la mayoría de los errores se detectan durante la compilación, mucho antes de que el código llegue a producción, lo que aumenta drásticamente la fiabilidad del software.</p>
+<p>Java es la tecnología dominante en el sector financiero (banca, fintech), grandes plataformas de comercio electrónico, sistemas de reservas y en el backend de aplicaciones Android. Su rendimiento en aplicaciones de larga duración, su madurez y su ecosistema de herramientas de nivel empresarial lo convierten en la opción por defecto para proyectos donde la fiabilidad y la escalabilidad son la máxima prioridad.</p>
+<h2 id="rubi-la-joya-de-la-productividad-del-desarrollador">Rubi: La Joya de la Productividad del Desarrollador</h2>
+<p><strong>Ruby</strong> es un lenguaje de programación dinámico y orientado a objetos, conocido por su elegante sintaxis, que está diseñada para ser leída y escrita de forma natural. La filosofía de Ruby se centra en la <strong>felicidad y productividad del programador</strong>, proveyendo herramientas que hacen que el desarrollo sea una tarea agradable y rápida.</p>
+<p>En el mundo web, hablar de Ruby es hablar de <strong>Ruby on Rails</strong>, su "killer app". Rails es un framework web full-stack que popularizó muchos de los patrones de diseño que hoy damos por sentados. Su principio fundamental es la <strong>"Convención sobre Configuración" (Convention over Configuration - CoC)</strong>. Esto significa que el framework toma un gran número de decisiones por defecto por el desarrollador; si sigues sus convenciones para nombrar clases, tablas de la base de datos y ficheros, todo funciona "mágicamente" con una configuración mínima. Este enfoque, junto con el principio <strong>"No te repitas" (Don't Repeat Yourself - DRY)</strong>, permite desarrollar aplicaciones complejas a una velocidad asombrosa.</p>
+<p>Rails fue pionero en la adopción masiva del patrón <strong>Modelo-Vista-Controlador (MVC)</strong> en la web. Aunque su pico de popularidad ha pasado, sigue siendo una herramienta extremadamente potente y relevante, especialmente para startups y para el desarrollo rápido de productos (MVP - Minimum Viable Product). Sitios como <strong>GitHub</strong>, <strong>Shopify</strong> y <strong>Airbnb</strong> fueron construidos originalmente sobre Ruby on Rails y son un testamento de su poder.</p>
+<h2 id="c-y-net-la-solucion-empresarial-de-microsoft">C# y .NET: La Solución Empresarial de Microsoft</h2>
+<p><strong>C# (pronunciado "C sharp")</strong> es el lenguaje de programación insignia de Microsoft. Es un lenguaje moderno, orientado a objetos y fuertemente tipado, muy similar en capacidad y sintaxis a Java. C# forma parte del ecosistema <strong>.NET</strong>, una plataforma de desarrollo integral creada por Microsoft.</p>
+<p>Históricamente, .NET estaba ligado a Windows, pero con la llegada de <strong>.NET Core (ahora simplemente .NET)</strong>, la plataforma se ha transformado en un ecosistema de código abierto y multiplataforma, capaz de ejecutarse en Windows, macOS y Linux. Esto ha disparado su popularidad y relevancia para el desarrollo web moderno.</p>
+<p>El framework para construir aplicaciones web con C# es <strong>ASP.NET Core</strong>. Es conocido por su <strong>excepcional rendimiento</strong>, siendo uno de los frameworks más rápidos del mercado. Al igual que Java y Spring, C# y ASP.NET Core son una opción muy sólida para construir <strong>aplicaciones empresariales robustas y a gran escala</strong>. Su fuerte tipado, excelentes herramientas (especialmente el IDE Visual Studio) y la profunda integración con el ecosistema de Microsoft (incluyendo la nube de <strong>Azure</strong>) lo convierten en la opción por defecto para muchas grandes organizaciones. Se utiliza para construir desde APIs de alto rendimiento hasta aplicaciones web completas y servicios en la nube.</p>
+<h2 id="integrando-codigo-de-servidor-y-lenguajes-de-marcas">Integrando Código de Servidor y Lenguajes de Marcas</h2>
+<p>Hemos explorado qué son los lenguajes de servidor y qué hacen, y previamente vimos la estructura de los lenguajes de marcas como HTML. El siguiente paso es entender cómo estas dos piezas se unen en un mismo fichero para producir una página web dinámica. La integración del código de servidor con el HTML es el núcleo de la generación de contenido. Existen dos filosofías principales para lograr esta fusión: el método clásico de código embebido y el enfoque moderno de los motores de plantillas.</p>
+<hr/>
+<h3 id="codigo-embebido">Código Embebido</h3>
+<p>Esta es la forma más directa y fundamental de integración, y es el método nativo de lenguajes como PHP. Consiste en tomar un documento HTML estándar e "incrustar" bloques de código de servidor directamente en él. El servidor web, al procesar el fichero, ejecutará únicamente el código contenido dentro de unas etiquetas especiales y lo reemplazará por su resultado.</p>
+<p>La sintaxis utiliza las etiquetas <code>&lt;?php</code> para iniciar un bloque de código de servidor y <code>?&gt;</code> para terminarlo. Todo lo que está fuera de estas etiquetas es considerado texto plano (HTML) y se envía al navegador sin cambios.</p>
+<p><strong>Ejemplo práctico:</strong>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="x">&lt;!DOCTYPE html&gt;</span>
+</span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="x">&lt;html lang="es"&gt;</span>
+</span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="x">&lt;head&gt;</span>
+</span><span id="__span-0-4"><a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="x">    &lt;title&gt;Página de Bienvenida&lt;/title&gt;</span>
+</span><span id="__span-0-5"><a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="x">&lt;/head&gt;</span>
+</span><span id="__span-0-6"><a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="x">&lt;body&gt;</span>
+</span><span id="__span-0-7"><a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a>
+</span><span id="__span-0-8"><a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="x">    </span><span class="cp">&lt;?php</span>
+</span><span id="__span-0-9"><a href="#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a>        <span class="nv">$nombre_usuario</span> <span class="o">=</span> <span class="s2">"Ana"</span><span class="p">;</span>
+</span><span id="__span-0-10"><a href="#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a>        <span class="nv">$hora_actual</span> <span class="o">=</span> <span class="nb">date</span><span class="p">(</span><span class="s1">'H:i'</span><span class="p">);</span>
+</span><span id="__span-0-11"><a href="#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a>    <span class="cp">?&gt;</span>
+</span><span id="__span-0-12"><a href="#__codelineno-0-12" id="__codelineno-0-12" name="__codelineno-0-12"></a>
+</span><span id="__span-0-13"><a href="#__codelineno-0-13" id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="x">    &lt;h1&gt;Bienvenido a nuestro sitio, </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$nombre_usuario</span><span class="p">;</span> <span class="cp">?&gt;</span><span class="x">.&lt;/h1&gt;</span>
+</span><span id="__span-0-14"><a href="#__codelineno-0-14" id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="x">    &lt;p&gt;La hora actual del servidor es: </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$hora_actual</span><span class="p">;</span> <span class="cp">?&gt;</span><span class="x">&lt;/p&gt;</span>
+</span><span id="__span-0-15"><a href="#__codelineno-0-15" id="__codelineno-0-15" name="__codelineno-0-15"></a>
+</span><span id="__span-0-16"><a href="#__codelineno-0-16" id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="x">&lt;/body&gt;</span>
+</span><span id="__span-0-17"><a href="#__codelineno-0-17" id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="x">&lt;/html&gt;</span>
+</span></code></pre></div></p>
+<p>Cuando un cliente solicita este fichero <code>.php</code>, el motor de PHP lo procesa: ejecuta la lógica para definir las variables <code>$nombre_usuario</code> y <code>$hora_actual</code>, y luego, donde encuentra las sentencias <code>echo</code>, incrusta el valor de esas variables en el HTML. El navegador del cliente nunca ve el código PHP; recibe un documento HTML puro como el siguiente:</p>
+<div class="language-html highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">"es"</span><span class="p">&gt;</span>
+</span><span id="__span-1-3"><a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+</span><span id="__span-1-4"><a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a>    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Página de Bienvenida<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+</span><span id="__span-1-5"><a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span><span id="__span-1-6"><a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span><span id="__span-1-7"><a href="#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a>    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Bienvenido a nuestro sitio, Ana.<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</span><span id="__span-1-8"><a href="#__codelineno-1-8" id="__codelineno-1-8" name="__codelineno-1-8"></a>    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>La hora actual del servidor es: 10:25.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span><span id="__span-1-9"><a href="#__codelineno-1-9" id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span><span id="__span-1-10"><a href="#__codelineno-1-10" id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<p>La principal ventaja de este método es su simplicidad para tareas pequeñas. Sin embargo, en aplicaciones grandes, conduce fácilmente al llamado <strong>"código espagueti"</strong>, donde la lógica de negocio, el acceso a datos y la presentación se mezclan de forma caótica, haciendo el código muy difícil de leer y mantener.</p>
+<hr/>
+<h3 id="motores-de-plantillas-templating-engines">Motores de Plantillas (Templating Engines)</h3>
+<p>Para resolver los problemas del código embebido, los frameworks modernos promueven una <strong>separación de intereses</strong> más estricta a través de los <strong>motores de plantillas</strong>. La filosofía es separar completamente la lógica de negocio de la presentación.</p>
+<p>En este modelo, el código de servidor (un controlador, por ejemplo) se encarga primero de toda la lógica: procesa la petición, habla con la base de datos y reúne toda la información necesaria. Como último paso, pasa estos datos al motor de plantillas, que se encarga de "renderizar" una vista.</p>
+<p>Un fichero de plantilla es similar a un fichero HTML, pero utiliza una sintaxis mucho más simple y limitada, diseñada exclusivamente para la presentación. No contiene lógica de negocio compleja, solo las estructuras necesarias para mostrar los datos que recibe.</p>
+<div class="language-html highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span id="__span-2-2"><a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">"es"</span><span class="p">&gt;</span>
+</span><span id="__span-2-3"><a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+</span><span id="__span-2-4"><a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a>    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>{{ titulo_de_la_pagina }}<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+</span><span id="__span-2-5"><a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span><span id="__span-2-6"><a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span><span id="__span-2-7"><a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a>    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Bienvenido a nuestro sitio, {{ nombre_usuario }}.<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</span><span id="__span-2-8"><a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a>
+</span><span id="__span-2-9"><a href="#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a>    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Tus notificaciones:<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span><span id="__span-2-10"><a href="#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a>    <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span><span id="__span-2-11"><a href="#__codelineno-2-11" id="__codelineno-2-11" name="__codelineno-2-11"></a>        {% for notificacion in notificaciones %}
+</span><span id="__span-2-12"><a href="#__codelineno-2-12" id="__codelineno-2-12" name="__codelineno-2-12"></a>            <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>{{ notificacion.texto }}<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</span><span id="__span-2-13"><a href="#__codelineno-2-13" id="__codelineno-2-13" name="__codelineno-2-13"></a>        {% endfor %}
+</span><span id="__span-2-14"><a href="#__codelineno-2-14" id="__codelineno-2-14" name="__codelineno-2-14"></a>    <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span><span id="__span-2-15"><a href="#__codelineno-2-15" id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span><span id="__span-2-16"><a href="#__codelineno-2-16" id="__codelineno-2-16" name="__codelineno-2-16"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<p>Como se puede ver, la plantilla es mucho más limpia y legible. El código del controlador le pasaría los valores para <code>titulo_de_la_pagina</code>, <code>nombre_usuario</code> y la lista de <code>notificaciones</code>. Los motores de plantillas más populares incluyen <strong>Twig</strong> (usado por Symfony), <strong>Blade</strong> (usado por Laravel) y <strong>Jinja2</strong> (usado en el ecosistema de Python). Además de una sintaxis más limpia, ofrecen ventajas como el auto-escapado de variables para prevenir ataques XSS y una estructura que facilita la colaboración entre desarrolladores de backend y diseñadores de frontend.</p>
+<hr/>
+<h3 id="apis-y-aplicaciones-de-cliente-spas">APIs y Aplicaciones de Cliente (SPAs)</h3>
+<p>En este modelo, el servidor no genera HTML en absoluto. Su única responsabilidad es actuar como una <strong>API (Application Programming Interface)</strong>, exponiendo datos y lógica de negocio en un formato estructurado, casi siempre <strong>JSON</strong>.</p>
+<p>El frontend es una aplicación completamente independiente, construida con un framework de JavaScript como <strong>React, Angular o Vue.js</strong>. Este tipo de aplicación se conoce como <strong>Single-Page Application (SPA)</strong>.</p>
+<p>El flujo de trabajo es el siguiente:
+1.  El usuario carga la aplicación SPA en su navegador una sola vez.
+2.  El código JavaScript de la SPA, que se ejecuta en el navegador del cliente, realiza peticiones HTTP a la API del servidor para obtener los datos que necesita.
+3.  La API del servidor responde con datos en formato JSON.
+4.  El código JavaScript de la SPA recibe estos datos JSON y los utiliza para generar y manipular dinámicamente el HTML directamente en el navegador del usuario.</p>
+<p>Este enfoque ofrece un desacoplamiento total entre el frontend y el backend, permitiendo que cada uno sea desarrollado y escalado de forma independiente. La misma API puede servir datos a una aplicación web, una aplicación móvil y otros servicios.</p>
+<hr/>
+<h3 id="tabla-comparativa-de-arquitecturas">Tabla Comparativa de Arquitecturas</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Característica</th>
+<th style="text-align: left;">Código Embebido (PHP Clásico)</th>
+<th style="text-align: left;">Motor de Plantillas (Laravel/Symfony)</th>
+<th style="text-align: left;">API + SPA (React/Vue)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Lugar de Renderizado HTML</strong></td>
+<td style="text-align: left;">Servidor</td>
+<td style="text-align: left;">Servidor</td>
+<td style="text-align: left;"><strong>Cliente (Navegador)</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Respuesta del Servidor</strong></td>
+<td style="text-align: left;">HTML (con lógica mezclada)</td>
+<td style="text-align: left;">HTML (puro, generado)</td>
+<td style="text-align: left;"><strong>JSON (solo datos)</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Acoplamiento</strong></td>
+<td style="text-align: left;">Alto</td>
+<td style="text-align: left;">Medio</td>
+<td style="text-align: left;"><strong>Bajo (Desacoplado)</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Casos de Uso Típicos</strong></td>
+<td style="text-align: left;">Sitios simples, WordPress</td>
+<td style="text-align: left;">Aplicaciones web modernas</td>
+<td style="text-align: left;">Apps complejas, móviles, plataformas</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Manuel Sánchez Gomis
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["search.suggest", "search.highlight", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "content.code.copy", "content.tabs.link", "content.tooltips"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../../assets/_markdown_exec_pyodide.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../../_static/js/notebook.js"></script>
+      
+    
+  </body>
+</html>

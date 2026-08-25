@@ -1,0 +1,2576 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Manuel Sánchez Gomis">
+      
+      
+      
+        <link rel="prev" href="../07%20-%20estructura_proyecto/">
+      
+      
+        <link rel="next" href="../98%20-%20ejercicios_persistencia/">
+      
+      
+      <link rel="icon" href="../../../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.46">
+    
+    
+      
+        <title>Ejercicios - Desarrollo Web en entorno servidor</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/_markdown_exec_pyodide.css">
+    
+      <link rel="stylesheet" href="../../../_static/css/notebook.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ejercicios" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Desarrollo Web en entorno servidor" class="md-header__button md-logo" aria-label="Desarrollo Web en entorno servidor" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Desarrollo Web en entorno servidor
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Ejercicios
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber"  aria-label="Cambiar a modo brillante"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo brillante" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="amber"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Bienvenido
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../introduccion/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Introduccion
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../php/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Php
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Aplicaciones Web con Php
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../laravel/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Laravel
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../servicios_web/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Servicios Web
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../webs_dinamicas/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Webs Dinámicas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../aplicaciones_web_hibridas/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Aplicaciones Web Híbridas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../bibliografia/" class="md-tabs__link">
+        
+  
+    
+  
+  Bibliografia
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Desarrollo Web en entorno servidor" class="md-nav__button md-logo" aria-label="Desarrollo Web en entorno servidor" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    Desarrollo Web en entorno servidor
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bienvenido
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Introduccion
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Introduccion
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../introduccion/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Conceptos básicos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../introduccion/markdowns/02%20-%20lenguajes_programacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lenguajes de programación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../introduccion/markdowns/03%20-%20herramientas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Herramientas y frameworks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Php
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Php
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/02%20-%20primeros_pasos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primeros pasos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/03%20-%20estructuras_control/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Estructuras de Control en PHP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/04%20-%20arrays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Arrays
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/05%20-%20funciones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Funciones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/06%20-%20poo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Programación orientada a objetos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/07%20-%20excepciones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Excepciones y errores
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/08%20-%20directivas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Directivas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/09%20-%20codigo_embebido/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Código embebido
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Aplicaciones Web con Php
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Aplicaciones Web con Php
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02%20-%20formularios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Formularios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03%20-%20sesiones_cookies/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cookies y Sesiones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04%20-%20seguridad/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Seguridad
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05%20-%20ficheros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ficheros
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06%20-%20bases_datos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bases de datos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07%20-%20estructura_proyecto/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Organizando el código
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicios-practicos-formularios-y-validacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejercicios Prácticos: Formularios y Validación
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicios-practicos-cookies-sesiones-y-formularios" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejercicios Prácticos: Cookies, Sesiones y Formularios
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicios-practicos-autenticacion-autorizacion-y-seguridad" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejercicios Prácticos: Autenticación, Autorización y Seguridad
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../98%20-%20ejercicios_persistencia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios persistencia
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Laravel
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Laravel
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/02%20-%20instalacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instalación y primeros pasos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/03%20-%20rutas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rutas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/04%20-%20controladores/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Controladores
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/05%20-%20vistas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vistas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/06%20-%20formularios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Formularios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/07%20-%20modelos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modelos de Eloquent
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/14%20-%20response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Respuestas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/08%20-%20cookies_sesiones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cookies y Sesiones en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/09%20-%20servicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Servicios en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/10%20-%20seguridad/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Seguridad en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/11%20-%20inyeccion_dependencias/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inyección de Dependencias en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/12%20-%20testing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pruebas y documentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/13%20-%20fechas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fechas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/15%20-%20migrations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Migraciones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Servicios Web
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Servicios Web
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/02%20-%20tecnologias/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tecnologías y Estándares
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/03%20-%20creando_servicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creando un Servicio Web
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/04%20-%20probando_servicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Probando el Servicio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/05%20-%20documentando_servicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Documentando un Servicio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Webs Dinámicas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Webs Dinámicas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/02%20-%20ajax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AJAX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/03%20-%20validacion_formularios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Validación de Formularios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/04%20-%20modificacion_dom/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modificación del DOM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/05%20-%20async_patrones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Patrones Async
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Aplicaciones Web Híbridas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Aplicaciones Web Híbridas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/02%20-%20apis_terceros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    APIs de Terceros
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/03%20-%20creando_apis_propias/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creando APIs Propias
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/04%20-%20sdks_frameworks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SDKs y Frameworks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/05%20-%20big_data_ia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Big Data e IA
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/06%20-%20testing_depuracion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Testing y Depuración
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/07%20-%20autenticacion_apis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Autenticación de APIs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/08%20-%20versionado_webhooks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Versionado y Webhooks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../bibliografia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bibliografia
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicios-practicos-formularios-y-validacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejercicios Prácticos: Formularios y Validación
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicios-practicos-cookies-sesiones-y-formularios" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejercicios Prácticos: Cookies, Sesiones y Formularios
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicios-practicos-autenticacion-autorizacion-y-seguridad" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejercicios Prácticos: Autenticación, Autorización y Seguridad
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="ejercicios">Ejercicios</h1>
+<h2 id="ejercicios-practicos-formularios-y-validacion">Ejercicios Prácticos: Formularios y Validación</h2>
+<p>Los siguientes ejercicios están diseñados para aplicar los conocimientos de formularios HTML, la recepción de datos con PHP (<code>$_GET</code>, <code>$_POST</code>, <code>$_FILES</code>), código embebido, y validación estructurada.</p>
+<div class="admonition question">
+<p class="admonition-title">1. Saludo Simple con GET</p>
+<p>Crea un único archivo (<code>saludo_get.php</code>) con un formulario que solicite el nombre al usuario. Usa <code>method="get"</code>. Al enviar, el script debe mostrar un saludo (<code>¡Hola, [Nombre]!</code>) utilizando <code>$_GET</code> y aplicando <strong><code>htmlspecialchars()</code></strong> al nombre.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">2. Calculadora de Suma con POST</p>
+<p>Crea un archivo (<code>calculadora.php</code>) con un formulario que solicite dos números. Usa <code>method="post"</code>. El script debe autoprocesarse, sumar los dos números y mostrar el resultado. <strong>No utilices validación.</strong></p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">3. Detección de Envío</p>
+<p>Crea un formulario simple con un solo campo. El script debe autoprocesarse. Utiliza <code>$_SERVER['REQUEST_METHOD']</code> para determinar si la página ha sido accedida por primera vez (<code>GET</code>) o si el formulario ha sido enviado (<code>POST</code>). Muestra un mensaje diferente en cada caso.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">4. Verificación de Campos Requeridos</p>
+<p>Crea un formulario de registro con campos para <code>nombre</code>, <code>email</code> y <code>mensaje</code>. El script debe verificar que <strong>ninguno de los tres campos esté vacío</strong>. Si alguno lo está, muestra un mensaje de error. Si todos están llenos, muestra un mensaje de éxito.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">5. Suma con Conversión Explícita</p>
+<p>Modifica el ejercicio de la calculadora para asegurar que los valores recibidos de <code>$_POST</code> sean tratados como números enteros antes de la suma. Utiliza la función <strong><code>intval()</code></strong> o el <em>type casting</em> <code>(int)</code>.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">6. Procesamiento de Checkbox</p>
+<p>Crea un formulario con un <em>checkbox</em> llamado <code>acepto_terminos</code>. El script de procesamiento debe verificar si el <em>checkbox</em> ha sido marcado. Recuerda que un <em>checkbox</em> solo aparece en <code>$_POST</code> si está marcado.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">7. Retención Básica de Valor</p>
+<p>Crea un formulario con un campo de texto para un "Asunto". Al procesar el formulario con <code>POST</code>, asegúrate de que, si el formulario se vuelve a mostrar, el campo de "Asunto" <strong>mantenga el último valor ingresado</strong> por el usuario, utilizando código PHP embebido en el atributo <code>value</code>.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">8. Validación de Email con <code>filter_var</code></p>
+<p>Crea un formulario con un campo de email. El script debe verificar si el campo está lleno y, si lo está, utilizar <strong><code>filter_var($email, FILTER_VALIDATE_EMAIL)</code></strong> para verificar que el formato del correo electrónico sea válido. Muestra un mensaje de error específico si el formato es incorrecto.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">9. Procesamiento de Lista de Opciones (<code>&lt;select&gt;</code>)</p>
+<p>Crea un formulario con un desplegable de selección (<code>&lt;select&gt;</code>) con al menos tres opciones de países. El script debe procesar el formulario y mostrar el nombre del país seleccionado, asegurándose de aplicar <strong><code>htmlspecialchars()</code></strong> al valor.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">10. Subida de Archivo: Detección y Error</p>
+<p>Crea un formulario para subir un fichero. El script debe comprobar si el array <code>$_FILES['nombre_del_campo']</code> existe. Si existe, debe verificar si hubo un error en la subida utilizando <strong><code>$_FILES['...']['error'] === UPLOAD_ERR_OK</code></strong> y mostrar un mensaje de éxito o el código de error.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">11. Prevención de XSS en el Saludo</p>
+<p>Modifica el ejercicio 1 para permitir un ataque XSS (por ejemplo, introduciendo <code>&lt;script&gt;alert('hack')&lt;/script&gt;</code>). Muestra cómo la función <strong><code>htmlspecialchars()</code></strong> es la defensa crucial para evitar la ejecución del código al pintar el nombre.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">12. Validación de Contraseña con Longitud Mínima</p>
+<p>Crea un formulario de registro con un campo de contraseña. Valida que el campo <strong>no esté vacío</strong> y que su longitud sea de <strong>al menos 8 caracteres</strong> utilizando la función <strong><code>strlen()</code></strong>. Muestra errores específicos para cada condición fallida.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">13. Subida de Archivo: Validación de Tamaño y Tipo MIME</p>
+<p>Amplía el ejercicio 10. Antes de mover el fichero, valida que:</p>
+<ol>
+<li>El tamaño del fichero no exceda 1 MB (compara <code>['size']</code>).</li>
+<li>El tipo MIME sea <strong>únicamente <code>image/jpeg</code> o <code>image/png</code></strong> (compara <code>['type']</code>).</li>
+</ol>
+<p>Si pasa la validación, muestra los metadatos. Si falla, detén el script con un mensaje de error.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">14. Acciones de Tabla Seguras (URL Encoding)</p>
+<p>Define un array de datos de productos. Genera una tabla donde la última columna sea un enlace "Ver Detalles". La URL de este enlace debe contener el nombre del producto, asegurándote de usar <strong><code>urlencode()</code></strong> al inyectar el nombre en el <em>query string</em> (<code>?nombre=...</code>).</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">15. Creación de Clase <code>SimpleValidator</code></p>
+<p>Crea una clase simple de validación (<code>SimpleValidator</code>) con los métodos <code>__construct()</code>, <code>validate()</code> y <code>getErrors()</code>. Implementa solo la regla <code>required</code> dentro del método <code>validate()</code> y haz que devuelva un array asociativo de errores.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">16. Validación de Datos con Regex</p>
+<p>Añade la regla <code>zip_code</code> a tu clase <code>SimpleValidator</code>. Implementa la lógica para usar <strong><code>preg_match()</code></strong> y verificar que un campo llamado <code>codigo_postal</code> contenga exactamente 5 dígitos numéricos.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">17. Integración del Flujo de Errores</p>
+<p>Crea un formulario de registro. Utiliza la clase <code>SimpleValidator</code> para validar los campos. Si la validación falla, imprime un <strong>único array de errores</strong> devuelto por el validador, mostrando las claves de los campos con problemas.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">18. Validación de Login con Lógica de Negocio</p>
+<p>En el ejemplo de Login (<code>login.php</code>), modifica el script para que, si el login es exitoso, utilice <strong><code>password_hash()</code></strong> y <strong><code>password_verify()</code></strong> para simular la comprobación de una contraseña encriptada (en lugar de comparar <code>1234</code> directamente).</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">19. Implementación de Tokens CSRF Básico</p>
+<p>Investiga que es el CSRF ttoke y como implementarlo en php. Crea una función simple <code>generateCsrfToken()</code> que genere un token aleatorio y lo almacene en una variable. Modifica un formulario de contacto para incluir este token como campo oculto. El script de procesamiento debe verificar si el valor de <code>$_POST['csrf_token']</code> existe y, aunque no lo compares con la sesión, valida que <strong>el token tenga una longitud mínima</strong> (por ejemplo, 64 caracteres) antes de procesar la solicitud.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">20. Subida de Fichero: Mover a Destino Seguro</p>
+<p>Completa el flujo de subida de ficheros:</p>
+<ol>
+<li>Valida tamaño, tipo MIME y que no haya error.</li>
+<li>Genera un <strong>nombre de fichero único y seguro</strong> utilizando <strong><code>uniqid()</code></strong> y <code>basename()</code>.</li>
+<li>Utiliza la función <strong><code>move_uploaded_file()</code></strong> para mover el fichero de la ruta temporal (<code>['tmp_name']</code>) a una carpeta <code>uploads/</code> con el nombre seguro. Muestra la ruta final al usuario.</li>
+</ol>
+</div>
+<h2 id="ejercicios-practicos-cookies-sesiones-y-formularios">Ejercicios Prácticos: Cookies, Sesiones y Formularios</h2>
+<p>Estos ejercicios combinan el manejo de la persistencia de datos (Cookies y Sesiones) con el flujo de trabajo de los formularios (<code>POST</code>/<code>GET</code>), incluyendo la simulación de <em>login</em> y el manejo de preferencias.</p>
+<div class="admonition question">
+<p class="admonition-title">1. Guardar Preferencia con Formulario y Cookie</p>
+<p>Crea un formulario con un <em>select</em> para elegir el color de fondo (<code>blanco</code> o <code>negro</code>). Al enviar el formulario (<code>POST</code>), el script debe guardar la selección en una <strong>cookie</strong> llamada <code>tema_color</code> con una duración de 24 horas.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">2. Lectura Condicional de Cookie</p>
+<p>En el mismo archivo del ejercicio 1, utiliza PHP embebido para leer la cookie <code>tema_color</code>. Si existe, aplica el color al <code>&lt;body&gt;</code> del HTML. Si la cookie no existe, usa un color por defecto (ej. <code>blanco</code>).</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">3. Mensaje Único de Cookie</p>
+<p>Crea un formulario. Al enviarlo, establece una <strong>cookie de sesión</strong> (expiración a 0). En la siguiente recarga, lee la cookie y muestra un mensaje "Bienvenido de vuelta". Después de mostrar el mensaje, el script debe <strong>eliminar la cookie</strong> para que el mensaje solo se muestre una vez.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">4. Contador de Visitas con Sesión</p>
+<p>Crea una página. Utiliza <strong><code>session_start()</code></strong> al inicio. Comprueba si la variable <code>$_SESSION['contador']</code> existe. Si no existe, inicialízala a 1. Si existe, increméntala. Muestra el número de veces que el usuario ha visitado la página.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">5. Formulario de Inicio de Sesión Simple con Sesión</p>
+<p>Modifica el ejemplo de Login de los apuntes. Si la validación es exitosa, en lugar de mostrar un mensaje de éxito, <strong>guarda el nombre de usuario en <code>$_SESSION['user_name']</code></strong> y redirige (<code>header()</code>) a una página de bienvenida (<code>bienvenida.php</code>).</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">6. Página de Bienvenida y Redirección</p>
+<p>Crea la página <code>bienvenida.php</code>. Al inicio, comprueba si <code>$_SESSION['user_name']</code> está establecida. Si lo está, muestra un saludo personalizado. Si no lo está, redirige al usuario de vuelta al formulario de login.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">7. Botón de Logout Básico</p>
+<p>Añade un enlace "Cerrar Sesión" en <code>bienvenida.php</code> que apunte a un script <code>logout.php</code>. Este script solo debe contener <strong><code>session_start()</code></strong> seguido de <strong><code>session_unset()</code></strong> y una redirección a la página de login.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">8. Carrito de Compra (Array de Sesión)</p>
+<p>Crea un formulario con un campo <code>producto</code> y un botón "Añadir al Carrito". Utiliza <strong><code>$_SESSION['carrito']</code> como un array</strong> para almacenar los productos. Si el formulario se envía, añade el producto al array. Muestra el contenido actual del carrito en una lista no ordenada (<code>&lt;ul&gt;</code>) usando <code>foreach</code>.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">9. Eliminación Selectiva del Carrito</p>
+<p>Añade a cada elemento de la lista del carrito (Ejercicio 8) un enlace "Eliminar" que pase el índice del array (<code>?eliminar_indice=...</code>) mediante <code>GET</code>. El script debe usar <strong><code>unset()</code></strong> en el índice correspondiente de <code>$_SESSION['carrito']</code> para eliminar el ítem.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">10. Cookie de Última Visita</p>
+<p>Al cargar cualquier página, el script debe verificar si existe una cookie <code>ultima_visita</code>. Si existe, muestra: "Tu última visita fue el [Fecha/Hora]". Luego, actualiza la cookie con el timestamp actual para recordar la hora de esta visita.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">11. Login Seguro con Borrado Explícito de Contraseña</p>
+<p>Modifica el procesamiento del Login. Después de validar las credenciales, utiliza <strong><code>unset($_POST['password'])</code></strong> antes de realizar cualquier otra operación, demostrando la práctica de no mantener la contraseña en memoria más de lo necesario.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">12. Inyección de Atributo <code>checked</code> con Cookie</p>
+<p>Modifica el ejercicio 1 (Color de Fondo). El formulario debe tener dos <em>radio buttons</em> (<code>&lt;input type="radio"&gt;</code>) para las opciones "Blanco" y "Negro". Utiliza PHP embebido y una expresión ternaria para inyectar el atributo <strong><code>checked</code></strong> en la opción que coincida con el valor de la cookie <code>tema_color</code>.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">13. Formulario con Múltiple Validación de Sesión</p>
+<p>Crea un formulario con dos campos. Utiliza tu clase <code>SimpleValidator</code> para validar ambos campos. Si la validación falla, guarda el array de errores (<code>$validation_errors</code>) y el array de datos de entrada (<code>$data</code>) <strong>en la sesión</strong> (<code>$_SESSION</code>). Después de la validación fallida, redirige al formulario (<code>header()</code>) y muestra los errores y los datos retenidos de la sesión.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">14. Bloqueo Condicional de Formulario</p>
+<p>Define una variable de sesión <code>$_SESSION['compra_finalizada'] = true;</code>. Crea un formulario de pedido. Utiliza PHP embebido y una expresión ternaria para inyectar el atributo <strong><code>disabled</code></strong> en el botón de envío si <code>$_SESSION['compra_finalizada']</code> es verdadero.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">15. Cookie con Flag <code>HttpOnly</code></p>
+<p>Modifica el script de creación de cookies (Ejercicio 1) para establecer la cookie <code>preferencia_idioma</code> con los <em>flags</em> <code>Secure</code> y <strong><code>HttpOnly</code></strong> en <code>true</code> (asumiendo que se ejecuta en un entorno HTTPS). ¿Por qué es importante <code>HttpOnly</code>?.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">16. Flujo de Login-Redirección-Acceso Condicional</p>
+<p>Crea un flujo de tres páginas: <code>login.php</code>, <code>proceso_login.php</code> y <code>dashboard.php</code>.</p>
+<ol>
+<li><code>proceso_login.php</code>: Valida las credenciales. Si son correctas, inicia la sesión y guarda la ID. Redirige a <code>dashboard.php</code>.</li>
+<li><code>dashboard.php</code>: Comprueba la sesión. Si no hay ID, redirige a <code>login.php</code>.</li>
+</ol>
+</div>
+<div class="admonition question">
+<p class="admonition-title">17. Destrucción Segura de Sesión</p>
+<p>Crea un script <code>logout.php</code> que implemente el proceso de cierre de sesión <strong>completo y seguro</strong>:</p>
+<ol>
+<li><code>session_start()</code>, <code>session_unset()</code>, <code>session_destroy()</code>.</li>
+<li>Borrado explícito de la <strong>cookie de ID de sesión</strong> (<code>PHPSESSID</code>) con fecha pasada, utilizando <code>session_get_cookie_params()</code> y <code>setcookie()</code>.</li>
+</ol>
+</div>
+<div class="admonition question">
+<p class="admonition-title">18. Mensaje Flash de Sesión</p>
+<p>Implementa un sistema de mensajes <em>flash</em>: si un formulario se procesa con éxito, guarda un mensaje de confirmación (<code>'msg' =&gt; 'Registro exitoso'</code>) en <code>$_SESSION</code>. En la página a la que rediriges, muestra el mensaje de la sesión, y <strong>luego elimina el mensaje de <code>$_SESSION</code></strong> para que solo se muestre una vez.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">19. Clase <code>SessionManager</code> Encapsulada</p>
+<p>Crea una clase <code>SessionManager</code> con métodos estáticos como <code>set(key, value)</code>, <code>get(key)</code>, <code>has(key)</code> y <code>flash(key, value)</code>. Asegúrate de que <strong><code>session_start()</code> solo se llama una vez</strong> dentro del constructor o método de inicio de la clase, y utiliza esta clase para gestionar el carrito de compra (Ejercicio 8).</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">20. Prevención de Secuestro de Sesión (Session Hijacking)</p>
+<p>Investiga la función <strong><code>session_regenerate_id()</code></strong>. Modifica el <code>proceso_login.php</code> (Ejercicio 16) para que, inmediatamente después de verificar que el <em>login</em> es exitoso, llame a esta función para generar una nueva ID de sesión <strong>antes</strong> de guardar los datos de usuario en <code>$_SESSION</code>. Explica en un comentario por qué esta es una buena práctica de seguridad.</p>
+</div>
+<h2 id="ejercicios-practicos-autenticacion-autorizacion-y-seguridad">Ejercicios Prácticos: Autenticación, Autorización y Seguridad</h2>
+<p>Estos ejercicios están diseñados para implementar los mecanismos de seguridad del lado del servidor, cubriendo el ciclo completo de <em>login</em>, <em>logout</em>, protección de páginas y control de acceso basado en roles.</p>
+<div class="admonition question">
+<p class="admonition-title">1. Flujo de Tres Páginas: Login y Redirección</p>
+<p>Crea las páginas <code>login.php</code> y <code>privado.php</code>. En <code>login.php</code>, crea un formulario <code>POST</code> simple. En <code>privado.php</code>, utiliza <strong><code>session_start()</code></strong> y una comprobación simple de <code>isset($_SESSION['user_id'])</code>. Si la sesión NO existe, redirige inmediatamente a <code>login.php</code>.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">2. Cierre de Sesión Simple (<code>logout.php</code>)</p>
+<p>Crea el script <code>logout.php</code>. Este script debe contener <strong><code>session_start()</code></strong>, <strong><code>session_unset()</code></strong> y <strong><code>session_destroy()</code></strong>, seguido de una redirección a <code>login.php</code>.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">3. Mensaje de Error Único de Sesión</p>
+<p>Modifica el <code>procesar_login.php</code> del apunte. Si el <em>login</em> falla, guarda el mensaje "Credenciales inválidas" en <code>$_SESSION['error_msg']</code>. En <code>login.php</code>, muestra este mensaje usando código embebido y <strong>elimínalo inmediatamente con <code>unset()</code></strong> después de mostrarlo.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">4. Hashing de Contraseña Único</p>
+<p>Crea un <em>script</em> simple. Define una contraseña simple (ej: 'clave123'). Utiliza <strong><code>password_hash()</code></strong> para generar el <em>hash</em> de esa contraseña y muéstralo en pantalla. Explica en un comentario por qué este <em>hash</em> cambia cada vez que se ejecuta el <em>script</em>.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">5. Verificación de Contraseña con <code>password_verify</code></p>
+<p>Crea un <em>script</em>. Define una variable <code>$hash_guardado</code> con el <em>hash</em> del ejercicio 4. Define una variable <code>$password_prueba</code> con la contraseña original. Utiliza <strong><code>password_verify()</code></strong> y muestra "Contraseña OK" o "Contraseña Inválida".</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">6. Uso de <code>password_verify</code> en el Procesador de Login</p>
+<p>Modifica el <code>procesar_login.php</code> para que la comprobación de contraseña se realice <strong>obligatoriamente</strong> con <strong><code>password_verify()</code></strong>, en lugar de una simple comparación de strings.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">7. Protección Básica contra XSS en Sesión</p>
+<p>Modifica el <code>procesar_login.php</code>. Cuando el usuario inicie sesión, no solo guardes la ID, sino también el nombre de usuario (<code>$_POST['usuario']</code>). Asegúrate de aplicar <strong><code>htmlspecialchars()</code></strong> al nombre de usuario antes de guardarlo en <code>$_SESSION['user_name']</code>.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">8. Protección CSRF en Formulario Simple</p>
+<p>Modifica el <code>login.php</code>. Añade una función <code>generateCsrfToken()</code> que genere un <em>token</em> único y lo almacene en <code>$_SESSION['csrf_token']</code>. Inyecta este <em>token</em> en el formulario como un campo oculto.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">9. Verificación CSRF en el Procesador</p>
+<p>Modifica <code>procesar_login.php</code>. Inmediatamente después de iniciar sesión, comprueba si <code>$_POST['csrf_token']</code> es igual a <code>$_SESSION['csrf_token']</code>. Si no son iguales, detén el <em>script</em> con un <code>die("Error CSRF")</code>.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">10. Guardar Rol en Sesión</p>
+<p>Modifica <code>procesar_login.php</code>. Si el <em>login</em> es exitoso, además de la ID, guarda el campo <code>rol</code> (ej: 'admin' o 'user') en <strong><code>$_SESSION['rol']</code></strong>.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">11. Autorización: Botón Condicional por Rol</p>
+<p>Modifica <code>privado.php</code>. Utiliza el rol guardado en la sesión. Muestra un botón "Panel de Control" <strong>únicamente</strong> si <code>$_SESSION['rol']</code> es igual a 'admin'. Utiliza código embebido (<code>if (...) { echo '...' }</code>).</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">12. Mensaje de Acceso Denegado (Redirección)</p>
+<p>Modifica <code>privado.php</code>. Si la comprobación de autenticación falla (<code>!isset($_SESSION['usuario_id'])</code>), antes de redirigir a <code>login.php</code>, guarda un mensaje en <code>$_SESSION['error_denegado']</code> que diga: "Acceso denegado. Debe iniciar sesión."</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">13. Borrado Explícito de Cookie de Sesión</p>
+<p>Modifica el script <code>logout.php</code> para implementar la destrucción <strong>completa</strong> de la sesión, incluyendo el borrado explícito de la <strong>cookie de ID de sesión (<code>PHPSESSID</code>)</strong> con <code>session_get_cookie_params()</code> y <code>setcookie()</code>.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">14. Bloqueo de Página para Roles Específicos</p>
+<p>Crea una página <code>reportes.php</code>. En esta página, comprueba la sesión. Si el usuario existe pero su rol es <strong>'lector'</strong>, detén el <em>script</em> con un mensaje de error y un código de estado HTTP 403 (Forbidden) utilizando <strong><code>header('HTTP/1.0 403 Forbidden')</code></strong>.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">15. Autenticación como Función Reutilizable</p>
+<p>Crea un fichero <code>auth_helper.php</code> con una función <code>check_auth()</code>. Esta función debe encapsular la lógica de <code>privado.php</code> (comprobar la sesión y redirigir si es necesario). Incluye este fichero al principio de <code>privado.php</code> y en cualquier otra página que deba ser protegida.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">16. Prevención de Secuestro de Sesión (Regeneración de ID)</p>
+<p>Modifica <code>procesar_login.php</code>. Inmediatamente después de verificar que la contraseña es correcta (y <strong>antes</strong> de guardar cualquier dato en <code>$_SESSION</code>), llama a la función <strong><code>session_regenerate_id(true)</code></strong>. Explica en un comentario por qué esta es una defensa crítica.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">17. Clase <code>Auth</code> con Autenticación Encapsulada</p>
+<p>Crea una clase <code>Auth</code> con un método estático <code>login($user, $pass)</code>. Este método debe encapsular la lógica de <code>procesar_login.php</code> (verificación de <em>hash</em>, guardado de sesión, <code>session_regenerate_id</code>).</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">18. Clase <code>Auth</code> con Autorización Encapsulada</p>
+<p>Añade un método estático <code>hasRole($rol_name)</code> a la clase <code>Auth</code> (Ejercicio 17). Este método debe devolver <code>true</code> si <code>$_SESSION['rol']</code> coincide con <code>$rol_name</code>. Utiliza este método en <code>privado.php</code> para controlar la visibilidad del botón de edición.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">19. Inyección Segura de Datos para Contraseña</p>
+<p>Investiga la función <strong><code>password_needs_rehash()</code></strong>. Modifica tu procesador de login para que, si el <em>login</em> es correcto y la contraseña almacenada requiere <em>rehash</em> (debido a un algoritmo más antiguo o a cambios de configuración), automáticamente calcule un nuevo <em>hash</em> y simule su actualización en la "base de datos" (<code>$usuarios</code>).</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">20. Defensa Completa: CSRF + XSS + Login</p>
+<p>Combina los ejercicios de seguridad:</p>
+<ol>
+<li>Crea un formulario con <strong>Token CSRF</strong> y <strong>retención de datos</strong> fallidos.</li>
+<li>El <code>procesar_login.php</code> debe:<ul>
+<li>Verificar el Token CSRF.</li>
+<li>Verificar la contraseña con <code>password_verify()</code>.</li>
+<li>Aplicar <code>session_regenerate_id()</code>.</li>
+</ul>
+</li>
+<li>Si falla la validación (CSRF o credenciales), redirige a <code>login.php</code> con un mensaje de error de sesión, asegurándote de que el mensaje de error también sea <strong>escapado con <code>htmlspecialchars()</code></strong> antes de guardarse en <code>$_SESSION</code>.</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Manuel Sánchez Gomis
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["search.suggest", "search.highlight", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "content.code.copy", "content.tabs.link", "content.tooltips"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../../assets/_markdown_exec_pyodide.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../../_static/js/notebook.js"></script>
+      
+    
+  </body>
+</html>

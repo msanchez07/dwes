@@ -1,0 +1,2966 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Manuel Sánchez Gomis">
+      
+      
+      
+        <link rel="prev" href="../06%20-%20bases_datos/">
+      
+      
+        <link rel="next" href="../99%20-%20ejercicios/">
+      
+      
+      <link rel="icon" href="../../../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.46">
+    
+    
+      
+        <title>Organizando el código - Desarrollo Web en entorno servidor</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/_markdown_exec_pyodide.css">
+    
+      <link rel="stylesheet" href="../../../_static/css/notebook.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#organizando-el-codigo" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Desarrollo Web en entorno servidor" class="md-header__button md-logo" aria-label="Desarrollo Web en entorno servidor" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Desarrollo Web en entorno servidor
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Organizando el código
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber"  aria-label="Cambiar a modo brillante"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo brillante" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="amber"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Bienvenido
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../introduccion/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Introduccion
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../php/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Php
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Aplicaciones Web con Php
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../laravel/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Laravel
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../servicios_web/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Servicios Web
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../webs_dinamicas/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Webs Dinámicas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../aplicaciones_web_hibridas/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Aplicaciones Web Híbridas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../bibliografia/" class="md-tabs__link">
+        
+  
+    
+  
+  Bibliografia
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Desarrollo Web en entorno servidor" class="md-nav__button md-logo" aria-label="Desarrollo Web en entorno servidor" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    Desarrollo Web en entorno servidor
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bienvenido
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Introduccion
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Introduccion
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../introduccion/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Conceptos básicos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../introduccion/markdowns/02%20-%20lenguajes_programacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lenguajes de programación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../introduccion/markdowns/03%20-%20herramientas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Herramientas y frameworks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Php
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Php
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/02%20-%20primeros_pasos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primeros pasos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/03%20-%20estructuras_control/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Estructuras de Control en PHP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/04%20-%20arrays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Arrays
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/05%20-%20funciones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Funciones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/06%20-%20poo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Programación orientada a objetos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/07%20-%20excepciones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Excepciones y errores
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/08%20-%20directivas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Directivas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/09%20-%20codigo_embebido/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Código embebido
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Aplicaciones Web con Php
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Aplicaciones Web con Php
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02%20-%20formularios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Formularios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03%20-%20sesiones_cookies/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cookies y Sesiones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04%20-%20seguridad/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Seguridad
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05%20-%20ficheros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ficheros
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06%20-%20bases_datos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bases de datos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Organizando el código
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Organizando el código
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#el-corazon-del-arranque-indexphp" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Corazón del Arranque: index.php
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-cerebro-logistico-la-clase-router" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Cerebro Logístico: La Clase Router
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-proveedor-central-container" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Proveedor Central: Container
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-mapa-de-la-aplicacion-routesphp" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Mapa de la Aplicación: routes.php
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-controlador-el-director-de-orquesta" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Controlador: El Director de Orquesta
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="El Controlador: El Director de Orquesta">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-controlador-base-corecontroller" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Controlador Base (Core\Controller)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#un-controlador-concreto-homecontroller" class="md-nav__link">
+    <span class="md-ellipsis">
+      Un Controlador Concreto: HomeController
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-modelo-el-experto-en-datos-y-la-vista-el-presentador" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Modelo (El Experto en Datos) y La Vista (El Presentador)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="El Modelo (El Experto en Datos) y La Vista (El Presentador)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-modelo" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Modelo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-vista" class="md-nav__link">
+    <span class="md-ellipsis">
+      La Vista
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../98%20-%20ejercicios_persistencia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios persistencia
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Laravel
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Laravel
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/02%20-%20instalacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instalación y primeros pasos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/03%20-%20rutas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rutas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/04%20-%20controladores/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Controladores
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/05%20-%20vistas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vistas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/06%20-%20formularios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Formularios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/07%20-%20modelos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modelos de Eloquent
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/14%20-%20response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Respuestas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/08%20-%20cookies_sesiones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cookies y Sesiones en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/09%20-%20servicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Servicios en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/10%20-%20seguridad/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Seguridad en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/11%20-%20inyeccion_dependencias/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inyección de Dependencias en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/12%20-%20testing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pruebas y documentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/13%20-%20fechas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fechas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/15%20-%20migrations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Migraciones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Servicios Web
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Servicios Web
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/02%20-%20tecnologias/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tecnologías y Estándares
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/03%20-%20creando_servicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creando un Servicio Web
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/04%20-%20probando_servicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Probando el Servicio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/05%20-%20documentando_servicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Documentando un Servicio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Webs Dinámicas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Webs Dinámicas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/02%20-%20ajax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AJAX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/03%20-%20validacion_formularios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Validación de Formularios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/04%20-%20modificacion_dom/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modificación del DOM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/05%20-%20async_patrones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Patrones Async
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Aplicaciones Web Híbridas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Aplicaciones Web Híbridas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/02%20-%20apis_terceros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    APIs de Terceros
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/03%20-%20creando_apis_propias/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creando APIs Propias
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/04%20-%20sdks_frameworks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SDKs y Frameworks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/05%20-%20big_data_ia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Big Data e IA
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/06%20-%20testing_depuracion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Testing y Depuración
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/07%20-%20autenticacion_apis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Autenticación de APIs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/08%20-%20versionado_webhooks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Versionado y Webhooks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../bibliografia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bibliografia
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#el-corazon-del-arranque-indexphp" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Corazón del Arranque: index.php
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-cerebro-logistico-la-clase-router" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Cerebro Logístico: La Clase Router
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-proveedor-central-container" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Proveedor Central: Container
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-mapa-de-la-aplicacion-routesphp" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Mapa de la Aplicación: routes.php
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-controlador-el-director-de-orquesta" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Controlador: El Director de Orquesta
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="El Controlador: El Director de Orquesta">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-controlador-base-corecontroller" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Controlador Base (Core\Controller)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#un-controlador-concreto-homecontroller" class="md-nav__link">
+    <span class="md-ellipsis">
+      Un Controlador Concreto: HomeController
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-modelo-el-experto-en-datos-y-la-vista-el-presentador" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Modelo (El Experto en Datos) y La Vista (El Presentador)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="El Modelo (El Experto en Datos) y La Vista (El Presentador)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-modelo" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Modelo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-vista" class="md-nav__link">
+    <span class="md-ellipsis">
+      La Vista
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="organizando-el-codigo">Organizando el código</h1>
+<p>Hasta este punto, la creación de aplicaciones PHP se ha centrado en el uso de <strong>scripts separados</strong>, donde cada archivo se encarga de una tarea concreta o representa una página específica dentro del sitio web. Este enfoque es directo y funcional para proyectos de pequeña escala. Sin embargo, en el momento en que la aplicación crece y la complejidad aumenta, esta estructura lineal se vuelve insostenible. El código comienza a volverse un amasijo de responsabilidades mezcladas, donde la lógica de la aplicación se encuentra entremezclada con consultas a la base de datos y etiquetas HTML. El resultado es un código difícil de leer, propenso a errores y extremadamente complicado de mantener o escalar, ya que un cambio en una parte puede afectar inesperadamente a otras.</p>
+<p>Para superar este desafío, es imperativo adoptar una <strong>arquitectura de aplicación</strong> sólida y patrones de diseño establecidos. La piedra angular de esta modernización es la implementación del patrón <strong>Modelo-Vista-Controlador (MVC)</strong>, el cual promueve la <strong>separación de responsabilidades</strong>. En lugar de que un único <em>script</em> lo haga todo, nuestro código se divide en tres componentes especializados: los <strong>Modelos</strong> que gestionan los datos, las <strong>Vistas</strong> que manejan la presentación visual, y los <strong>Controladores</strong> que actúan como intermediarios para procesar la lógica de negocio. Esta estructura organizada, complementada por el <strong>Enrutador</strong>, garantiza que cada parte del código tenga un propósito claro y un lugar definido, haciendo que nuestra aplicación sea robusta, predecible y capaz de crecer de manera profesional.</p>
+<p>Para aplicar correctamente la separación de responsabilidades que impone el patrón MVC, nuestro proyecto se organiza en directorios específicos, cada uno con un propósito bien definido. La estructura se divide principalmente en tres secciones: la capa de <strong>Aplicación</strong> (<code>app/</code>), que contiene la lógica de negocio y la presentación; el <strong>Núcleo</strong> (<code>core/</code>), que alberga la funcionalidad esencial del <em>framework</em> como el Enrutador y el Contenedor de Servicios; y el punto de acceso público (<code>public/</code>), que actúa como la única puerta de entrada. Esta organización aísla los archivos internos del acceso directo del usuario, aumentando la seguridad y la claridad del sistema, al mismo tiempo que establece un lugar claro para cada tipo de código que desarrollemos.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>/
+</span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>├── app/
+</span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>│   ├── controller/  # Los Controladores que gestionan las peticiones
+</span><span id="__span-0-4"><a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a>│   ├── models/      # Los Modelos para interactuar con la base de datos
+</span><span id="__span-0-5"><a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a>│   ├── services/    # Servicios como la conexión a la BD
+</span><span id="__span-0-6"><a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a>│   └── views/       # Las Vistas, que contienen el código HTML
+</span><span id="__span-0-7"><a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a>├── core/
+</span><span id="__span-0-8"><a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a>│   ├── Container.php # Contenedor de servicios para dependencias
+</span><span id="__span-0-9"><a href="#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a>│   ├── Controller.php# La clase base de la que heredan los Controladores
+</span><span id="__span-0-10"><a href="#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a>│   └── Router.php    # La clase principal que maneja las URLs
+</span><span id="__span-0-11"><a href="#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a>├── database/
+</span><span id="__span-0-12"><a href="#__codelineno-0-12" id="__codelineno-0-12" name="__codelineno-0-12"></a>│   └── database.sqlite # Archivo de base de datos
+</span><span id="__span-0-13"><a href="#__codelineno-0-13" id="__codelineno-0-13" name="__codelineno-0-13"></a>├── public/
+</span><span id="__span-0-14"><a href="#__codelineno-0-14" id="__codelineno-0-14" name="__codelineno-0-14"></a>│   ├── index.php     # El punto de entrada único (Front Controller)
+</span><span id="__span-0-15"><a href="#__codelineno-0-15" id="__codelineno-0-15" name="__codelineno-0-15"></a>│   └── css/          # Archivos estáticos como CSS
+</span><span id="__span-0-16"><a href="#__codelineno-0-16" id="__codelineno-0-16" name="__codelineno-0-16"></a>├── routes.php        # El archivo donde se definen las rutas de la aplicación
+</span><span id="__span-0-17"><a href="#__codelineno-0-17" id="__codelineno-0-17" name="__codelineno-0-17"></a>└── README.md
+</span></code></pre></div>
+<p>En las siguientes secciones vamos a ir explicando poco a poco esta estructura y las distintas clases que lo componen.</p>
+<h2 id="el-corazon-del-arranque-indexphp">El Corazón del Arranque: index.php</h2>
+<p>El archivo <code>public/index.php</code> no es una simple página web, sino el <strong>Front Controller</strong> de nuestra aplicación, el portero que centraliza y dirige todo el tráfico. Para el desarrollador experto, este archivo es el <em>bootstrap</em> o motor de arranque, donde se realiza el ritual cuidadosamente orquestado de la inicialización antes de que la lógica de negocio entre en juego. </p>
+<p>Este proceso comienza con la necesidad de establecer un sistema de coordenadas inmutable, ya que trabajar con rutas relativas en PHP es una fuente constante de errores; por ello, definimos <strong>constantes de ruta absolutas</strong> utilizando el truco del oficio: <code>dirname(__DIR__)</code>, que sube un nivel desde el directorio <code>public</code> para establecer <strong><code>BASE_PATH</code></strong> como la raíz de nuestro proyecto, a partir de la cual se define el camino hacia las <strong>Vistas</strong> en <strong><code>VIEWS_PATH</code></strong>, como se muestra a continuación:</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>        <span class="c1">// BASE_PATH: La raíz del proyecto.</span>
+</span><span id="__span-1-3"><a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>    <span class="nb">define</span><span class="p">(</span><span class="s1">'BASE_PATH'</span><span class="p">,</span> <span class="nb">dirname</span><span class="p">(</span><span class="no">__DIR__</span><span class="p">));</span>
+</span><span id="__span-1-4"><a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a>    <span class="c1">// VIEWS_PATH: Ruta a la carpeta de vistas.</span>
+</span><span id="__span-1-6"><a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a>    <span class="nb">define</span><span class="p">(</span><span class="s1">'VIEWS_PATH'</span><span class="p">,</span> <span class="nx">BASE_PATH</span> <span class="o">.</span> <span class="s1">'/app/views'</span><span class="p">);</span>
+</span></code></pre></div>
+<p>Aquí, <code>dirname(__DIR__)</code> es el truco del oficio: le dice al sistema que suba un nivel desde el directorio <code>public</code>, estableciendo un punto de referencia (<code>BASE_PATH</code>) a la raíz de nuestra aplicación que es independiente de la URL que el usuario haya tecleado. Sobre esta base, se define el camino hacia los archivos de presentación, o <strong>Vistas</strong>, encapsulados en <code>VIEWS_PATH</code>.</p>
+<p>Tras establecer las rutas, abordamos la gestión manual de dependencias, una práctica obsoleta que se soluciona implementando la carga automática de clases mediante el estándar <strong>PSR-4</strong>, lo cual hace que nuestro código parezca y funcione como un <em>framework</em> profesional. </p>
+<p>La función <code>spl_autoload_register</code> es nuestra aliada, registrando una función anónima que interviene solo cuando PHP necesita una clase desconocida. La lógica interna de esta función se basa en la <strong>convención</strong>: un mapa predefine que el <em>namespace</em> <code>App\</code> se corresponde con el directorio <code>/app/</code> y <code>Core\</code> con <code>/core/</code>. Al solicitar, por ejemplo, <code>App\controller\HomeController</code>, el sistema sabe exactamente dónde buscar: extrae el prefijo, sustituye las barras invertidas por barras del sistema operativo, y construye una ruta absoluta precisa. Si el archivo existe, es cargado y el proceso de búsqueda termina. Esta es la esencia de la <strong>modularidad</strong> y la <strong>limpieza</strong> en el código moderno.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-2-2"><a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a>    <span class="c1">// --- 1. AUTOLOADING (CARGA AUTOMÁTICA DE CLASES) ---</span>
+</span><span id="__span-2-3"><a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a>    <span class="c1">// Registramos una función que se ejecutará automáticamente cada vez que PHP</span>
+</span><span id="__span-2-4"><a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a>    <span class="c1">// necesite cargar una clase que no conoce.</span>
+</span><span id="__span-2-5"><a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a>    <span class="nb">spl_autoload_register</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$class</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-2-6"><a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a>
+</span><span id="__span-2-7"><a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a>        <span class="c1">// Mapeo de "namespaces" a directorios (según el estándar PSR-4).</span>
+</span><span id="__span-2-8"><a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a>        <span class="nv">$prefixes</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="__span-2-9"><a href="#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a>            <span class="s1">'App\\'</span>  <span class="o">=&gt;</span> <span class="nx">BASE_PATH</span> <span class="o">.</span> <span class="s1">'/app/'</span><span class="p">,</span>
+</span><span id="__span-2-10"><a href="#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a>            <span class="s1">'Core\\'</span> <span class="o">=&gt;</span> <span class="nx">BASE_PATH</span> <span class="o">.</span> <span class="s1">'/core/'</span><span class="p">,</span>
+</span><span id="__span-2-11"><a href="#__codelineno-2-11" id="__codelineno-2-11" name="__codelineno-2-11"></a>        <span class="p">];</span>
+</span><span id="__span-2-12"><a href="#__codelineno-2-12" id="__codelineno-2-12" name="__codelineno-2-12"></a>
+</span><span id="__span-2-13"><a href="#__codelineno-2-13" id="__codelineno-2-13" name="__codelineno-2-13"></a>        <span class="c1">// Recorremos el mapa para encontrar el prefijo que corresponde a la clase buscada.</span>
+</span><span id="__span-2-14"><a href="#__codelineno-2-14" id="__codelineno-2-14" name="__codelineno-2-14"></a>        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$prefixes</span> <span class="k">as</span> <span class="nv">$prefix</span> <span class="o">=&gt;</span> <span class="nv">$base_dir</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-2-15"><a href="#__codelineno-2-15" id="__codelineno-2-15" name="__codelineno-2-15"></a>
+</span><span id="__span-2-16"><a href="#__codelineno-2-16" id="__codelineno-2-16" name="__codelineno-2-16"></a>            <span class="c1">// Comparamos el inicio del nombre de la clase con el prefijo.</span>
+</span><span id="__span-2-17"><a href="#__codelineno-2-17" id="__codelineno-2-17" name="__codelineno-2-17"></a>            <span class="nv">$len</span> <span class="o">=</span> <span class="nb">strlen</span><span class="p">(</span><span class="nv">$prefix</span><span class="p">);</span>
+</span><span id="__span-2-18"><a href="#__codelineno-2-18" id="__codelineno-2-18" name="__codelineno-2-18"></a>            <span class="k">if</span> <span class="p">(</span><span class="nb">strncmp</span><span class="p">(</span><span class="nv">$prefix</span><span class="p">,</span> <span class="nv">$class</span><span class="p">,</span> <span class="nv">$len</span><span class="p">)</span> <span class="o">!==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-2-19"><a href="#__codelineno-2-19" id="__codelineno-2-19" name="__codelineno-2-19"></a>                <span class="c1">// Si no coincide, pasamos al siguiente prefijo del mapa.</span>
+</span><span id="__span-2-20"><a href="#__codelineno-2-20" id="__codelineno-2-20" name="__codelineno-2-20"></a>                <span class="k">continue</span><span class="p">;</span>
+</span><span id="__span-2-21"><a href="#__codelineno-2-21" id="__codelineno-2-21" name="__codelineno-2-21"></a>            <span class="p">}</span>
+</span><span id="__span-2-22"><a href="#__codelineno-2-22" id="__codelineno-2-22" name="__codelineno-2-22"></a>
+</span><span id="__span-2-23"><a href="#__codelineno-2-23" id="__codelineno-2-23" name="__codelineno-2-23"></a>            <span class="c1">// Si coincide, construimos la ruta al archivo.</span>
+</span><span id="__span-2-24"><a href="#__codelineno-2-24" id="__codelineno-2-24" name="__codelineno-2-24"></a>            <span class="nv">$relative_class</span> <span class="o">=</span> <span class="nb">substr</span><span class="p">(</span><span class="nv">$class</span><span class="p">,</span> <span class="nv">$len</span><span class="p">);</span> <span class="c1">// Quitamos el prefijo.</span>
+</span><span id="__span-2-25"><a href="#__codelineno-2-25" id="__codelineno-2-25" name="__codelineno-2-25"></a>            <span class="c1">// Reemplazamos las barras invertidas del namespace por las del sistema de archivos.</span>
+</span><span id="__span-2-26"><a href="#__codelineno-2-26" id="__codelineno-2-26" name="__codelineno-2-26"></a>            <span class="nv">$file</span> <span class="o">=</span> <span class="nv">$base_dir</span> <span class="o">.</span> <span class="nb">str_replace</span><span class="p">(</span><span class="s1">'\\'</span><span class="p">,</span> <span class="s1">'/'</span><span class="p">,</span> <span class="nv">$relative_class</span><span class="p">)</span> <span class="o">.</span> <span class="s1">'.php'</span><span class="p">;</span> 
+</span><span id="__span-2-27"><a href="#__codelineno-2-27" id="__codelineno-2-27" name="__codelineno-2-27"></a>
+</span><span id="__span-2-28"><a href="#__codelineno-2-28" id="__codelineno-2-28" name="__codelineno-2-28"></a>            <span class="c1">// Si el archivo existe en la ruta construida, lo cargamos y salimos.</span>
+</span><span id="__span-2-29"><a href="#__codelineno-2-29" id="__codelineno-2-29" name="__codelineno-2-29"></a>            <span class="k">if</span> <span class="p">(</span><span class="nb">file_exists</span><span class="p">(</span><span class="nv">$file</span><span class="p">))</span> <span class="p">{</span>
+</span><span id="__span-2-30"><a href="#__codelineno-2-30" id="__codelineno-2-30" name="__codelineno-2-30"></a>                <span class="k">require</span> <span class="nv">$file</span><span class="p">;</span>
+</span><span id="__span-2-31"><a href="#__codelineno-2-31" id="__codelineno-2-31" name="__codelineno-2-31"></a>                <span class="k">return</span><span class="p">;</span> 
+</span><span id="__span-2-32"><a href="#__codelineno-2-32" id="__codelineno-2-32" name="__codelineno-2-32"></a>            <span class="p">}</span>
+</span><span id="__span-2-33"><a href="#__codelineno-2-33" id="__codelineno-2-33" name="__codelineno-2-33"></a>        <span class="p">}</span>
+</span><span id="__span-2-34"><a href="#__codelineno-2-34" id="__codelineno-2-34" name="__codelineno-2-34"></a>    <span class="p">});</span>
+</span></code></pre></div>
+<p>Para ilustrar la función del autocargador, imaginemos que más adelante en nuestro código, concretamente en la clase <code>Router</code>, necesitamos instanciar el controlador de la página de inicio. El código que se ejecutaría sería algo como:</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="x">// El Router decide que debe cargar el HomeController</span>
+</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="x">$controlador = new App\controller\HomeController();</span>
+</span></code></pre></div>
+<p>En el instante en que PHP encuentra esta línea, se da cuenta de que no conoce la clase <code>App\controller\HomeController</code>. En lugar de lanzar un error fatal, PHP invoca la función anónima que registramos con <code>spl_autoload_register</code>. El proceso interno que se desencadena es el siguiente: </p>
+<ol>
+<li>La variable <code>$class</code> dentro de la función anónima recibe el valor <code>'App\controller\HomeController'</code>. </li>
+<li>El código entra en el bucle <code>foreach</code> y comprueba el primer prefijo del mapa, que es <code>'App\\'</code>. </li>
+<li>La función <code>strncmp</code> compara este prefijo con el inicio de la clase solicitada, y como la comparación es exitosa (devuelve <code>0</code>), el código avanza. </li>
+<li>A continuación, <code>substr</code> elimina el prefijo (<code>'App\\'</code>) de la clase, dejando la clase relativa en <code>$relative_class = 'controller\HomeController'</code>. </li>
+<li>Inmediatamente, <code>str_replace</code> convierte las barras invertidas de esta cadena en barras diagonales, y se concatena la ruta base con la extensión <code>.php</code>, generando la variable <code>$file</code> con el valor final <code>'BASE_PATH/app/controller/HomeController.php'</code>. </li>
+<li>El script comprueba si <code>file_exists</code> es verdadero para esa ruta y, si lo es, <code>require $file;</code> carga el archivo. </li>
+<li>En ese momento, PHP obtiene la definición de la clase <code>HomeController</code> y la ejecución de la aplicación continúa con normalidad. </li>
+<li>Si la clase solicitada hubiera sido, por ejemplo, <code>Core\Container</code>, el bucle simplemente habría fallado en la primera iteración con <code>'App\\'</code>, pero habría encontrado la coincidencia en la segunda iteración con <code>'Core\\'</code>, construyendo y cargando la ruta <code>BASE_PATH/core/Container.php</code>.</li>
+</ol>
+<p>Una vez que las clases pueden ser cargadas, el Front Controller se dedica a inicializar las piezas clave del <em>framework</em>. Primero, se crea el <strong>Contenedor</strong> (<code>Core\Container</code>), que se convierte en la <strong>caja de herramientas</strong> central donde almacenaremos objetos complejos (como la conexión a la base de datos). </p>
+<p>Inmediatamente después, se crea el <strong>Enrutador</strong>, y es crucial que al inyectarle el constructor del <code>Core\Router($container)</code>, nos aseguramos de que el Enrutador tenga acceso a todas las dependencias necesarias para instanciar cualquier controlador, implementando así el principio de <strong>Inyección de Dependencias</strong>. </p>
+<p>Tras esto, cargamos la configuración de rutas desde <code>routes.php</code> y la pasamos al Enrutador mediante <code>addRoutes</code> para que conozca el mapa de la aplicación.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-4-2"><a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a>    <span class="c1">// --- 2. INICIALIZACIÓN DE LA APLICACIÓN (BOOTSTRAPPING) ---</span>
+</span><span id="__span-4-3"><a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a>
+</span><span id="__span-4-4"><a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a>    <span class="c1">// 3. CREAR EL CONTENEDOR DE SERVICIOS</span>
+</span><span id="__span-4-5"><a href="#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a>    <span class="c1">// El contenedor es como una "caja de herramientas" donde guardamos</span>
+</span><span id="__span-4-6"><a href="#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a>    <span class="c1">// objetos que queremos que estén disponibles en toda la aplicación (ej: la conexión a la BD).</span>
+</span><span id="__span-4-7"><a href="#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a>    <span class="nv">$container</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Core\Container</span><span class="p">();</span>
+</span><span id="__span-4-8"><a href="#__codelineno-4-8" id="__codelineno-4-8" name="__codelineno-4-8"></a>
+</span><span id="__span-4-9"><a href="#__codelineno-4-9" id="__codelineno-4-9" name="__codelineno-4-9"></a>    <span class="c1">// 4. CREAR EL ENRUTADOR</span>
+</span><span id="__span-4-10"><a href="#__codelineno-4-10" id="__codelineno-4-10" name="__codelineno-4-10"></a>    <span class="c1">// El enrutador se encargará de dirigir cada petición a su controlador correspondiente.</span>
+</span><span id="__span-4-11"><a href="#__codelineno-4-11" id="__codelineno-4-11" name="__codelineno-4-11"></a>    <span class="c1">// Le pasamos el contenedor para que los controladores puedan usar sus herramientas.</span>
+</span><span id="__span-4-12"><a href="#__codelineno-4-12" id="__codelineno-4-12" name="__codelineno-4-12"></a>    <span class="nv">$router</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Core\Router</span><span class="p">(</span><span class="nv">$container</span><span class="p">);</span>
+</span><span id="__span-4-13"><a href="#__codelineno-4-13" id="__codelineno-4-13" name="__codelineno-4-13"></a>
+</span><span id="__span-4-14"><a href="#__codelineno-4-14" id="__codelineno-4-14" name="__codelineno-4-14"></a>    <span class="c1">// 4.1. AÑADIR LAS RUTAS AL ENRUTADOR</span>
+</span><span id="__span-4-15"><a href="#__codelineno-4-15" id="__codelineno-4-15" name="__codelineno-4-15"></a>    <span class="c1">// Cargamos el archivo que define qué URI corresponde a qué controlador y método.</span>
+</span><span id="__span-4-16"><a href="#__codelineno-4-16" id="__codelineno-4-16" name="__codelineno-4-16"></a>    <span class="nv">$routes</span> <span class="o">=</span> <span class="k">require</span> <span class="nx">BASE_PATH</span> <span class="o">.</span> <span class="s1">'/routes.php'</span><span class="p">;</span>
+</span><span id="__span-4-17"><a href="#__codelineno-4-17" id="__codelineno-4-17" name="__codelineno-4-17"></a>    <span class="nv">$router</span><span class="o">-&gt;</span><span class="na">addRoutes</span><span class="p">(</span><span class="nv">$routes</span><span class="p">);</span>
+</span></code></pre></div>
+<p>La fase final es la <strong>Transferencia de Mando</strong>, que es la más sencilla pero la más importante. Recogemos la URI (el texto completo de la URL solicitada por el usuario) a través de <code>$_SERVER['REQUEST_URI']</code> y se la entregamos al Enrutador. La línea <code>$router-&gt;dispatch($uri)</code> es el punto de no retorno. En ese momento, <code>index.php</code> ha cumplido su misión; ha configurado el entorno, ha cargado las herramientas y ha entregado la llave de la petición al verdadero motor de la aplicación: el Enrutador, que a partir de aquí se encargará de mapear la URI a la clase y al método correctos.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-5-2"><a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a>    <span class="c1">// 5. OBTENER LA URI DE LA PETICIÓN</span>
+</span><span id="__span-5-3"><a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a>    <span class="c1">// `$_SERVER['REQUEST_URI']` contiene la URL que el usuario ha solicitado (ej: "/perfil/1").</span>
+</span><span id="__span-5-4"><a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a>    <span class="nv">$uri</span> <span class="o">=</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">'REQUEST_URI'</span><span class="p">];</span>
+</span><span id="__span-5-5"><a href="#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a>
+</span><span id="__span-5-6"><a href="#__codelineno-5-6" id="__codelineno-5-6" name="__codelineno-5-6"></a>    <span class="c1">// 6. DESPACHAR LA PETICIÓN</span>
+</span><span id="__span-5-7"><a href="#__codelineno-5-7" id="__codelineno-5-7" name="__codelineno-5-7"></a>    <span class="c1">// Le pasamos la URI al enrutador para que busque una coincidencia, cree el</span>
+</span><span id="__span-5-8"><a href="#__codelineno-5-8" id="__codelineno-5-8" name="__codelineno-5-8"></a>    <span class="c1">// controlador y ejecute el método correspondiente. Aquí es donde la "magia" ocurre.</span>
+</span><span id="__span-5-9"><a href="#__codelineno-5-9" id="__codelineno-5-9" name="__codelineno-5-9"></a>    <span class="nv">$router</span><span class="o">-&gt;</span><span class="na">dispatch</span><span class="p">(</span><span class="nv">$uri</span><span class="p">);</span>
+</span></code></pre></div>
+<h2 id="el-cerebro-logistico-la-clase-router">El Cerebro Logístico: La Clase Router</h2>
+<p>Si el <code>index.php</code> es el portero, el <strong>Enrutador</strong> es el jefe de logística. Su trabajo es tomar la petición que el portero le ha pasado y decidir exactamente quién debe atenderla. En nuestro archivo <code>core/Router.php</code>, definimos esta clase esencial que actúa como intermediaria entre la URL del navegador y nuestros controladores. </p>
+<p>La clase comienza definiendo sus herramientas básicas: una propiedad <code>$routes</code> para almacenar el mapa de direcciones (cargado desde <code>routes.php</code>) y, crucialmente, una propiedad <code>$container</code>. </p>
+<p>En el constructor, recibimos y almacenamos este <strong>Contenedor de Servicios</strong>. Esto es vital porque el enrutador no solo decide <em>qué</em> controlador llamar, sino que también es responsable de <strong>construirlo</strong>, y para ello necesitará acceder a las dependencias (como la base de datos) que viven dentro del contenedor.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-6-2"><a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a>    <span class="k">namespace</span> <span class="nx">Core</span><span class="p">;</span>
+</span><span id="__span-6-3"><a href="#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a>
+</span><span id="__span-6-4"><a href="#__codelineno-6-4" id="__codelineno-6-4" name="__codelineno-6-4"></a>    <span class="k">class</span> <span class="nc">Router</span>
+</span><span id="__span-6-5"><a href="#__codelineno-6-5" id="__codelineno-6-5" name="__codelineno-6-5"></a>    <span class="p">{</span>
+</span><span id="__span-6-6"><a href="#__codelineno-6-6" id="__codelineno-6-6" name="__codelineno-6-6"></a>        <span class="k">private</span> <span class="nv">$container</span><span class="p">;</span> <span class="c1">// Almacena el contenedor de servicios.</span>
+</span><span id="__span-6-7"><a href="#__codelineno-6-7" id="__codelineno-6-7" name="__codelineno-6-7"></a>        <span class="k">private</span> <span class="nv">$routes</span> <span class="o">=</span> <span class="p">[];</span> <span class="c1">// Almacena la lista de rutas permitidas.</span>
+</span><span id="__span-6-8"><a href="#__codelineno-6-8" id="__codelineno-6-8" name="__codelineno-6-8"></a>
+</span><span id="__span-6-9"><a href="#__codelineno-6-9" id="__codelineno-6-9" name="__codelineno-6-9"></a>        <span class="c1">// Recibimos el contenedor al nacer para poder usarlo más tarde.</span>
+</span><span id="__span-6-10"><a href="#__codelineno-6-10" id="__codelineno-6-10" name="__codelineno-6-10"></a>        <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">Container</span> <span class="nv">$container</span><span class="p">)</span>
+</span><span id="__span-6-11"><a href="#__codelineno-6-11" id="__codelineno-6-11" name="__codelineno-6-11"></a>        <span class="p">{</span>
+</span><span id="__span-6-12"><a href="#__codelineno-6-12" id="__codelineno-6-12" name="__codelineno-6-12"></a>            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">container</span> <span class="o">=</span> <span class="nv">$container</span><span class="p">;</span>
+</span><span id="__span-6-13"><a href="#__codelineno-6-13" id="__codelineno-6-13" name="__codelineno-6-13"></a>        <span class="p">}</span>
+</span><span id="__span-6-14"><a href="#__codelineno-6-14" id="__codelineno-6-14" name="__codelineno-6-14"></a>
+</span><span id="__span-6-15"><a href="#__codelineno-6-15" id="__codelineno-6-15" name="__codelineno-6-15"></a>        <span class="c1">// Método simple para cargar el array de rutas desde el exterior.</span>
+</span><span id="__span-6-16"><a href="#__codelineno-6-16" id="__codelineno-6-16" name="__codelineno-6-16"></a>        <span class="k">public</span> <span class="k">function</span> <span class="nf">addRoutes</span><span class="p">(</span><span class="k">array</span> <span class="nv">$routes</span><span class="p">)</span>
+</span><span id="__span-6-17"><a href="#__codelineno-6-17" id="__codelineno-6-17" name="__codelineno-6-17"></a>        <span class="p">{</span>
+</span><span id="__span-6-18"><a href="#__codelineno-6-18" id="__codelineno-6-18" name="__codelineno-6-18"></a>            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">routes</span> <span class="o">=</span> <span class="nv">$routes</span><span class="p">;</span>
+</span><span id="__span-6-19"><a href="#__codelineno-6-19" id="__codelineno-6-19" name="__codelineno-6-19"></a>        <span class="p">}</span>
+</span><span id="__span-6-20"><a href="#__codelineno-6-20" id="__codelineno-6-20" name="__codelineno-6-20"></a>    <span class="c1">// ...</span>
+</span></code></pre></div>
+<p>El corazón operativo de la clase es el método <strong><code>dispatch($uri)</code></strong>. Este método es el que llamamos desde el <code>index.php</code> y recibe la URL "sucia" que viene del servidor. La primera tarea de <code>dispatch</code> es la <strong>higiene y normalización</strong>: utiliza <code>parse_url</code> para ignorar cualquier parámetro GET (como <code>?busqueda=php</code>) y quedarse solo con la ruta, y <code>rtrim</code> para eliminar barras finales que podrían causar duplicidad (haciendo que <code>/perfil/</code> y <code>/perfil</code> sean lo mismo). Si tras esta limpieza la ruta queda vacía, asumimos que el usuario quiere ir a la raíz (<code>/</code>). </p>
+<p>Con la URI limpia, el enrutador comienza a iterar sobre su lista de rutas conocidas buscando una coincidencia. Aquí surge un desafío: ¿cómo distinguimos una ruta estática como <code>/contacto</code> de una ruta dinámica como <code>/perfil/15</code>? La respuesta es el uso de <strong>Expresiones Regulares</strong>. </p>
+<p>Dentro del bucle, el enrutador llama a un método auxiliar privado llamado <code>getRoutePattern</code> que transforma nuestras rutas legibles (ej. <code>/perfil/{id}</code>) en patrones complejos de búsqueda (ej. <code>#^/perfil/(?P&lt;id&gt;[^/]+)$#</code>).</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-7-2"><a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">dispatch</span><span class="p">(</span><span class="nv">$uri</span><span class="p">)</span>
+</span><span id="__span-7-3"><a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a>    <span class="p">{</span>
+</span><span id="__span-7-4"><a href="#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a>        <span class="c1">// 1. Normalización: Limpiamos la URI para evitar confusiones.</span>
+</span><span id="__span-7-5"><a href="#__codelineno-7-5" id="__codelineno-7-5" name="__codelineno-7-5"></a>        <span class="nv">$uri</span> <span class="o">=</span> <span class="nb">parse_url</span><span class="p">(</span><span class="nv">$uri</span><span class="p">,</span> <span class="nx">PHP_URL_PATH</span><span class="p">);</span>
+</span><span id="__span-7-6"><a href="#__codelineno-7-6" id="__codelineno-7-6" name="__codelineno-7-6"></a>        <span class="nv">$uri</span> <span class="o">=</span> <span class="nb">rtrim</span><span class="p">(</span><span class="nv">$uri</span><span class="p">,</span> <span class="s1">'/'</span><span class="p">);</span>
+</span><span id="__span-7-7"><a href="#__codelineno-7-7" id="__codelineno-7-7" name="__codelineno-7-7"></a>        <span class="k">if</span> <span class="p">(</span><span class="nv">$uri</span> <span class="o">===</span> <span class="s1">''</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-7-8"><a href="#__codelineno-7-8" id="__codelineno-7-8" name="__codelineno-7-8"></a>            <span class="nv">$uri</span> <span class="o">=</span> <span class="s1">'/'</span><span class="p">;</span>
+</span><span id="__span-7-9"><a href="#__codelineno-7-9" id="__codelineno-7-9" name="__codelineno-7-9"></a>        <span class="p">}</span>
+</span><span id="__span-7-10"><a href="#__codelineno-7-10" id="__codelineno-7-10" name="__codelineno-7-10"></a>
+</span><span id="__span-7-11"><a href="#__codelineno-7-11" id="__codelineno-7-11" name="__codelineno-7-11"></a>        <span class="c1">// 2. Búsqueda: Recorremos todas las rutas registradas.</span>
+</span><span id="__span-7-12"><a href="#__codelineno-7-12" id="__codelineno-7-12" name="__codelineno-7-12"></a>        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">routes</span> <span class="k">as</span> <span class="nv">$route</span> <span class="o">=&gt;</span> <span class="nv">$handler</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-7-13"><a href="#__codelineno-7-13" id="__codelineno-7-13" name="__codelineno-7-13"></a>            <span class="c1">// Convertimos la ruta "humana" en un patrón Regex para poder comparar.</span>
+</span><span id="__span-7-14"><a href="#__codelineno-7-14" id="__codelineno-7-14" name="__codelineno-7-14"></a>            <span class="nv">$pattern</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getRoutePattern</span><span class="p">(</span><span class="nv">$route</span><span class="p">);</span>
+</span><span id="__span-7-15"><a href="#__codelineno-7-15" id="__codelineno-7-15" name="__codelineno-7-15"></a>
+</span><span id="__span-7-16"><a href="#__codelineno-7-16" id="__codelineno-7-16" name="__codelineno-7-16"></a>            <span class="c1">// Usamos preg_match para ver si la URI actual encaja en el patrón.</span>
+</span><span id="__span-7-17"><a href="#__codelineno-7-17" id="__codelineno-7-17" name="__codelineno-7-17"></a>            <span class="k">if</span> <span class="p">(</span><span class="nb">preg_match</span><span class="p">(</span><span class="nv">$pattern</span><span class="p">,</span> <span class="nv">$uri</span><span class="p">,</span> <span class="nv">$matches</span><span class="p">))</span> <span class="p">{</span>
+</span><span id="__span-7-18"><a href="#__codelineno-7-18" id="__codelineno-7-18" name="__codelineno-7-18"></a>                <span class="c1">// ... (Lógica de coincidencia encontrada)</span>
+</span><span id="__span-7-19"><a href="#__codelineno-7-19" id="__codelineno-7-19" name="__codelineno-7-19"></a>            <span class="p">}</span>
+</span><span id="__span-7-20"><a href="#__codelineno-7-20" id="__codelineno-7-20" name="__codelineno-7-20"></a>        <span class="p">}</span>
+</span><span id="__span-7-21"><a href="#__codelineno-7-21" id="__codelineno-7-21" name="__codelineno-7-21"></a>
+</span><span id="__span-7-22"><a href="#__codelineno-7-22" id="__codelineno-7-22" name="__codelineno-7-22"></a>        <span class="c1">// Si termina el bucle sin coincidencia, mostramos error 404.</span>
+</span><span id="__span-7-23"><a href="#__codelineno-7-23" id="__codelineno-7-23" name="__codelineno-7-23"></a>        <span class="nb">http_response_code</span><span class="p">(</span><span class="mi">404</span><span class="p">);</span>
+</span><span id="__span-7-24"><a href="#__codelineno-7-24" id="__codelineno-7-24" name="__codelineno-7-24"></a>        <span class="k">echo</span> <span class="s2">"&lt;h1&gt;404 - Página no encontrada&lt;/h1&gt;"</span><span class="p">;</span>
+</span><span id="__span-7-25"><a href="#__codelineno-7-25" id="__codelineno-7-25" name="__codelineno-7-25"></a>    <span class="p">}</span>
+</span></code></pre></div>
+<p>Cuando <code>preg_match</code> confirma que la URI del usuario coincide con una de nuestras rutas, entramos en la fase de <strong>Resolución y Ejecución</strong>. </p>
+<p>Primero, extraemos los parámetros dinámicos de la URL (como el <code>15</code> de <code>/perfil/15</code>) filtrando los resultados de la búsqueda para quedarnos solo con los valores nombrados. </p>
+<p>A continuación, preparamos el controlador: construimos el nombre completo de la clase (añadiendo el namespace <code>App\controller\</code>), y aquí es donde brilla la Inyección de Dependencias. No hacemos un simple <code>new Controller()</code>, sino que pedimos al <code>$container</code> que nos dé la conexión a la base de datos (<code>getDatabase()</code>) y se la pasamos al controlador al instanciarlo (<code>new $controllerName($database)</code>). </p>
+<p>Finalmente, utilizamos la función nativa <code>call_user_func_array</code> para ejecutar el método específico del controlador, pasándole los parámetros que extrajimos de la URL. Esto completa el ciclo: el enrutador ha encontrado al responsable, le ha dado las herramientas necesarias y le ha entregado los datos de la petición.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-8-1"><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-8-2"><a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a>    <span class="c1">// Dentro del if (preg_match(...)):</span>
+</span><span id="__span-8-3"><a href="#__codelineno-8-3" id="__codelineno-8-3" name="__codelineno-8-3"></a>
+</span><span id="__span-8-4"><a href="#__codelineno-8-4" id="__codelineno-8-4" name="__codelineno-8-4"></a>    <span class="c1">// 3. Extracción de datos: Sacamos los valores de los parámetros (ej: id=1).</span>
+</span><span id="__span-8-5"><a href="#__codelineno-8-5" id="__codelineno-8-5" name="__codelineno-8-5"></a>    <span class="nv">$params</span> <span class="o">=</span> <span class="nb">array_filter</span><span class="p">(</span><span class="nv">$matches</span><span class="p">,</span> <span class="s1">'is_string'</span><span class="p">,</span> <span class="nx">ARRAY_FILTER_USE_KEY</span><span class="p">);</span>
+</span><span id="__span-8-6"><a href="#__codelineno-8-6" id="__codelineno-8-6" name="__codelineno-8-6"></a>
+</span><span id="__span-8-7"><a href="#__codelineno-8-7" id="__codelineno-8-7" name="__codelineno-8-7"></a>    <span class="c1">// 4. Preparación: Determinamos qué clase y método usar.</span>
+</span><span id="__span-8-8"><a href="#__codelineno-8-8" id="__codelineno-8-8" name="__codelineno-8-8"></a>    <span class="nv">$controllerName</span> <span class="o">=</span> <span class="s1">'App\\controller\\'</span> <span class="o">.</span> <span class="nv">$handler</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span><span id="__span-8-9"><a href="#__codelineno-8-9" id="__codelineno-8-9" name="__codelineno-8-9"></a>    <span class="nv">$methodName</span> <span class="o">=</span> <span class="nv">$handler</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+</span><span id="__span-8-10"><a href="#__codelineno-8-10" id="__codelineno-8-10" name="__codelineno-8-10"></a>
+</span><span id="__span-8-11"><a href="#__codelineno-8-11" id="__codelineno-8-11" name="__codelineno-8-11"></a>    <span class="c1">// 5. Instanciación Inteligente:</span>
+</span><span id="__span-8-12"><a href="#__codelineno-8-12" id="__codelineno-8-12" name="__codelineno-8-12"></a>    <span class="c1">// Usamos el contenedor para obtener la Base de Datos e inyectarla en el controlador.</span>
+</span><span id="__span-8-13"><a href="#__codelineno-8-13" id="__codelineno-8-13" name="__codelineno-8-13"></a>    <span class="nv">$database</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">container</span><span class="o">-&gt;</span><span class="na">getDatabase</span><span class="p">();</span>
+</span><span id="__span-8-14"><a href="#__codelineno-8-14" id="__codelineno-8-14" name="__codelineno-8-14"></a>    <span class="nv">$controller</span> <span class="o">=</span> <span class="k">new</span> <span class="nv">$controllerName</span><span class="p">(</span><span class="nv">$database</span><span class="p">);</span>
+</span><span id="__span-8-15"><a href="#__codelineno-8-15" id="__codelineno-8-15" name="__codelineno-8-15"></a>
+</span><span id="__span-8-16"><a href="#__codelineno-8-16" id="__codelineno-8-16" name="__codelineno-8-16"></a>    <span class="c1">// 6. Ejecución: Llamamos al método del controlador enviándole los parámetros.</span>
+</span><span id="__span-8-17"><a href="#__codelineno-8-17" id="__codelineno-8-17" name="__codelineno-8-17"></a>    <span class="nb">call_user_func_array</span><span class="p">([</span><span class="nv">$controller</span><span class="p">,</span> <span class="nv">$methodName</span><span class="p">],</span> <span class="nv">$params</span><span class="p">);</span>
+</span><span id="__span-8-18"><a href="#__codelineno-8-18" id="__codelineno-8-18" name="__codelineno-8-18"></a>
+</span><span id="__span-8-19"><a href="#__codelineno-8-19" id="__codelineno-8-19" name="__codelineno-8-19"></a>    <span class="k">return</span><span class="p">;</span> <span class="c1">// Misión cumplida, salimos del dispatch.</span>
+</span></code></pre></div>
+<p>Para finalizar la comprensión del enrutador, debemos observar el método auxiliar <strong><code>getRoutePattern</code></strong>, el "traductor" de rutas. Su función es convertir la sintaxis amigable de llaves <code>{}</code> que usamos en <code>routes.php</code> en una expresión regular estricta que PHP pueda entender. </p>
+<p>Utiliza <code>str_replace</code> para escapar las barras de la URL y <code>preg_replace_callback</code> para encontrar cada ocurrencia de <code>{parametro}</code> y sustituirla por un grupo de captura regex <code>(?P&lt;parametro&gt;[^/]+)</code>. Este grupo de captura le dice a PHP: "Cualquier cosa que encuentres aquí que no sea una barra, captúralo y guárdalo con este nombre". </p>
+<p>Finalmente, añade anclas de inicio (<code>^</code>) y fin (<code>$</code>) para asegurar que la coincidencia sea exacta (que <code>/perfil/1</code> coincida, pero <code>/perfil/1/algo</code> no).</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-9-1"><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-9-2"><a href="#__codelineno-9-2" id="__codelineno-9-2" name="__codelineno-9-2"></a>    <span class="k">private</span> <span class="k">function</span> <span class="nf">getRoutePattern</span><span class="p">(</span><span class="nv">$route</span><span class="p">)</span>
+</span><span id="__span-9-3"><a href="#__codelineno-9-3" id="__codelineno-9-3" name="__codelineno-9-3"></a>    <span class="p">{</span>
+</span><span id="__span-9-4"><a href="#__codelineno-9-4" id="__codelineno-9-4" name="__codelineno-9-4"></a>        <span class="c1">// Escapamos las barras '/' para la regex.</span>
+</span><span id="__span-9-5"><a href="#__codelineno-9-5" id="__codelineno-9-5" name="__codelineno-9-5"></a>        <span class="nv">$pattern</span> <span class="o">=</span> <span class="nb">str_replace</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="s1">'\\/'</span><span class="p">,</span> <span class="nv">$route</span><span class="p">);</span>
+</span><span id="__span-9-6"><a href="#__codelineno-9-6" id="__codelineno-9-6" name="__codelineno-9-6"></a>
+</span><span id="__span-9-7"><a href="#__codelineno-9-7" id="__codelineno-9-7" name="__codelineno-9-7"></a>        <span class="c1">// Convertimos {variable} en grupos de captura regex.</span>
+</span><span id="__span-9-8"><a href="#__codelineno-9-8" id="__codelineno-9-8" name="__codelineno-9-8"></a>        <span class="c1">// Esto transforma '/perfil/{id}' en algo parecido a '/perfil/(?P&lt;id&gt;[^/]+)'</span>
+</span><span id="__span-9-9"><a href="#__codelineno-9-9" id="__codelineno-9-9" name="__codelineno-9-9"></a>        <span class="nv">$pattern</span> <span class="o">=</span> <span class="nb">preg_replace_callback</span><span class="p">(</span>
+</span><span id="__span-9-10"><a href="#__codelineno-9-10" id="__codelineno-9-10" name="__codelineno-9-10"></a>            <span class="s1">'/\{([a-zA-Z_][a-zA-Z0-9_]*)(?::([^\}]+))?\}/'</span><span class="p">,</span>
+</span><span id="__span-9-11"><a href="#__codelineno-9-11" id="__codelineno-9-11" name="__codelineno-9-11"></a>            <span class="k">function</span> <span class="p">(</span><span class="nv">$matches</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-9-12"><a href="#__codelineno-9-12" id="__codelineno-9-12" name="__codelineno-9-12"></a>                <span class="nv">$paramName</span> <span class="o">=</span> <span class="nv">$matches</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+</span><span id="__span-9-13"><a href="#__codelineno-9-13" id="__codelineno-9-13" name="__codelineno-9-13"></a>                <span class="nv">$regex</span> <span class="o">=</span> <span class="nb">isset</span><span class="p">(</span><span class="nv">$matches</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">?</span> <span class="nv">$matches</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">:</span> <span class="s1">'[^/]+'</span><span class="p">;</span>
+</span><span id="__span-9-14"><a href="#__codelineno-9-14" id="__codelineno-9-14" name="__codelineno-9-14"></a>                <span class="k">return</span> <span class="s1">'(?P&lt;'</span> <span class="o">.</span> <span class="nv">$paramName</span> <span class="o">.</span> <span class="s1">'&gt;'</span> <span class="o">.</span> <span class="nv">$regex</span> <span class="o">.</span> <span class="s1">')'</span><span class="p">;</span>
+</span><span id="__span-9-15"><a href="#__codelineno-9-15" id="__codelineno-9-15" name="__codelineno-9-15"></a>            <span class="p">},</span>
+</span><span id="__span-9-16"><a href="#__codelineno-9-16" id="__codelineno-9-16" name="__codelineno-9-16"></a>            <span class="nv">$pattern</span>
+</span><span id="__span-9-17"><a href="#__codelineno-9-17" id="__codelineno-9-17" name="__codelineno-9-17"></a>        <span class="p">);</span>
+</span><span id="__span-9-18"><a href="#__codelineno-9-18" id="__codelineno-9-18" name="__codelineno-9-18"></a>
+</span><span id="__span-9-19"><a href="#__codelineno-9-19" id="__codelineno-9-19" name="__codelineno-9-19"></a>        <span class="k">return</span> <span class="s1">'#^'</span> <span class="o">.</span> <span class="nv">$pattern</span> <span class="o">.</span> <span class="s1">'$#'</span><span class="p">;</span>
+</span><span id="__span-9-20"><a href="#__codelineno-9-20" id="__codelineno-9-20" name="__codelineno-9-20"></a>    <span class="p">}</span>
+</span></code></pre></div>
+<h2 id="el-proveedor-central-container">El Proveedor Central: Container</h2>
+<p>Continuando con el núcleo de nuestro <em>framework</em>, nos encontramos con el <code>Core\Container</code>. Esta clase es la implementación de un <strong>Contenedor de Servicios</strong>, también conocido como Contenedor de Inyección de Dependencias (DI). Su propósito es centralizar la gestión de las dependencias de la aplicación; en lugar de que cada clase cree manualmente los objetos que necesita (como una conexión a la base de datos), se los pide a este contenedor. </p>
+<p>Es importante entender, tal como se indica en la documentación del archivo, que esta implementación es deliberadamente simple, actuando más como un <strong>Localizador de Servicios</strong> que como un contenedor de DI completo. Un contenedor avanzado gestionaría el ciclo de vida de los objetos mediante métodos para "registrar" (bind) y "resolver" (resolve) dependencias, pero en nuestro caso, su función es más directa: actuar como un punto de acceso centralizado a los servicios.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-10-1"><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-10-2"><a href="#__codelineno-10-2" id="__codelineno-10-2" name="__codelineno-10-2"></a>    <span class="k">namespace</span> <span class="nx">Core</span><span class="p">;</span>
+</span><span id="__span-10-3"><a href="#__codelineno-10-3" id="__codelineno-10-3" name="__codelineno-10-3"></a>
+</span><span id="__span-10-4"><a href="#__codelineno-10-4" id="__codelineno-10-4" name="__codelineno-10-4"></a>    <span class="sd">/**</span>
+</span><span id="__span-10-5"><a href="#__codelineno-10-5" id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="sd">     * Class Container</span>
+</span><span id="__span-10-6"><a href="#__codelineno-10-6" id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="sd">     *</span>
+</span><span id="__span-10-7"><a href="#__codelineno-10-7" id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="sd">     * Un contenedor de servicios (o contenedor de Inyección de Dependencias - DI) es una</span>
+</span><span id="__span-10-8"><a href="#__codelineno-10-8" id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="sd">     * herramienta que gestiona las dependencias de la aplicación. En lugar de crear</span>
+</span><span id="__span-10-9"><a href="#__codelineno-10-9" id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="sd">     * objetos (servicios) manualmente donde se necesitan, se piden al contenedor.</span>
+</span><span id="__span-10-10"><a href="#__codelineno-10-10" id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="sd">     *</span>
+</span><span id="__span-10-11"><a href="#__codelineno-10-11" id="__codelineno-10-11" name="__codelineno-10-11"></a><span class="sd">     * Esta implementación es muy simple y actúa más como un "Localizador de Servicios".</span>
+</span><span id="__span-10-12"><a href="#__codelineno-10-12" id="__codelineno-10-12" name="__codelineno-10-12"></a><span class="sd">     * No construye los objetos, sino que delega la obtención de los mismos.</span>
+</span><span id="__span-10-13"><a href="#__codelineno-10-13" id="__codelineno-10-13" name="__codelineno-10-13"></a><span class="sd">     * Un contenedor más avanzado tendría métodos para "registrar" (bind) y "resolver" (resolve)</span>
+</span><span id="__span-10-14"><a href="#__codelineno-10-14" id="__codelineno-10-14" name="__codelineno-10-14"></a><span class="sd">     * servicios, gestionando su ciclo de vida.</span>
+</span><span id="__span-10-15"><a href="#__codelineno-10-15" id="__codelineno-10-15" name="__codelineno-10-15"></a><span class="sd">     */</span>
+</span><span id="__span-10-16"><a href="#__codelineno-10-16" id="__codelineno-10-16" name="__codelineno-10-16"></a>    <span class="k">class</span> <span class="nc">Container</span>
+</span><span id="__span-10-17"><a href="#__codelineno-10-17" id="__codelineno-10-17" name="__codelineno-10-17"></a>    <span class="p">{</span>
+</span><span id="__span-10-18"><a href="#__codelineno-10-18" id="__codelineno-10-18" name="__codelineno-10-18"></a>        <span class="sd">/**</span>
+</span><span id="__span-10-19"><a href="#__codelineno-10-19" id="__codelineno-10-19" name="__codelineno-10-19"></a><span class="sd">         * Obtiene la instancia del servicio de base de datos.</span>
+</span><span id="__span-10-20"><a href="#__codelineno-10-20" id="__codelineno-10-20" name="__codelineno-10-20"></a><span class="sd">         *</span>
+</span><span id="__span-10-21"><a href="#__codelineno-10-21" id="__codelineno-10-21" name="__codelineno-10-21"></a><span class="sd">         * En esta implementación, el método no crea ni almacena la instancia,</span>
+</span><span id="__span-10-22"><a href="#__codelineno-10-22" id="__codelineno-10-22" name="__codelineno-10-22"></a><span class="sd">         * sino que delega la llamada al método estático `getInstance()` de la</span>
+</span><span id="__span-10-23"><a href="#__codelineno-10-23" id="__codelineno-10-23" name="__codelineno-10-23"></a><span class="sd">         * propia clase `Database`.</span>
+</span><span id="__span-10-24"><a href="#__codelineno-10-24" id="__codelineno-10-24" name="__codelineno-10-24"></a><span class="sd">         *</span>
+</span><span id="__span-10-25"><a href="#__codelineno-10-25" id="__codelineno-10-25" name="__codelineno-10-25"></a><span class="sd">         * Esto significa que la clase `Database` está implementada como un Singleton,</span>
+</span><span id="__span-10-26"><a href="#__codelineno-10-26" id="__codelineno-10-26" name="__codelineno-10-26"></a><span class="sd">         * un patrón que asegura que solo exista una única instancia de la clase</span>
+</span><span id="__span-10-27"><a href="#__codelineno-10-27" id="__codelineno-10-27" name="__codelineno-10-27"></a><span class="sd">         * en toda la aplicación.</span>
+</span><span id="__span-10-28"><a href="#__codelineno-10-28" id="__codelineno-10-28" name="__codelineno-10-28"></a><span class="sd">         *</span>
+</span><span id="__span-10-29"><a href="#__codelineno-10-29" id="__codelineno-10-29" name="__codelineno-10-29"></a><span class="sd">         * @return \App\services\Database La única instancia del servicio de base de datos.</span>
+</span><span id="__span-10-30"><a href="#__codelineno-10-30" id="__codelineno-10-30" name="__codelineno-10-30"></a><span class="sd">         */</span>
+</span><span id="__span-10-31"><a href="#__codelineno-10-31" id="__codelineno-10-31" name="__codelineno-10-31"></a>        <span class="k">public</span> <span class="k">function</span> <span class="nf">getDatabase</span><span class="p">()</span><span class="o">:</span> <span class="nx">\App\services\Database</span>
+</span><span id="__span-10-32"><a href="#__codelineno-10-32" id="__codelineno-10-32" name="__codelineno-10-32"></a>        <span class="p">{</span>
+</span><span id="__span-10-33"><a href="#__codelineno-10-33" id="__codelineno-10-33" name="__codelineno-10-33"></a>            <span class="c1">// Devuelve la instancia única del servicio de base de datos.</span>
+</span><span id="__span-10-34"><a href="#__codelineno-10-34" id="__codelineno-10-34" name="__codelineno-10-34"></a>            <span class="k">return</span> <span class="nx">\App\services\Database</span><span class="o">::</span><span class="na">getInstance</span><span class="p">();</span>
+</span><span id="__span-10-35"><a href="#__codelineno-10-35" id="__codelineno-10-35" name="__codelineno-10-35"></a>        <span class="p">}</span>
+</span><span id="__span-10-36"><a href="#__codelineno-10-36" id="__codelineno-10-36" name="__codelineno-10-36"></a>    <span class="p">}</span>
+</span></code></pre></div>
+<p>La funcionalidad clave reside en su único método, <strong><code>getDatabase()</code></strong>. Cuando el <code>Router</code> (o cualquier otra parte del sistema) necesita interactuar con la base de datos, no crea una nueva conexión, sino que le pide al contenedor que se la proporcione. </p>
+<p>La clave de esta implementación es la <strong>delegación</strong>: el Contenedor no sabe <em>cómo</em> construir el objeto <code>Database</code>, sino que confía en la propia clase <code>Database</code> llamando a su método estático <code>getInstance()</code>. </p>
+<p>Este nombre de método es la firma clásica del patrón de diseño <strong>Singleton</strong>. Este patrón garantiza que, sin importar cuántas veces se llame a <code>getInstance()</code>, solo existirá <strong>una única instancia</strong> de la clase <code>Database</code> en toda la aplicación, evitando así el desperdicio de recursos que supondría abrir múltiples conexiones a la base de datos en una misma petición. </p>
+<p>Por lo tanto, nuestro Contenedor actúa como un intermediario limpio que nos da acceso a ese Singleton.</p>
+<h2 id="el-mapa-de-la-aplicacion-routesphp">El Mapa de la Aplicación: routes.php</h2>
+<p>El archivo <code>routes.php</code> es el <strong>mapa de carreteras</strong> o el <strong>directorio telefónico</strong> de nuestra aplicación. A diferencia de los archivos lógicos como el Enrutador o el Contenedor, este es un simple <strong>archivo de configuración</strong>. Su única responsabilidad es devolver un <em>array</em> de PHP que centraliza y define la correspondencia entre la URI (Uniform Resource Identifier) que el usuario escribe en el navegador y la acción específica que debe ejecutar el <em>framework</em>. </p>
+<p>Esta acción, conocida como <em>handler</em>, es a su vez un pequeño <em>array</em> que especifica el nombre de la clase del Controlador y el nombre del método que debe ser invocado. El formato es simple: <code>'URI_PATTERN' =&gt; ['NombreDelControlador', 'nombreDelMetodo']</code>. Es importante notar que el nombre del controlador es solo el nombre de la clase, ya que, como se indica en la documentación, el Enrutador se encarga de añadir automáticamente el prefijo del <em>namespace</em> (<code>App\controller\</code>) al construirlo. </p>
+<p>El verdadero poder de este sistema reside en las <strong>rutas dinámicas</strong>, que se definen usando la sintaxis de llaves <code>{}</code>. Una ruta como <code>'/perfil/{id}'</code> se convierte en un patrón flexible. El Enrutador es lo suficientemente inteligente como para capturar el valor de ese <code>{id}</code> y pasarlo como argumento al método del controlador correspondiente. </p>
+<p>El sistema incluso permite validaciones avanzadas con expresiones regulares, usando la sintaxis <code>{parametro:regex}</code>, aunque si no se especifica, se usa una regex por defecto que coincide con cualquier cadena que no contenga una barra (<code>/</code>), lo cual es perfecto para la mayoría de los casos.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-11-1"><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-11-2"><a href="#__codelineno-11-2" id="__codelineno-11-2" name="__codelineno-11-2"></a>    <span class="sd">/**</span>
+</span><span id="__span-11-3"><a href="#__codelineno-11-3" id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="sd">     * --------------------------------------------------------------------------</span>
+</span><span id="__span-11-4"><a href="#__codelineno-11-4" id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="sd">     * DEFINICIÓN DE RUTAS DE LA APLICACIÓN</span>
+</span><span id="__span-11-5"><a href="#__codelineno-11-5" id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="sd">     * --------------------------------------------------------------------------</span>
+</span><span id="__span-11-6"><a href="#__codelineno-11-6" id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="sd">     *</span>
+</span><span id="__span-11-7"><a href="#__codelineno-11-7" id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="sd">     * Este archivo centraliza la configuración de todas las rutas de la aplicación.</span>
+</span><span id="__span-11-8"><a href="#__codelineno-11-8" id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="sd">     * Cada entrada en el array mapea una URI (Uniform Resource Identifier) a un</span>
+</span><span id="__span-11-9"><a href="#__codelineno-11-9" id="__codelineno-11-9" name="__codelineno-11-9"></a><span class="sd">     * "handler", que es la combinación de un controlador y un método dentro de ese</span>
+</span><span id="__span-11-10"><a href="#__codelineno-11-10" id="__codelineno-11-10" name="__codelineno-11-10"></a><span class="sd">     * controlador que se encargará de procesar la petición para esa URI.</span>
+</span><span id="__span-11-11"><a href="#__codelineno-11-11" id="__codelineno-11-11" name="__codelineno-11-11"></a><span class="sd">     *</span>
+</span><span id="__span-11-12"><a href="#__codelineno-11-12" id="__codelineno-11-12" name="__codelineno-11-12"></a><span class="sd">     * El formato es:</span>
+</span><span id="__span-11-13"><a href="#__codelineno-11-13" id="__codelineno-11-13" name="__codelineno-11-13"></a><span class="sd">     * 'URI_PATTERN' =&gt; ['NombreDelControlador', 'nombreDelMetodo']</span>
+</span><span id="__span-11-14"><a href="#__codelineno-11-14" id="__codelineno-11-14" name="__codelineno-11-14"></a><span class="sd">     *</span>
+</span><span id="__span-11-15"><a href="#__codelineno-11-15" id="__codelineno-11-15" name="__codelineno-11-15"></a><span class="sd">     * El 'NombreDelControlador' debe ser el nombre de la clase del controlador</span>
+</span><span id="__span-11-16"><a href="#__codelineno-11-16" id="__codelineno-11-16" name="__codelineno-11-16"></a><span class="sd">     * (sin el namespace 'App\controller\', ya que el Router lo añade automáticamente).</span>
+</span><span id="__span-11-17"><a href="#__codelineno-11-17" id="__codelineno-11-17" name="__codelineno-11-17"></a><span class="sd">     *</span>
+</span><span id="__span-11-18"><a href="#__codelineno-11-18" id="__codelineno-11-18" name="__codelineno-11-18"></a><span class="sd">     * Las rutas pueden incluir parámetros dinámicos encerrados entre llaves `{}`.</span>
+</span><span id="__span-11-19"><a href="#__codelineno-11-19" id="__codelineno-11-19" name="__codelineno-11-19"></a><span class="sd">     * Por ejemplo, `{id}` o `{nombre}`. Estos parámetros se pasarán como argumentos</span>
+</span><span id="__span-11-20"><a href="#__codelineno-11-20" id="__codelineno-11-20" name="__codelineno-11-20"></a><span class="sd">     * al método del controlador.</span>
+</span><span id="__span-11-21"><a href="#__codelineno-11-21" id="__codelineno-11-21" name="__codelineno-11-21"></a><span class="sd">     *</span>
+</span><span id="__span-11-22"><a href="#__codelineno-11-22" id="__codelineno-11-22" name="__codelineno-11-22"></a><span class="sd">     * Opcionalmente, se puede especificar una expresión regular para un parámetro</span>
+</span><span id="__span-11-23"><a href="#__codelineno-11-23" id="__codelineno-11-23" name="__codelineno-11-23"></a><span class="sd">     * usando la sintaxis `{parametro:regex}`. Si no se especifica, se usa una</span>
+</span><span id="__span-11-24"><a href="#__codelineno-11-24" id="__codelineno-11-24" name="__codelineno-11-24"></a><span class="sd">     * regex por defecto que coincide con cualquier cadena que no contenga una barra `/`.</span>
+</span><span id="__span-11-25"><a href="#__codelineno-11-25" id="__codelineno-11-25" name="__codelineno-11-25"></a><span class="sd">     */</span>
+</span><span id="__span-11-26"><a href="#__codelineno-11-26" id="__codelineno-11-26" name="__codelineno-11-26"></a>
+</span><span id="__span-11-27"><a href="#__codelineno-11-27" id="__codelineno-11-27" name="__codelineno-11-27"></a>    <span class="k">return</span> <span class="p">[</span>
+</span><span id="__span-11-28"><a href="#__codelineno-11-28" id="__codelineno-11-28" name="__codelineno-11-28"></a>        <span class="c1">// Ruta raíz o página de inicio.</span>
+</span><span id="__span-11-29"><a href="#__codelineno-11-29" id="__codelineno-11-29" name="__codelineno-11-29"></a>        <span class="c1">// Cuando el usuario accede a "/", se ejecuta el método 'index' de 'HomeController'.</span>
+</span><span id="__span-11-30"><a href="#__codelineno-11-30" id="__codelineno-11-30" name="__codelineno-11-30"></a>        <span class="s1">'/'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'HomeController'</span><span class="p">,</span> <span class="s1">'index'</span><span class="p">],</span>
+</span><span id="__span-11-31"><a href="#__codelineno-11-31" id="__codelineno-11-31" name="__codelineno-11-31"></a>
+</span><span id="__span-11-32"><a href="#__codelineno-11-32" id="__codelineno-11-32" name="__codelineno-11-32"></a>        <span class="c1">// Otra forma de acceder a la página de inicio.</span>
+</span><span id="__span-11-33"><a href="#__codelineno-11-33" id="__codelineno-11-33" name="__codelineno-11-33"></a>        <span class="s1">'/home'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'HomeController'</span><span class="p">,</span> <span class="s1">'index'</span><span class="p">],</span>
+</span><span id="__span-11-34"><a href="#__codelineno-11-34" id="__codelineno-11-34" name="__codelineno-11-34"></a>
+</span><span id="__span-11-35"><a href="#__codelineno-11-35" id="__codelineno-11-35" name="__codelineno-11-35"></a>        <span class="c1">// Ruta para ver el perfil de un usuario específico.</span>
+</span><span id="__span-11-36"><a href="#__codelineno-11-36" id="__codelineno-11-36" name="__codelineno-11-36"></a>        <span class="c1">// `{id}` es un parámetro dinámico que capturará el ID del usuario.</span>
+</span><span id="__span-11-37"><a href="#__codelineno-11-37" id="__codelineno-11-37" name="__codelineno-11-37"></a>        <span class="c1">// El Router pasará este ID como argumento al método 'ver' de 'PerfilController'.</span>
+</span><span id="__span-11-38"><a href="#__codelineno-11-38" id="__codelineno-11-38" name="__codelineno-11-38"></a>        <span class="s1">'/perfil/{id}'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'PerfilController'</span><span class="p">,</span> <span class="s1">'ver'</span><span class="p">],</span>
+</span><span id="__span-11-39"><a href="#__codelineno-11-39" id="__codelineno-11-39" name="__codelineno-11-39"></a>
+</span><span id="__span-11-40"><a href="#__codelineno-11-40" id="__codelineno-11-40" name="__codelineno-11-40"></a>        <span class="c1">// Ruta de ejemplo para saludar a alguien con nombre y apellido.</span>
+</span><span id="__span-11-41"><a href="#__codelineno-11-41" id="__codelineno-11-41" name="__codelineno-11-41"></a>        <span class="c1">// `{nombre}` y `{apellido}` son parámetros dinámículos.</span>
+</span><span id="__span-11-42"><a href="#__codelineno-11-42" id="__codelineno-11-42" name="__codelineno-11-42"></a>        <span class="c1">// El Router los pasará como argumentos al método 'saludar' de 'SaludarController'.</span>
+</span><span id="__span-11-43"><a href="#__codelineno-11-43" id="__codelineno-11-43" name="__codelineno-11-43"></a>        <span class="s1">'/saludo/{nombre}/{apellido}'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'SaludarController'</span><span class="p">,</span> <span class="s1">'saludar'</span><span class="p">],</span>
+</span><span id="__span-11-44"><a href="#__codelineno-11-44" id="__codelineno-11-44" name="__codelineno-11-44"></a>    <span class="p">];</span>
+</span></code></pre></div>
+<p>Al observar el <em>array</em> devuelto, vemos estas reglas en acción. Las rutas <code>'/'</code> y <code>'/home'</code> están mapeadas al mismo método <code>index</code> del <code>HomeController</code>, permitiendo múltiples puntos de entrada para la misma página. </p>
+<p>La ruta <code>'/perfil/{id}'</code> es un ejemplo canónico de un parámetro dinámico; si un usuario visita <code>/perfil/123</code>, el Enrutador capturará <code>'123'</code> y llamará a <code>PerfilController::ver('123')</code>. </p>
+<p>Finalmente, la ruta <code>'/saludo/{nombre}/{apellido}'</code> demuestra cómo el sistema puede capturar múltiples parámetros y pasarlos en orden al método del controlador, permitiendo una flexibilidad total en la definición de nuestras URLs.</p>
+<h2 id="el-controlador-el-director-de-orquesta">El Controlador: El Director de Orquesta</h2>
+<p>Ahora que tenemos el <code>Router</code> (el jefe de logística) y el <code>Container</code> (el proveedor de herramientas), llegamos al corazón de la lógica de la aplicación: el <strong>Controlador</strong>. El Controlador es el "Director de Orquesta" en el patrón MVC. No obtiene los datos (eso es trabajo del Modelo) y no los muestra (eso es trabajo de la Vista); su única misión es <strong>coordinar</strong> la petición. Recibe la llamada del Enrutador, le pide al Modelo los datos que necesita y, finalmente, le entrega esos datos a la Vista para que los prepare.</p>
+<hr/>
+<h3 id="el-controlador-base-corecontroller">El Controlador Base (<code>Core\Controller</code>)</h3>
+<p>Para evitar repetir código, creamos un <strong>Controlador Base</strong> del cual heredarán todos nuestros controladores. Este archivo, <code>Core\Controller.php</code>, es una clase <code>abstract</code>, lo que significa que no podemos crear una instancia de ella directamente, sino que sirve como <strong>plantilla</strong> o <strong>plano</strong> para otros controladores. Su propósito es centralizar la lógica común, como el acceso a la base de datos y la carga de vistas.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-12-1"><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-12-2"><a href="#__codelineno-12-2" id="__codelineno-12-2" name="__codelineno-12-2"></a>
+</span><span id="__span-12-3"><a href="#__codelineno-12-3" id="__codelineno-12-3" name="__codelineno-12-3"></a>    <span class="k">namespace</span> <span class="nx">Core</span><span class="p">;</span>
+</span><span id="__span-12-4"><a href="#__codelineno-12-4" id="__codelineno-12-4" name="__codelineno-12-4"></a>
+</span><span id="__span-12-5"><a href="#__codelineno-12-5" id="__codelineno-12-5" name="__codelineno-12-5"></a>    <span class="k">use</span> <span class="nx">App\services\Database</span><span class="p">;</span>
+</span><span id="__span-12-6"><a href="#__codelineno-12-6" id="__codelineno-12-6" name="__codelineno-12-6"></a>
+</span><span id="__span-12-7"><a href="#__codelineno-12-7" id="__codelineno-12-7" name="__codelineno-12-7"></a>    <span class="sd">/**</span>
+</span><span id="__span-12-8"><a href="#__codelineno-12-8" id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="sd">     * Class Controller</span>
+</span><span id="__span-12-9"><a href="#__codelineno-12-9" id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="sd">     *</span>
+</span><span id="__span-12-10"><a href="#__codelineno-12-10" id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="sd">     * Es una clase base abstracta para todos los controladores de la aplicación.</span>
+</span><span id="__span-12-11"><a href="#__codelineno-12-11" id="__codelineno-12-11" name="__codelineno-12-11"></a><span class="sd">     * Su propósito es centralizar la lógica común que puedan necesitar los controladores.</span>
+</span><span id="__span-12-12"><a href="#__codelineno-12-12" id="__codelineno-12-12" name="__codelineno-12-12"></a><span class="sd">     *</span>
+</span><span id="__span-12-13"><a href="#__codelineno-12-13" id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="sd">     * Al ser 'abstract', no se pueden crear instancias directas de esta clase,</span>
+</span><span id="__span-12-14"><a href="#__codelineno-12-14" id="__codelineno-12-14" name="__codelineno-12-14"></a><span class="sd">     * solo se puede heredar de ella.</span>
+</span><span id="__span-12-15"><a href="#__codelineno-12-15" id="__codelineno-12-15" name="__codelineno-12-15"></a><span class="sd">     */</span>
+</span><span id="__span-12-16"><a href="#__codelineno-12-16" id="__codelineno-12-16" name="__codelineno-12-16"></a>    <span class="k">abstract</span> <span class="k">class</span> <span class="nc">Controller</span>
+</span><span id="__span-12-17"><a href="#__codelineno-12-17" id="__codelineno-12-17" name="__codelineno-12-17"></a>    <span class="p">{</span>
+</span><span id="__span-12-18"><a href="#__codelineno-12-18" id="__codelineno-12-18" name="__codelineno-12-18"></a>        <span class="sd">/**</span>
+</span><span id="__span-12-19"><a href="#__codelineno-12-19" id="__codelineno-12-19" name="__codelineno-12-19"></a><span class="sd">         * @var Database La instancia del servicio de base de datos.</span>
+</span><span id="__span-12-20"><a href="#__codelineno-12-20" id="__codelineno-12-20" name="__codelineno-12-20"></a><span class="sd">         * Es 'protected' para que las clases hijas (los controladores concretos) puedan acceder a ella.</span>
+</span><span id="__span-12-21"><a href="#__codelineno-12-21" id="__codelineno-12-21" name="__codelineno-12-21"></a><span class="sd">         */</span>
+</span><span id="__span-12-22"><a href="#__codelineno-12-22" id="__codelineno-12-22" name="__codelineno-12-22"></a>        <span class="k">protected</span> <span class="nv">$db</span><span class="p">;</span>
+</span><span id="__span-12-23"><a href="#__codelineno-12-23" id="__codelineno-12-23" name="__codelineno-12-23"></a>
+</span><span id="__span-12-24"><a href="#__codelineno-12-24" id="__codelineno-12-24" name="__codelineno-12-24"></a>        <span class="sd">/**</span>
+</span><span id="__span-12-25"><a href="#__codelineno-12-25" id="__codelineno-12-25" name="__codelineno-12-25"></a><span class="sd">         * Constructor del controlador.</span>
+</span><span id="__span-12-26"><a href="#__codelineno-12-26" id="__codelineno-12-26" name="__codelineno-12-26"></a><span class="sd">         *</span>
+</span><span id="__span-12-27"><a href="#__codelineno-12-27" id="__codelineno-12-27" name="__codelineno-12-27"></a><span class="sd">         * Recibe dependencias (en este caso, el servicio de base de datos) y las</span>
+</span><span id="__span-12-28"><a href="#__codelineno-12-28" id="__codelineno-12-28" name="__codelineno-12-28"></a><span class="sd">         * almacena para que estén disponibles en los métodos del controlador.</span>
+</span><span id="__span-12-29"><a href="#__codelineno-12-29" id="__codelineno-12-29" name="__codelineno-12-29"></a><span class="sd">         * Esto es un ejemplo de "Inyección de Dependencias".</span>
+</span><span id="__span-12-30"><a href="#__codelineno-12-30" id="__codelineno-12-30" name="__codelineno-12-30"></a><span class="sd">         *</span>
+</span><span id="__span-12-31"><a href="#__codelineno-12-31" id="__codelineno-12-31" name="__codelineno-12-31"></a><span class="sd">         * @param Database $database El servicio de base de datos, inyectado por el Router.</span>
+</span><span id="__span-12-32"><a href="#__codelineno-12-32" id="__codelineno-12-32" name="__codelineno-12-32"></a><span class="sd">         */</span>
+</span><span id="__span-12-33"><a href="#__codelineno-12-33" id="__codelineno-12-33" name="__codelineno-12-33"></a>        <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">Database</span> <span class="nv">$database</span><span class="p">)</span>
+</span><span id="__span-12-34"><a href="#__codelineno-12-34" id="__codelineno-12-34" name="__codelineno-12-34"></a>        <span class="p">{</span>
+</span><span id="__span-12-35"><a href="#__codelineno-12-35" id="__codelineno-12-35" name="__codelineno-12-35"></a>            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span> <span class="o">=</span> <span class="nv">$database</span><span class="p">;</span>
+</span><span id="__span-12-36"><a href="#__codelineno-12-36" id="__codelineno-12-36" name="__codelineno-12-36"></a>        <span class="p">}</span>
+</span><span id="__span-12-37"><a href="#__codelineno-12-37" id="__codelineno-12-37" name="__codelineno-12-37"></a>
+</span><span id="__span-12-38"><a href="#__codelineno-12-38" id="__codelineno-12-38" name="__codelineno-12-38"></a>        <span class="sd">/**</span>
+</span><span id="__span-12-39"><a href="#__codelineno-12-39" id="__codelineno-12-39" name="__codelineno-12-39"></a><span class="sd">         * Método de ayuda (helper) para cargar una vista.</span>
+</span><span id="__span-12-40"><a href="#__codelineno-12-40" id="__codelineno-12-40" name="__codelineno-12-40"></a><span class="sd">         *</span>
+</span><span id="__span-12-41"><a href="#__codelineno-12-41" id="__codelineno-12-41" name="__codelineno-12-41"></a><span class="sd">         * Simplifica la carga de archivos de vista y el paso de datos a las mismas.</span>
+</span><span id="__span-12-42"><a href="#__codelineno-12-42" id="__codelineno-12-42" name="__codelineno-12-42"></a><span class="sd">         *</span>
+</span><span id="__span-12-43"><a href="#__codelineno-12-43" id="__codelineno-12-43" name="__codelineno-12-43"></a><span class="sd">         * @param string $viewName El nombre del archivo de la vista (sin la extensión '.view.php').</span>
+</span><span id="__span-12-44"><a href="#__codelineno-12-44" id="__codelineno-12-44" name="__codelineno-12-44"></a><span class="sd">         * @param array $data Un array asociativo de datos que se deben hacer disponibles en la vista.</span>
+</span><span id="__span-12-45"><a href="#__codelineno-12-45" id="__codelineno-12-45" name="__codelineno-12-45"></a><span class="sd">         */</span>
+</span><span id="__span-12-46"><a href="#__codelineno-12-46" id="__codelineno-12-46" name="__codelineno-12-46"></a>        <span class="k">protected</span> <span class="k">function</span> <span class="nf">view</span><span class="p">(</span><span class="nv">$viewName</span><span class="p">,</span> <span class="nv">$data</span> <span class="o">=</span> <span class="p">[])</span>
+</span><span id="__span-12-47"><a href="#__codelineno-12-47" id="__codelineno-12-47" name="__codelineno-12-47"></a>        <span class="p">{</span>
+</span><span id="__span-12-48"><a href="#__codelineno-12-48" id="__codelineno-12-48" name="__codelineno-12-48"></a>            <span class="c1">// La función `extract` es un atajo. Convierte las claves de un array asociativo en variables.</span>
+</span><span id="__span-12-49"><a href="#__codelineno-12-49" id="__codelineno-12-49" name="__codelineno-12-49"></a>            <span class="nb">extract</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+</span><span id="__span-12-50"><a href="#__codelineno-12-50" id="__codelineno-12-50" name="__codelineno-12-50"></a>
+</span><span id="__span-12-51"><a href="#__codelineno-12-51" id="__codelineno-12-51" name="__codelineno-12-51"></a>            <span class="c1">// Construimos la ruta completa al archivo de la vista usando la constante VIEWS_PATH</span>
+</span><span id="__span-12-52"><a href="#__codelineno-12-52" id="__codelineno-12-52" name="__codelineno-12-52"></a>            <span class="c1">// y cargamos el archivo.</span>
+</span><span id="__span-12-53"><a href="#__codelineno-12-53" id="__codelineno-12-53" name="__codelineno-12-53"></a>            <span class="k">require</span> <span class="nx">VIEWS_PATH</span> <span class="o">.</span> <span class="s1">'/'</span> <span class="o">.</span> <span class="nv">$viewName</span> <span class="o">.</span> <span class="s1">'.view.php'</span><span class="p">;</span>
+</span><span id="__span-12-54"><a href="#__codelineno-12-54" id="__codelineno-12-54" name="__codelineno-12-54"></a>        <span class="p">}</span>
+</span><span id="__span-12-55"><a href="#__codelineno-12-55" id="__codelineno-12-55" name="__codelineno-12-55"></a>    <span class="p">}</span>
+</span></code></pre></div>
+<p>La magia de esta clase base reside en dos sitios. Primero, su <strong>constructor</strong>: exige que se le pase una instancia de <code>Database</code>. Cuando nuestro <code>Router</code> crea un controlador, primero obtiene la base de datos del <code>Container</code> y se la "inyecta" al controlador, que la almacena en la propiedad <code>protected $db</code>, dejándola disponible para cualquier controlador hijo. </p>
+<p>Segundo, el método <code>view()</code>, que es un <strong>ayudante (helper)</strong>. Este método se encarga del trabajo sucio de cargar un archivo de vista. Lo más importante es que utiliza la función <code>extract($data)</code>: si le pasamos un <em>array</em> como <code>['users' =&gt; $listaUsuarios]</code>, esta función crea mágicamente una variable <code>$users</code> dentro del ámbito del método, que estará disponible en el archivo de la vista que se carga inmediatamente después con <code>require</code>.</p>
+<hr/>
+<h3 id="un-controlador-concreto-homecontroller">Un Controlador Concreto: HomeController</h3>
+<p>Ahora veamos cómo esta base nos facilita la vida al crear un controlador real, como <code>HomeController.php</code>. Este controlador se encarga de la lógica de nuestra página de inicio, tal como se definió en <code>routes.php</code>.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-13-1"><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-13-2"><a href="#__codelineno-13-2" id="__codelineno-13-2" name="__codelineno-13-2"></a>    <span class="c1">// Archivo: app/controllers/HomeController.php</span>
+</span><span id="__span-13-3"><a href="#__codelineno-13-3" id="__codelineno-13-3" name="__codelineno-13-3"></a>
+</span><span id="__span-13-4"><a href="#__codelineno-13-4" id="__codelineno-13-4" name="__codelineno-13-4"></a>    <span class="k">namespace</span> <span class="nx">App\controller</span><span class="p">;</span>
+</span><span id="__span-13-5"><a href="#__codelineno-13-5" id="__codelineno-13-5" name="__codelineno-13-5"></a>
+</span><span id="__span-13-6"><a href="#__codelineno-13-6" id="__codelineno-13-6" name="__codelineno-13-6"></a>    <span class="k">use</span> <span class="nx">App\models\User</span><span class="p">;</span>
+</span><span id="__span-13-7"><a href="#__codelineno-13-7" id="__codelineno-13-7" name="__codelineno-13-7"></a>    <span class="k">use</span> <span class="nx">Core\Controller</span><span class="p">;</span>
+</span><span id="__span-13-8"><a href="#__codelineno-13-8" id="__codelineno-13-8" name="__codelineno-13-8"></a>
+</span><span id="__span-13-9"><a href="#__codelineno-13-9" id="__codelineno-13-9" name="__codelineno-13-9"></a>    <span class="k">class</span> <span class="nc">HomeController</span> <span class="k">extends</span> <span class="nx">Controller</span>
+</span><span id="__span-13-10"><a href="#__codelineno-13-10" id="__codelineno-13-10" name="__codelineno-13-10"></a>    <span class="p">{</span>
+</span><span id="__span-13-11"><a href="#__codelineno-13-11" id="__codelineno-13-11" name="__codelineno-13-11"></a>        <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span>
+</span><span id="__span-13-12"><a href="#__codelineno-13-12" id="__codelineno-13-12" name="__codelineno-13-12"></a>        <span class="p">{</span>
+</span><span id="__span-13-13"><a href="#__codelineno-13-13" id="__codelineno-13-13" name="__codelineno-13-13"></a>            <span class="c1">// 1. Pedir datos al Modelo (User::all), pasando la conexión a la BD.</span>
+</span><span id="__span-13-14"><a href="#__codelineno-13-14" id="__codelineno-13-14" name="__codelineno-13-14"></a>            <span class="nv">$users</span> <span class="o">=</span> <span class="nx">User</span><span class="o">::</span><span class="na">all</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">);</span>
+</span><span id="__span-13-15"><a href="#__codelineno-13-15" id="__codelineno-13-15" name="__codelineno-13-15"></a>
+</span><span id="__span-13-16"><a href="#__codelineno-13-16" id="__codelineno-13-16" name="__codelineno-13-16"></a>            <span class="c1">// 2. Cargar la vista 'home' y pasarle los datos.</span>
+</span><span id="__span-13-17"><a href="#__codelineno-13-17" id="__codelineno-13-17" name="__codelineno-13-17"></a>            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">view</span><span class="p">(</span><span class="s1">'home'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'users'</span> <span class="o">=&gt;</span> <span class="nv">$users</span><span class="p">]);</span>
+</span><span id="__span-13-18"><a href="#__codelineno-13-18" id="__codelineno-13-18" name="__codelineno-13-18"></a>        <span class="p">}</span>
+</span><span id="__span-13-19"><a href="#__codelineno-13-19" id="__codelineno-13-19" name="__codelineno-13-19"></a>    <span class="p">}</span>
+</span></code></pre></div>
+<p>Observe la elegancia y simplicidad de este archivo. Al hacer <code>extends Controller</code>, <code>HomeController</code> hereda automáticamente el constructor y el método <code>view</code>. No necesitamos un constructor aquí; PHP llamará automáticamente al constructor del padre (<code>Core\Controller</code>), el cual recibirá la base de datos inyectada por el <code>Router</code> y la almacenará en <code>$this-&gt;db</code>. </p>
+<p>Por lo tanto, dentro de nuestro método <code>index()</code>, podemos acceder libremente a <code>$this-&gt;db</code> para pasárselo al modelo <code>User::all()</code>. Una vez que el modelo nos devuelve los datos, simplemente llamamos al método heredado <code>$this-&gt;view()</code>, le pasamos el nombre de la vista (<code>'home'</code>) y el <em>array</em> de datos que queremos que estén disponibles. </p>
+<p>El controlador ha cumplido su misión de coordinación de forma limpia y con muy poco código.</p>
+<h2 id="el-modelo-el-experto-en-datos-y-la-vista-el-presentador">El Modelo (El Experto en Datos) y  La Vista (El Presentador)</h2>
+<p>Llegamos a las dos piezas finales de nuestro patrón MVC: el <strong>Modelo</strong> y la <strong>Vista</strong>. Si el Controlador es el director de orquesta, el Modelo es el músico experto (el especialista en datos) y la Vista es el decorador del escenario (el especialista en presentación).</p>
+<hr/>
+<h3 id="el-modelo">El Modelo</h3>
+<p>El <strong>Modelo</strong> es la capa de nuestra aplicación que tiene la única responsabilidad de interactuar con la base de datos. Toda la lógica de negocio relacionada con los datos —obtener, guardar, actualizar o eliminar— debe residir aquí. Esto aísla nuestro SQL del resto de la aplicación, permitiendo que nuestros Controladores permanezcan limpios y agnósticos sobre <em>cómo</em> se obtienen los datos. </p>
+<p>En nuestro <em>framework</em> didáctico, el modelo <code>User</code> se implementa con métodos <code>static</code>. Esta es una elección de diseño simple que nos permite llamar a sus métodos directamente sin instanciar un objeto <code>User</code>, pasando la conexión a la base de datos que el Controlador ya posee como dependencia.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-14-1"><a href="#__codelineno-14-1" id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="x">    </span><span class="cp">&lt;?php</span>
+</span><span id="__span-14-2"><a href="#__codelineno-14-2" id="__codelineno-14-2" name="__codelineno-14-2"></a>
+</span><span id="__span-14-3"><a href="#__codelineno-14-3" id="__codelineno-14-3" name="__codelineno-14-3"></a>    <span class="k">namespace</span> <span class="nx">App\models</span><span class="p">;</span>
+</span><span id="__span-14-4"><a href="#__codelineno-14-4" id="__codelineno-14-4" name="__codelineno-14-4"></a>
+</span><span id="__span-14-5"><a href="#__codelineno-14-5" id="__codelineno-14-5" name="__codelineno-14-5"></a>    <span class="k">use</span> <span class="nx">App\services\Database</span><span class="p">;</span>
+</span><span id="__span-14-6"><a href="#__codelineno-14-6" id="__codelineno-14-6" name="__codelineno-14-6"></a>    <span class="k">use</span> <span class="nx">PDO</span><span class="p">;</span>
+</span><span id="__span-14-7"><a href="#__codelineno-14-7" id="__codelineno-14-7" name="__codelineno-14-7"></a>
+</span><span id="__span-14-8"><a href="#__codelineno-14-8" id="__codelineno-14-8" name="__codelineno-14-8"></a>    <span class="sd">/**</span>
+</span><span id="__span-14-9"><a href="#__codelineno-14-9" id="__codelineno-14-9" name="__codelineno-14-9"></a><span class="sd">     * Class User</span>
+</span><span id="__span-14-10"><a href="#__codelineno-14-10" id="__codelineno-14-10" name="__codelineno-14-10"></a><span class="sd">     *</span>
+</span><span id="__span-14-11"><a href="#__codelineno-14-11" id="__codelineno-14-11" name="__codelineno-14-11"></a><span class="sd">     * Representa el modelo de usuario en la aplicación.</span>
+</span><span id="__span-14-12"><a href="#__codelineno-14-12" id="__codelineno-14-12" name="__codelineno-14-12"></a><span class="sd">     * Los modelos son responsables de interactuar con la base de datos</span>
+</span><span id="__span-14-13"><a href="#__codelineno-14-13" id="__codelineno-14-13" name="__codelineno-14-13"></a><span class="sd">     * para obtener, guardar, actualizar o eliminar datos relacionados con una entidad (en este caso, 'usuarios').</span>
+</span><span id="__span-14-14"><a href="#__codelineno-14-14" id="__codelineno-14-14" name="__codelineno-14-14"></a><span class="sd">     *</span>
+</span><span id="__span-14-15"><a href="#__codelineno-14-15" id="__codelineno-14-15" name="__codelineno-14-15"></a><span class="sd">     * Este modelo utiliza métodos estáticos para simplificar el acceso a los datos,</span>
+</span><span id="__span-14-16"><a href="#__codelineno-14-16" id="__codelineno-14-16" name="__codelineno-14-16"></a><span class="sd">     * recibiendo la instancia de la base de datos como dependencia.</span>
+</span><span id="__span-14-17"><a href="#__codelineno-14-17" id="__codelineno-14-17" name="__codelineno-14-17"></a><span class="sd">     */</span>
+</span><span id="__span-14-18"><a href="#__codelineno-14-18" id="__codelineno-14-18" name="__codelineno-14-18"></a>    <span class="k">class</span> <span class="nc">User</span>
+</span><span id="__span-14-19"><a href="#__codelineno-14-19" id="__codelineno-14-19" name="__codelineno-14-19"></a>    <span class="p">{</span>
+</span><span id="__span-14-20"><a href="#__codelineno-14-20" id="__codelineno-14-20" name="__codelineno-14-20"></a>        <span class="sd">/**</span>
+</span><span id="__span-14-21"><a href="#__codelineno-14-21" id="__codelineno-14-21" name="__codelineno-14-21"></a><span class="sd">         * Obtiene todos los usuarios de la base de datos.</span>
+</span><span id="__span-14-22"><a href="#__codelineno-14-22" id="__codelineno-14-22" name="__codelineno-14-22"></a><span class="sd">         *</span>
+</span><span id="__span-14-23"><a href="#__codelineno-14-23" id="__codelineno-14-23" name="__codelineno-14-23"></a><span class="sd">         * @param Database $db La instancia del servicio de base de datos.</span>
+</span><span id="__span-14-24"><a href="#__codelineno-14-24" id="__codelineno-14-24" name="__codelineno-14-24"></a><span class="sd">         * @return array Un array de objetos `stdClass`, donde cada objeto representa un usuario.</span>
+</span><span id="__span-14-25"><a href="#__codelineno-14-25" id="__codelineno-14-25" name="__codelineno-14-25"></a><span class="sd">         */</span>
+</span><span id="__span-14-26"><a href="#__codelineno-14-26" id="__codelineno-14-26" name="__codelineno-14-26"></a>        <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">all</span><span class="p">(</span><span class="nx">Database</span> <span class="nv">$db</span><span class="p">)</span>
+</span><span id="__span-14-27"><a href="#__codelineno-14-27" id="__codelineno-14-27" name="__codelineno-14-27"></a>        <span class="p">{</span>
+</span><span id="__span-14-28"><a href="#__codelineno-14-28" id="__codelineno-14-28" name="__codelineno-14-28"></a>            <span class="nv">$pdo</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">getConnection</span><span class="p">();</span> <span class="c1">// Obtiene la conexión PDO.</span>
+</span><span id="__span-14-29"><a href="#__codelineno-14-29" id="__codelineno-14-29" name="__codelineno-14-29"></a>            <span class="nv">$stmt</span> <span class="o">=</span> <span class="nv">$pdo</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="s1">'SELECT * FROM users'</span><span class="p">);</span> <span class="c1">// Ejecuta una consulta para seleccionar todos los usuarios.</span>
+</span><span id="__span-14-30"><a href="#__codelineno-14-30" id="__codelineno-14-30" name="__codelineno-14-30"></a>
+</span><span id="__span-14-31"><a href="#__codelineno-14-31" id="__codelineno-14-31" name="__codelineno-14-31"></a>            <span class="c1">// `fetchAll(PDO::FETCH_OBJ)` devuelve un array de objetos genéricos (stdClass),</span>
+</span><span id="__span-14-32"><a href="#__codelineno-14-32" id="__codelineno-14-32" name="__codelineno-14-32"></a>            <span class="c1">// donde las propiedades del objeto corresponden a los nombres de las columnas.</span>
+</span><span id="__span-14-33"><a href="#__codelineno-14-33" id="__codelineno-14-33" name="__codelineno-14-33"></a>            <span class="k">return</span> <span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">fetchAll</span><span class="p">(</span><span class="nx">PDO</span><span class="o">::</span><span class="na">FETCH_OBJ</span><span class="p">);</span>
+</span><span id="__span-14-34"><a href="#__codelineno-14-34" id="__codelineno-14-34" name="__codelineno-14-34"></a>        <span class="p">}</span>
+</span><span id="__span-14-35"><a href="#__codelineno-14-35" id="__codelineno-14-35" name="__codelineno-14-35"></a>
+</span><span id="__span-14-36"><a href="#__codelineno-14-36" id="__codelineno-14-36" name="__codelineno-14-36"></a>        <span class="sd">/**</span>
+</span><span id="__span-14-37"><a href="#__codelineno-14-37" id="__codelineno-14-37" name="__codelineno-14-37"></a><span class="sd">         * Obtiene un usuario específico por su ID.</span>
+</span><span id="__span-14-38"><a href="#__codelineno-14-38" id="__codelineno-14-38" name="__codelineno-14-38"></a><span class="sd">         *</span>
+</span><span id="__span-14-39"><a href="#__codelineno-14-39" id="__codelineno-14-39" name="__codelineno-14-39"></a><span class="sd">         * @param Database $db La instancia del servicio de base de datos.</span>
+</span><span id="__span-14-40"><a href="#__codelineno-14-40" id="__codelineno-14-40" name="__codelineno-14-40"></a><span class="sd">         * @param int $id El ID del usuario a buscar.</span>
+</span><span id="__span-14-41"><a href="#__codelineno-14-41" id="__codelineno-14-41" name="__codelineno-14-41"></a><span class="sd">         * @return object|false Un objeto `stdClass` que representa al usuario, o `false` si no se encuentra.</span>
+</span><span id="__span-14-42"><a href="#__codelineno-14-42" id="__codelineno-14-42" name="__codelineno-14-42"></a><span class="sd">         */</span>
+</span><span id="__span-14-43"><a href="#__codelineno-14-43" id="__codelineno-14-43" name="__codelineno-14-43"></a>        <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">find</span><span class="p">(</span><span class="nx">Database</span> <span class="nv">$db</span><span class="p">,</span> <span class="nv">$id</span><span class="p">)</span>
+</span><span id="__span-14-44"><a href="#__codelineno-14-44" id="__codelineno-14-44" name="__codelineno-14-44"></a>        <span class="p">{</span>
+</span><span id="__span-14-45"><a href="#__codelineno-14-45" id="__codelineno-14-45" name="__codelineno-14-45"></a>            <span class="nv">$pdo</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">getConnection</span><span class="p">();</span> <span class="c1">// Obtiene la conexión PDO.</span>
+</span><span id="__span-14-46"><a href="#__codelineno-14-46" id="__codelineno-14-46" name="__codelineno-14-46"></a>
+</span><span id="__span-14-47"><a href="#__codelineno-14-47" id="__codelineno-14-47" name="__codelineno-14-47"></a>            <span class="c1">// Prepara una consulta SQL para evitar inyecciones SQL.</span>
+</span><span id="__span-14-48"><a href="#__codelineno-14-48" id="__codelineno-14-48" name="__codelineno-14-48"></a>            <span class="c1">// `:id` es un marcador de posición para el valor del ID.</span>
+</span><span id="__span-14-49"><a href="#__codelineno-14-49" id="__codelineno-14-49" name="__codelineno-14-49"></a>            <span class="nv">$stmt</span> <span class="o">=</span> <span class="nv">$pdo</span><span class="o">-&gt;</span><span class="na">prepare</span><span class="p">(</span><span class="s1">'SELECT * FROM users WHERE id = :id'</span><span class="p">);</span>
+</span><span id="__span-14-50"><a href="#__codelineno-14-50" id="__codelineno-14-50" name="__codelineno-14-50"></a>
+</span><span id="__span-14-51"><a href="#__codelineno-14-51" id="__codelineno-14-51" name="__codelineno-14-51"></a>            <span class="c1">// Ejecuta la consulta, pasando el valor del ID al marcador de posición.</span>
+</span><span id="__span-14-52"><a href="#__codelineno-14-52" id="__codelineno-14-52" name="__codelineno-14-52"></a>            <span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">([</span><span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="nv">$id</span><span class="p">]);</span>
+</span><span id="__span-14-53"><a href="#__codelineno-14-53" id="__codelineno-14-53" name="__codelineno-14-53"></a>
+</span><span id="__span-14-54"><a href="#__codelineno-14-54" id="__codelineno-14-54" name="__codelineno-14-54"></a>            <span class="c1">// `fetch(PDO::FETCH_OBJ)` devuelve un único objeto genérico (stdClass)</span>
+</span><span id="__span-14-55"><a href="#__codelineno-14-55" id="__codelineno-14-55" name="__codelineno-14-55"></a>            <span class="c1">// o `false` si no se encuentra ninguna fila.</span>
+</span><span id="__span-14-56"><a href="#__codelineno-14-56" id="__codelineno-14-56" name="__codelineno-14-56"></a>            <span class="k">return</span> <span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">fetch</span><span class="p">(</span><span class="nx">PDO</span><span class="o">::</span><span class="na">FETCH_OBJ</span><span class="p">);</span>
+</span><span id="__span-14-57"><a href="#__codelineno-14-57" id="__codelineno-14-57" name="__codelineno-14-57"></a>        <span class="p">}</span>
+</span><span id="__span-14-58"><a href="#__codelineno-14-58" id="__codelineno-14-58" name="__codelineno-14-58"></a>    <span class="p">}</span>
+</span></code></pre></div>
+<p>Al analizar los métodos, vemos dos prácticas cruciales. En <code>all()</code>, utilizamos <code>fetchAll(PDO::FETCH_OBJ)</code>. Esto es fundamental, ya que le dice a PDO que devuelva los resultados no como <em>arrays</em> asociativos, sino como un <em>array</em> de <strong>objetos <code>stdClass</code></strong> genéricos, donde cada columna de la tabla es una propiedad pública. Esto nos permitirá en la Vista usar una sintaxis limpia como <code>$user-&gt;name</code>. </p>
+<p>En <code>find()</code>, vemos una práctica de seguridad esencial: el uso de <strong>consultas preparadas</strong> (<code>prepare</code> y <code>execute</code>). Al usar marcadores de posición (<code>:id</code>) en lugar de concatenar el <code>$id</code> directamente en el SQL, prevenimos el tipo de ataque más común en la web: la <strong>Inyección SQL</strong>.</p>
+<hr/>
+<h3 id="la-vista">La Vista</h3>
+<p>Una vez que el Modelo ha extraído los datos y el Controlador se los ha pasado, estos deben ser presentados al usuario. Aquí es donde entra la <strong>Vista</strong>. La Vista es la capa de presentación; idealmente, no debería contener lógica de negocio, sino solo la lógica de presentación necesaria para mostrar los datos. Es un archivo (en este caso, HTML con incrustaciones de PHP) que actúa como una plantilla.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-15-1"><a href="#__codelineno-15-1" id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="x">    &lt;!DOCTYPE html&gt;</span>
+</span><span id="__span-15-2"><a href="#__codelineno-15-2" id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="x">    &lt;html&gt;</span>
+</span><span id="__span-15-3"><a href="#__codelineno-15-3" id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="x">    &lt;head&gt;</span>
+</span><span id="__span-15-4"><a href="#__codelineno-15-4" id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="x">        &lt;title&gt;</span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$pageTitle</span> <span class="cp">?&gt;</span><span class="x">&lt;/title&gt;</span>
+</span><span id="__span-15-5"><a href="#__codelineno-15-5" id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="x">        &lt;link rel="stylesheet" href="/css/style.css"&gt;</span>
+</span><span id="__span-15-6"><a href="#__codelineno-15-6" id="__codelineno-15-6" name="__codelineno-15-6"></a><span class="x">    &lt;/head&gt;</span>
+</span><span id="__span-15-7"><a href="#__codelineno-15-7" id="__codelineno-15-7" name="__codelineno-15-7"></a><span class="x">    &lt;body&gt;</span>
+</span><span id="__span-15-8"><a href="#__codelineno-15-8" id="__codelineno-15-8" name="__codelineno-15-8"></a><span class="x">    &lt;div class="container"&gt;</span>
+</span><span id="__span-15-9"><a href="#__codelineno-15-9" id="__codelineno-15-9" name="__codelineno-15-9"></a><span class="x">        &lt;h1&gt;Página de Inicio&lt;/h1&gt;</span>
+</span><span id="__span-15-10"><a href="#__codelineno-15-10" id="__codelineno-15-10" name="__codelineno-15-10"></a><span class="x">        &lt;p&gt;Bienvenido a la página de inicio.&lt;/p&gt;</span>
+</span><span id="__span-15-11"><a href="#__codelineno-15-11" id="__codelineno-15-11" name="__codelineno-15-11"></a>
+</span><span id="__span-15-12"><a href="#__codelineno-15-12" id="__codelineno-15-12" name="__codelineno-15-12"></a><span class="x">        &lt;hr&gt;</span>
+</span><span id="__span-15-13"><a href="#__codelineno-15-13" id="__codelineno-15-13" name="__codelineno-15-13"></a>
+</span><span id="__span-15-14"><a href="#__codelineno-15-14" id="__codelineno-15-14" name="__codelineno-15-14"></a><span class="x">        &lt;h2&gt;Listado de Usuarios&lt;/h2&gt;</span>
+</span><span id="__span-15-15"><a href="#__codelineno-15-15" id="__codelineno-15-15" name="__codelineno-15-15"></a><span class="x">        </span><span class="cp">&lt;?php</span> <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$users</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$users</span><span class="p">))</span><span class="o">:</span> <span class="cp">?&gt;</span>
+</span><span id="__span-15-16"><a href="#__codelineno-15-16" id="__codelineno-15-16" name="__codelineno-15-16"></a><span class="x">            &lt;ul&gt;</span>
+</span><span id="__span-15-17"><a href="#__codelineno-15-17" id="__codelineno-15-17" name="__codelineno-15-17"></a><span class="x">                </span><span class="cp">&lt;?php</span> <span class="k">foreach</span> <span class="p">(</span><span class="nv">$users</span> <span class="k">as</span> <span class="nv">$user</span><span class="p">)</span><span class="o">:</span> <span class="cp">?&gt;</span>
+</span><span id="__span-15-18"><a href="#__codelineno-15-18" id="__codelineno-15-18" name="__codelineno-15-18"></a><span class="x">                    &lt;li&gt;</span>
+</span><span id="__span-15-19"><a href="#__codelineno-15-19" id="__codelineno-15-19" name="__codelineno-15-19"></a><span class="x">                        &lt;a href="/perfil/</span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">;</span> <span class="cp">?&gt;</span><span class="x">"&gt;</span>
+</span><span id="__span-15-20"><a href="#__codelineno-15-20" id="__codelineno-15-20" name="__codelineno-15-20"></a><span class="x">                            </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nb">htmlspecialchars</span><span class="p">(</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">);</span> <span class="cp">?&gt;</span>
+</span><span id="__span-15-21"><a href="#__codelineno-15-21" id="__codelineno-15-21" name="__codelineno-15-21"></a><span class="x">                        &lt;/a&gt;</span>
+</span><span id="__span-15-22"><a href="#__codelineno-15-22" id="__codelineno-15-22" name="__codelineno-15-22"></a><span class="x">                    &lt;/li&gt;</span>
+</span><span id="__span-15-23"><a href="#__codelineno-15-23" id="__codelineno-15-23" name="__codelineno-15-23"></a><span class="x">                </span><span class="cp">&lt;?php</span> <span class="k">endforeach</span><span class="p">;</span> <span class="cp">?&gt;</span>
+</span><span id="__span-15-24"><a href="#__codelineno-15-24" id="__codelineno-15-24" name="__codelineno-15-24"></a><span class="x">            &lt;/ul&gt;</span>
+</span><span id="__span-15-25"><a href="#__codelineno-15-25" id="__codelineno-15-25" name="__codelineno-15-25"></a><span class="x">        </span><span class="cp">&lt;?php</span> <span class="k">else</span><span class="o">:</span> <span class="cp">?&gt;</span>
+</span><span id="__span-15-26"><a href="#__codelineno-15-26" id="__codelineno-15-26" name="__codelineno-15-26"></a><span class="x">            &lt;p&gt;No se encontraron usuarios.&lt;/p&gt;</span>
+</span><span id="__span-15-27"><a href="#__codelineno-15-27" id="__codelineno-15-27" name="__codelineno-15-27"></a><span class="x">        </span><span class="cp">&lt;?php</span> <span class="k">endif</span><span class="p">;</span> <span class="cp">?&gt;</span>
+</span><span id="__span-15-28"><a href="#__codelineno-15-28" id="__codelineno-15-28" name="__codelineno-15-28"></a><span class="x">    &lt;/div&gt;</span>
+</span><span id="__span-15-29"><a href="#__codelineno-15-29" id="__codelineno-15-29" name="__codelineno-15-29"></a><span class="x">    &lt;/body&gt;</span>
+</span><span id="__span-15-30"><a href="#__codelineno-15-30" id="__codelineno-15-30" name="__codelineno-15-30"></a><span class="x">    &lt;/html&gt;</span>
+</span></code></pre></div>
+<p>La magia aquí ocurre gracias al método <code>view()</code> de nuestro <code>Controller</code> base. La llamada <code>extract($data)</code> que hicimos en el controlador ha convertido las claves del <em>array</em> de datos en variables locales. Por eso, la vista puede acceder directamente a <code>$users</code> (y a <code>$pageTitle</code>, si se hubiera pasado) como si siempre hubieran existido. </p>
+<p>La vista comprueba si <code>$users</code> existe e itera sobre él con un <code>foreach</code>. Aquí vemos el contrato perfecto con el Modelo: como el Modelo usó <code>PDO::FETCH_OBJ</code>, la Vista accede a los datos usando la sintaxis de objeto (<code>$user-&gt;id</code>, <code>$user-&gt;name</code>). </p>
+<p>Finalmente, se aplica otra práctica de seguridad vital: <code>htmlspecialchars($user-&gt;name)</code>. Esto previene ataques de <strong>Cross-Site Scripting (XSS)</strong>, asegurando que si un nombre de usuario contiene código HTML o JavaScript malicioso, se muestre como texto inofensivo en lugar de ejecutarse en el navegador del visitante. </p>
+<p>Con la creación de enlaces dinámicos como <code>/perfil/&lt;?php echo $user-&gt;id; ?&gt;</code>, la Vista completa el ciclo, creando URLs que el <code>Router</code> estará esperando para iniciar la siguiente petición.</p>
+<div class="admonition note">
+<p class="admonition-title">Proyecto</p>
+<p>Se puede descargar el contenido de este fichero en el siguiente <a href="../../data/estructura.zip">enlace</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Manuel Sánchez Gomis
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["search.suggest", "search.highlight", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "content.code.copy", "content.tabs.link", "content.tooltips"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../../assets/_markdown_exec_pyodide.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../../_static/js/notebook.js"></script>
+      
+    
+  </body>
+</html>
