@@ -1,0 +1,2833 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Manuel Sánchez Gomis">
+      
+      
+      
+        <link rel="prev" href="../../../introduccion/markdowns/03%20-%20herramientas/">
+      
+      
+        <link rel="next" href="../02%20-%20primeros_pasos/">
+      
+      
+      <link rel="icon" href="../../../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.46">
+    
+    
+      
+        <title>Introducción - Desarrollo Web en entorno servidor</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/_markdown_exec_pyodide.css">
+    
+      <link rel="stylesheet" href="../../../_static/css/notebook.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduccion" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Desarrollo Web en entorno servidor" class="md-header__button md-logo" aria-label="Desarrollo Web en entorno servidor" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Desarrollo Web en entorno servidor
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Introducción
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber"  aria-label="Cambiar a modo brillante"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo brillante" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="amber"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Bienvenido
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../introduccion/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Introduccion
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+    
+  
+  Php
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../aplicaciones_web/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Aplicaciones Web con Php
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../laravel/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Laravel
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../servicios_web/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Servicios Web
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../webs_dinamicas/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Webs Dinámicas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../aplicaciones_web_hibridas/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Aplicaciones Web Híbridas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../bibliografia/" class="md-tabs__link">
+        
+  
+    
+  
+  Bibliografia
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Desarrollo Web en entorno servidor" class="md-nav__button md-logo" aria-label="Desarrollo Web en entorno servidor" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    Desarrollo Web en entorno servidor
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bienvenido
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Introduccion
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Introduccion
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../introduccion/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Conceptos básicos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../introduccion/markdowns/02%20-%20lenguajes_programacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lenguajes de programación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../introduccion/markdowns/03%20-%20herramientas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Herramientas y frameworks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Php
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Php
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#el-mecanismo-de-generacion-con-codigo-embebido" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Mecanismo de Generación con Código Embebido
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="El Mecanismo de Generación con Código Embebido">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ventajas-y-desventajas-del-codigo-embebido" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ventajas y desventajas del código embebido
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ventajas y desventajas del código embebido">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ventajas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ventajas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#desventajas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Desventajas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#php" class="md-nav__link">
+    <span class="md-ellipsis">
+      Php
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aplicaciones-y-usos-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aplicaciones y Usos Principales
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ventajas-y-popularidad-de-php" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ventajas y Popularidad de PHP
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preparando-el-entorno" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preparando el entorno
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Preparando el entorno">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requisitos-previos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requisitos previos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Requisitos previos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#opcion-a-descargar-php-manualmente" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opción A: Descargar PHP manualmente
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opcion-b-usar-un-gestor-de-paquetes-como-chocolatey" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opción B: Usar un gestor de paquetes como Chocolatey
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-visual-studio-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración de Visual Studio Code
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración de Visual Studio Code">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#instalacion-de-extensiones-esenciales" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación de Extensiones Esenciales
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configurar-el-ejecutable-de-php" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configurar el ejecutable de PHP
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejecutando-el-servidor-de-php" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejecutando el servidor de PHP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejecutando el servidor de PHP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#opcion-a-usar-el-servidor-integrado-de-php" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opción A: Usar el servidor integrado de PHP
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opcion-b-usar-la-extension-php-server-en-vs-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opción B: Usar la extensión "PHP Server" en VS Code
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#depurar-con-php" class="md-nav__link">
+    <span class="md-ellipsis">
+      Depurar con PHP
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02%20-%20primeros_pasos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primeros pasos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03%20-%20estructuras_control/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Estructuras de Control en PHP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04%20-%20arrays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Arrays
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05%20-%20funciones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Funciones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06%20-%20poo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Programación orientada a objetos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07%20-%20excepciones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Excepciones y errores
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08%20-%20directivas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Directivas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09%20-%20codigo_embebido/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Código embebido
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Aplicaciones Web con Php
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Aplicaciones Web con Php
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/02%20-%20formularios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Formularios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/03%20-%20sesiones_cookies/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cookies y Sesiones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/04%20-%20seguridad/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Seguridad
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/05%20-%20ficheros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ficheros
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/06%20-%20bases_datos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bases de datos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/07%20-%20estructura_proyecto/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Organizando el código
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/98%20-%20ejercicios_persistencia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios persistencia
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Laravel
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Laravel
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/02%20-%20instalacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instalación y primeros pasos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/03%20-%20rutas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rutas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/04%20-%20controladores/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Controladores
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/05%20-%20vistas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vistas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/06%20-%20formularios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Formularios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/07%20-%20modelos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modelos de Eloquent
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/14%20-%20response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Respuestas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/08%20-%20cookies_sesiones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cookies y Sesiones en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/09%20-%20servicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Servicios en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/10%20-%20seguridad/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Seguridad en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/11%20-%20inyeccion_dependencias/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inyección de Dependencias en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/12%20-%20testing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pruebas y documentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/13%20-%20fechas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fechas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/15%20-%20migrations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Migraciones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Servicios Web
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Servicios Web
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/02%20-%20tecnologias/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tecnologías y Estándares
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/03%20-%20creando_servicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creando un Servicio Web
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/04%20-%20probando_servicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Probando el Servicio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/05%20-%20documentando_servicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Documentando un Servicio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Webs Dinámicas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Webs Dinámicas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/02%20-%20ajax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AJAX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/03%20-%20validacion_formularios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Validación de Formularios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/04%20-%20modificacion_dom/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modificación del DOM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/05%20-%20async_patrones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Patrones Async
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Aplicaciones Web Híbridas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Aplicaciones Web Híbridas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/02%20-%20apis_terceros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    APIs de Terceros
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/03%20-%20creando_apis_propias/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creando APIs Propias
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/04%20-%20sdks_frameworks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SDKs y Frameworks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/05%20-%20big_data_ia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Big Data e IA
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/06%20-%20testing_depuracion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Testing y Depuración
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/07%20-%20autenticacion_apis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Autenticación de APIs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/08%20-%20versionado_webhooks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Versionado y Webhooks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../bibliografia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bibliografia
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#el-mecanismo-de-generacion-con-codigo-embebido" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Mecanismo de Generación con Código Embebido
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="El Mecanismo de Generación con Código Embebido">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ventajas-y-desventajas-del-codigo-embebido" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ventajas y desventajas del código embebido
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ventajas y desventajas del código embebido">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ventajas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ventajas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#desventajas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Desventajas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#php" class="md-nav__link">
+    <span class="md-ellipsis">
+      Php
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aplicaciones-y-usos-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aplicaciones y Usos Principales
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ventajas-y-popularidad-de-php" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ventajas y Popularidad de PHP
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preparando-el-entorno" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preparando el entorno
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Preparando el entorno">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requisitos-previos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requisitos previos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Requisitos previos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#opcion-a-descargar-php-manualmente" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opción A: Descargar PHP manualmente
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opcion-b-usar-un-gestor-de-paquetes-como-chocolatey" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opción B: Usar un gestor de paquetes como Chocolatey
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-visual-studio-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración de Visual Studio Code
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración de Visual Studio Code">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#instalacion-de-extensiones-esenciales" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación de Extensiones Esenciales
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configurar-el-ejecutable-de-php" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configurar el ejecutable de PHP
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejecutando-el-servidor-de-php" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejecutando el servidor de PHP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejecutando el servidor de PHP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#opcion-a-usar-el-servidor-integrado-de-php" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opción A: Usar el servidor integrado de PHP
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opcion-b-usar-la-extension-php-server-en-vs-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opción B: Usar la extensión "PHP Server" en VS Code
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#depurar-con-php" class="md-nav__link">
+    <span class="md-ellipsis">
+      Depurar con PHP
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="introduccion">Introducción</h1>
+<p>En el capítulo anterior, hemos desmontado la "caja negra" del servidor. Hemos explorado la arquitectura cliente-servidor, los mecanismos de ejecución que utilizan Apache o Nginx, y el rol de los servidores de aplicaciones. Ahora que comprendemos <em>cómo</em> y <em>dónde</em> se ejecuta el código, es el momento de bajar al siguiente nivel y responder a la pregunta fundamental: ¿cómo se escribe físicamente el código que genera una página dinámica?</p>
+<p>Este capítulo se centra en el punto exacto donde el backend y el frontend se encuentran: la <strong>integración de los lenguajes de marcas con los lenguajes de entorno servidor</strong>. Exploraremos el método más directo y fundamental para lograrlo, conocido como el uso de <strong>lenguajes embebidos en HTML</strong>. Esta técnica consiste en incrustar fragmentos de código de servidor directamente en un fichero HTML.</p>
+<p>El objetivo final de este proceso es siempre el mismo: la <strong>obtención del lenguaje de marcas para mostrar en el cliente</strong>. Veremos cómo el servidor procesa estos ficheros híbridos, ejecuta las instrucciones de servidor, y genera como resultado un documento HTML puro. Este documento final es lo único que el navegador del usuario recibirá, desconociendo por completo la lógica que lo ha creado. Empecemos a escribir nuestras primeras líneas de código dinámico.</p>
+<h2 id="el-mecanismo-de-generacion-con-codigo-embebido">El Mecanismo de Generación con Código Embebido</h2>
+<p>La solución más fundamental e intuitiva para dar vida a una página web es la técnica del <strong>código embebido</strong>. Su concepto es una fusión directa: en lugar de mantener los archivos HTML y la lógica del servidor en mundos separados, los unimos en un único documento híbrido. Consiste en tomar un fichero HTML estándar y, en los puntos exactos donde se necesita dinamismo, "incrustar" fragmentos de un lenguaje de programación de servidor. Cuando el servidor procesa este archivo, no lo envía tal cual, sino que primero ejecuta estas instrucciones de servidor, las reemplaza por su resultado y, solo entonces, envía al cliente un documento HTML final, coherente y completamente renderizado. Este enfoque transformó las páginas web de documentos estáticos a plantillas vivas, capaces de ser rellenadas con datos en tiempo real.</p>
+<p>Este poderoso paradigma vio nacer una diversidad de tecnologías a lo largo de la historia de la web, cada una ligada a un ecosistema particular. Microsoft desarrolló sus <strong>ASP</strong> (Active Server Pages), mientras que el mundo de Java propuso soluciones como <strong>JSP</strong> (JavaServer Pages) y los <strong>Servlets</strong>. Si bien todas compartían el objetivo de generar HTML dinámicamente, su sintaxis y complejidad variaban. Para nuestros apuntes, nos centraremos en <strong>PHP</strong> (PHP: Hypertext Preprocessor), no solo por ser una de las tecnologías más extendidas en la historia de la web, sino porque fue diseñada explícitamente con este modelo en mente. Su sintaxis se integra de forma muy natural con el HTML, lo que la convierte en una herramienta excepcionalmente clara para comprender los fundamentos del código embebido.</p>
+<p>El funcionamiento de esta "magia" depende de una configuración clave en el servidor web. Un servidor como Apache debe ser equipado con un programa especializado conocido como <strong>intérprete o motor</strong> del lenguaje, en este caso, el motor de PHP. El servidor actúa como un controlador de tráfico: cuando recibe una petición para un archivo <code>.html</code>, simplemente lo sirve. Sin embargo, su configuración le indica que si el archivo solicitado tiene la extensión <code>.php</code>, debe delegar el trabajo. En lugar de enviarlo, se lo pasa al intérprete de PHP para que lo procese. Este intérprete es un ejecutor especializado cuya única misión es leer estos ficheros híbridos y producir un resultado final.</p>
+<p>Dentro de un fichero <code>.php</code>, el intérprete necesita señales claras para saber qué partes debe ejecutar y qué partes debe ignorar. Estas señales son las <strong>etiquetas</strong> de apertura y cierre: <code>&lt;?php</code> y <code>?&gt;</code>. El intérprete lee el archivo secuencialmente, desde el principio hasta el final, y por defecto se encuentra en un "modo de copia". En este modo, cualquier texto que encuentre, ya sea HTML, CSS o simple texto plano, lo copia directamente a un búfer de salida temporal. Sin embargo, al toparse con la etiqueta de apertura <code>&lt;?php</code>, su comportamiento cambia radicalmente: entra en "modo de ejecución". A partir de ese punto, y hasta que no encuentre la etiqueta de cierre <code>?&gt;</code>, interpretará todo como instrucciones de PHP. El código contenido entre estas dos etiquetas se denomina <strong>bloque de código</strong>. Al encontrar la etiqueta de cierre, el intérprete vuelve a su "modo de copia" original, continuando su camino por el resto del fichero.</p>
+<figure>
+<img alt="" src="../../images/09.png" width="90%"/>
+</figure>
+<p>Podemos visualizar el proceso de generación como un artesano construyendo un documento. Comienza con una hoja en blanco (el búfer de salida) y va copiando el texto y el HTML del archivo original. Al llegar a un bloque de código PHP, el artesano deja de copiar y se pone a ejecutar las tareas que se le indican: quizás hacer un cálculo, o buscar un dato. El resultado de esa tarea (por ejemplo, el texto generado por una instrucción <code>echo</code>) lo escribe en la hoja. Una vez terminada la tarea del bloque, continúa copiando el resto del texto del archivo original.</p>
+<p>Cuando el intérprete llega al final del fichero, el proceso concluye. El búfer de salida contiene ahora un documento completo y coherente, compuesto exclusivamente por HTML y los resultados de la ejecución del código. Este documento final es lo que el intérprete devuelve al servidor web, y es lo que el servidor, a su vez, envía como cuerpo de la respuesta HTTP al navegador del cliente. El resultado es una abstracción perfecta: el navegador recibe una página HTML estándar, sin tener la menor idea del complejo proceso de ejecución y ensamblaje que ha ocurrido en el servidor para crearla.</p>
+<hr/>
+<h3 id="ventajas-y-desventajas-del-codigo-embebido">Ventajas y desventajas del código embebido</h3>
+<p>Vamos ahora a listar todas las ventajas y desventajas que se generar de embeber nuestro código:</p>
+<h4 id="ventajas">Ventajas</h4>
+<ul>
+<li>
+<p><strong>Personalización y Contenido Interactivo:</strong> Es la principal ventaja. El contenido de la página se puede adaptar en tiempo real para cada usuario. Esto permite mostrar un mensaje de bienvenida personalizado ("Hola, Ana"), presentar un carrito de la compra único, o ajustar el contenido según las preferencias del usuario.</p>
+</li>
+<li>
+<p><strong>Gestión Centralizada del Contenido:</strong> El contenido no está "quemado" en los ficheros HTML. Se almacena en una base de datos u otra fuente de datos. Esto permite que el contenido sea actualizado fácilmente a través de un panel de administración (CMS), sin necesidad de que un programador edite el código.</p>
+</li>
+<li>
+<p><strong>Escalabilidad del Contenido:</strong> Es posible gestionar sitios web con miles o millones de páginas (como un blog, un periódico o una tienda online) de forma sencilla. Solo se necesita una plantilla que se rellena dinámicamente con la información del producto o artículo solicitado, en lugar de tener que mantener miles de ficheros HTML individuales.</p>
+</li>
+<li>
+<p><strong>Información en Tiempo Real:</strong> Las páginas pueden mostrar datos que cambian constantemente, como la hora actual, precios de acciones, resultados deportivos o el tiempo meteorológico, consultando la información más reciente en el momento de la solicitud.</p>
+</li>
+</ul>
+<hr/>
+<h4 id="desventajas">Desventajas</h4>
+<ul>
+<li>
+<p><strong>Mayor Complejidad:</strong> La arquitectura es inherentemente más compleja. Requiere un servidor con un entorno de ejecución específico (PHP, Python, etc.), una base de datos y un código de backend. El desarrollo y el mantenimiento son más exigentes que en un sitio estático.</p>
+</li>
+<li>
+<p><strong>Mayor Carga para el Servidor:</strong> Generar una página dinámicamente consume más recursos del servidor (CPU y memoria) que simplemente servir un fichero estático preexistente. Cada visita requiere la ejecución de código y, a menudo, consultas a la base de datos, lo que puede traducirse en mayores costes de hosting.</p>
+</li>
+<li>
+<p><strong>Rendimiento Potencialmente Inferior:</strong> El tiempo necesario para ejecutar el código y construir la página en el servidor introduce una pequeña latencia. Una página estática, al estar ya construida, se sirve de forma casi instantánea. Para mitigar esto, las aplicaciones dinámicas dependen en gran medida de sistemas de caché.</p>
+</li>
+<li>
+<p><strong>Riesgos de Seguridad:</strong> La introducción de código de servidor, bases de datos y la gestión de datos de usuario abre la puerta a una amplia gama de vulnerabilidades de seguridad (inyección SQL, XSS, CSRF, etc.) que no existen en un sitio puramente estático. Requiere un desarrollo cuidadoso y consciente de la seguridad.</p>
+</li>
+</ul>
+<h2 id="php">Php</h2>
+<p>El desarrollo web moderno exige herramientas capaces de generar contenido interactivo y personalizado, distanciándose de la estaticidad inherente a las primeras páginas de internet. En este contexto, <strong>PHP</strong> emerge como uno de los lenguajes fundamentales, sirviendo como el motor invisible detrás de una vasta porción de la World Wide Web.</p>
+<p>PHP, un acrónimo de <strong>H</strong>ypertext <strong>P</strong>reprocessor  (Preprocesador de Hipertexto), es un <strong>lenguaje de programación de código abierto diseñado específicamente para el desarrollo web del lado del servidor</strong>. Su naturaleza de código abierto implica que su uso, modificación y distribución son completamente libres, fomentando una comunidad global activa que contribuye a su evolución constante y asegura una amplia disponibilidad de recursos. </p>
+<figure>
+<img alt="" src="../../images/01.png" width="30%"/>
+</figure>
+<p>La característica distintiva de PHP radica en su ejecución "del lado del servidor". Cuando un usuario solicita una página web que contiene código PHP, el navegador del cliente envía dicha solicitud al servidor web. Es en este servidor donde el código PHP es procesado e interpretado, generando dinámicamente el contenido HTML resultante. Este HTML es posteriormente enviado de vuelta al navegador del usuario, el cual lo renderiza. </p>
+<p>Este proceso contrasta con lenguajes como JavaScript que, en su uso más común, se ejecutan directamente en el navegador del cliente. La ventaja fundamental de este enfoque radica en la capacidad de manipular datos, interactuar con bases de datos y realizar operaciones complejas antes de que el contenido sea entregado al usuario final, manteniendo el código fuente del servidor inaccesible desde el cliente.</p>
+<h2 id="aplicaciones-y-usos-principales">Aplicaciones y Usos Principales</h2>
+<p>La capacidad de PHP para interactuar con el servidor y las bases de datos lo convierte en una herramienta idónea para la construcción de <strong>aplicaciones web dinámicas</strong>. El término "dinámicas" se refiere a la habilidad de una página web para modificar su contenido y comportamiento en función de diversos factores, como la interacción del usuario, los datos almacenados en una base de datos, la hora actual o las preferencias individuales. </p>
+<p>Entre las aplicaciones más comunes desarrolladas con PHP se encuentran sitios web interactivos de diversa índole, incluyendo foros de discusión, blogs, plataformas de comercio electrónico y redes sociales. </p>
+<figure>
+<img alt="" src="../../images/02.png" width="70%"/>
+</figure>
+<p>Es ampliamente utilizado para la <strong>gestión de bases de datos</strong>, permitiendo la conexión y manipulación de información en sistemas como <strong>MySQL</strong>, esencial para almacenar perfiles de usuario, registros de productos o publicaciones. </p>
+<p>Además, PHP es crucial para el <strong>procesamiento de formularios HTML</strong>, la implementación de sistemas de <strong>autenticación de usuarios</strong> (como logins y registros), y la <strong>generación de contenido personalizado</strong> que se adapta a cada visitante. </p>
+<p>Su utilidad se extiende a la construcción de <strong>APIs (Application Programming Interfaces)</strong>, que actúan como la columna vertebral de aplicaciones móviles o de escritorio que necesitan comunicarse con un servidor.</p>
+<h2 id="ventajas-y-popularidad-de-php">Ventajas y Popularidad de PHP</h2>
+<p>A pesar de la evolución constante del panorama tecnológico, PHP mantiene su estatus como un pilar fundamental en el desarrollo web, respaldado por una serie de ventajas distintivas. </p>
+<p>Su <strong>amplio uso</strong> es innegable; una parte considerable de la infraestructura web global, incluyendo plataformas tan extendidas como <strong>WordPress</strong>, <strong>Facebook</strong> (en sus inicios) y <strong>Wikipedia</strong>, se construyó y aún opera con PHP. Esto se complementa con una <strong>curva de aprendizaje notablemente amigable</strong>, especialmente para aquellos que ya poseen conocimientos de HTML, facilitando una rápida inmersión en el desarrollo web dinámico. </p>
+<p>La <strong>gran y activa comunidad</strong> de desarrolladores de PHP es otro activo invaluable, proveyendo una vasta cantidad de documentación, tutoriales, foros y librerías que simplifican el proceso de desarrollo y resolución de problemas. Su excepcional <strong>compatibilidad con bases de datos</strong>, particularmente con MySQL, es un factor crucial dado que la mayoría de las aplicaciones web dinámicas requieren almacenar y recuperar información. </p>
+<p>Finalmente, las versiones modernas de PHP han experimentado mejoras significativas en <strong>rendimiento</strong>, ofreciendo velocidades de ejecución y eficiencia que lo hacen competitivo frente a otras tecnologías. Estas características consolidan a PHP como una opción robusta y versátil para el desarrollo de soluciones web.</p>
+<h2 id="preparando-el-entorno">Preparando el entorno</h2>
+<p>Esta guía te ayudará a instalar las extensiones necesarias en Visual Studio Code y configurar una tarea que inicie un servidor PHP local usando el archivo <code>tasks.json</code>. Previamente debes tener instalado este editor de código.</p>
+<hr/>
+<h3 id="requisitos-previos">Requisitos previos</h3>
+<p>Lo primero que debes comprobar es si tienes instalado en tu sistema. Puedes comprobarlo abriendo una terminal y ejecutando:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"/><input id="__tabbed_1_2" name="__tabbed_1" type="radio"/><div class="tabbed-labels"><label for="__tabbed_1_1">ubuntu</label><label for="__tabbed_1_2">windows</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="w">  </span>php<span class="w"> </span>-v
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>  <span class="n">php</span> <span class="n">-v</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<p>En caso de no tener instalado PHP, pudes hacerlo en ubuntu mediante el comando:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>php
+</span></code></pre></div>
+<p>En windows, tenemos dos opciones para hacerlo:</p>
+<h4 id="opcion-a-descargar-php-manualmente">Opción A: Descargar PHP manualmente</h4>
+<ol>
+<li>Ve a <a href="https://windows.php.net/download">https://windows.php.net/download</a></li>
+<li>Descarga la versión <strong>Thread Safe</strong> que coincida con tu sistema (x64 o x86).</li>
+<li>Descomprime el archivo ZIP en una carpeta, por ejemplo: <code>C:\php</code>.</li>
+<li>
+<p>Añade la carpeta <code>C:\php</code> a la variable de entorno <code>PATH</code>:</p>
+<ul>
+<li>Busca <strong>“Editar las variables de entorno del sistema”</strong> en el menú inicio.</li>
+<li>En <strong>Variables de entorno</strong>, edita la variable <code>Path</code> y añade <code>C:\php</code>.</li>
+<li>Guarda y cierra.</li>
+</ul>
+</li>
+<li>
+<p>Abre una nueva terminal y ejecuta:</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">php</span> <span class="n">-v</span>
+</span></code></pre></div>
+<p>para verificar que PHP está correctamente instalado.</p>
+</li>
+</ol>
+<hr/>
+<h4 id="opcion-b-usar-un-gestor-de-paquetes-como-chocolatey">Opción B: Usar un gestor de paquetes como Chocolatey</h4>
+<p>Si tienes Chocolatey instalado, puedes instalar PHP ejecutando en PowerShell o CMD:</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="n">choco</span> <span class="n">install</span> <span class="n">php</span>
+</span></code></pre></div>
+<p>Una vez instalado PHP, podemos pasar a instalar las extensiones recomendadas de VSCode. La primera de ellas es <strong>PHP Server</strong> (brapifra.phpserver), que permite ejecutar de forma rápida un servidor PHP integrado. La segunda exstensión interesante es <strong>Code Runner</strong> (formulahendry.code-runner) que permite ejecutar en terminal scripts de PHP. </p>
+<p>Una vez instaladas las extensiones, es recomendable leer su documentación para ver como funcionan.</p>
+<h2 id="configuracion-de-visual-studio-code">Configuración de Visual Studio Code</h2>
+<p>En clase vamos a utilizar <strong>Visual Studio Code (VS Code)</strong> para desarrollar nuestras aplicaciones de php. Podemos descargar este editor desde <a href="https://code.visualstudio.com/download">la siguiente url</a>.</p>
+<hr/>
+<h3 id="instalacion-de-extensiones-esenciales">Instalación de Extensiones Esenciales</h3>
+<p>Para una experiencia de desarrollo fluida, te recomendamos instalar las siguientes extensiones. Puedes encontrarlas buscando su nombre en la pestaña de Extensiones (<code>Ctrl+Shift+X</code>) de VS Code:</p>
+<ul>
+<li>
+<p><strong>PHP Intelephense</strong>: Es un asistente de código avanzado. Proporciona autocompletado inteligente, detección de errores en tiempo real, navegación por el código y formato automático. Es una herramienta fundamental para escribir código de calidad de manera más rápida.</p>
+</li>
+<li>
+<p><strong>PHP Server</strong>: Como su nombre indica, esta extensión te permite lanzar un servidor de desarrollo local con un solo clic, directamente desde VS Code. Es extremadamente útil para probar tus scripts PHP sin tener que configurar un servidor web completo como Apache.</p>
+</li>
+</ul>
+<hr/>
+<h3 id="configurar-el-ejecutable-de-php">Configurar el ejecutable de PHP</h3>
+<p>Aunque muchas extensiones detectan PHP automáticamente, es una buena práctica indicar explícitamente a VS Code dónde se encuentra el ejecutable.</p>
+<ol>
+<li>Abre la configuración de VS Code (<code>Ctrl+,</code>).</li>
+<li>Busca <code>"php.validate.executablePath"</code>.</li>
+<li>
+<p>Haz clic en <strong>"Editar en settings.json"</strong> y añade la ruta a tu ejecutable de PHP. La ruta dependerá de tu sistema operativo y método de instalación.</p>
+<ul>
+<li><strong>En Linux (típicamente):</strong>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="nt">"php.validate.executablePath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/usr/bin/php"</span>
+</span></code></pre></div></li>
+<li><strong>En Windows (si usaste Chocolatey):</strong>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="nt">"php.validate.executablePath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C:/tools/php82/php.exe"</span>
+</span></code></pre></div></li>
+<li><strong>En Windows (instalación manual):</strong>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="nt">"php.validate.executablePath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C:/php/php.exe"</span>
+</span></code></pre></div></li>
+</ul>
+</li>
+</ol>
+<p>Guardar este ajuste asegura que VS Code y sus extensiones puedan ejecutar y validar tu código correctamente.</p>
+<h3 id="ejecutando-el-servidor-de-php">Ejecutando el servidor de PHP</h3>
+<p>Para que un navegador pueda interpretar un fichero <code>.php</code>, este debe ser servido a través de un servidor web que ejecute el intérprete de PHP. No puedes simplemente abrir un fichero <code>.php</code> en el navegador como harías con un <code>.html</code>. A continuación, vemos dos maneras sencillas de lanzar un servidor de desarrollo.</p>
+<hr/>
+<h4 id="opcion-a-usar-el-servidor-integrado-de-php">Opción A: Usar el servidor integrado de PHP</h4>
+<p>PHP incluye un servidor web ligero, perfecto para desarrollo. Para usarlo:</p>
+<ol>
+<li>Abre una terminal.</li>
+<li>Navega hasta la carpeta raíz de tu proyecto.</li>
+<li>
+<p>Ejecuta el siguiente comando:
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a>php<span class="w"> </span>-S<span class="w"> </span>localhost:8000
+</span></code></pre></div></p>
+<ul>
+<li><code>php -S</code>: Es la instrucción para iniciar el servidor.</li>
+<li><code>localhost</code>: Indica que el servidor solo será accesible desde tu propio ordenador.</li>
+<li><code>8000</code>: Es el puerto. Puedes elegir otro si el 8000 está ocupado.</li>
+</ul>
+<p>Ahora puedes abrir tu navegador y visitar <code>http://localhost:8000</code> para ver tu aplicación en funcionamiento.</p>
+</li>
+</ol>
+<hr/>
+<h4 id="opcion-b-usar-la-extension-php-server-en-vs-code">Opción B: Usar la extensión "PHP Server" en VS Code</h4>
+<p>Esta extensión simplifica el proceso anterior a un solo clic.</p>
+<ol>
+<li>Con tu proyecto abierto en VS Code, haz clic derecho sobre un fichero <code>.php</code>.</li>
+<li>
+<p>Selecciona la opción <strong>"PHP Server: Serve project"</strong>.</p>
+</li>
+<li>
+<p>Automáticamente se iniciará el servidor y se abrirá una pestaña en tu navegador con la dirección correcta.</p>
+</li>
+</ol>
+<p>Este método es ideal para principiantes por su simplicidad y su excelente integración con el editor.</p>
+<h2 id="depurar-con-php">Depurar con PHP</h2>
+<p>Escribir código es un proceso de creación, y como en todo proceso creativo, los errores son una parte natural e inevitable. Ningún desarrollador, sin importar su experiencia, escribe código perfecto a la primera. La habilidad fundamental que diferencia a un programador eficiente no es la capacidad de no cometer errores, sino la de <strong>encontrarlos y corregirlos</strong> de forma rápida y precisa. A este proceso lo llamamos <strong>depuración (debugging)</strong>.</p>
+<p>En PHP, existen varias técnicas para depurar, que van desde métodos muy simples hasta herramientas profesionales de alto nivel. El enfoque más básico, y el primero que todo desarrollador aprende, es el de "imprimir y morir", utilizando funciones como <code>echo</code>, <code>print_r()</code> y, especialmente, <code>var_dump()</code> para mostrar el contenido de una variable en un punto concreto y luego detener la ejecución con <code>die()</code>. Aunque útil para revisiones rápidas, este método es limitado y puede volverse muy ineficiente en problemas complejos.</p>
+<p>La forma profesional de depurar en PHP (y en la mayoría de los lenguajes) es utilizando un <strong>depurador por pasos (step debugger)</strong>. Herramientas como <strong>Xdebug</strong>, la extensión estándar para PHP, se integran con los editores de código (como VS Code o PhpStorm) y nos permiten pausar la ejecución del código en puntos específicos llamados <strong>breakpoints</strong>. Una vez pausado, podemos inspeccionar el valor de todas las variables, ejecutar el código línea por línea y entender el flujo exacto del programa. Para instalar XDebug en VsCode solo debes seguir la <a href="https://marketplace.visualstudio.com/items?itemName=xdebug.php-debug">siguiente documentación</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Manuel Sánchez Gomis
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["search.suggest", "search.highlight", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "content.code.copy", "content.tabs.link", "content.tooltips"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../../assets/_markdown_exec_pyodide.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../../_static/js/notebook.js"></script>
+      
+    
+  </body>
+</html>

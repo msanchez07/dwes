@@ -1,0 +1,2885 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Manuel Sánchez Gomis">
+      
+      
+      
+        <link rel="prev" href="../04%20-%20seguridad/">
+      
+      
+        <link rel="next" href="../06%20-%20bases_datos/">
+      
+      
+      <link rel="icon" href="../../../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.46">
+    
+    
+      
+        <title>Ficheros - Desarrollo Web en entorno servidor</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/_markdown_exec_pyodide.css">
+    
+      <link rel="stylesheet" href="../../../_static/css/notebook.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ficheros" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Desarrollo Web en entorno servidor" class="md-header__button md-logo" aria-label="Desarrollo Web en entorno servidor" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Desarrollo Web en entorno servidor
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Ficheros
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber"  aria-label="Cambiar a modo brillante"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo brillante" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="amber"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Bienvenido
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../introduccion/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Introduccion
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../php/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Php
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Aplicaciones Web con Php
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../laravel/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Laravel
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../servicios_web/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Servicios Web
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../webs_dinamicas/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Webs Dinámicas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../aplicaciones_web_hibridas/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Aplicaciones Web Híbridas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../bibliografia/" class="md-tabs__link">
+        
+  
+    
+  
+  Bibliografia
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Desarrollo Web en entorno servidor" class="md-nav__button md-logo" aria-label="Desarrollo Web en entorno servidor" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    Desarrollo Web en entorno servidor
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bienvenido
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Introduccion
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Introduccion
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../introduccion/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Conceptos básicos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../introduccion/markdowns/02%20-%20lenguajes_programacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lenguajes de programación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../introduccion/markdowns/03%20-%20herramientas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Herramientas y frameworks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Php
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Php
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/02%20-%20primeros_pasos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primeros pasos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/03%20-%20estructuras_control/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Estructuras de Control en PHP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/04%20-%20arrays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Arrays
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/05%20-%20funciones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Funciones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/06%20-%20poo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Programación orientada a objetos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/07%20-%20excepciones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Excepciones y errores
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/08%20-%20directivas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Directivas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/09%20-%20codigo_embebido/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Código embebido
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Aplicaciones Web con Php
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Aplicaciones Web con Php
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02%20-%20formularios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Formularios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03%20-%20sesiones_cookies/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cookies y Sesiones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04%20-%20seguridad/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Seguridad
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Ficheros
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Ficheros
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#operaciones-fundamentales-sobre-ficheros" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operaciones Fundamentales sobre Ficheros
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Operaciones Fundamentales sobre Ficheros">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-metodo-fundamental" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Método Fundamental
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="El Método Fundamental">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#abrir-el-fichero" class="md-nav__link">
+    <span class="md-ellipsis">
+      Abrir el Fichero
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#escribir-y-cerrar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Escribir y Cerrar
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#leer-y-cerrar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Leer y Cerrar
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#funciones-todo-en-uno" class="md-nav__link">
+    <span class="md-ellipsis">
+      Funciones "Todo en Uno"
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#leyendo-ficheros-xml-con-simplexml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Leyendo Ficheros XML con SimpleXML
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Leyendo Ficheros XML con SimpleXML">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#escribiendo-xml-con-simplexml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Escribiendo XML con SimpleXML
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#leyendo-ficheros-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      Leyendo Ficheros JSON
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Leyendo Ficheros JSON">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-practico-guardar-y-leer-un-fichero-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo Práctico: Guardar y Leer un Fichero JSON
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#leyendo-ficheros-csv" class="md-nav__link">
+    <span class="md-ellipsis">
+      Leyendo Ficheros CSV
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06%20-%20bases_datos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bases de datos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07%20-%20estructura_proyecto/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Organizando el código
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../98%20-%20ejercicios_persistencia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios persistencia
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Laravel
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Laravel
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/02%20-%20instalacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instalación y primeros pasos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/03%20-%20rutas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rutas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/04%20-%20controladores/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Controladores
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/05%20-%20vistas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vistas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/06%20-%20formularios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Formularios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/07%20-%20modelos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modelos de Eloquent
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/14%20-%20response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Respuestas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/08%20-%20cookies_sesiones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cookies y Sesiones en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/09%20-%20servicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Servicios en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/10%20-%20seguridad/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Seguridad en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/11%20-%20inyeccion_dependencias/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inyección de Dependencias en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/12%20-%20testing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pruebas y documentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/13%20-%20fechas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fechas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/15%20-%20migrations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Migraciones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Servicios Web
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Servicios Web
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/02%20-%20tecnologias/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tecnologías y Estándares
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/03%20-%20creando_servicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creando un Servicio Web
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/04%20-%20probando_servicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Probando el Servicio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/05%20-%20documentando_servicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Documentando un Servicio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Webs Dinámicas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Webs Dinámicas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/02%20-%20ajax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AJAX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/03%20-%20validacion_formularios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Validación de Formularios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/04%20-%20modificacion_dom/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modificación del DOM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/05%20-%20async_patrones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Patrones Async
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Aplicaciones Web Híbridas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Aplicaciones Web Híbridas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/02%20-%20apis_terceros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    APIs de Terceros
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/03%20-%20creando_apis_propias/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creando APIs Propias
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/04%20-%20sdks_frameworks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SDKs y Frameworks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/05%20-%20big_data_ia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Big Data e IA
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/06%20-%20testing_depuracion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Testing y Depuración
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/07%20-%20autenticacion_apis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Autenticación de APIs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/08%20-%20versionado_webhooks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Versionado y Webhooks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../bibliografia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bibliografia
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#operaciones-fundamentales-sobre-ficheros" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operaciones Fundamentales sobre Ficheros
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Operaciones Fundamentales sobre Ficheros">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-metodo-fundamental" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Método Fundamental
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="El Método Fundamental">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#abrir-el-fichero" class="md-nav__link">
+    <span class="md-ellipsis">
+      Abrir el Fichero
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#escribir-y-cerrar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Escribir y Cerrar
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#leer-y-cerrar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Leer y Cerrar
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#funciones-todo-en-uno" class="md-nav__link">
+    <span class="md-ellipsis">
+      Funciones "Todo en Uno"
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#leyendo-ficheros-xml-con-simplexml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Leyendo Ficheros XML con SimpleXML
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Leyendo Ficheros XML con SimpleXML">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#escribiendo-xml-con-simplexml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Escribiendo XML con SimpleXML
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#leyendo-ficheros-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      Leyendo Ficheros JSON
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Leyendo Ficheros JSON">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-practico-guardar-y-leer-un-fichero-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo Práctico: Guardar y Leer un Fichero JSON
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#leyendo-ficheros-csv" class="md-nav__link">
+    <span class="md-ellipsis">
+      Leyendo Ficheros CSV
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="ficheros">Ficheros</h1>
+<p>Hasta ahora, los datos que hemos manejado en nuestras variables se pierden en cuanto el script termina de ejecutarse. Las sesiones nos permitieron extender la vida de esos datos durante la visita de un usuario, pero siguen siendo temporales. La <strong>persistencia de datos</strong> es la capacidad de una aplicación para guardar información de forma permanente en el disco del servidor, de manera que sobreviva entre diferentes sesiones e incluso si el servidor se reinicia.</p>
+<p>Antes de introducir la complejidad de un sistema de gestión de bases de datos como MySQL, es fundamental entender el método de persistencia más directo que existe: el <strong>almacenamiento en ficheros</strong>. Para aplicaciones sencillas, guardar la información en un fichero de texto puede ser una solución perfectamente válida y mucho más simple que configurar y mantener una base de datos.</p>
+<p>Los casos de uso típicos para la persistencia en ficheros incluyen:</p>
+<ul>
+<li><strong>Sistemas de comentarios o libros de visitas simples.</strong></li>
+<li><strong>Registros de actividad (logs)</strong> para monitorizar eventos en la aplicación.</li>
+<li><strong>Almacenamiento de configuraciones</strong> sencillas.</li>
+<li><strong>Sistemas de caché</strong> para guardar temporalmente resultados de operaciones costosas.</li>
+</ul>
+<p>Para guardar datos estructurados, es común utilizar formatos estandarizados como <strong>CSV</strong> (valores separados por comas) para datos tabulares, o <strong>JSON</strong>, que es extremadamente popular por su legibilidad y por lo fácil que es convertirlo desde y hacia los arrays de PHP.</p>
+<p>El ciclo de vida del trabajo con ficheros en PHP se basa en tres operaciones fundamentales: <strong>abrir</strong> un fichero en un modo específico (lectura, escritura, etc.), <strong>leer o escribir</strong> su contenido, y finalmente <strong>cerrar</strong> el fichero para liberar los recursos. En las siguientes secciones, exploraremos las funciones que PHP nos proporciona para realizar estas tareas.</p>
+<h2 id="operaciones-fundamentales-sobre-ficheros">Operaciones Fundamentales sobre Ficheros</h2>
+<p>PHP, al ser un lenguaje de servidor, tiene un potente conjunto de funciones para interactuar con el sistema de ficheros del servidor. Esto nos permite crear, leer y modificar ficheros, una capacidad esencial para la persistencia de datos. Para entender cómo funciona, comenzaremos con el método de bajo nivel, que nos da un control total sobre el proceso.</p>
+<h3 id="el-metodo-fundamental">El Método Fundamental</h3>
+<p>Este es el enfoque clásico para la manipulación de ficheros, heredado de lenguajes como C. El proceso consiste en obtener un "puntero" o "manejador" (<code>handle</code>) del fichero, operar a través de él y, finalmente, cerrarlo.</p>
+<h4 id="abrir-el-fichero">Abrir el Fichero</h4>
+<p>La función <code>fopen()</code> abre una conexión a un fichero y nos devuelve un recurso de tipo "puntero" que usaremos para las demás operaciones. Su argumento más importante es el <strong>modo de apertura</strong>, que le indica a PHP qué queremos hacer.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Modo</th>
+<th style="text-align: left;">Descripción</th>
+<th style="text-align: left;">Comportamiento del Puntero/Fichero</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong><code>'r'</code></strong></td>
+<td style="text-align: left;"><strong>Leer (Read)</strong></td>
+<td style="text-align: left;">El puntero se coloca al principio. Si el fichero no existe, da error.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong><code>'w'</code></strong></td>
+<td style="text-align: left;"><strong>Escribir (Write)</strong></td>
+<td style="text-align: left;">El puntero se coloca al principio. <strong>Si el fichero existe, su contenido se borra</strong>. Si no existe, se intenta crear.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong><code>'a'</code></strong></td>
+<td style="text-align: left;"><strong>Añadir (Append)</strong></td>
+<td style="text-align: left;">El puntero se coloca <strong>al final</strong>. Si el fichero existe, se conserva su contenido. Si no existe, se intenta crear.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong><code>'r+'</code></strong></td>
+<td style="text-align: left;"><strong>Lectura y Escritura</strong></td>
+<td style="text-align: left;">El puntero se coloca al principio.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong><code>'w+'</code></strong></td>
+<td style="text-align: left;"><strong>Lectura y Escritura</strong></td>
+<td style="text-align: left;">Igual que <code>'w'</code>, borra el contenido del fichero si existe.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong><code>'a+'</code></strong></td>
+<td style="text-align: left;"><strong>Lectura y Escritura/Añadir</strong></td>
+<td style="text-align: left;">El puntero se coloca al final para escribir, pero se puede mover para leer.</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h4 id="escribir-y-cerrar">Escribir y Cerrar</h4>
+<p>Una vez abierto un fichero en modo de escritura (<code>'w'</code>) o añadir (<code>'a'</code>), usamos <code>fwrite()</code> para escribir en él. Es <strong>crucial</strong> cerrar siempre el fichero con <code>fclose()</code> para liberar los recursos del sistema.</p>
+<p><strong>Ejemplo de escritura:</strong>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>    <span class="nv">$fichero</span> <span class="o">=</span> <span class="s1">'notas.txt'</span><span class="p">;</span>
+</span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>    <span class="nv">$puntero</span> <span class="o">=</span> <span class="nb">fopen</span><span class="p">(</span><span class="nv">$fichero</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">);</span> <span class="c1">// Abrir en modo escritura (borra el contenido anterior)</span>
+</span><span id="__span-0-4"><a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a>    <span class="k">if</span> <span class="p">(</span><span class="nv">$puntero</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-0-6"><a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a>        <span class="nb">fwrite</span><span class="p">(</span><span class="nv">$puntero</span><span class="p">,</span> <span class="s2">"Esta es la primera línea.</span><span class="se">\n</span><span class="s2">"</span><span class="p">);</span>
+</span><span id="__span-0-7"><a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a>        <span class="nb">fwrite</span><span class="p">(</span><span class="nv">$puntero</span><span class="p">,</span> <span class="s2">"Esta es la segunda línea.</span><span class="se">\n</span><span class="s2">"</span><span class="p">);</span>
+</span><span id="__span-0-8"><a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a>
+</span><span id="__span-0-9"><a href="#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a>        <span class="nb">fclose</span><span class="p">(</span><span class="nv">$puntero</span><span class="p">);</span> <span class="c1">// ¡Importante cerrar el fichero!</span>
+</span><span id="__span-0-10"><a href="#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a>        <span class="k">echo</span> <span class="s2">"Se ha escrito en el fichero 'notas.txt'."</span><span class="p">;</span>
+</span><span id="__span-0-11"><a href="#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span id="__span-0-12"><a href="#__codelineno-0-12" id="__codelineno-0-12" name="__codelineno-0-12"></a>        <span class="k">echo</span> <span class="s2">"No se pudo abrir el fichero para escribir."</span><span class="p">;</span>
+</span><span id="__span-0-13"><a href="#__codelineno-0-13" id="__codelineno-0-13" name="__codelineno-0-13"></a>    <span class="p">}</span>
+</span><span id="__span-0-14"><a href="#__codelineno-0-14" id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="cp">?&gt;</span>
+</span></code></pre></div></p>
+<hr/>
+<h4 id="leer-y-cerrar">Leer y Cerrar</h4>
+<p>Para leer, abrimos el fichero en modo lectura (<code>'r'</code>). Aunque <code>fread()</code> lee un número específico de bytes, es mucho más común leer un fichero línea por línea. Para ello, se usa la función <code>fgets()</code> (que lee una línea) dentro de un bucle <code>while</code> que comprueba el fin de fichero con <code>feof()</code>.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>    <span class="nv">$fichero</span> <span class="o">=</span> <span class="s1">'notas.txt'</span><span class="p">;</span>
+</span><span id="__span-1-3"><a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>    <span class="nv">$puntero</span> <span class="o">=</span> <span class="nb">fopen</span><span class="p">(</span><span class="nv">$fichero</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">);</span> <span class="c1">// Abrir en modo solo lectura</span>
+</span><span id="__span-1-4"><a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a>    <span class="k">if</span> <span class="p">(</span><span class="nv">$puntero</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-1-6"><a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a>        <span class="k">echo</span> <span class="s2">"&lt;h2&gt;Contenido de 'notas.txt':&lt;/h2&gt;"</span><span class="p">;</span>
+</span><span id="__span-1-7"><a href="#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a>        <span class="c1">// Mientras no lleguemos al final del fichero (End-Of-File)...</span>
+</span><span id="__span-1-8"><a href="#__codelineno-1-8" id="__codelineno-1-8" name="__codelineno-1-8"></a>        <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="nb">feof</span><span class="p">(</span><span class="nv">$puntero</span><span class="p">))</span> <span class="p">{</span>
+</span><span id="__span-1-9"><a href="#__codelineno-1-9" id="__codelineno-1-9" name="__codelineno-1-9"></a>            <span class="c1">// ...leemos la siguiente línea y la mostramos.</span>
+</span><span id="__span-1-10"><a href="#__codelineno-1-10" id="__codelineno-1-10" name="__codelineno-1-10"></a>            <span class="nv">$linea</span> <span class="o">=</span> <span class="nb">fgets</span><span class="p">(</span><span class="nv">$puntero</span><span class="p">);</span>
+</span><span id="__span-1-11"><a href="#__codelineno-1-11" id="__codelineno-1-11" name="__codelineno-1-11"></a>            <span class="k">echo</span> <span class="nv">$linea</span> <span class="o">.</span> <span class="s2">"&lt;br&gt;"</span><span class="p">;</span>
+</span><span id="__span-1-12"><a href="#__codelineno-1-12" id="__codelineno-1-12" name="__codelineno-1-12"></a>        <span class="p">}</span>
+</span><span id="__span-1-13"><a href="#__codelineno-1-13" id="__codelineno-1-13" name="__codelineno-1-13"></a>
+</span><span id="__span-1-14"><a href="#__codelineno-1-14" id="__codelineno-1-14" name="__codelineno-1-14"></a>        <span class="nb">fclose</span><span class="p">(</span><span class="nv">$puntero</span><span class="p">);</span> <span class="c1">// Cerramos el fichero al terminar.</span>
+</span><span id="__span-1-15"><a href="#__codelineno-1-15" id="__codelineno-1-15" name="__codelineno-1-15"></a>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span id="__span-1-16"><a href="#__codelineno-1-16" id="__codelineno-1-16" name="__codelineno-1-16"></a>        <span class="k">echo</span> <span class="s2">"No se pudo abrir el fichero para leer."</span><span class="p">;</span>
+</span><span id="__span-1-17"><a href="#__codelineno-1-17" id="__codelineno-1-17" name="__codelineno-1-17"></a>    <span class="p">}</span>
+</span><span id="__span-1-18"><a href="#__codelineno-1-18" id="__codelineno-1-18" name="__codelineno-1-18"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<h3 id="funciones-todo-en-uno">Funciones "Todo en Uno"</h3>
+<p>Ahora que entendemos el proceso completo, podemos apreciar las funciones de alto nivel que PHP nos ofrece como atajos. Estas funciones realizan el ciclo de <code>fopen</code>/<code>operación</code>/<code>fclose</code> por nosotros en una sola llamada.</p>
+<ul>
+<li><strong><code>file_put_contents($fichero, $datos, [flags])</code></strong>: Es el equivalente a <code>fopen</code> en modo <code>'w'</code>, <code>fwrite</code> y <code>fclose</code>. Si se usa la bandera <code>FILE_APPEND</code>, equivale a abrir en modo <code>'a'</code>. Es la forma moderna y segura de escribir ficheros.</li>
+<li><strong><code>file_get_contents($fichero)</code></strong>: Es el equivalente a <code>fopen</code> en modo <code>'r'</code>, leer todo el contenido de una vez y <code>fclose</code>. Ideal para leer ficheros que no son excesivamente grandes.</li>
+</ul>
+<p>Independientemente del método que uses, es una buena práctica comprobar el estado del fichero antes de operar sobre él para evitar errores.</p>
+<ul>
+<li><strong><code>file_exists($ruta)</code></strong>: Devuelve <code>true</code> si el fichero o directorio existe.</li>
+<li><strong><code>is_readable($ruta)</code></strong>: Devuelve <code>true</code> si el fichero existe y se puede leer.</li>
+<li><strong><code>is_writable($ruta)</code></strong>: Devuelve <code>true</code> si el fichero existe y se puede escribir en él.</li>
+</ul>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-2-2"><a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a>    <span class="nv">$fichero</span> <span class="o">=</span> <span class="s1">'config.json'</span><span class="p">;</span>
+</span><span id="__span-2-3"><a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a>    <span class="k">if</span> <span class="p">(</span><span class="nb">file_exists</span><span class="p">(</span><span class="nv">$fichero</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nb">is_readable</span><span class="p">(</span><span class="nv">$fichero</span><span class="p">))</span> <span class="p">{</span>
+</span><span id="__span-2-5"><a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a>        <span class="nv">$config_json</span> <span class="o">=</span> <span class="nb">file_get_contents</span><span class="p">(</span><span class="nv">$fichero</span><span class="p">);</span>
+</span><span id="__span-2-6"><a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a>        <span class="c1">// ... procesar el JSON ...</span>
+</span><span id="__span-2-7"><a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span id="__span-2-8"><a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a>        <span class="k">die</span><span class="p">(</span><span class="s2">"Error: El fichero de configuración no existe o no se puede leer."</span><span class="p">);</span>
+</span><span id="__span-2-9"><a href="#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a>    <span class="p">}</span>
+</span><span id="__span-2-10"><a href="#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<h2 id="leyendo-ficheros-xml-con-simplexml">Leyendo Ficheros XML con SimpleXML</h2>
+<p>A menudo, no guardaremos datos en ficheros de texto plano sin formato, sino en formatos estructurados que nos permitan representar relaciones complejas de una manera estándar. Uno de los formatos más clásicos para el intercambio de datos es <strong>XML (eXtensible Markup Language)</strong>.</p>
+<p>XML organiza los datos de forma jerárquica mediante etiquetas, de forma similar a HTML, pero con la diferencia de que las etiquetas no están predefinidas, sino que las creamos nosotros para describir nuestros datos.</p>
+<p>PHP ofrece varias formas de trabajar con XML, pero la más sencilla e intuitiva es la extensión <strong>SimpleXML</strong>. Esta herramienta nos permite convertir un documento XML en un <strong>objeto</strong> de PHP, que podemos navegar de una forma muy natural para acceder a sus datos.</p>
+<p>Imaginemos que tenemos el siguiente fichero, llamado <code>libros.xml</code>:</p>
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="nt">&lt;catalogo&gt;</span>
+</span><span id="__span-3-3"><a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">    </span><span class="nt">&lt;libro</span><span class="w"> </span><span class="na">id=</span><span class="s">"bk101"</span><span class="nt">&gt;</span>
+</span><span id="__span-3-4"><a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">        </span><span class="nt">&lt;autor&gt;</span>Gambardella,<span class="w"> </span>Matthew<span class="nt">&lt;/autor&gt;</span>
+</span><span id="__span-3-5"><a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">        </span><span class="nt">&lt;titulo&gt;</span>XML<span class="w"> </span>Developer's<span class="w"> </span>Guide<span class="nt">&lt;/titulo&gt;</span>
+</span><span id="__span-3-6"><a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">        </span><span class="nt">&lt;genero&gt;</span>Computer<span class="nt">&lt;/genero&gt;</span>
+</span><span id="__span-3-7"><a href="#__codelineno-3-7" id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="w">        </span><span class="nt">&lt;precio&gt;</span>44.95<span class="nt">&lt;/precio&gt;</span>
+</span><span id="__span-3-8"><a href="#__codelineno-3-8" id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">    </span><span class="nt">&lt;/libro&gt;</span>
+</span><span id="__span-3-9"><a href="#__codelineno-3-9" id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="w">    </span><span class="nt">&lt;libro</span><span class="w"> </span><span class="na">id=</span><span class="s">"bk102"</span><span class="nt">&gt;</span>
+</span><span id="__span-3-10"><a href="#__codelineno-3-10" id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="w">        </span><span class="nt">&lt;autor&gt;</span>Ralls,<span class="w"> </span>Kim<span class="nt">&lt;/autor&gt;</span>
+</span><span id="__span-3-11"><a href="#__codelineno-3-11" id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="w">        </span><span class="nt">&lt;titulo&gt;</span>Midnight<span class="w"> </span>Rain<span class="nt">&lt;/titulo&gt;</span>
+</span><span id="__span-3-12"><a href="#__codelineno-3-12" id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="w">        </span><span class="nt">&lt;genero&gt;</span>Fantasy<span class="nt">&lt;/genero&gt;</span>
+</span><span id="__span-3-13"><a href="#__codelineno-3-13" id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="w">        </span><span class="nt">&lt;precio&gt;</span>5.95<span class="nt">&lt;/precio&gt;</span>
+</span><span id="__span-3-14"><a href="#__codelineno-3-14" id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="w">    </span><span class="nt">&lt;/libro&gt;</span>
+</span><span id="__span-3-15"><a href="#__codelineno-3-15" id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="w">    </span><span class="nt">&lt;libro</span><span class="w"> </span><span class="na">id=</span><span class="s">"bk103"</span><span class="nt">&gt;</span>
+</span><span id="__span-3-16"><a href="#__codelineno-3-16" id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="w">        </span><span class="nt">&lt;autor&gt;</span>Thurman,<span class="w"> </span>Paula<span class="nt">&lt;/autor&gt;</span>
+</span><span id="__span-3-17"><a href="#__codelineno-3-17" id="__codelineno-3-17" name="__codelineno-3-17"></a><span class="w">        </span><span class="nt">&lt;titulo&gt;</span>Maeve<span class="w"> </span>Ascendant<span class="nt">&lt;/titulo&gt;</span>
+</span><span id="__span-3-18"><a href="#__codelineno-3-18" id="__codelineno-3-18" name="__codelineno-3-18"></a><span class="w">        </span><span class="nt">&lt;genero&gt;</span>Fantasy<span class="nt">&lt;/genero&gt;</span>
+</span><span id="__span-3-19"><a href="#__codelineno-3-19" id="__codelineno-3-19" name="__codelineno-3-19"></a><span class="w">        </span><span class="nt">&lt;precio&gt;</span>5.95<span class="nt">&lt;/precio&gt;</span>
+</span><span id="__span-3-20"><a href="#__codelineno-3-20" id="__codelineno-3-20" name="__codelineno-3-20"></a><span class="w">    </span><span class="nt">&lt;/libro&gt;</span>
+</span><span id="__span-3-21"><a href="#__codelineno-3-21" id="__codelineno-3-21" name="__codelineno-3-21"></a><span class="nt">&lt;/catalogo&gt;</span>
+</span></code></pre></div>
+<p>Ahora, crearemos un script de PHP para leer este fichero y mostrar sus datos.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-4-2"><a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a>    <span class="nv">$fichero_xml</span> <span class="o">=</span> <span class="s1">'libros.xml'</span><span class="p">;</span>
+</span><span id="__span-4-3"><a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a>
+</span><span id="__span-4-4"><a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a>    <span class="k">if</span> <span class="p">(</span><span class="nb">file_exists</span><span class="p">(</span><span class="nv">$fichero_xml</span><span class="p">))</span> <span class="p">{</span>
+</span><span id="__span-4-5"><a href="#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a>        <span class="c1">// 1. Cargamos el fichero XML. Esto devuelve un objeto SimpleXMLElement.</span>
+</span><span id="__span-4-6"><a href="#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a>        <span class="nv">$xml</span> <span class="o">=</span> <span class="nb">simplexml_load_file</span><span class="p">(</span><span class="nv">$fichero_xml</span><span class="p">);</span>
+</span><span id="__span-4-7"><a href="#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a>
+</span><span id="__span-4-8"><a href="#__codelineno-4-8" id="__codelineno-4-8" name="__codelineno-4-8"></a>        <span class="k">if</span> <span class="p">(</span><span class="nv">$xml</span> <span class="o">===</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-4-9"><a href="#__codelineno-4-9" id="__codelineno-4-9" name="__codelineno-4-9"></a>            <span class="k">die</span><span class="p">(</span><span class="s2">"Error: No se ha podido cargar el fichero XML."</span><span class="p">);</span>
+</span><span id="__span-4-10"><a href="#__codelineno-4-10" id="__codelineno-4-10" name="__codelineno-4-10"></a>        <span class="p">}</span>
+</span><span id="__span-4-11"><a href="#__codelineno-4-11" id="__codelineno-4-11" name="__codelineno-4-11"></a>
+</span><span id="__span-4-12"><a href="#__codelineno-4-12" id="__codelineno-4-12" name="__codelineno-4-12"></a>        <span class="c1">// --- Acceso a los datos ---</span>
+</span><span id="__span-4-13"><a href="#__codelineno-4-13" id="__codelineno-4-13" name="__codelineno-4-13"></a>
+</span><span id="__span-4-14"><a href="#__codelineno-4-14" id="__codelineno-4-14" name="__codelineno-4-14"></a>        <span class="k">echo</span> <span class="s2">"&lt;h1&gt;Catálogo de Libros&lt;/h1&gt;"</span><span class="p">;</span>
+</span><span id="__span-4-15"><a href="#__codelineno-4-15" id="__codelineno-4-15" name="__codelineno-4-15"></a>
+</span><span id="__span-4-16"><a href="#__codelineno-4-16" id="__codelineno-4-16" name="__codelineno-4-16"></a>        <span class="c1">// 2. Recorremos los elementos &lt;libro&gt; como si fuera un array.</span>
+</span><span id="__span-4-17"><a href="#__codelineno-4-17" id="__codelineno-4-17" name="__codelineno-4-17"></a>        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$xml</span><span class="o">-&gt;</span><span class="na">libro</span> <span class="k">as</span> <span class="nv">$libro</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-4-18"><a href="#__codelineno-4-18" id="__codelineno-4-18" name="__codelineno-4-18"></a>            <span class="c1">// 3. Accedemos a los atributos con una sintaxis de array.</span>
+</span><span id="__span-4-19"><a href="#__codelineno-4-19" id="__codelineno-4-19" name="__codelineno-4-19"></a>            <span class="nv">$id</span> <span class="o">=</span> <span class="nv">$libro</span><span class="p">[</span><span class="s1">'id'</span><span class="p">];</span>
+</span><span id="__span-4-20"><a href="#__codelineno-4-20" id="__codelineno-4-20" name="__codelineno-4-20"></a>
+</span><span id="__span-4-21"><a href="#__codelineno-4-21" id="__codelineno-4-21" name="__codelineno-4-21"></a>            <span class="c1">// 4. Accedemos a los elementos hijos como si fueran propiedades del objeto.</span>
+</span><span id="__span-4-22"><a href="#__codelineno-4-22" id="__codelineno-4-22" name="__codelineno-4-22"></a>            <span class="nv">$titulo</span> <span class="o">=</span> <span class="nv">$libro</span><span class="o">-&gt;</span><span class="na">titulo</span><span class="p">;</span>
+</span><span id="__span-4-23"><a href="#__codelineno-4-23" id="__codelineno-4-23" name="__codelineno-4-23"></a>            <span class="nv">$autor</span> <span class="o">=</span> <span class="nv">$libro</span><span class="o">-&gt;</span><span class="na">autor</span><span class="p">;</span>
+</span><span id="__span-4-24"><a href="#__codelineno-4-24" id="__codelineno-4-24" name="__codelineno-4-24"></a>            <span class="nv">$genero</span> <span class="o">=</span> <span class="nv">$libro</span><span class="o">-&gt;</span><span class="na">genero</span><span class="p">;</span>
+</span><span id="__span-4-25"><a href="#__codelineno-4-25" id="__codelineno-4-25" name="__codelineno-4-25"></a>            <span class="nv">$precio</span> <span class="o">=</span> <span class="nv">$libro</span><span class="o">-&gt;</span><span class="na">precio</span><span class="p">;</span>
+</span><span id="__span-4-26"><a href="#__codelineno-4-26" id="__codelineno-4-26" name="__codelineno-4-26"></a>
+</span><span id="__span-4-27"><a href="#__codelineno-4-27" id="__codelineno-4-27" name="__codelineno-4-27"></a>            <span class="c1">// Mostramos la información</span>
+</span><span id="__span-4-28"><a href="#__codelineno-4-28" id="__codelineno-4-28" name="__codelineno-4-28"></a>            <span class="k">echo</span> <span class="s2">"&lt;div&gt;"</span><span class="p">;</span>
+</span><span id="__span-4-29"><a href="#__codelineno-4-29" id="__codelineno-4-29" name="__codelineno-4-29"></a>            <span class="k">echo</span> <span class="s2">"&lt;h3&gt;"</span> <span class="o">.</span> <span class="nv">$titulo</span> <span class="o">.</span> <span class="s2">" (ID: "</span> <span class="o">.</span> <span class="nv">$id</span> <span class="o">.</span> <span class="s2">")&lt;/h3&gt;"</span><span class="p">;</span>
+</span><span id="__span-4-30"><a href="#__codelineno-4-30" id="__codelineno-4-30" name="__codelineno-4-30"></a>            <span class="k">echo</span> <span class="s2">"&lt;ul&gt;"</span><span class="p">;</span>
+</span><span id="__span-4-31"><a href="#__codelineno-4-31" id="__codelineno-4-31" name="__codelineno-4-31"></a>            <span class="k">echo</span> <span class="s2">"&lt;li&gt;&lt;strong&gt;Autor:&lt;/strong&gt; "</span> <span class="o">.</span> <span class="nv">$autor</span> <span class="o">.</span> <span class="s2">"&lt;/li&gt;"</span><span class="p">;</span>
+</span><span id="__span-4-32"><a href="#__codelineno-4-32" id="__codelineno-4-32" name="__codelineno-4-32"></a>            <span class="k">echo</span> <span class="s2">"&lt;li&gt;&lt;strong&gt;Género:&lt;/strong&gt; "</span> <span class="o">.</span> <span class="nv">$genero</span> <span class="o">.</span> <span class="s2">"&lt;/li&gt;"</span><span class="p">;</span>
+</span><span id="__span-4-33"><a href="#__codelineno-4-33" id="__codelineno-4-33" name="__codelineno-4-33"></a>            <span class="k">echo</span> <span class="s2">"&lt;li&gt;&lt;strong&gt;Precio:&lt;/strong&gt; $"</span> <span class="o">.</span> <span class="nv">$precio</span> <span class="o">.</span> <span class="s2">"&lt;/li&gt;"</span><span class="p">;</span>
+</span><span id="__span-4-34"><a href="#__codelineno-4-34" id="__codelineno-4-34" name="__codelineno-4-34"></a>            <span class="k">echo</span> <span class="s2">"&lt;/ul&gt;"</span><span class="p">;</span>
+</span><span id="__span-4-35"><a href="#__codelineno-4-35" id="__codelineno-4-35" name="__codelineno-4-35"></a>            <span class="k">echo</span> <span class="s2">"&lt;/div&gt;&lt;hr&gt;"</span><span class="p">;</span>
+</span><span id="__span-4-36"><a href="#__codelineno-4-36" id="__codelineno-4-36" name="__codelineno-4-36"></a>        <span class="p">}</span>
+</span><span id="__span-4-37"><a href="#__codelineno-4-37" id="__codelineno-4-37" name="__codelineno-4-37"></a>
+</span><span id="__span-4-38"><a href="#__codelineno-4-38" id="__codelineno-4-38" name="__codelineno-4-38"></a>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span id="__span-4-39"><a href="#__codelineno-4-39" id="__codelineno-4-39" name="__codelineno-4-39"></a>        <span class="k">die</span><span class="p">(</span><span class="s2">"Error: El fichero libros.xml no ha sido encontrado."</span><span class="p">);</span>
+</span><span id="__span-4-40"><a href="#__codelineno-4-40" id="__codelineno-4-40" name="__codelineno-4-40"></a>    <span class="p">}</span>
+</span><span id="__span-4-41"><a href="#__codelineno-4-41" id="__codelineno-4-41" name="__codelineno-4-41"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<p>El proceso de SimpleXML se puede entender en dos fases clave. La primera es la <strong>carga del fichero</strong>, gestionada por completo por la función <code>simplexml_load_file()</code>. Esta función se encarga del trabajo pesado de leer el documento, verificar que su sintaxis XML es válida y, si todo es correcto, transformar toda la estructura jerárquica en un objeto especial de PHP. En caso de que el fichero esté mal formado o no sea accesible, la función devolverá <code>false</code>, permitiéndonos controlar el error de forma elegante.</p>
+<p>Una vez que la carga ha sido exitosa, comienza la fase de <strong>navegación del objeto</strong>, que es donde reside la verdadera potencia y simplicidad de la herramienta. SimpleXML nos presenta el árbol de datos como un objeto PHP con una sintaxis híbrida e intuitiva. Para acceder a los elementos hijos directos, se utiliza la notación de flecha estándar de los objetos, como en <code>$xml-&gt;libro</code>. Si existen múltiples elementos con el mismo nombre, como es el caso de las etiquetas <code>&lt;libro&gt;</code>, SimpleXML los agrupa de forma transparente en una colección que puede ser recorrida con un simple bucle <code>foreach</code>. Los atributos de una etiqueta se hacen accesibles mediante una sintaxis de array asociativo, como en <code>$libro['id']</code>, mientras que los elementos anidados más profundos se alcanzan encadenando el acceso a propiedades, como en <code>$libro-&gt;titulo</code>. De esta manera, SimpleXML abstrae la complejidad del análisis de XML y convierte la tarea en un proceso tan natural como la manipulación de objetos y arrays nativos de PHP.</p>
+<h3 id="escribiendo-xml-con-simplexml">Escribiendo XML con SimpleXML</h3>
+<p>Además de leer ficheros XML, <strong>SimpleXML</strong> también nos permite <strong>crear y guardar nuevos documentos XML</strong> desde PHP de forma sencilla. Podemos construir una estructura jerárquica desde cero y luego guardarla en disco con el método <code>asXML()</code>.</p>
+<p>Imaginemos que queremos crear un fichero <code>alumnos.xml</code> con una lista de estudiantes y sus notas. Podemos hacerlo así:</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-5-2"><a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="c1">// 1. Creamos el nodo raíz</span>
+</span><span id="__span-5-3"><a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="nv">$xml</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SimpleXMLElement</span><span class="p">(</span><span class="s1">'&lt;alumnos&gt;&lt;/alumnos&gt;'</span><span class="p">);</span>
+</span><span id="__span-5-4"><a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a>
+</span><span id="__span-5-5"><a href="#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="c1">// 2. Añadimos nodos hijo</span>
+</span><span id="__span-5-6"><a href="#__codelineno-5-6" id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="nv">$alumno1</span> <span class="o">=</span> <span class="nv">$xml</span><span class="o">-&gt;</span><span class="na">addChild</span><span class="p">(</span><span class="s1">'alumno'</span><span class="p">);</span>
+</span><span id="__span-5-7"><a href="#__codelineno-5-7" id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="nv">$alumno1</span><span class="o">-&gt;</span><span class="na">addAttribute</span><span class="p">(</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'A001'</span><span class="p">);</span>
+</span><span id="__span-5-8"><a href="#__codelineno-5-8" id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="nv">$alumno1</span><span class="o">-&gt;</span><span class="na">addChild</span><span class="p">(</span><span class="s1">'nombre'</span><span class="p">,</span> <span class="s1">'Laura Pérez'</span><span class="p">);</span>
+</span><span id="__span-5-9"><a href="#__codelineno-5-9" id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="nv">$alumno1</span><span class="o">-&gt;</span><span class="na">addChild</span><span class="p">(</span><span class="s1">'nota'</span><span class="p">,</span> <span class="s1">'8.5'</span><span class="p">);</span>
+</span><span id="__span-5-10"><a href="#__codelineno-5-10" id="__codelineno-5-10" name="__codelineno-5-10"></a>
+</span><span id="__span-5-11"><a href="#__codelineno-5-11" id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="nv">$alumno2</span> <span class="o">=</span> <span class="nv">$xml</span><span class="o">-&gt;</span><span class="na">addChild</span><span class="p">(</span><span class="s1">'alumno'</span><span class="p">);</span>
+</span><span id="__span-5-12"><a href="#__codelineno-5-12" id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="nv">$alumno2</span><span class="o">-&gt;</span><span class="na">addAttribute</span><span class="p">(</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'A002'</span><span class="p">);</span>
+</span><span id="__span-5-13"><a href="#__codelineno-5-13" id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="nv">$alumno2</span><span class="o">-&gt;</span><span class="na">addChild</span><span class="p">(</span><span class="s1">'nombre'</span><span class="p">,</span> <span class="s1">'Carlos Ruiz'</span><span class="p">);</span>
+</span><span id="__span-5-14"><a href="#__codelineno-5-14" id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="nv">$alumno2</span><span class="o">-&gt;</span><span class="na">addChild</span><span class="p">(</span><span class="s1">'nota'</span><span class="p">,</span> <span class="s1">'9.2'</span><span class="p">);</span>
+</span><span id="__span-5-15"><a href="#__codelineno-5-15" id="__codelineno-5-15" name="__codelineno-5-15"></a>
+</span><span id="__span-5-16"><a href="#__codelineno-5-16" id="__codelineno-5-16" name="__codelineno-5-16"></a><span class="c1">// 3. Guardamos el documento en un fichero</span>
+</span><span id="__span-5-17"><a href="#__codelineno-5-17" id="__codelineno-5-17" name="__codelineno-5-17"></a><span class="nv">$xml</span><span class="o">-&gt;</span><span class="na">asXML</span><span class="p">(</span><span class="s1">'alumnos.xml'</span><span class="p">);</span>
+</span><span id="__span-5-18"><a href="#__codelineno-5-18" id="__codelineno-5-18" name="__codelineno-5-18"></a>
+</span><span id="__span-5-19"><a href="#__codelineno-5-19" id="__codelineno-5-19" name="__codelineno-5-19"></a><span class="k">echo</span> <span class="s2">"El archivo alumnos.xml se ha creado correctamente."</span><span class="p">;</span>
+</span><span id="__span-5-20"><a href="#__codelineno-5-20" id="__codelineno-5-20" name="__codelineno-5-20"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<p>Este script genera automáticamente un archivo con el siguiente contenido:</p>
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+</span><span id="__span-6-2"><a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="nt">&lt;alumnos&gt;</span>
+</span><span id="__span-6-3"><a href="#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="w">    </span><span class="nt">&lt;alumno</span><span class="w"> </span><span class="na">id=</span><span class="s">"A001"</span><span class="nt">&gt;</span>
+</span><span id="__span-6-4"><a href="#__codelineno-6-4" id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="w">        </span><span class="nt">&lt;nombre&gt;</span>Laura<span class="w"> </span>Pérez<span class="nt">&lt;/nombre&gt;</span>
+</span><span id="__span-6-5"><a href="#__codelineno-6-5" id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="w">        </span><span class="nt">&lt;nota&gt;</span>8.5<span class="nt">&lt;/nota&gt;</span>
+</span><span id="__span-6-6"><a href="#__codelineno-6-6" id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="w">    </span><span class="nt">&lt;/alumno&gt;</span>
+</span><span id="__span-6-7"><a href="#__codelineno-6-7" id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="w">    </span><span class="nt">&lt;alumno</span><span class="w"> </span><span class="na">id=</span><span class="s">"A002"</span><span class="nt">&gt;</span>
+</span><span id="__span-6-8"><a href="#__codelineno-6-8" id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="w">        </span><span class="nt">&lt;nombre&gt;</span>Carlos<span class="w"> </span>Ruiz<span class="nt">&lt;/nombre&gt;</span>
+</span><span id="__span-6-9"><a href="#__codelineno-6-9" id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="w">        </span><span class="nt">&lt;nota&gt;</span>9.2<span class="nt">&lt;/nota&gt;</span>
+</span><span id="__span-6-10"><a href="#__codelineno-6-10" id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="w">    </span><span class="nt">&lt;/alumno&gt;</span>
+</span><span id="__span-6-11"><a href="#__codelineno-6-11" id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="nt">&lt;/alumnos&gt;</span>
+</span></code></pre></div>
+<p>El método <code>addChild()</code> sirve para <strong>añadir un nuevo elemento hijo</strong> dentro del nodo actual, mientras que <code>addAttribute()</code> añade <strong>atributos</strong> al elemento.<br/>
+Finalmente, <code>asXML()</code> puede recibir un nombre de fichero como parámetro para <strong>guardar</strong> el XML en disco, o usarse sin argumentos para devolverlo como cadena.</p>
+<h2 id="leyendo-ficheros-json">Leyendo Ficheros JSON</h2>
+<p><strong>JSON (JavaScript Object Notation)</strong> es un formato de texto ligero para el intercambio de datos. Aunque nació del lenguaje JavaScript, hoy en día es un estándar universal, legible por humanos y fácil de procesar para las máquinas. En el desarrollo web moderno, ha reemplazado en gran medida a XML como el formato preferido para las APIs y los ficheros de configuración por ser menos verboso y más fácil de mapear a las estructuras de datos nativas de los lenguajes de programación.</p>
+<p>La relación entre PHP y JSON es especialmente fluida, ya que la estructura de los arrays asociativos e indexados de PHP se corresponde casi perfectamente con los objetos y arrays de JSON. PHP nos proporciona dos funciones principales para trabajar con este formato: <code>json_encode()</code> y <code>json_decode()</code>.</p>
+<p>La función  <code>json_encode()</code> toma una variable de PHP (generalmente un array o un objeto) y la convierte en una cadena de texto con formato JSON.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-7-2"><a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a>    <span class="c1">// Un array asociativo en PHP</span>
+</span><span id="__span-7-3"><a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a>    <span class="nv">$usuario</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="__span-7-4"><a href="#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a>        <span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-7-5"><a href="#__codelineno-7-5" id="__codelineno-7-5" name="__codelineno-7-5"></a>        <span class="s1">'nombre'</span> <span class="o">=&gt;</span> <span class="s1">'Ana García'</span><span class="p">,</span>
+</span><span id="__span-7-6"><a href="#__codelineno-7-6" id="__codelineno-7-6" name="__codelineno-7-6"></a>        <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="s1">'ana.garcia@email.com'</span><span class="p">,</span>
+</span><span id="__span-7-7"><a href="#__codelineno-7-7" id="__codelineno-7-7" name="__codelineno-7-7"></a>        <span class="s1">'activo'</span> <span class="o">=&gt;</span> <span class="k">true</span>
+</span><span id="__span-7-8"><a href="#__codelineno-7-8" id="__codelineno-7-8" name="__codelineno-7-8"></a>    <span class="p">];</span>
+</span><span id="__span-7-9"><a href="#__codelineno-7-9" id="__codelineno-7-9" name="__codelineno-7-9"></a>
+</span><span id="__span-7-10"><a href="#__codelineno-7-10" id="__codelineno-7-10" name="__codelineno-7-10"></a>    <span class="c1">// Lo convertimos a una cadena JSON</span>
+</span><span id="__span-7-11"><a href="#__codelineno-7-11" id="__codelineno-7-11" name="__codelineno-7-11"></a>    <span class="c1">// JSON_PRETTY_PRINT es una constante opcional que formatea el JSON para que sea legible.</span>
+</span><span id="__span-7-12"><a href="#__codelineno-7-12" id="__codelineno-7-12" name="__codelineno-7-12"></a>    <span class="nv">$usuario_json</span> <span class="o">=</span> <span class="nb">json_encode</span><span class="p">(</span><span class="nv">$usuario</span><span class="p">,</span> <span class="nx">JSON_PRETTY_PRINT</span><span class="p">);</span>
+</span><span id="__span-7-13"><a href="#__codelineno-7-13" id="__codelineno-7-13" name="__codelineno-7-13"></a>
+</span><span id="__span-7-14"><a href="#__codelineno-7-14" id="__codelineno-7-14" name="__codelineno-7-14"></a>    <span class="k">echo</span> <span class="s2">"&lt;pre&gt;"</span><span class="p">;</span> <span class="c1">// Usamos &lt;pre&gt; para respetar los saltos de línea y espacios del JSON formateado</span>
+</span><span id="__span-7-15"><a href="#__codelineno-7-15" id="__codelineno-7-15" name="__codelineno-7-15"></a>    <span class="k">echo</span> <span class="nv">$usuario_json</span><span class="p">;</span>
+</span><span id="__span-7-16"><a href="#__codelineno-7-16" id="__codelineno-7-16" name="__codelineno-7-16"></a>    <span class="k">echo</span> <span class="s2">"&lt;/pre&gt;"</span><span class="p">;</span>
+</span><span id="__span-7-17"><a href="#__codelineno-7-17" id="__codelineno-7-17" name="__codelineno-7-17"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<p>Este código genera la siguiente salida:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-8-1"><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="p">{</span>
+</span><span id="__span-8-2"><a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-8-3"><a href="#__codelineno-8-3" id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="w">    </span><span class="nt">"nombre"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ana Garc\u00eda"</span><span class="p">,</span>
+</span><span id="__span-8-4"><a href="#__codelineno-8-4" id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="w">    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ana.garcia@email.com"</span><span class="p">,</span>
+</span><span id="__span-8-5"><a href="#__codelineno-8-5" id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="w">    </span><span class="nt">"activo"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+</span><span id="__span-8-6"><a href="#__codelineno-8-6" id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="p">}</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p><code>json_encode</code> convierte los caracteres especiales como la 'í' a su representación Unicode (<code>\u00eda</code>).</p>
+</div>
+<p>Por su parte, <code>json_decode()</code> toma una cadena de texto con formato JSON y la convierte en una variable de PHP.</p>
+<p>Esta función tiene un segundo argumento muy importante. Por defecto, convierte los objetos JSON en objetos <code>stdClass</code> de PHP. Si le pasamos <code>true</code> como segundo argumento, los convertirá en <strong>arrays asociativos</strong>, que suelen ser más fáciles de manejar.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-9-1"><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-9-2"><a href="#__codelineno-9-2" id="__codelineno-9-2" name="__codelineno-9-2"></a>    <span class="nv">$json_string</span> <span class="o">=</span> <span class="s1">'{ "id": 1, "nombre": "Ana García", "activo": true }'</span><span class="p">;</span>
+</span><span id="__span-9-3"><a href="#__codelineno-9-3" id="__codelineno-9-3" name="__codelineno-9-3"></a>
+</span><span id="__span-9-4"><a href="#__codelineno-9-4" id="__codelineno-9-4" name="__codelineno-9-4"></a>    <span class="c1">// 1. Decodificando como objeto (comportamiento por defecto)</span>
+</span><span id="__span-9-5"><a href="#__codelineno-9-5" id="__codelineno-9-5" name="__codelineno-9-5"></a>    <span class="nv">$usuario_objeto</span> <span class="o">=</span> <span class="nb">json_decode</span><span class="p">(</span><span class="nv">$json_string</span><span class="p">);</span>
+</span><span id="__span-9-6"><a href="#__codelineno-9-6" id="__codelineno-9-6" name="__codelineno-9-6"></a>    <span class="k">echo</span> <span class="s2">"Acceso como objeto: "</span> <span class="o">.</span> <span class="nv">$usuario_objeto</span><span class="o">-&gt;</span><span class="na">nombre</span><span class="p">;</span> <span class="c1">// Salida: Ana García</span>
+</span><span id="__span-9-7"><a href="#__codelineno-9-7" id="__codelineno-9-7" name="__codelineno-9-7"></a>    <span class="k">echo</span> <span class="s2">"&lt;br&gt;"</span><span class="p">;</span>
+</span><span id="__span-9-8"><a href="#__codelineno-9-8" id="__codelineno-9-8" name="__codelineno-9-8"></a>
+</span><span id="__span-9-9"><a href="#__codelineno-9-9" id="__codelineno-9-9" name="__codelineno-9-9"></a>    <span class="c1">// 2. Decodificando como array asociativo (recomendado)</span>
+</span><span id="__span-9-10"><a href="#__codelineno-9-10" id="__codelineno-9-10" name="__codelineno-9-10"></a>    <span class="nv">$usuario_array</span> <span class="o">=</span> <span class="nb">json_decode</span><span class="p">(</span><span class="nv">$json_string</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+</span><span id="__span-9-11"><a href="#__codelineno-9-11" id="__codelineno-9-11" name="__codelineno-9-11"></a>    <span class="k">echo</span> <span class="s2">"Acceso como array: "</span> <span class="o">.</span> <span class="nv">$usuario_array</span><span class="p">[</span><span class="s1">'nombre'</span><span class="p">];</span> <span class="c1">// Salida: Ana García</span>
+</span><span id="__span-9-12"><a href="#__codelineno-9-12" id="__codelineno-9-12" name="__codelineno-9-12"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<h3 id="ejemplo-practico-guardar-y-leer-un-fichero-json">Ejemplo Práctico: Guardar y Leer un Fichero JSON</h3>
+<p>Ahora combinemos estas funciones con las operaciones de ficheros que ya conocemos para crear un pequeño sistema de persistencia. Primero vamos a guardar los datos en un fichero JSON:</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-10-1"><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-10-2"><a href="#__codelineno-10-2" id="__codelineno-10-2" name="__codelineno-10-2"></a>    <span class="c1">// Partimos de un array multidimensional de usuarios en PHP</span>
+</span><span id="__span-10-3"><a href="#__codelineno-10-3" id="__codelineno-10-3" name="__codelineno-10-3"></a>    <span class="nv">$usuarios</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="__span-10-4"><a href="#__codelineno-10-4" id="__codelineno-10-4" name="__codelineno-10-4"></a>        <span class="p">[</span> <span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'nombre'</span> <span class="o">=&gt;</span> <span class="s1">'Ana García'</span> <span class="p">],</span>
+</span><span id="__span-10-5"><a href="#__codelineno-10-5" id="__codelineno-10-5" name="__codelineno-10-5"></a>        <span class="p">[</span> <span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'nombre'</span> <span class="o">=&gt;</span> <span class="s1">'Luis Soler'</span> <span class="p">]</span>
+</span><span id="__span-10-6"><a href="#__codelineno-10-6" id="__codelineno-10-6" name="__codelineno-10-6"></a>    <span class="p">];</span>
+</span><span id="__span-10-7"><a href="#__codelineno-10-7" id="__codelineno-10-7" name="__codelineno-10-7"></a>
+</span><span id="__span-10-8"><a href="#__codelineno-10-8" id="__codelineno-10-8" name="__codelineno-10-8"></a>    <span class="c1">// Convertimos el array a una cadena JSON formateada</span>
+</span><span id="__span-10-9"><a href="#__codelineno-10-9" id="__codelineno-10-9" name="__codelineno-10-9"></a>    <span class="nv">$json_para_guardar</span> <span class="o">=</span> <span class="nb">json_encode</span><span class="p">(</span><span class="nv">$usuarios</span><span class="p">,</span> <span class="nx">JSON_PRETTY_PRINT</span><span class="p">);</span>
+</span><span id="__span-10-10"><a href="#__codelineno-10-10" id="__codelineno-10-10" name="__codelineno-10-10"></a>
+</span><span id="__span-10-11"><a href="#__codelineno-10-11" id="__codelineno-10-11" name="__codelineno-10-11"></a>    <span class="c1">// Guardamos la cadena en un fichero</span>
+</span><span id="__span-10-12"><a href="#__codelineno-10-12" id="__codelineno-10-12" name="__codelineno-10-12"></a>    <span class="nb">file_put_contents</span><span class="p">(</span><span class="s1">'usuarios.json'</span><span class="p">,</span> <span class="nv">$json_para_guardar</span><span class="p">);</span>
+</span><span id="__span-10-13"><a href="#__codelineno-10-13" id="__codelineno-10-13" name="__codelineno-10-13"></a>
+</span><span id="__span-10-14"><a href="#__codelineno-10-14" id="__codelineno-10-14" name="__codelineno-10-14"></a>    <span class="k">echo</span> <span class="s2">"Los datos de los usuarios han sido guardados en 'usuarios.json'"</span><span class="p">;</span>
+</span><span id="__span-10-15"><a href="#__codelineno-10-15" id="__codelineno-10-15" name="__codelineno-10-15"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<p>Una vez creado el fichero, podemos leerlo con la siguiente funcionalidad:</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-11-1"><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-11-2"><a href="#__codelineno-11-2" id="__codelineno-11-2" name="__codelineno-11-2"></a>    <span class="nv">$fichero_json</span> <span class="o">=</span> <span class="s1">'usuarios.json'</span><span class="p">;</span>
+</span><span id="__span-11-3"><a href="#__codelineno-11-3" id="__codelineno-11-3" name="__codelineno-11-3"></a>
+</span><span id="__span-11-4"><a href="#__codelineno-11-4" id="__codelineno-11-4" name="__codelineno-11-4"></a>    <span class="k">if</span> <span class="p">(</span><span class="nb">file_exists</span><span class="p">(</span><span class="nv">$fichero_json</span><span class="p">))</span> <span class="p">{</span>
+</span><span id="__span-11-5"><a href="#__codelineno-11-5" id="__codelineno-11-5" name="__codelineno-11-5"></a>        <span class="c1">// Leemos el contenido del fichero</span>
+</span><span id="__span-11-6"><a href="#__codelineno-11-6" id="__codelineno-11-6" name="__codelineno-11-6"></a>        <span class="nv">$json_string</span> <span class="o">=</span> <span class="nb">file_get_contents</span><span class="p">(</span><span class="nv">$fichero_json</span><span class="p">);</span>
+</span><span id="__span-11-7"><a href="#__codelineno-11-7" id="__codelineno-11-7" name="__codelineno-11-7"></a>
+</span><span id="__span-11-8"><a href="#__codelineno-11-8" id="__codelineno-11-8" name="__codelineno-11-8"></a>        <span class="c1">// Decodificamos el JSON a un array de PHP</span>
+</span><span id="__span-11-9"><a href="#__codelineno-11-9" id="__codelineno-11-9" name="__codelineno-11-9"></a>        <span class="nv">$usuarios</span> <span class="o">=</span> <span class="nb">json_decode</span><span class="p">(</span><span class="nv">$json_string</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+</span><span id="__span-11-10"><a href="#__codelineno-11-10" id="__codelineno-11-10" name="__codelineno-11-10"></a>
+</span><span id="__span-11-11"><a href="#__codelineno-11-11" id="__codelineno-11-11" name="__codelineno-11-11"></a>        <span class="k">echo</span> <span class="s2">"&lt;h1&gt;Lista de Usuarios&lt;/h1&gt;"</span><span class="p">;</span>
+</span><span id="__span-11-12"><a href="#__codelineno-11-12" id="__codelineno-11-12" name="__codelineno-11-12"></a>        <span class="k">echo</span> <span class="s2">"&lt;ul&gt;"</span><span class="p">;</span>
+</span><span id="__span-11-13"><a href="#__codelineno-11-13" id="__codelineno-11-13" name="__codelineno-11-13"></a>        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$usuarios</span> <span class="k">as</span> <span class="nv">$usuario</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-11-14"><a href="#__codelineno-11-14" id="__codelineno-11-14" name="__codelineno-11-14"></a>            <span class="k">echo</span> <span class="s2">"&lt;li&gt;"</span> <span class="o">.</span> <span class="nv">$usuario</span><span class="p">[</span><span class="s1">'nombre'</span><span class="p">]</span> <span class="o">.</span> <span class="s2">" (ID: "</span> <span class="o">.</span> <span class="nv">$usuario</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span> <span class="o">.</span> <span class="s2">")&lt;/li&gt;"</span><span class="p">;</span>
+</span><span id="__span-11-15"><a href="#__codelineno-11-15" id="__codelineno-11-15" name="__codelineno-11-15"></a>        <span class="p">}</span>
+</span><span id="__span-11-16"><a href="#__codelineno-11-16" id="__codelineno-11-16" name="__codelineno-11-16"></a>        <span class="k">echo</span> <span class="s2">"&lt;/ul&gt;"</span><span class="p">;</span>
+</span><span id="__span-11-17"><a href="#__codelineno-11-17" id="__codelineno-11-17" name="__codelineno-11-17"></a>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span id="__span-11-18"><a href="#__codelineno-11-18" id="__codelineno-11-18" name="__codelineno-11-18"></a>        <span class="k">echo</span> <span class="s2">"El fichero no existe."</span><span class="p">;</span>
+</span><span id="__span-11-19"><a href="#__codelineno-11-19" id="__codelineno-11-19" name="__codelineno-11-19"></a>    <span class="p">}</span>
+</span><span id="__span-11-20"><a href="#__codelineno-11-20" id="__codelineno-11-20" name="__codelineno-11-20"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<p>Este ciclo de leer un fichero, decodificarlo, manipular el array y volver a codificarlo y guardarlo es la base de muchas aplicaciones sencillas que usan el sistema de ficheros como base de datos.</p>
+<h2 id="leyendo-ficheros-csv">Leyendo Ficheros CSV</h2>
+<p><strong>CSV (Comma-Separated Values o Valores Separados por Comas)</strong> es un formato de fichero de texto plano que se utiliza para almacenar datos en una estructura de tabla. Cada línea del fichero representa una fila de la tabla, y las columnas dentro de esa fila se separan por un <strong>delimitador</strong>, que comúnmente es una coma (<code>,</code>), aunque también puede ser un punto y coma (<code>;</code>) u otro carácter.</p>
+<p>La gran ventaja del formato CSV es su simplicidad y universalidad. Prácticamente cualquier software de hoja de cálculo, como Microsoft Excel o Google Sheets, puede abrir e importar datos desde un fichero CSV. Esto lo convierte en el formato ideal para funcionalidades de <strong>importación y exportación de datos</strong> en una aplicación web.</p>
+<p>Aunque podríamos intentar procesar un CSV con funciones de strings como <code>explode()</code>, es una mala idea porque no maneja casos complejos (por ejemplo, cuando una de las columnas contiene una coma). PHP ofrece funciones nativas y robustas para trabajar con CSV de forma correcta: <code>fputcsv()</code> y <code>fgetcsv()</code>.</p>
+<p>La función <code>fputcsv()</code> formatea un array como una línea de CSV y la escribe en un fichero. Esta función trabaja con un "puntero" de fichero, por lo que necesitamos usar el ciclo <code>fopen()</code> -&gt; <code>fputcsv()</code> -&gt; <code>fclose()</code>.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-12-1"><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-12-2"><a href="#__codelineno-12-2" id="__codelineno-12-2" name="__codelineno-12-2"></a>    <span class="c1">// Datos de ejemplo (un array de arrays)</span>
+</span><span id="__span-12-3"><a href="#__codelineno-12-3" id="__codelineno-12-3" name="__codelineno-12-3"></a>    <span class="nv">$productos</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="__span-12-4"><a href="#__codelineno-12-4" id="__codelineno-12-4" name="__codelineno-12-4"></a>        <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"Portátil T-1000"</span><span class="p">,</span> <span class="mf">899.99</span><span class="p">],</span>
+</span><span id="__span-12-5"><a href="#__codelineno-12-5" id="__codelineno-12-5" name="__codelineno-12-5"></a>        <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="s2">"Ratón Óptico Pro"</span><span class="p">,</span> <span class="mf">24.50</span><span class="p">],</span>
+</span><span id="__span-12-6"><a href="#__codelineno-12-6" id="__codelineno-12-6" name="__codelineno-12-6"></a>        <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="s2">"Teclado Mecánico RGB, Modelo K-7"</span><span class="p">,</span> <span class="mf">119.95</span><span class="p">]</span>
+</span><span id="__span-12-7"><a href="#__codelineno-12-7" id="__codelineno-12-7" name="__codelineno-12-7"></a>    <span class="p">];</span>
+</span><span id="__span-12-8"><a href="#__codelineno-12-8" id="__codelineno-12-8" name="__codelineno-12-8"></a>
+</span><span id="__span-12-9"><a href="#__codelineno-12-9" id="__codelineno-12-9" name="__codelineno-12-9"></a>    <span class="c1">// Abrimos el fichero en modo escritura ('w')</span>
+</span><span id="__span-12-10"><a href="#__codelineno-12-10" id="__codelineno-12-10" name="__codelineno-12-10"></a>    <span class="nv">$puntero</span> <span class="o">=</span> <span class="nb">fopen</span><span class="p">(</span><span class="s1">'productos.csv'</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">);</span>
+</span><span id="__span-12-11"><a href="#__codelineno-12-11" id="__codelineno-12-11" name="__codelineno-12-11"></a>
+</span><span id="__span-12-12"><a href="#__codelineno-12-12" id="__codelineno-12-12" name="__codelineno-12-12"></a>    <span class="c1">// (Opcional, pero buena práctica) Escribimos una fila de cabecera</span>
+</span><span id="__span-12-13"><a href="#__codelineno-12-13" id="__codelineno-12-13" name="__codelineno-12-13"></a>    <span class="nv">$cabecera</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'ID'</span><span class="p">,</span> <span class="s1">'Nombre del Producto'</span><span class="p">,</span> <span class="s1">'Precio'</span><span class="p">];</span>
+</span><span id="__span-12-14"><a href="#__codelineno-12-14" id="__codelineno-12-14" name="__codelineno-12-14"></a>    <span class="nb">fputcsv</span><span class="p">(</span><span class="nv">$puntero</span><span class="p">,</span> <span class="nv">$cabecera</span><span class="p">);</span>
+</span><span id="__span-12-15"><a href="#__codelineno-12-15" id="__codelineno-12-15" name="__codelineno-12-15"></a>
+</span><span id="__span-12-16"><a href="#__codelineno-12-16" id="__codelineno-12-16" name="__codelineno-12-16"></a>    <span class="c1">// Recorremos el array de productos y escribimos cada uno como una fila en el CSV</span>
+</span><span id="__span-12-17"><a href="#__codelineno-12-17" id="__codelineno-12-17" name="__codelineno-12-17"></a>    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$productos</span> <span class="k">as</span> <span class="nv">$producto</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-12-18"><a href="#__codelineno-12-18" id="__codelineno-12-18" name="__codelineno-12-18"></a>        <span class="nb">fputcsv</span><span class="p">(</span><span class="nv">$puntero</span><span class="p">,</span> <span class="nv">$producto</span><span class="p">);</span>
+</span><span id="__span-12-19"><a href="#__codelineno-12-19" id="__codelineno-12-19" name="__codelineno-12-19"></a>    <span class="p">}</span>
+</span><span id="__span-12-20"><a href="#__codelineno-12-20" id="__codelineno-12-20" name="__codelineno-12-20"></a>
+</span><span id="__span-12-21"><a href="#__codelineno-12-21" id="__codelineno-12-21" name="__codelineno-12-21"></a>    <span class="c1">// Cerramos el fichero</span>
+</span><span id="__span-12-22"><a href="#__codelineno-12-22" id="__codelineno-12-22" name="__codelineno-12-22"></a>    <span class="nb">fclose</span><span class="p">(</span><span class="nv">$puntero</span><span class="p">);</span>
+</span><span id="__span-12-23"><a href="#__codelineno-12-23" id="__codelineno-12-23" name="__codelineno-12-23"></a>
+</span><span id="__span-12-24"><a href="#__codelineno-12-24" id="__codelineno-12-24" name="__codelineno-12-24"></a>    <span class="k">echo</span> <span class="s2">"Fichero 'productos.csv' creado con éxito."</span><span class="p">;</span>
+</span><span id="__span-12-25"><a href="#__codelineno-12-25" id="__codelineno-12-25" name="__codelineno-12-25"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<p>Si abres el fichero <code>productos.csv</code> generado, verás un contenido como este:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a>ID,"Nombre del Producto",Precio
+</span><span id="__span-13-2"><a href="#__codelineno-13-2" id="__codelineno-13-2" name="__codelineno-13-2"></a>1,"Portátil T-1000",899.99
+</span><span id="__span-13-3"><a href="#__codelineno-13-3" id="__codelineno-13-3" name="__codelineno-13-3"></a>2,"Ratón Óptico Pro",24.5
+</span><span id="__span-13-4"><a href="#__codelineno-13-4" id="__codelineno-13-4" name="__codelineno-13-4"></a>3,"Teclado Mecánico RGB, Modelo K-7",119.95
+</span></code></pre></div>
+<p>De forma análoga, la función <code>fgetcsv()</code> lee una línea de un fichero CSV abierto y la convierte en un array indexado. La forma más común de usarla es dentro de un bucle <code>while</code> para leer el fichero entero, fila por fila.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-14-1"><a href="#__codelineno-14-1" id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-14-2"><a href="#__codelineno-14-2" id="__codelineno-14-2" name="__codelineno-14-2"></a>    <span class="nv">$fichero_csv</span> <span class="o">=</span> <span class="s1">'productos.csv'</span><span class="p">;</span>
+</span><span id="__span-14-3"><a href="#__codelineno-14-3" id="__codelineno-14-3" name="__codelineno-14-3"></a>
+</span><span id="__span-14-4"><a href="#__codelineno-14-4" id="__codelineno-14-4" name="__codelineno-14-4"></a>    <span class="k">echo</span> <span class="s2">"&lt;h1&gt;Lista de Productos desde CSV&lt;/h1&gt;"</span><span class="p">;</span>
+</span><span id="__span-14-5"><a href="#__codelineno-14-5" id="__codelineno-14-5" name="__codelineno-14-5"></a>    <span class="k">echo</span> <span class="s2">"&lt;table border='1' cellpadding='5'&gt;"</span><span class="p">;</span>
+</span><span id="__span-14-6"><a href="#__codelineno-14-6" id="__codelineno-14-6" name="__codelineno-14-6"></a>
+</span><span id="__span-14-7"><a href="#__codelineno-14-7" id="__codelineno-14-7" name="__codelineno-14-7"></a>    <span class="c1">// Abrimos el fichero en modo lectura ('r')</span>
+</span><span id="__span-14-8"><a href="#__codelineno-14-8" id="__codelineno-14-8" name="__codelineno-14-8"></a>    <span class="k">if</span> <span class="p">((</span><span class="nv">$puntero</span> <span class="o">=</span> <span class="nb">fopen</span><span class="p">(</span><span class="nv">$fichero_csv</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">))</span> <span class="o">!==</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-14-9"><a href="#__codelineno-14-9" id="__codelineno-14-9" name="__codelineno-14-9"></a>
+</span><span id="__span-14-10"><a href="#__codelineno-14-10" id="__codelineno-14-10" name="__codelineno-14-10"></a>        <span class="c1">// (Opcional) Leemos la primera fila para descartar la cabecera</span>
+</span><span id="__span-14-11"><a href="#__codelineno-14-11" id="__codelineno-14-11" name="__codelineno-14-11"></a>        <span class="nv">$cabecera</span> <span class="o">=</span> <span class="nb">fgetcsv</span><span class="p">(</span><span class="nv">$puntero</span><span class="p">);</span>
+</span><span id="__span-14-12"><a href="#__codelineno-14-12" id="__codelineno-14-12" name="__codelineno-14-12"></a>        <span class="k">echo</span> <span class="s2">"&lt;tr&gt;&lt;th&gt;"</span> <span class="o">.</span> <span class="nb">implode</span><span class="p">(</span><span class="s2">"&lt;/th&gt;&lt;th&gt;"</span><span class="p">,</span> <span class="nv">$cabecera</span><span class="p">)</span> <span class="o">.</span> <span class="s2">"&lt;/th&gt;&lt;/tr&gt;"</span><span class="p">;</span>
+</span><span id="__span-14-13"><a href="#__codelineno-14-13" id="__codelineno-14-13" name="__codelineno-14-13"></a>
+</span><span id="__span-14-14"><a href="#__codelineno-14-14" id="__codelineno-14-14" name="__codelineno-14-14"></a>        <span class="c1">// Mientras haya líneas por leer, fgetcsv() las devolverá como un array</span>
+</span><span id="__span-14-15"><a href="#__codelineno-14-15" id="__codelineno-14-15" name="__codelineno-14-15"></a>        <span class="k">while</span> <span class="p">((</span><span class="nv">$fila</span> <span class="o">=</span> <span class="nb">fgetcsv</span><span class="p">(</span><span class="nv">$puntero</span><span class="p">))</span> <span class="o">!==</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-14-16"><a href="#__codelineno-14-16" id="__codelineno-14-16" name="__codelineno-14-16"></a>            <span class="k">echo</span> <span class="s2">"&lt;tr&gt;"</span><span class="p">;</span>
+</span><span id="__span-14-17"><a href="#__codelineno-14-17" id="__codelineno-14-17" name="__codelineno-14-17"></a>            <span class="k">echo</span> <span class="s2">"&lt;td&gt;"</span> <span class="o">.</span> <span class="nv">$fila</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">.</span> <span class="s2">"&lt;/td&gt;"</span><span class="p">;</span> <span class="c1">// ID</span>
+</span><span id="__span-14-18"><a href="#__codelineno-14-18" id="__codelineno-14-18" name="__codelineno-14-18"></a>            <span class="k">echo</span> <span class="s2">"&lt;td&gt;"</span> <span class="o">.</span> <span class="nv">$fila</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">.</span> <span class="s2">"&lt;/td&gt;"</span><span class="p">;</span> <span class="c1">// Nombre</span>
+</span><span id="__span-14-19"><a href="#__codelineno-14-19" id="__codelineno-14-19" name="__codelineno-14-19"></a>            <span class="k">echo</span> <span class="s2">"&lt;td&gt;"</span> <span class="o">.</span> <span class="nv">$fila</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">.</span> <span class="s2">"&lt;/td&gt;"</span><span class="p">;</span> <span class="c1">// Precio</span>
+</span><span id="__span-14-20"><a href="#__codelineno-14-20" id="__codelineno-14-20" name="__codelineno-14-20"></a>            <span class="k">echo</span> <span class="s2">"&lt;/tr&gt;"</span><span class="p">;</span>
+</span><span id="__span-14-21"><a href="#__codelineno-14-21" id="__codelineno-14-21" name="__codelineno-14-21"></a>        <span class="p">}</span>
+</span><span id="__span-14-22"><a href="#__codelineno-14-22" id="__codelineno-14-22" name="__codelineno-14-22"></a>
+</span><span id="__span-14-23"><a href="#__codelineno-14-23" id="__codelineno-14-23" name="__codelineno-14-23"></a>        <span class="c1">// Cerramos el fichero</span>
+</span><span id="__span-14-24"><a href="#__codelineno-14-24" id="__codelineno-14-24" name="__codelineno-14-24"></a>        <span class="nb">fclose</span><span class="p">(</span><span class="nv">$puntero</span><span class="p">);</span>
+</span><span id="__span-14-25"><a href="#__codelineno-14-25" id="__codelineno-14-25" name="__codelineno-14-25"></a>    <span class="p">}</span>
+</span><span id="__span-14-26"><a href="#__codelineno-14-26" id="__codelineno-14-26" name="__codelineno-14-26"></a>
+</span><span id="__span-14-27"><a href="#__codelineno-14-27" id="__codelineno-14-27" name="__codelineno-14-27"></a>    <span class="k">echo</span> <span class="s2">"&lt;/table&gt;"</span><span class="p">;</span>
+</span><span id="__span-14-28"><a href="#__codelineno-14-28" id="__codelineno-14-28" name="__codelineno-14-28"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<p>Este método es muy eficiente en el uso de memoria, ya que procesa el fichero línea por línea en lugar de cargarlo todo de golpe, lo que lo hace ideal incluso para ficheros CSV de gran tamaño.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Manuel Sánchez Gomis
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["search.suggest", "search.highlight", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "content.code.copy", "content.tabs.link", "content.tooltips"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../../assets/_markdown_exec_pyodide.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../../_static/js/notebook.js"></script>
+      
+    
+  </body>
+</html>

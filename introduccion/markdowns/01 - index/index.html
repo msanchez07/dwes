@@ -1,0 +1,2757 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Manuel Sánchez Gomis">
+      
+      
+      
+        <link rel="prev" href="../../..">
+      
+      
+        <link rel="next" href="../02%20-%20lenguajes_programacion/">
+      
+      
+      <link rel="icon" href="../../../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.46">
+    
+    
+      
+        <title>Conceptos básicos - Desarrollo Web en entorno servidor</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/_markdown_exec_pyodide.css">
+    
+      <link rel="stylesheet" href="../../../_static/css/notebook.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#conceptos-basicos" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Desarrollo Web en entorno servidor" class="md-header__button md-logo" aria-label="Desarrollo Web en entorno servidor" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Desarrollo Web en entorno servidor
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Conceptos básicos
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber"  aria-label="Cambiar a modo brillante"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo brillante" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="amber"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Bienvenido
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+    
+  
+  Introduccion
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../php/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Php
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../aplicaciones_web/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Aplicaciones Web con Php
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../laravel/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Laravel
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../servicios_web/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Servicios Web
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../webs_dinamicas/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Webs Dinámicas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../aplicaciones_web_hibridas/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Aplicaciones Web Híbridas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../bibliografia/" class="md-tabs__link">
+        
+  
+    
+  
+  Bibliografia
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Desarrollo Web en entorno servidor" class="md-nav__button md-logo" aria-label="Desarrollo Web en entorno servidor" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    Desarrollo Web en entorno servidor
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bienvenido
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Introduccion
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Introduccion
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Conceptos básicos
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Conceptos básicos
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#fundamentos-de-la-programacion-web-cliente-y-servidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fundamentos de la Programación Web: Cliente y Servidor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-lenguaje-de-la-web-protocolo-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Lenguaje de la Web: Protocolo HTTP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="El Lenguaje de la Web: Protocolo HTTP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#la-anatomia-de-una-peticion-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      La Anatomía de una Petición HTTP
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-anatomia-de-una-respuesta-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      La Anatomía de una Respuesta HTTP
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-amnesia-del-servidor-el-concepto-de-stateless" class="md-nav__link">
+    <span class="md-ellipsis">
+      La "Amnesia" del Servidor: El Concepto de "Stateless"
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generacion-dinamica" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generación dinámica
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mecanismos-de-ejecucion-de-codigo-en-servidores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mecanismos de ejecución de código en servidores
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mecanismos de ejecución de código en servidores">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mecanismos-principales-de-ejecucion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mecanismos Principales de Ejecución
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mecanismos Principales de Ejecución">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-cgi-common-gateway-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. CGI (Common Gateway Interface)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-fastcgi" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. FastCGI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-modulo-embebido" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Módulo Embebido
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabla-comparativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tabla Comparativa
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#servidor-de-aplicaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Servidor de Aplicaciones
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Servidor de Aplicaciones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-proxy-inverso" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Proxy Inverso
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#servlets-y-contenedores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Servlets y Contenedores
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02%20-%20lenguajes_programacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lenguajes de programación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03%20-%20herramientas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Herramientas y frameworks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Php
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Php
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/02%20-%20primeros_pasos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primeros pasos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/03%20-%20estructuras_control/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Estructuras de Control en PHP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/04%20-%20arrays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Arrays
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/05%20-%20funciones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Funciones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/06%20-%20poo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Programación orientada a objetos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/07%20-%20excepciones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Excepciones y errores
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/08%20-%20directivas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Directivas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/09%20-%20codigo_embebido/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Código embebido
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Aplicaciones Web con Php
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Aplicaciones Web con Php
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/02%20-%20formularios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Formularios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/03%20-%20sesiones_cookies/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cookies y Sesiones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/04%20-%20seguridad/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Seguridad
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/05%20-%20ficheros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ficheros
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/06%20-%20bases_datos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bases de datos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/07%20-%20estructura_proyecto/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Organizando el código
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/98%20-%20ejercicios_persistencia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios persistencia
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Laravel
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Laravel
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/02%20-%20instalacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instalación y primeros pasos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/03%20-%20rutas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rutas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/04%20-%20controladores/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Controladores
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/05%20-%20vistas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vistas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/06%20-%20formularios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Formularios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/07%20-%20modelos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modelos de Eloquent
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/14%20-%20response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Respuestas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/08%20-%20cookies_sesiones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cookies y Sesiones en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/09%20-%20servicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Servicios en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/10%20-%20seguridad/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Seguridad en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/11%20-%20inyeccion_dependencias/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inyección de Dependencias en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/12%20-%20testing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pruebas y documentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/13%20-%20fechas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fechas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/15%20-%20migrations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Migraciones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Servicios Web
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Servicios Web
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/02%20-%20tecnologias/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tecnologías y Estándares
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/03%20-%20creando_servicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creando un Servicio Web
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/04%20-%20probando_servicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Probando el Servicio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/05%20-%20documentando_servicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Documentando un Servicio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Webs Dinámicas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Webs Dinámicas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/02%20-%20ajax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AJAX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/03%20-%20validacion_formularios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Validación de Formularios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/04%20-%20modificacion_dom/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modificación del DOM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/05%20-%20async_patrones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Patrones Async
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Aplicaciones Web Híbridas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Aplicaciones Web Híbridas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/02%20-%20apis_terceros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    APIs de Terceros
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/03%20-%20creando_apis_propias/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creando APIs Propias
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/04%20-%20sdks_frameworks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SDKs y Frameworks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/05%20-%20big_data_ia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Big Data e IA
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/06%20-%20testing_depuracion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Testing y Depuración
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/07%20-%20autenticacion_apis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Autenticación de APIs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/08%20-%20versionado_webhooks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Versionado y Webhooks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../bibliografia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bibliografia
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#fundamentos-de-la-programacion-web-cliente-y-servidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fundamentos de la Programación Web: Cliente y Servidor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-lenguaje-de-la-web-protocolo-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Lenguaje de la Web: Protocolo HTTP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="El Lenguaje de la Web: Protocolo HTTP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#la-anatomia-de-una-peticion-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      La Anatomía de una Petición HTTP
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-anatomia-de-una-respuesta-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      La Anatomía de una Respuesta HTTP
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-amnesia-del-servidor-el-concepto-de-stateless" class="md-nav__link">
+    <span class="md-ellipsis">
+      La "Amnesia" del Servidor: El Concepto de "Stateless"
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generacion-dinamica" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generación dinámica
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mecanismos-de-ejecucion-de-codigo-en-servidores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mecanismos de ejecución de código en servidores
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mecanismos de ejecución de código en servidores">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mecanismos-principales-de-ejecucion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mecanismos Principales de Ejecución
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mecanismos Principales de Ejecución">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-cgi-common-gateway-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. CGI (Common Gateway Interface)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-fastcgi" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. FastCGI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-modulo-embebido" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Módulo Embebido
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabla-comparativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tabla Comparativa
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#servidor-de-aplicaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Servidor de Aplicaciones
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Servidor de Aplicaciones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-proxy-inverso" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Proxy Inverso
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#servlets-y-contenedores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Servlets y Contenedores
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="conceptos-basicos">Conceptos básicos</h1>
+<p>¡Bienvenido/a al fascinante mundo del desarrollo web en entorno servidor! Si alguna vez te has preguntado qué ocurre "detrás de las cámaras" cuando te registras en una red social, compras un producto en una tienda online o simplemente ves contenido personalizado en una página, estás en el lugar correcto.</p>
+<p>Hasta ahora, es probable que tu experiencia con el desarrollo web se haya centrado en el <strong>cliente (frontend)</strong>: el HTML que estructura el contenido, el CSS que lo embellece y el JavaScript que añade interactividad visual. Esa es la parte del iceberg que vemos.</p>
+<p>En este módulo, nos sumergiremos en el <strong>servidor (backend)</strong>, la parte oculta del iceberg que hace que casi todo en la web moderna sea posible. El backend es el cerebro, la sala de máquinas de cualquier aplicación web compleja. Es donde reside la lógica de negocio, se gestiona la seguridad y se manipulan los datos.</p>
+<p>A lo largo de estos apuntes, aprenderás a:
+* Construir páginas <strong>dinámicas</strong> cuyo contenido cambia según el usuario o la información de una base de datos.
+* Procesar la información que los usuarios envían a través de <strong>formularios</strong>.
+* Crear sistemas de <strong>autenticación</strong> seguros para gestionar usuarios y sesiones.
+* Conectar tus aplicaciones a <strong>bases de datos</strong> para almacenar y recuperar información de forma eficiente.
+* Desarrollar <strong>servicios web y APIs</strong> para que tus aplicaciones se comuniquen con otras.</p>
+<p>Pasaremos de crear páginas estáticas a construir aplicaciones web completas y robustas. ¡Empecemos por sentar las bases!</p>
+<h2 id="fundamentos-de-la-programacion-web-cliente-y-servidor">Fundamentos de la Programación Web: Cliente y Servidor</h2>
+<p>Para entender cómo funciona la web moderna, lo primero es diferenciar los dos escenarios principales donde se ejecuta el código: el <strong>cliente</strong> y el <strong>servidor</strong>. Toda página web que visitas, desde un simple blog hasta una compleja tienda online, es el resultado de la colaboración entre ambos.</p>
+<p>El cliente es el <strong>navegador web</strong> del usuario (Google Chrome, Firefox, Safari, etc.). Es el programa que solicita, recibe e interpreta la información para mostrar la página web.</p>
+<p>El código que se ejecuta en el <strong>cliente</strong> es el responsable de todo lo que el usuario ve e interactúa directamente en su pantalla. Esta capa de la aplicación, conocida como <em>frontend</em>, se construye sobre tres tecnologías fundamentales que trabajan en perfecta sintonía. El navegador web no es un simple visor de documentos; es un entorno de ejecución sofisticado que interpreta y da vida a los ficheros que recibe desde el servidor.</p>
+<p>La base de todo es el <strong>HTML</strong> (HyperText Markup Language), el lenguaje que define la <strong>estructura y el contenido semántico</strong> de la página. Podemos imaginarlo como el esqueleto de la aplicación: establece dónde va un encabezado, un párrafo, una imagen o un botón. Sin HTML, la página sería un lienzo en blanco, sin información ni organización. Es el primer plano que el navegador lee para entender qué elementos debe renderizar.</p>
+<p>Sobre esta estructura ósea, el <strong>CSS</strong> (Cascading Style Sheets) actúa como la piel y la ropa, encargándose exclusivamente de la <strong>presentación y el estilo</strong>. Es el lenguaje que dicta la apariencia visual de los elementos definidos por el HTML. Los colores, las tipografías, los márgenes y el posicionamiento de cada caja o texto son responsabilidad del CSS. Transforma el esqueleto funcional en una experiencia visualmente coherente y atractiva, definiendo la identidad gráfica de la aplicación.</p>
+<p>Finalmente, <strong>JavaScript</strong> aporta los músculos y el sistema nervioso; es el lenguaje que introduce la <strong>interactividad y el dinamismo</strong>. Mientras que HTML y CSS crean una presentación estática, JavaScript la convierte en una aplicación reactiva. Se encarga de validar un formulario en tiempo real, mostrar una ventana emergente, crear animaciones suaves o actualizar una sección de la página sin necesidad de recargarla por completo. Es la tecnología que permite que la web se sienta como una aplicación fluida y no como un documento pasivo.</p>
+<p>El <strong>modelo de ejecución</strong> de estas tres tecnologías es directo y local. El servidor web actúa como un simple almacén que, ante la petición de un usuario, le entrega los ficheros de código (HTML, CSS y JavaScript). Es el navegador del usuario, en su propio ordenador, el que asume la carga de trabajo: lee el HTML para construir el DOM (Document Object Model), aplica los estilos del CSS y ejecuta las sentencias de JavaScript para manipular la página. Todo este proceso ocurre <strong>directamente en la máquina del cliente</strong>, lo que permite una respuesta instantánea a las acciones del usuario.</p>
+<figure>
+<img alt="" src="../../images/01.png" width="100%"/>
+</figure>
+<p>En contraposición al cliente, encontramos el <strong>servidor</strong>, que podemos visualizar como el cerebro central y la sala de máquinas de la aplicación web. Se trata de un ordenador remoto, optimizado para estar siempre encendido y conectado a internet, cuya misión principal es almacenar los recursos de la aplicación y procesar la lógica de negocio. Es en este entorno, conocido como <em>backend</em>, donde se ejecutan lenguajes de programación robustos como <strong>PHP, Python, Java o Node.js</strong>. Una de las reglas de oro de la seguridad y la arquitectura web es que el código fuente escrito en estos lenguajes reside y se ejecuta exclusivamente en el servidor; el navegador del usuario nunca tiene acceso a él.</p>
+<p>El <strong>modelo de ejecución</strong> en el servidor es un proceso reactivo que se inicia siempre a raíz de una petición del cliente. Cuando un usuario hace clic en un enlace o envía un formulario, su navegador envía una solicitud a la URL correspondiente. El servidor, que está constantemente a la escucha, recibe esta petición y actúa como un director de orquesta: identifica el script o programa responsable de gestionar esa solicitud y lo pone en marcha. A partir de este momento, comienza la verdadera magia del backend.</p>
+<p>La ejecución del código del lado del servidor es donde se realizan las tareas complejas que definen a una aplicación web dinámica. Este código es el único que tiene la capacidad de conectarse de forma segura a una <strong>base de datos</strong> para consultar el catálogo de productos, verificar las credenciales de un usuario o guardar un nuevo comentario en un blog. Es el responsable de procesar los datos enviados desde un formulario de contacto, de <strong>personalizar el contenido</strong> de la página para que un usuario vea su nombre de perfil, o de comunicarse con <strong>servicios externos (APIs)</strong> para, por ejemplo, obtener la previsión del tiempo. Son operaciones que, por su naturaleza sensible o por la necesidad de acceder a recursos centralizados, no pueden ni deben ejecutarse en la máquina del cliente.</p>
+<p>Una vez que el servidor ha finalizado todas estas operaciones, su trabajo culmina en la <strong>generación de una respuesta</strong>. Es fundamental entender que el servidor no envía su código PHP o Python al cliente. En su lugar, envía el <strong>resultado</strong> de haberlo ejecutado. Este resultado es, comúnmente, un documento de texto plano, como una página <strong>HTML</strong> completamente ensamblada y lista para ser renderizada, o datos estructurados en formato <strong>JSON</strong> si se trata de una API. Este documento final viaja de vuelta por la red hasta el navegador del cliente, que solo tiene que preocuparse de interpretarlo y mostrarlo. El usuario final solo interactúa con este producto terminado, desconociendo por completo la compleja secuencia de operaciones que ocurrieron en milisegundos en un servidor a cientos o miles de kilómetros de distancia.</p>
+<p>La siguiente tabla resumen muestra las difernecias clave entre el cliente y el servidor:</p>
+<table>
+<thead>
+<tr>
+<th>Característica</th>
+<th>Cliente (Client-Side)</th>
+<th>Servidor (Server-Side)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Lugar de ejecución</strong></td>
+<td>Navegador web del usuario</td>
+<td>Ordenador remoto (servidor)</td>
+</tr>
+<tr>
+<td><strong>Tecnologías</strong></td>
+<td>HTML, CSS, JavaScript</td>
+<td>PHP, Python, Java, Node.js, Ruby, etc.</td>
+</tr>
+<tr>
+<td><strong>Tareas típicas</strong></td>
+<td>Interfaz de usuario, interactividad, validaciones</td>
+<td>Lógica de negocio, acceso a BBDD, autenticación de usuarios</td>
+</tr>
+<tr>
+<td><strong>Visibilidad del código</strong></td>
+<td>El usuario puede ver el código (HTML, CSS, JS)</td>
+<td>El código fuente <strong>nunca</strong> es visible para el usuario</td>
+</tr>
+<tr>
+<td><strong>Acceso a recursos</strong></td>
+<td>Limitado a los recursos del navegador y del usuario</td>
+<td>Acceso total a los recursos del servidor (BBDD, archivos)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="el-lenguaje-de-la-web-protocolo-http">El Lenguaje de la Web: Protocolo HTTP</h2>
+<p>Si el modelo cliente-servidor es la arquitectura de la web, el <strong>Protocolo de Transferencia de Hipertexto (HTTP)</strong> es el idioma universal y el sistema de mensajería que permite que ambos componentes se comuniquen. Es un conjunto de reglas bien definidas y rigurosas que asegura que un navegador en Japón pueda entenderse perfectamente con un servidor en Argentina. Toda interacción, desde cargar una imagen hasta enviar un formulario, se rige por este protocolo.</p>
+<p>La comunicación en la web opera bajo un paradigma fundamentalmente simple y elegante: el <strong>modelo Petición-Respuesta (Request-Response)</strong>. El flujo es siempre el mismo y es siempre iniciado por el cliente. Podemos imaginarlo como un diálogo: el cliente "habla" primero enviando un mensaje de <strong>petición</strong> a un servidor, solicitando un recurso o una acción. El servidor, que se encuentra en un estado de escucha pasiva, procesa esa petición y "responde" con un mensaje de <strong>respuesta</strong>, que contiene el resultado de la solicitud. Este ciclo de dos pasos es la base de toda la navegación web.</p>
+<hr/>
+<h3 id="la-anatomia-de-una-peticion-http">La Anatomía de una Petición HTTP</h3>
+<p>Un mensaje de petición del cliente no es una simple pregunta, sino un paquete de información estructurado con varias partes clave. La primera es el <strong>Método</strong>, que actúa como el verbo de la petición, indicando la intención del cliente. Los más comunes son <strong><code>GET</code></strong>, utilizado para solicitar y recuperar recursos (como cuando visitas una página), y <strong><code>POST</code></strong>, empleado para enviar datos al servidor con el fin de crear un nuevo recurso (como al registrar un nuevo usuario).</p>
+<p>Junto al método, la petición incluye la <strong>URL</strong> (Uniform Resource Locator), que es la dirección exacta del recurso que se desea obtener. A continuación, se encuentran las <strong>Cabeceras (Headers)</strong>, un conjunto de metadatos que proporcionan contexto crucial, como el tipo de navegador que realiza la petición, los formatos de datos que acepta o la información de autenticación. Finalmente, para métodos como <code>POST</code>, la petición contiene un <strong>Cuerpo (Body)</strong>, que es el paquete de datos en sí mismo, como la información de los campos que el usuario ha rellenado en un formulario.</p>
+<figure>
+<img alt="" src="../../images/02.png" width="80%"/>
+</figure>
+<hr/>
+<h3 id="la-anatomia-de-una-respuesta-http">La Anatomía de una Respuesta HTTP</h3>
+<p>La respuesta del servidor sigue una estructura similar. Su componente más importante para un desarrollador es el <strong>Código de Estado</strong>, un número de tres dígitos que resume el resultado de la petición. Un <strong><code>200 OK</code></strong> indica que todo ha ido correctamente. Un <strong><code>404 Not Found</code></strong> nos dice que el recurso solicitado no existe en el servidor. Un temido <strong><code>500 Internal Server Error</code></strong> señala que algo ha fallado en la ejecución del código del lado del servidor.</p>
+<p>Al igual que la petición, la respuesta también incluye <strong>Cabeceras</strong> que describen el contenido que se está enviando (por ejemplo, <code>Content-Type: text/html</code> para una página web) o directivas sobre cómo el navegador debe manejarlo (como las instrucciones de caché). Por último, si la petición tuvo éxito, la respuesta contendrá un <strong>Cuerpo</strong>, que es el recurso solicitado: el documento HTML, los datos de una imagen, un fichero CSS o una cadena de texto en formato JSON.</p>
+<hr/>
+<h3 id="la-amnesia-del-servidor-el-concepto-de-stateless">La "Amnesia" del Servidor: El Concepto de "Stateless"</h3>
+<p>Un concepto <strong>crucial</strong> del diseño de HTTP es que es un protocolo <strong>"sin estado" (stateless)</strong>. Esto significa que cada ciclo de petición-respuesta es un evento completamente independiente y aislado. El servidor no guarda ningún recuerdo de las transacciones anteriores con un mismo cliente. Si pides la página principal y un segundo después pides la página de contacto, el servidor te trata como a un completo desconocido en ambas ocasiones. No tiene memoria inherente.</p>
+<figure>
+<img alt="" src="../../images/03.png" width="40%"/>
+</figure>
+<p>Esta "amnesia" es una característica de diseño que simplifica enormemente el funcionamiento de los servidores, pero presenta un desafío para las aplicaciones modernas que necesitan continuidad, como un carrito de la compra o una sesión de usuario. Precisamente para superar esta limitación, se desarrollaron técnicas como las <strong>sesiones y las cookies</strong>, que actúan como una "memoria externa" para que la aplicación pueda recordar a un usuario entre diferentes peticiones.</p>
+<h2 id="generacion-dinamica">Generación dinámica</h2>
+<p>En el apartado anterior, sentamos las bases de la arquitectura cliente-servidor. Comprendimos que el cliente se encarga de la presentación y el servidor de la lógica pesada. Ahora, exploraremos el concepto que une ambos mundos y que constituye el corazón de la programación de backend: la <strong>generación dinámica de páginas web</strong>.</p>
+<p>Una página web <strong>estática</strong> es como un folleto impreso. Su contenido está fijo en el fichero HTML; es el mismo para cada persona que lo ve y solo cambia si un desarrollador edita manualmente el código fuente. Esto es útil para páginas informativas simples, pero se queda corto para la web interactiva que conocemos hoy. ¿Cómo podría una red social mostrarte tus notificaciones? ¿Cómo sabría una tienda online qué productos poner en tu carrito?</p>
+<figure>
+<img alt="" src="../../images/05.png" width="80%"/>
+</figure>
+<p>Aquí es donde entra en juego la <strong>generación dinámica</strong>. En lugar de enviar un archivo HTML pre-escrito, el servidor actúa como una fábrica que <strong>construye la página en tiempo real</strong>, justo en el momento en que el usuario la solicita. Utilizando un lenguaje de backend, el servidor puede ejecutar lógica, consultar bases de datos, comprobar la hora, leer la información del usuario y, en base a todos esos factores, ensamblar un documento HTML único y personalizado para esa petición específica.</p>
+<p>Gracias a este proceso, podemos crear aplicaciones que:</p>
+<ul>
+<li>Muestran un saludo personalizado con el nombre del usuario.</li>
+<li>Presentan la fecha y hora actual.</li>
+<li>Extraen las últimas noticias de una base de datos y las muestran en la portada.</li>
+<li>Calculan y muestran los resultados de una búsqueda.</li>
+</ul>
+<p>En esencia, la generación dinámica es el proceso de usar código de servidor para "escribir" el HTML que se enviará al cliente. Existen muchas técnicas y arquitecturas para lograrlo, pero nuestro viaje comenzará con el método más fundamental e histórico: el código embebido.</p>
+<h2 id="mecanismos-de-ejecucion-de-codigo-en-servidores">Mecanismos de ejecución de código en servidores</h2>
+<p>Un <strong>mecanismo de ejecución de código</strong> en un servidor web es la estrategia o tecnología que utiliza el servidor (como Apache o Nginx) para procesar un fichero que contiene código de programación (como un script <code>.php</code> o <code>.py</code>) en lugar de simplemente servirlo como un fichero de texto estático.</p>
+<p>El servidor web, por sí mismo, solo sabe entregar archivos. Cuando recibe una petición para un fichero ejecutable, necesita un "puente" para pasarle ese fichero a un intérprete o motor que sí sepa cómo ejecutar el código. El resultado de esa ejecución (normalmente HTML) es lo que se envía de vuelta al cliente.</p>
+<hr/>
+<h3 id="mecanismos-principales-de-ejecucion">Mecanismos Principales de Ejecución</h3>
+<p>Existen varias formas de establecer este "puente", cada una con sus propias ventajas en cuanto a rendimiento, escalabilidad y aislamiento.</p>
+<h4 id="1-cgi-common-gateway-interface">1. CGI (Common Gateway Interface)</h4>
+<p>Es el estándar original y más simple. Por <strong>cada petición</strong> que llega, el servidor web inicia un <strong>proceso del sistema operativo completamente nuevo</strong>, ejecuta el script dentro de él, captura la salida que genera el script (<code>stdout</code>), y finalmente <strong>destruye el proceso</strong>.</p>
+<figure>
+<img alt="" src="../../images/15.png" width="100%"/>
+</figure>
+<ul>
+<li><strong>Ventaja:</strong> Universal y simple de entender. Funciona con casi cualquier lenguaje.</li>
+<li><strong>Desventaja:</strong> Extremadamente lento e ineficiente. El coste de crear y destruir un proceso para cada visita es muy alto, lo que lo hace inviable para sitios con tráfico. Hoy en día se considera obsoleto.</li>
+</ul>
+<hr/>
+<h4 id="2-fastcgi">2. FastCGI</h4>
+<p>Es la evolución de CGI y soluciona su principal problema de rendimiento. En este modelo, un gestor de procesos independiente (como PHP-FPM) mantiene un <strong>conjunto de procesos ("pool") siempre activos</strong> y listos para trabajar. El servidor web simplemente reenvía las peticiones a uno de estos procesos ya existentes a través de un socket.</p>
+<figure>
+<img alt="" src="../../images/16.png" width="100%"/>
+</figure>
+<ul>
+<li><strong>Ventaja:</strong> Alto rendimiento al eliminar la creación constante de procesos. Buen aislamiento, ya que la aplicación se ejecuta de forma separada al servidor web.</li>
+<li><strong>Desventaja:</strong> Configuración ligeramente más compleja que los módulos embebidos.</li>
+<li><strong>Uso:</strong> Es el estándar de facto en arquitecturas modernas, especialmente con Nginx.</li>
+</ul>
+<hr/>
+<h4 id="3-modulo-embebido">3. Módulo Embebido</h4>
+<p>En esta arquitectura, el intérprete del lenguaje se carga <strong>directamente dentro del proceso del servidor web</strong> como un módulo. El ejemplo más clásico es <strong><code>mod_php</code></strong> para Apache. Cuando llega una petición, el propio proceso de Apache, que ya "habla" PHP, ejecuta el código directamente.</p>
+<figure>
+<img alt="" src="../../images/17.png" width="100%"/>
+</figure>
+<ul>
+<li><strong>Ventaja:</strong> Velocidad máxima, ya que no hay comunicación entre procesos externos.</li>
+<li><strong>Desventaja:</strong> Menor aislamiento (un error en el script puede afectar la estabilidad del proceso del servidor) y mayor consumo de memoria por parte del servidor web.</li>
+</ul>
+<hr/>
+<h4 id="tabla-comparativa">Tabla Comparativa</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Mecanismo</th>
+<th style="text-align: left;">Cómo Funciona</th>
+<th style="text-align: left;">Ventaja Principal</th>
+<th style="text-align: left;">Desventaja Principal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>CGI</strong></td>
+<td style="text-align: left;">Crea un proceso nuevo por cada petición.</td>
+<td style="text-align: left;">Universal</td>
+<td style="text-align: left;">Muy lento y obsoleto.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>FastCGI</strong></td>
+<td style="text-align: left;">Reutiliza un pool de procesos persistentes.</td>
+<td style="text-align: left;">Alto rendimiento y buen aislamiento.</td>
+<td style="text-align: left;">Configuración intermedia.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Módulo Embebido</strong></td>
+<td style="text-align: left;">El intérprete se carga dentro del servidor web.</td>
+<td style="text-align: left;">Máxima velocidad (sin IPC).</td>
+<td style="text-align: left;">Menor aislamiento, más memoria.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="servidor-de-aplicaciones">Servidor de Aplicaciones</h2>
+<p>Para las aplicaciones a gran escala y de nivel empresarial, a menudo se necesita más que una simple ejecución de código. Se requiere un entorno robusto que gestione recursos, seguridad y transacciones de manera centralizada. Este entorno es el <strong>servidor de aplicaciones</strong>.</p>
+<p>Un entorno compuesto por un servidor web y un intérprete de lenguaje, comunicándose a través de mecanismos eficientes como FastCGI o módulos embebidos, es ciertamente muy eficaz para su propósito fundamental: ejecutar un script y generar una respuesta. Sin embargo, el desarrollo de aplicaciones robustas, escalables y seguras implica resolver desafíos que trascienden este simple ciclo de petición-respuesta. A medida que las aplicaciones crecen en complejidad, emergen una serie de necesidades críticas a nivel de infraestructura que un simple intérprete de scripts no está diseñado para resolver. Es en este punto donde debemos preguntarnos por las capacidades que rodean a la ejecución del código.</p>
+<figure>
+<img alt="" src="../../images/07.png" width="100%"/>
+</figure>
+<p>La primera de estas grandes cuestiones es la <strong>gestión eficiente de los recursos</strong>, particularmente las conexiones a la base de datos. Establecer una conexión con un sistema gestor de bases de datos es una operación costosa en términos de tiempo y recursos computacionales. En un modelo simple, cada script que necesita datos podría abrir su propia conexión, realizar la consulta y luego cerrarla. Si bien esto funciona para un tráfico bajo, resulta desastroso a escala. Con cientos o miles de peticiones concurrentes, este ciclo constante de abrir y cerrar conexiones puede agotar los recursos del servidor de base de datos, provocando cuellos de botella y una degradación severa del rendimiento de toda la aplicación.</p>
+<p>Otro desafío fundamental es garantizar la <strong>integridad de los datos a través de operaciones complejas</strong>. Pensemos en una transacción de comercio electrónico: el proceso implica verificar el stock de un producto, reducirlo, autorizar el pago del cliente y finalmente registrar el pedido. Estos pasos deben ocurrir como una unidad atómica, indivisible; o se completan todos con éxito, o no se completa ninguno. Si el sistema reduce el stock pero el pago falla, los datos quedan en un estado inconsistente y corrupto. Asegurar este comportamiento de "todo o nada", conocido como <strong>transaccionalidad</strong>, es una tarea compleja que escapa a la responsabilidad de un simple script. Se necesita una capa de gestión que pueda supervisar la operación completa y revertir los cambios si algo sale mal.</p>
+<p>Finalmente, consideremos la <strong>gestión de la seguridad</strong>. En una arquitectura simple, es común que la lógica de autorización se mezcle directamente con la lógica de negocio, resultando en incontables comprobaciones de permisos diseminadas por todo el código fuente. Este enfoque no solo es repetitivo y propenso a errores, sino que también es increíblemente difícil de mantener y auditar. La necesidad real es un modelo de seguridad declarativo, donde las reglas de acceso se definan en una ubicación centralizada y sean aplicadas de forma automática por el propio entorno de ejecución, liberando al programador de la responsabilidad de implementar la seguridad en cada punto de la aplicación.</p>
+<p>Es precisamente para dar una solución integral a estos problemas de gestión de recursos, transaccionalidad y seguridad centralizada que nace el concepto de <strong>servidor de aplicaciones</strong>. Este software no es un mero ejecutor de código, sino un entorno de ejecución gestionado y robusto que provee un conjunto de servicios de infraestructura de alto nivel, permitiendo a los desarrolladores centrarse en la lógica de negocio en lugar de tener que reinventar estas complejas soluciones para cada nuevo proyecto.</p>
+<hr/>
+<h3 id="el-proxy-inverso">El Proxy Inverso</h3>
+<p>La forma estándar de integrar un servidor de aplicaciones en un entorno de producción es a través del patrón de <strong>proxy inverso</strong>. Esta arquitectura desacoplada es un pilar del software moderno. El <strong>servidor web</strong> (p. ej., Nginx) se posiciona en el borde de la red (<code>edge server</code>), siendo la única pieza que recibe tráfico directamente de los usuarios. Sus responsabilidades se especializan en gestionar y terminar las conexiones seguras (HTTPS), servir todo el <strong>contenido estático</strong> (imágenes, CSS, JavaScript) de forma extremadamente rápida, y actuar como <strong>balanceador de carga</strong>, distribuyendo las peticiones dinámicas entre varias instancias del servidor de aplicaciones para mejorar la escalabilidad.</p>
+<figure>
+<img alt="" src="../../images/06.png" width="100%"/>
+</figure>
+<p>Detrás de esta primera línea, en una red interna y protegida, se encuentra el <strong>servidor de aplicaciones</strong> (p. ej., <strong>Apache Tomcat</strong>, Gunicorn). Su única responsabilidad es recibir las peticiones de negocio que le reenvía el servidor web, ejecutar la lógica de la aplicación y devolver el resultado. Esta separación total de responsabilidades permite que cada componente se especialice en lo que mejor sabe hacer, mejorando el rendimiento, la seguridad y la escalabilidad del sistema en su conjunto.</p>
+<hr/>
+<h3 id="servlets-y-contenedores">Servlets y Contenedores</h3>
+<p>Para materializar el concepto abstracto de "servidor de aplicaciones", podemos examinar su implementación más extendida en el ecosistema de Java: el <strong>Contenedor de Servlets</strong>. Si en la arquitectura de proxy inverso el servidor de aplicaciones es el motor del backend, los <strong>Servlets</strong> son los componentes específicos que ejecutan la lógica.</p>
+<p>A diferencia de un fichero <code>.php</code>, un <strong>Servlet</strong> es una <strong>clase de Java</strong> diseñada específicamente para procesar peticiones y respuestas HTTP. Aquí es donde el papel del servidor de aplicaciones, como <strong>Tomcat</strong>, se vuelve fundamental y se gana el título de "Contenedor", ya que es responsable de gestionar todo el <strong>ciclo de vida</strong> de estos componentes.</p>
+<figure>
+<img alt="" src="../../images/08.png" width="100%"/>
+</figure>
+<p>En contraste con el modelo de un script por petición, el contenedor carga la clase del Servlet y crea una <strong>única instancia</strong> (<code>singleton</code>) la primera vez que se solicita. Para cada petición subsiguiente, el contenedor no crea nada nuevo; en su lugar, asigna un <strong>hilo de ejecución (<code>thread</code>)</strong> que invoca un método (p. ej., <code>doGet()</code> o <code>doPost()</code>) en esa única instancia compartida. Este modelo multi-hilo es la razón de su alta eficiencia en el uso de memoria. El contenedor se encarga de todo el ciclo: llama al método <code>init()</code> en la creación, al método <code>service()</code> para cada petición, y finalmente al método <code>destroy()</code> cuando la aplicación se detiene. Este modelo de gestión del ciclo de vida de componentes es una de las diferencias arquitectónicas clave y uno de los servicios de valor añadido que distinguen a un servidor de aplicaciones de un simple intérprete de scripts.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Manuel Sánchez Gomis
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["search.suggest", "search.highlight", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "content.code.copy", "content.tabs.link", "content.tooltips"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../../assets/_markdown_exec_pyodide.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../../_static/js/notebook.js"></script>
+      
+    
+  </body>
+</html>

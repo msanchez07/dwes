@@ -1,0 +1,3163 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Manuel Sánchez Gomis">
+      
+      
+      
+        <link rel="prev" href="../09%20-%20servicios/">
+      
+      
+        <link rel="next" href="../11%20-%20inyeccion_dependencias/">
+      
+      
+      <link rel="icon" href="../../../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.46">
+    
+    
+      
+        <title>Seguridad en Laravel - Desarrollo Web en entorno servidor</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/_markdown_exec_pyodide.css">
+    
+      <link rel="stylesheet" href="../../../_static/css/notebook.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#seguridad-en-laravel" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Desarrollo Web en entorno servidor" class="md-header__button md-logo" aria-label="Desarrollo Web en entorno servidor" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Desarrollo Web en entorno servidor
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Seguridad en Laravel
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber"  aria-label="Cambiar a modo brillante"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo brillante" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="amber"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Bienvenido
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../introduccion/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Introduccion
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../php/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Php
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../aplicaciones_web/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Aplicaciones Web con Php
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Laravel
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../servicios_web/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Servicios Web
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../webs_dinamicas/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Webs Dinámicas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../aplicaciones_web_hibridas/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Aplicaciones Web Híbridas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../bibliografia/" class="md-tabs__link">
+        
+  
+    
+  
+  Bibliografia
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Desarrollo Web en entorno servidor" class="md-nav__button md-logo" aria-label="Desarrollo Web en entorno servidor" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    Desarrollo Web en entorno servidor
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bienvenido
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Introduccion
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Introduccion
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../introduccion/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Conceptos básicos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../introduccion/markdowns/02%20-%20lenguajes_programacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lenguajes de programación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../introduccion/markdowns/03%20-%20herramientas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Herramientas y frameworks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Php
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Php
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/02%20-%20primeros_pasos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primeros pasos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/03%20-%20estructuras_control/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Estructuras de Control en PHP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/04%20-%20arrays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Arrays
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/05%20-%20funciones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Funciones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/06%20-%20poo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Programación orientada a objetos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/07%20-%20excepciones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Excepciones y errores
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/08%20-%20directivas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Directivas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/09%20-%20codigo_embebido/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Código embebido
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Aplicaciones Web con Php
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Aplicaciones Web con Php
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/02%20-%20formularios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Formularios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/03%20-%20sesiones_cookies/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cookies y Sesiones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/04%20-%20seguridad/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Seguridad
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/05%20-%20ficheros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ficheros
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/06%20-%20bases_datos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bases de datos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/07%20-%20estructura_proyecto/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Organizando el código
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/98%20-%20ejercicios_persistencia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios persistencia
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Laravel
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Laravel
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02%20-%20instalacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instalación y primeros pasos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03%20-%20rutas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rutas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04%20-%20controladores/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Controladores
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05%20-%20vistas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vistas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06%20-%20formularios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Formularios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07%20-%20modelos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modelos de Eloquent
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14%20-%20response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Respuestas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08%20-%20cookies_sesiones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cookies y Sesiones en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09%20-%20servicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Servicios en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Seguridad en Laravel
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Seguridad en Laravel
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#autenticacion-estableciendo-la-identidad-del-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      Autenticación: Estableciendo la Identidad del Usuario
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Autenticación: Estableciendo la Identidad del Usuario">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuracion-basica-y-starter-kits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración Básica y Starter Kits
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración Básica y Starter Kits">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#los-starter-kits-la-via-rapida" class="md-nav__link">
+    <span class="md-ellipsis">
+      Los Starter Kits (La Vía Rápida)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-modelo-de-persistencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Modelo de Persistencia
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autenticacion-manual" class="md-nav__link">
+    <span class="md-ellipsis">
+      Autenticación Manual
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recuperando-el-usuario-autenticado" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recuperando el Usuario Autenticado
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Recuperando el Usuario Autenticado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-via-fachada-o-helper-contexto-global" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Vía Fachada o Helper (Contexto Global)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-via-request-contexto-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Vía Request (Contexto HTTP)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-en-plantillas-blade-contexto-de-vista" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. En Plantillas Blade (Contexto de Vista)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autorizacion-definiendo-lo-que-un-usuario-puede-hacer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Autorización: Definiendo lo que un Usuario Puede Hacer
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Autorización: Definiendo lo que un Usuario Puede Hacer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gates-puertas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gates (Puertas)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#policies-politicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Policies (Políticas)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roles-integrando-permisos-basados-en-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Roles: Integrando Permisos Basados en Roles
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Roles: Integrando Permisos Basados en Roles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementacion-de-roles-ejemplo-simple" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementación de Roles (Ejemplo Simple)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-de-roles-en-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uso de Roles en Gates
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-de-roles-en-policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uso de Roles en Policies
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11%20-%20inyeccion_dependencias/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inyección de Dependencias en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12%20-%20testing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pruebas y documentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13%20-%20fechas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fechas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15%20-%20migrations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Migraciones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Servicios Web
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Servicios Web
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/02%20-%20tecnologias/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tecnologías y Estándares
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/03%20-%20creando_servicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creando un Servicio Web
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/04%20-%20probando_servicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Probando el Servicio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/05%20-%20documentando_servicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Documentando un Servicio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Webs Dinámicas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Webs Dinámicas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/02%20-%20ajax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AJAX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/03%20-%20validacion_formularios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Validación de Formularios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/04%20-%20modificacion_dom/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modificación del DOM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/05%20-%20async_patrones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Patrones Async
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Aplicaciones Web Híbridas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Aplicaciones Web Híbridas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/02%20-%20apis_terceros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    APIs de Terceros
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/03%20-%20creando_apis_propias/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creando APIs Propias
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/04%20-%20sdks_frameworks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SDKs y Frameworks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/05%20-%20big_data_ia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Big Data e IA
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/06%20-%20testing_depuracion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Testing y Depuración
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/07%20-%20autenticacion_apis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Autenticación de APIs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/08%20-%20versionado_webhooks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Versionado y Webhooks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../bibliografia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bibliografia
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#autenticacion-estableciendo-la-identidad-del-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      Autenticación: Estableciendo la Identidad del Usuario
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Autenticación: Estableciendo la Identidad del Usuario">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuracion-basica-y-starter-kits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración Básica y Starter Kits
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración Básica y Starter Kits">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#los-starter-kits-la-via-rapida" class="md-nav__link">
+    <span class="md-ellipsis">
+      Los Starter Kits (La Vía Rápida)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-modelo-de-persistencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Modelo de Persistencia
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autenticacion-manual" class="md-nav__link">
+    <span class="md-ellipsis">
+      Autenticación Manual
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recuperando-el-usuario-autenticado" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recuperando el Usuario Autenticado
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Recuperando el Usuario Autenticado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-via-fachada-o-helper-contexto-global" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Vía Fachada o Helper (Contexto Global)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-via-request-contexto-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Vía Request (Contexto HTTP)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-en-plantillas-blade-contexto-de-vista" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. En Plantillas Blade (Contexto de Vista)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autorizacion-definiendo-lo-que-un-usuario-puede-hacer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Autorización: Definiendo lo que un Usuario Puede Hacer
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Autorización: Definiendo lo que un Usuario Puede Hacer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gates-puertas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gates (Puertas)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#policies-politicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Policies (Políticas)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roles-integrando-permisos-basados-en-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Roles: Integrando Permisos Basados en Roles
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Roles: Integrando Permisos Basados en Roles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementacion-de-roles-ejemplo-simple" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementación de Roles (Ejemplo Simple)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-de-roles-en-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uso de Roles en Gates
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-de-roles-en-policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uso de Roles en Policies
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="seguridad-en-laravel">Seguridad en Laravel</h1>
+<p>En nuestro capítulo anterior sobre seguridad en PHP, nos sumergimos en las profundidades de la implementación manual. Vimos que, si bien es posible construir mecanismos de defensa con PHP puro, la carga que recae sobre el desarrollador es inmensa y el margen de error, peligrosamente pequeño. Tuvimos que gestionar directamente el array superglobal <code>$_SESSION</code>, asegurándonos de iniciar y destruir sesiones correctamente. Nos enfrentamos a la responsabilidad de hashear y verificar contraseñas usando <code>password_hash()</code> y <code>password_verify()</code>, y de construir nuestra propia lógica repetitiva en cada página para comprobar si un usuario tenía permiso para acceder. Cada paso era un recordatorio de que un pequeño descuido podía abrir una brecha de seguridad en toda la aplicación. Este enfoque, aunque educativo, no es escalable ni sostenible para proyectos profesionales complejos.</p>
+<p>Aquí es donde un framework como Laravel no solo brilla, sino que se convierte en una herramienta indispensable. Laravel no introduce conceptos de seguridad nuevos; en su lugar, toma los mismos principios fundamentales (hashing, gestión de sesiones, control de acceso) y los envuelve en una arquitectura robusta, probada en batalla por miles de desarrolladores, y presentada a través de una API elegante y expresiva. Este apartado explorará cómo Laravel nos libera de la peligrosa carga del trabajo manual, permitiéndonos definir políticas de seguridad complejas de una manera que es a la vez más segura, más legible y infinitamente más fácil de mantener. Pasamos de construir cada cerradura a mano a tener a nuestra disposición un maestro cerrajero.</p>
+<h2 id="autenticacion-estableciendo-la-identidad-del-usuario">Autenticación: Estableciendo la Identidad del Usuario</h2>
+<p>Tras haber analizado la complejidad y los riesgos inherentes a la gestión manual de seguridad en PHP nativo, Laravel nos ofrece un cambio de paradigma mediante la abstracción.</p>
+<p>En este contexto, definimos la <strong>Autenticación</strong> como el mecanismo encargado estrictamente de verificar la identidad de un usuario. Su función es validar las credenciales presentadas para responder a una única pregunta técnica: <strong>"¿Quién eres?"</strong>.</p>
+<p>A diferencia del enfoque manual, donde el desarrollador es responsable de la criptografía y la gestión del estado, Laravel encapsula estos procesos en una arquitectura robusta y probada. El framework gestiona automáticamente el ciclo de vida de la sesión, el hashing seguro de contraseñas y la protección contra vulnerabilidades comunes (como la fijación de sesión), permitiéndonos implementar sistemas de acceso seguros y escalables casi "fuera de la caja", sin la necesidad de escribir la infraestructura de seguridad desde cero.</p>
+<hr/>
+<h3 id="configuracion-basica-y-starter-kits">Configuración Básica y Starter Kits</h3>
+<p>Aunque el núcleo de autenticación de Laravel (<code>Auth</code>) ya está integrado en el framework, una aplicación web necesita una interfaz visual: formularios de login, registro, recuperación de contraseña, etc. Laravel no impone un diseño específico por defecto, pero ofrece soluciones de "andamiaje" (<em>scaffolding</em>) para acelerar el desarrollo.</p>
+<p>Tenemos dos caminos principales: utilizar los <strong>Starter Kits</strong> oficiales o construir la interfaz manualmente.</p>
+<h4 id="los-starter-kits-la-via-rapida">Los Starter Kits (La Vía Rápida)</h4>
+<p>Estos paquetes generan automáticamente todas las rutas, controladores y vistas necesarias para un sistema de autenticación completo y seguro. Son la recomendación estándar para proyectos nuevos, ya que eliminan horas de configuración repetitiva.</p>
+<ul>
+<li>
+<p><strong>Laravel Breeze (Minimalismo):</strong>
+    Es la implementación más ligera y sencilla. Proporciona un punto de partida limpio con todas las funciones básicas de autenticación.</p>
+<ul>
+<li><em>Stack Tecnológico:</em> Utiliza <strong>Blade</strong> y <strong>Tailwind CSS</strong> por defecto, lo que facilita su personalización si ya conoces el motor de plantillas de Laravel.</li>
+<li><em>Versiones Modernas:</em> Recientemente, Breeze también ofrece versiones "Headless" preconfiguradas para <strong>React</strong> y <strong>Vue</strong> (usando Inertia.js) e incluso versiones para APIs.</li>
+<li><em>Uso recomendado:</em> Proyectos que requieren una autenticación estándar y que planean personalizar mucho el diseño o crecer orgánicamente.</li>
+</ul>
+</li>
+<li>
+<p><strong>Laravel Jetstream (Ecosistema Completo):</strong>
+    Es un kit de diseño de aplicaciones mucho más robusto y opinado. No solo incluye autenticación, sino también funcionalidades de nivel empresarial listas para usar: autenticación de dos factores (2FA), gestión de sesiones de navegador, gestión de equipos (Teams) y soporte para API Tokens (Sanctum).</p>
+<ul>
+<li><em>Stack Tecnológico:</em> Te obliga a elegir entre <strong>Livewire</strong> (para amantes de Blade) o <strong>Inertia.js</strong> (para amantes de Vue.js).</li>
+<li><em>Uso recomendado:</em> Aplicaciones SaaS (Software as a Service) o proyectos complejos que necesitan estas características avanzadas desde el día uno.</li>
+</ul>
+</li>
+</ul>
+<hr/>
+<h3 id="el-modelo-de-persistencia">El Modelo de Persistencia</h3>
+<p>Independientemente de si usas un kit o lo haces a mano, la configuración predeterminada de Laravel asume una estructura de base de datos estándar.</p>
+<p>El framework incluye de fábrica un modelo <code>App\Models\User</code> y una migración de base de datos (<code>create_users_table</code>) que define la estructura de la tabla <code>users</code>. Esta tabla contiene los campos esenciales como <code>email</code>, <code>password</code> (que almacenará el hash, nunca el texto plano) y <code>remember_token</code> (para la funcionalidad "Recordarme").</p>
+<p>Esta estandarización permite que el sistema de autenticación funcione inmediatamente después de ejecutar las migraciones (<code>php artisan migrate</code>), sin necesidad de configuración adicional.</p>
+<hr/>
+<h3 id="autenticacion-manual">Autenticación Manual</h3>
+<p>Aunque los <em>Starter Kits</em> aceleran el desarrollo inicial, comprender la implementación manual a través de la fachada <code>Auth</code> es indispensable para cualquier aplicación que requiera flujos personalizados (como login con API externa, login social, o validaciones condicionales complejas).</p>
+<p>Laravel simplifica este proceso reduciendo la verificación de credenciales a una sola línea de código, abstraída detrás de métodos seguros.</p>
+<p>El método <code>Auth::attempt</code> es la puerta de entrada estándar. Acepta un array de pares clave/valor como primer argumento.</p>
+<p>¿Qué ocurre internamente? Cuando ejecutas este método, Laravel realiza tres pasos de seguridad:</p>
+<ol>
+<li><strong>Búsqueda:</strong> Busca al usuario en la base de datos usando los campos que <strong>no</strong> son la contraseña (normalmente <code>email</code>).</li>
+<li><strong>Verificación Criptográfica:</strong> Si encuentra al usuario, toma la contraseña proporcionada en el formulario (texto plano), la somete al algoritmo de hashing configurado (Bcrypt/Argon2) y compara el resultado con el hash almacenado en la base de datos.</li>
+<li><strong>Persistencia:</strong> Si los hashes coinciden, inicia una sesión autenticada para ese usuario.</li>
+</ol>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>    <span class="k">namespace</span> <span class="nx">App\Http\Controllers</span><span class="p">;</span>
+</span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a>    <span class="k">use</span> <span class="nx">Illuminate\Http\Request</span><span class="p">;</span>
+</span><span id="__span-0-5"><a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a>    <span class="k">use</span> <span class="nx">Illuminate\Support\Facades\Auth</span><span class="p">;</span>
+</span><span id="__span-0-6"><a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a>    <span class="k">class</span> <span class="nc">LoginController</span> <span class="k">extends</span> <span class="nx">Controller</span>
+</span><span id="__span-0-8"><a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a>    <span class="p">{</span>
+</span><span id="__span-0-9"><a href="#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a>        <span class="k">public</span> <span class="k">function</span> <span class="nf">authenticate</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+</span><span id="__span-0-10"><a href="#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a>        <span class="p">{</span>
+</span><span id="__span-0-11"><a href="#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a>            <span class="nv">$credentials</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">([</span>
+</span><span id="__span-0-12"><a href="#__codelineno-0-12" id="__codelineno-0-12" name="__codelineno-0-12"></a>                <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'required'</span><span class="p">,</span> <span class="s1">'email'</span><span class="p">],</span>
+</span><span id="__span-0-13"><a href="#__codelineno-0-13" id="__codelineno-0-13" name="__codelineno-0-13"></a>                <span class="s1">'password'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'required'</span><span class="p">],</span>
+</span><span id="__span-0-14"><a href="#__codelineno-0-14" id="__codelineno-0-14" name="__codelineno-0-14"></a>            <span class="p">]);</span>
+</span><span id="__span-0-15"><a href="#__codelineno-0-15" id="__codelineno-0-15" name="__codelineno-0-15"></a>
+</span><span id="__span-0-16"><a href="#__codelineno-0-16" id="__codelineno-0-16" name="__codelineno-0-16"></a>            <span class="c1">// El segundo parámetro (true/false) controla la cookie "Recordarme"</span>
+</span><span id="__span-0-17"><a href="#__codelineno-0-17" id="__codelineno-0-17" name="__codelineno-0-17"></a>            <span class="nv">$remember</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">boolean</span><span class="p">(</span><span class="s1">'remember'</span><span class="p">);</span>
+</span><span id="__span-0-18"><a href="#__codelineno-0-18" id="__codelineno-0-18" name="__codelineno-0-18"></a>
+</span><span id="__span-0-19"><a href="#__codelineno-0-19" id="__codelineno-0-19" name="__codelineno-0-19"></a>            <span class="k">if</span> <span class="p">(</span><span class="nx">Auth</span><span class="o">::</span><span class="na">attempt</span><span class="p">(</span><span class="nv">$credentials</span><span class="p">,</span> <span class="nv">$remember</span><span class="p">))</span> <span class="p">{</span>
+</span><span id="__span-0-20"><a href="#__codelineno-0-20" id="__codelineno-0-20" name="__codelineno-0-20"></a>
+</span><span id="__span-0-21"><a href="#__codelineno-0-21" id="__codelineno-0-21" name="__codelineno-0-21"></a>                <span class="c1">// CRÍTICO: Prevención de "Session Fixation"</span>
+</span><span id="__span-0-22"><a href="#__codelineno-0-22" id="__codelineno-0-22" name="__codelineno-0-22"></a>                <span class="c1">// Regeneramos el ID de sesión tras el login para invalidar</span>
+</span><span id="__span-0-23"><a href="#__codelineno-0-23" id="__codelineno-0-23" name="__codelineno-0-23"></a>                <span class="c1">// cualquier ID que un atacante pudiera haber interceptado antes.</span>
+</span><span id="__span-0-24"><a href="#__codelineno-0-24" id="__codelineno-0-24" name="__codelineno-0-24"></a>                <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">session</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">regenerate</span><span class="p">();</span>
+</span><span id="__span-0-25"><a href="#__codelineno-0-25" id="__codelineno-0-25" name="__codelineno-0-25"></a>
+</span><span id="__span-0-26"><a href="#__codelineno-0-26" id="__codelineno-0-26" name="__codelineno-0-26"></a>                <span class="c1">// Redirección Inteligente</span>
+</span><span id="__span-0-27"><a href="#__codelineno-0-27" id="__codelineno-0-27" name="__codelineno-0-27"></a>                <span class="c1">// 'intended' redirige al usuario a la URL que intentaba visitar</span>
+</span><span id="__span-0-28"><a href="#__codelineno-0-28" id="__codelineno-0-28" name="__codelineno-0-28"></a>                <span class="c1">// antes de ser interceptado por el middleware de autenticación.</span>
+</span><span id="__span-0-29"><a href="#__codelineno-0-29" id="__codelineno-0-29" name="__codelineno-0-29"></a>                <span class="k">return</span> <span class="nx">redirect</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">intended</span><span class="p">(</span><span class="s1">'/dashboard'</span><span class="p">);</span>
+</span><span id="__span-0-30"><a href="#__codelineno-0-30" id="__codelineno-0-30" name="__codelineno-0-30"></a>            <span class="p">}</span>
+</span><span id="__span-0-31"><a href="#__codelineno-0-31" id="__codelineno-0-31" name="__codelineno-0-31"></a>
+</span><span id="__span-0-32"><a href="#__codelineno-0-32" id="__codelineno-0-32" name="__codelineno-0-32"></a>            <span class="c1">// Si falla, volvemos atrás con un error genérico (por seguridad)</span>
+</span><span id="__span-0-33"><a href="#__codelineno-0-33" id="__codelineno-0-33" name="__codelineno-0-33"></a>            <span class="c1">// y devolvemos el email para no obligar a reescribirlo.</span>
+</span><span id="__span-0-34"><a href="#__codelineno-0-34" id="__codelineno-0-34" name="__codelineno-0-34"></a>            <span class="k">return</span> <span class="nx">back</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">withErrors</span><span class="p">([</span>
+</span><span id="__span-0-35"><a href="#__codelineno-0-35" id="__codelineno-0-35" name="__codelineno-0-35"></a>                <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="s1">'Las credenciales no coinciden con nuestros registros.'</span><span class="p">,</span>
+</span><span id="__span-0-36"><a href="#__codelineno-0-36" id="__codelineno-0-36" name="__codelineno-0-36"></a>            <span class="p">])</span><span class="o">-&gt;</span><span class="na">onlyInput</span><span class="p">(</span><span class="s1">'email'</span><span class="p">);</span>
+</span><span id="__span-0-37"><a href="#__codelineno-0-37" id="__codelineno-0-37" name="__codelineno-0-37"></a>        <span class="p">}</span>
+</span><span id="__span-0-38"><a href="#__codelineno-0-38" id="__codelineno-0-38" name="__codelineno-0-38"></a>    <span class="p">}</span>
+</span><span id="__span-0-39"><a href="#__codelineno-0-39" id="__codelineno-0-39" name="__codelineno-0-39"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<p>Existen escenarios donde ya tenemos la instancia del usuario y confiamos en su identidad, por lo que no necesitamos verificar una contraseña. El caso de uso más común es el <strong>Registro de Usuarios</strong>: una vez que el usuario crea su cuenta exitosamente, queremos que quede logueado automáticamente para reducir la fricción, sin pedirle que ingrese sus credenciales nuevamente.</p>
+<p>Para esto utilizamos <code>Auth::login($user)</code>, que recibe una instancia de un modelo Eloquent.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>    <span class="k">use</span> <span class="nx">App\Models\User</span><span class="p">;</span>
+</span><span id="__span-1-3"><a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>    <span class="k">use</span> <span class="nx">Illuminate\Support\Facades\Auth</span><span class="p">;</span>
+</span><span id="__span-1-4"><a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a>    <span class="k">use</span> <span class="nx">Illuminate\Support\Facades\Hash</span><span class="p">;</span>
+</span><span id="__span-1-5"><a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a>
+</span><span id="__span-1-6"><a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">register</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+</span><span id="__span-1-7"><a href="#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a>    <span class="p">{</span>
+</span><span id="__span-1-8"><a href="#__codelineno-1-8" id="__codelineno-1-8" name="__codelineno-1-8"></a>        <span class="c1">// 1. Validación</span>
+</span><span id="__span-1-9"><a href="#__codelineno-1-9" id="__codelineno-1-9" name="__codelineno-1-9"></a>        <span class="nv">$validated</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">([</span><span class="cm">/* ... */</span><span class="p">]);</span>
+</span><span id="__span-1-10"><a href="#__codelineno-1-10" id="__codelineno-1-10" name="__codelineno-1-10"></a>
+</span><span id="__span-1-11"><a href="#__codelineno-1-11" id="__codelineno-1-11" name="__codelineno-1-11"></a>        <span class="c1">// 2. Creación del Usuario</span>
+</span><span id="__span-1-12"><a href="#__codelineno-1-12" id="__codelineno-1-12" name="__codelineno-1-12"></a>        <span class="c1">// Nota: Es responsabilidad nuestra hashear la contraseña aquí.</span>
+</span><span id="__span-1-13"><a href="#__codelineno-1-13" id="__codelineno-1-13" name="__codelineno-1-13"></a>        <span class="nv">$user</span> <span class="o">=</span> <span class="nx">User</span><span class="o">::</span><span class="na">create</span><span class="p">([</span>
+</span><span id="__span-1-14"><a href="#__codelineno-1-14" id="__codelineno-1-14" name="__codelineno-1-14"></a>            <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="nv">$validated</span><span class="p">[</span><span class="s1">'name'</span><span class="p">],</span>
+</span><span id="__span-1-15"><a href="#__codelineno-1-15" id="__codelineno-1-15" name="__codelineno-1-15"></a>            <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="nv">$validated</span><span class="p">[</span><span class="s1">'email'</span><span class="p">],</span>
+</span><span id="__span-1-16"><a href="#__codelineno-1-16" id="__codelineno-1-16" name="__codelineno-1-16"></a>            <span class="s1">'password'</span> <span class="o">=&gt;</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="nv">$validated</span><span class="p">[</span><span class="s1">'password'</span><span class="p">]),</span>
+</span><span id="__span-1-17"><a href="#__codelineno-1-17" id="__codelineno-1-17" name="__codelineno-1-17"></a>        <span class="p">]);</span>
+</span><span id="__span-1-18"><a href="#__codelineno-1-18" id="__codelineno-1-18" name="__codelineno-1-18"></a>
+</span><span id="__span-1-19"><a href="#__codelineno-1-19" id="__codelineno-1-19" name="__codelineno-1-19"></a>        <span class="c1">// 3. Autenticación Inmediata ("Login sin contraseña")</span>
+</span><span id="__span-1-20"><a href="#__codelineno-1-20" id="__codelineno-1-20" name="__codelineno-1-20"></a>        <span class="c1">// El usuario entra al sistema directamente.</span>
+</span><span id="__span-1-21"><a href="#__codelineno-1-21" id="__codelineno-1-21" name="__codelineno-1-21"></a>        <span class="nx">Auth</span><span class="o">::</span><span class="na">login</span><span class="p">(</span><span class="nv">$user</span><span class="p">);</span>
+</span><span id="__span-1-22"><a href="#__codelineno-1-22" id="__codelineno-1-22" name="__codelineno-1-22"></a>
+</span><span id="__span-1-23"><a href="#__codelineno-1-23" id="__codelineno-1-23" name="__codelineno-1-23"></a>        <span class="k">return</span> <span class="nx">redirect</span><span class="p">(</span><span class="s1">'/home'</span><span class="p">);</span>
+</span><span id="__span-1-24"><a href="#__codelineno-1-24" id="__codelineno-1-24" name="__codelineno-1-24"></a>    <span class="p">}</span>
+</span><span id="__span-1-25"><a href="#__codelineno-1-25" id="__codelineno-1-25" name="__codelineno-1-25"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<p>Además de las acciones de inicio de sesión, la fachada <code>Auth</code> nos proporciona herramientas esenciales para inspeccionar el estado actual del usuario y gestionar su salida.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Método</th>
+<th style="text-align: left;">Descripción y Uso</th>
+<th style="text-align: left;">Retorno</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong><code>Auth::check()</code></strong></td>
+<td style="text-align: left;">Verifica si existe un usuario autenticado en la petición actual. Es la forma estándar de proteger bloques de código o vistas.</td>
+<td style="text-align: left;"><code>bool</code> (<code>true</code> / <code>false</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>Auth::user()</code></strong></td>
+<td style="text-align: left;">Recupera la instancia completa del modelo del usuario autenticado (ej. <code>App\Models\User</code>). Permite acceder a sus propiedades (<code>Auth::user()-&gt;email</code>).</td>
+<td style="text-align: left;"><code>?User</code> (Modelo o <code>null</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>Auth::id()</code></strong></td>
+<td style="text-align: left;">Obtiene únicamente la clave primaria (ID) del usuario autenticado. Es ligeramente más eficiente que cargar todo el modelo si solo necesitas el ID para una consulta.</td>
+<td style="text-align: left;"><code>int</code> | <code>string</code> | <code>null</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>Auth::logout()</code></strong></td>
+<td style="text-align: left;">Cierra la sesión del usuario actual. Limpia los datos de autenticación de la sesión PHP y regenera el ID de sesión por seguridad.</td>
+<td style="text-align: left;"><code>void</code></td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h3 id="recuperando-el-usuario-autenticado">Recuperando el Usuario Autenticado</h3>
+<p>Una vez que la barrera de seguridad ha sido superada, necesitamos acceder constantemente a los datos del usuario actual para personalizar su experiencia (mostrar su nombre, listar sus pedidos, verificar sus roles).</p>
+<p>Laravel nos ofrece tres vías principales para acceder a esta instancia del modelo <code>User</code>, dependiendo del contexto en el que nos encontremos.</p>
+<h4 id="1-via-fachada-o-helper-contexto-global">1. Vía Fachada o Helper (Contexto Global)</h4>
+<p>Es la forma más común y funciona en cualquier parte de tu aplicación (Controladores, Modelos, Servicios, Vistas). Puedes usar la clase estática <code>Auth</code> o la función auxiliar <code>auth()</code>. Ambas son equivalentes.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-2-2"><a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a>    <span class="k">use</span> <span class="nx">Illuminate\Support\Facades\Auth</span><span class="p">;</span>
+</span><span id="__span-2-3"><a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a>    <span class="c1">// Opción A: Fachada (Más formal)</span>
+</span><span id="__span-2-5"><a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a>    <span class="nv">$user</span> <span class="o">=</span> <span class="nx">Auth</span><span class="o">::</span><span class="na">user</span><span class="p">();</span>
+</span><span id="__span-2-6"><a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a>
+</span><span id="__span-2-7"><a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a>    <span class="c1">// Opción B: Helper (Más conciso)</span>
+</span><span id="__span-2-8"><a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a>    <span class="nv">$user</span> <span class="o">=</span> <span class="nx">auth</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">();</span>
+</span><span id="__span-2-9"><a href="#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a>
+</span><span id="__span-2-10"><a href="#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a>    <span class="k">if</span> <span class="p">(</span><span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-2-11"><a href="#__codelineno-2-11" id="__codelineno-2-11" name="__codelineno-2-11"></a>        <span class="c1">// Acceso directo a propiedades del modelo</span>
+</span><span id="__span-2-12"><a href="#__codelineno-2-12" id="__codelineno-2-12" name="__codelineno-2-12"></a>        <span class="k">return</span> <span class="s2">"Hola, "</span> <span class="o">.</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">name</span> <span class="o">.</span> <span class="s2">" (Email: "</span> <span class="o">.</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">email</span> <span class="o">.</span> <span class="s2">")"</span><span class="p">;</span>
+</span><span id="__span-2-13"><a href="#__codelineno-2-13" id="__codelineno-2-13" name="__codelineno-2-13"></a>    <span class="p">}</span>
+</span><span id="__span-2-14"><a href="#__codelineno-2-14" id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<h4 id="2-via-request-contexto-http">2. Vía Request (Contexto HTTP)</h4>
+<p>Esta es la forma "arquitectónicamente pura" dentro de los Controladores. Dado que la autenticación es un estado de la petición actual, el objeto <code>$request</code> siempre tiene acceso al usuario que la originó.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>    <span class="k">namespace</span> <span class="nx">App\Http\Controllers</span><span class="p">;</span>
+</span><span id="__span-3-3"><a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a>
+</span><span id="__span-3-4"><a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a>    <span class="k">use</span> <span class="nx">Illuminate\Http\Request</span><span class="p">;</span>
+</span><span id="__span-3-5"><a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a>
+</span><span id="__span-3-6"><a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a>    <span class="k">class</span> <span class="nc">ProfileController</span> <span class="k">extends</span> <span class="nx">Controller</span>
+</span><span id="__span-3-7"><a href="#__codelineno-3-7" id="__codelineno-3-7" name="__codelineno-3-7"></a>    <span class="p">{</span>
+</span><span id="__span-3-8"><a href="#__codelineno-3-8" id="__codelineno-3-8" name="__codelineno-3-8"></a>        <span class="k">public</span> <span class="k">function</span> <span class="nf">show</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+</span><span id="__span-3-9"><a href="#__codelineno-3-9" id="__codelineno-3-9" name="__codelineno-3-9"></a>        <span class="p">{</span>
+</span><span id="__span-3-10"><a href="#__codelineno-3-10" id="__codelineno-3-10" name="__codelineno-3-10"></a>            <span class="c1">// No usamos Auth::user(), sino que se lo pedimos a la petición.</span>
+</span><span id="__span-3-11"><a href="#__codelineno-3-11" id="__codelineno-3-11" name="__codelineno-3-11"></a>            <span class="c1">// Esto es ideal para Unit Testing, ya que es más fácil de simular (mock).</span>
+</span><span id="__span-3-12"><a href="#__codelineno-3-12" id="__codelineno-3-12" name="__codelineno-3-12"></a>
+</span><span id="__span-3-13"><a href="#__codelineno-3-13" id="__codelineno-3-13" name="__codelineno-3-13"></a>            <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">();</span>
+</span><span id="__span-3-14"><a href="#__codelineno-3-14" id="__codelineno-3-14" name="__codelineno-3-14"></a>
+</span><span id="__span-3-15"><a href="#__codelineno-3-15" id="__codelineno-3-15" name="__codelineno-3-15"></a>            <span class="k">return</span> <span class="nx">view</span><span class="p">(</span><span class="s1">'profile'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'user'</span> <span class="o">=&gt;</span> <span class="nv">$user</span><span class="p">]);</span>
+</span><span id="__span-3-16"><a href="#__codelineno-3-16" id="__codelineno-3-16" name="__codelineno-3-16"></a>        <span class="p">}</span>
+</span><span id="__span-3-17"><a href="#__codelineno-3-17" id="__codelineno-3-17" name="__codelineno-3-17"></a>    <span class="p">}</span>
+</span><span id="__span-3-18"><a href="#__codelineno-3-18" id="__codelineno-3-18" name="__codelineno-3-18"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<h4 id="3-en-plantillas-blade-contexto-de-vista">3. En Plantillas Blade (Contexto de Vista)</h4>
+<p>Aunque puedes usar <code>Auth::user()</code> en Blade, Laravel ofrece una directiva mucho más limpia para comprobar si hay alguien logueado y acceder a sus datos sin llenar la vista de condicionales PHP.</p>
+<div class="language-html highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>@auth
+</span><span id="__span-4-2"><a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a>    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Bienvenido, {{ auth()-&gt;user()-&gt;name }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span><span id="__span-4-3"><a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a>
+</span><span id="__span-4-4"><a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a>    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">"/logout"</span> <span class="na">method</span><span class="o">=</span><span class="s">"POST"</span><span class="p">&gt;</span>
+</span><span id="__span-4-5"><a href="#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a>        @csrf
+</span><span id="__span-4-6"><a href="#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a>        <span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>Cerrar Sesión<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span><span id="__span-4-7"><a href="#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a>    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</span><span id="__span-4-8"><a href="#__codelineno-4-8" id="__codelineno-4-8" name="__codelineno-4-8"></a>@endauth
+</span><span id="__span-4-9"><a href="#__codelineno-4-9" id="__codelineno-4-9" name="__codelineno-4-9"></a>
+</span><span id="__span-4-10"><a href="#__codelineno-4-10" id="__codelineno-4-10" name="__codelineno-4-10"></a>@guest
+</span><span id="__span-4-11"><a href="#__codelineno-4-11" id="__codelineno-4-11" name="__codelineno-4-11"></a>    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"/login"</span><span class="p">&gt;</span>Iniciar Sesión<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</span><span id="__span-4-12"><a href="#__codelineno-4-12" id="__codelineno-4-12" name="__codelineno-4-12"></a>@endguest
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Es un error común pensar que inyectar el modelo <code>User</code> en un método del controlador nos dará al usuario logueado.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="x">// ¡CUIDADO! Esto NO inyecta al usuario logueado.</span>
+</span><span id="__span-5-2"><a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="x">// Esto activa "Route Model Binding" buscando un ID en la URL.</span>
+</span><span id="__span-5-3"><a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="x">public function index(User $user) { ... }</span>
+</span></code></pre></div>
+<p>Para obtener al usuario autenticado en el controlador, <strong>siempre</strong> inyecta <code>Illuminate\Http\Request</code> y usa <code>$request-&gt;user()</code>.</p>
+</div>
+<h2 id="autorizacion-definiendo-lo-que-un-usuario-puede-hacer">Autorización: Definiendo lo que un Usuario Puede Hacer</h2>
+<p>Una vez verificada la identidad del usuario (Autenticación), el siguiente componente crítico en la seguridad de la aplicación es la <strong>Autorización</strong>. Este proceso determina si la entidad autenticada posee los privilegios necesarios para ejecutar una acción específica sobre un recurso dado.</p>
+<p>Laravel implementa un sistema de autorización flexible que permite definir reglas de acceso granulares. Este sistema desacopla la lógica de validación de permisos del flujo de control principal, centralizándola en dos estructuras arquitectónicas primarias: <strong>Gates</strong> y <strong>Policies</strong>.</p>
+<hr/>
+<h3 id="gates-puertas">Gates (Puertas)</h3>
+<p>Los <strong>Gates</strong> (Compuertas) representan el mecanismo de autorización más directo dentro del framework. Se implementan mediante <code>Closures</code> (funciones anónimas) que evalúan si un usuario autenticado cumple con ciertos criterios para ejecutar una acción.</p>
+<p>Desde una perspectiva arquitectónica, los Gates son ideales para validar permisos que tienen un alcance global o que no están vinculados a una instancia específica de un modelo (por ejemplo, verificar roles administrativos o acceso a áreas restringidas del sistema).</p>
+<p>Los Gates se registran habitualmente en el método <code>boot</code> del <code>AppServiceProvider</code>. La función de definición recibe automáticamente la instancia del usuario autenticado (<code>$user</code>) como primer argumento. Si el usuario no está autenticado, el Gate denegará el acceso automáticamente antes de ejecutar el closure.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-6-2"><a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a>    <span class="k">namespace</span> <span class="nx">App\Providers</span><span class="p">;</span>
+</span><span id="__span-6-3"><a href="#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a>
+</span><span id="__span-6-4"><a href="#__codelineno-6-4" id="__codelineno-6-4" name="__codelineno-6-4"></a>    <span class="k">use</span> <span class="nx">Illuminate\Support\Facades\Gate</span><span class="p">;</span>
+</span><span id="__span-6-5"><a href="#__codelineno-6-5" id="__codelineno-6-5" name="__codelineno-6-5"></a>    <span class="k">use</span> <span class="nx">Illuminate\Foundation\Support\Providers\AuthServiceProvider</span> <span class="k">as</span> <span class="nx">ServiceProvider</span><span class="p">;</span>
+</span><span id="__span-6-6"><a href="#__codelineno-6-6" id="__codelineno-6-6" name="__codelineno-6-6"></a>    <span class="k">use</span> <span class="nx">App\Models\User</span><span class="p">;</span>
+</span><span id="__span-6-7"><a href="#__codelineno-6-7" id="__codelineno-6-7" name="__codelineno-6-7"></a>
+</span><span id="__span-6-8"><a href="#__codelineno-6-8" id="__codelineno-6-8" name="__codelineno-6-8"></a>    <span class="k">class</span> <span class="nc">AuthServiceProvider</span> <span class="k">extends</span> <span class="nx">ServiceProvider</span>
+</span><span id="__span-6-9"><a href="#__codelineno-6-9" id="__codelineno-6-9" name="__codelineno-6-9"></a>    <span class="p">{</span>
+</span><span id="__span-6-10"><a href="#__codelineno-6-10" id="__codelineno-6-10" name="__codelineno-6-10"></a>        <span class="k">public</span> <span class="k">function</span> <span class="nf">boot</span><span class="p">()</span><span class="o">:</span> <span class="nx">void</span>
+</span><span id="__span-6-11"><a href="#__codelineno-6-11" id="__codelineno-6-11" name="__codelineno-6-11"></a>        <span class="p">{</span>
+</span><span id="__span-6-12"><a href="#__codelineno-6-12" id="__codelineno-6-12" name="__codelineno-6-12"></a>            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">registerPolicies</span><span class="p">();</span>
+</span><span id="__span-6-13"><a href="#__codelineno-6-13" id="__codelineno-6-13" name="__codelineno-6-13"></a>
+</span><span id="__span-6-14"><a href="#__codelineno-6-14" id="__codelineno-6-14" name="__codelineno-6-14"></a>            <span class="c1">// Definición de un Gate para acceso administrativo</span>
+</span><span id="__span-6-15"><a href="#__codelineno-6-15" id="__codelineno-6-15" name="__codelineno-6-15"></a>            <span class="nx">Gate</span><span class="o">::</span><span class="na">define</span><span class="p">(</span><span class="s1">'access-admin-panel'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">User</span> <span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-6-16"><a href="#__codelineno-6-16" id="__codelineno-6-16" name="__codelineno-6-16"></a>                <span class="c1">// Retorna true si el usuario cumple la condición</span>
+</span><span id="__span-6-17"><a href="#__codelineno-6-17" id="__codelineno-6-17" name="__codelineno-6-17"></a>                <span class="k">return</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">role</span> <span class="o">===</span> <span class="s1">'admin'</span><span class="p">;</span>
+</span><span id="__span-6-18"><a href="#__codelineno-6-18" id="__codelineno-6-18" name="__codelineno-6-18"></a>            <span class="p">});</span>
+</span><span id="__span-6-19"><a href="#__codelineno-6-19" id="__codelineno-6-19" name="__codelineno-6-19"></a>
+</span><span id="__span-6-20"><a href="#__codelineno-6-20" id="__codelineno-6-20" name="__codelineno-6-20"></a>            <span class="c1">// Definición de un Gate con parámetros adicionales</span>
+</span><span id="__span-6-21"><a href="#__codelineno-6-21" id="__codelineno-6-21" name="__codelineno-6-21"></a>            <span class="c1">// Ejemplo: Verificar si un usuario tiene un nivel de suscripción específico</span>
+</span><span id="__span-6-22"><a href="#__codelineno-6-22" id="__codelineno-6-22" name="__codelineno-6-22"></a>            <span class="nx">Gate</span><span class="o">::</span><span class="na">define</span><span class="p">(</span><span class="s1">'download-report'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">User</span> <span class="nv">$user</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$reportLevel</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-6-23"><a href="#__codelineno-6-23" id="__codelineno-6-23" name="__codelineno-6-23"></a>                <span class="k">return</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">subscription_level</span> <span class="o">&gt;=</span> <span class="nv">$reportLevel</span><span class="p">;</span>
+</span><span id="__span-6-24"><a href="#__codelineno-6-24" id="__codelineno-6-24" name="__codelineno-6-24"></a>            <span class="p">});</span>
+</span><span id="__span-6-25"><a href="#__codelineno-6-25" id="__codelineno-6-25" name="__codelineno-6-25"></a>        <span class="p">}</span>
+</span><span id="__span-6-26"><a href="#__codelineno-6-26" id="__codelineno-6-26" name="__codelineno-6-26"></a>    <span class="p">}</span>
+</span><span id="__span-6-27"><a href="#__codelineno-6-27" id="__codelineno-6-27" name="__codelineno-6-27"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<p>Una vez definidos, Laravel permite evaluar estos permisos desde múltiples contextos (Controladores, Middlewares, Vistas) utilizando una sintaxis fluida.</p>
+<p>Existen dos formas canónicas de invocar un Gate: a través de la fachada <code>Gate</code> o mediante el trait <code>Authorizable</code> que incluye el modelo <code>User</code>.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-7-2"><a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a>    <span class="k">use</span> <span class="nx">Illuminate\Support\Facades\Gate</span><span class="p">;</span>
+</span><span id="__span-7-3"><a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a>    <span class="k">use</span> <span class="nx">Illuminate\Http\Response</span><span class="p">;</span>
+</span><span id="__span-7-4"><a href="#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a>
+</span><span id="__span-7-5"><a href="#__codelineno-7-5" id="__codelineno-7-5" name="__codelineno-7-5"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span>
+</span><span id="__span-7-6"><a href="#__codelineno-7-6" id="__codelineno-7-6" name="__codelineno-7-6"></a>    <span class="p">{</span>
+</span><span id="__span-7-7"><a href="#__codelineno-7-7" id="__codelineno-7-7" name="__codelineno-7-7"></a>        <span class="c1">// Opción A: Usando la Fachada Gate</span>
+</span><span id="__span-7-8"><a href="#__codelineno-7-8" id="__codelineno-7-8" name="__codelineno-7-8"></a>        <span class="k">if</span> <span class="p">(</span><span class="nx">Gate</span><span class="o">::</span><span class="na">allows</span><span class="p">(</span><span class="s1">'access-admin-panel'</span><span class="p">))</span> <span class="p">{</span>
+</span><span id="__span-7-9"><a href="#__codelineno-7-9" id="__codelineno-7-9" name="__codelineno-7-9"></a>            <span class="c1">// Lógica permitida...</span>
+</span><span id="__span-7-10"><a href="#__codelineno-7-10" id="__codelineno-7-10" name="__codelineno-7-10"></a>        <span class="p">}</span>
+</span><span id="__span-7-11"><a href="#__codelineno-7-11" id="__codelineno-7-11" name="__codelineno-7-11"></a>
+</span><span id="__span-7-12"><a href="#__codelineno-7-12" id="__codelineno-7-12" name="__codelineno-7-12"></a>        <span class="k">if</span> <span class="p">(</span><span class="nx">Gate</span><span class="o">::</span><span class="na">denies</span><span class="p">(</span><span class="s1">'access-admin-panel'</span><span class="p">))</span> <span class="p">{</span>
+</span><span id="__span-7-13"><a href="#__codelineno-7-13" id="__codelineno-7-13" name="__codelineno-7-13"></a>            <span class="nx">abort</span><span class="p">(</span><span class="mi">403</span><span class="p">,</span> <span class="s1">'Acceso no autorizado.'</span><span class="p">);</span>
+</span><span id="__span-7-14"><a href="#__codelineno-7-14" id="__codelineno-7-14" name="__codelineno-7-14"></a>        <span class="p">}</span>
+</span><span id="__span-7-15"><a href="#__codelineno-7-15" id="__codelineno-7-15" name="__codelineno-7-15"></a>
+</span><span id="__span-7-16"><a href="#__codelineno-7-16" id="__codelineno-7-16" name="__codelineno-7-16"></a>        <span class="c1">// Opción B: Usando el modelo User (Más legible)</span>
+</span><span id="__span-7-17"><a href="#__codelineno-7-17" id="__codelineno-7-17" name="__codelineno-7-17"></a>        <span class="c1">// El método can() busca tanto en Gates como en Policies.</span>
+</span><span id="__span-7-18"><a href="#__codelineno-7-18" id="__codelineno-7-18" name="__codelineno-7-18"></a>        <span class="k">if</span> <span class="p">(</span><span class="nx">auth</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">can</span><span class="p">(</span><span class="s1">'access-admin-panel'</span><span class="p">))</span> <span class="p">{</span>
+</span><span id="__span-7-19"><a href="#__codelineno-7-19" id="__codelineno-7-19" name="__codelineno-7-19"></a>            <span class="c1">// ...</span>
+</span><span id="__span-7-20"><a href="#__codelineno-7-20" id="__codelineno-7-20" name="__codelineno-7-20"></a>        <span class="p">}</span>
+</span><span id="__span-7-21"><a href="#__codelineno-7-21" id="__codelineno-7-21" name="__codelineno-7-21"></a>
+</span><span id="__span-7-22"><a href="#__codelineno-7-22" id="__codelineno-7-22" name="__codelineno-7-22"></a>        <span class="c1">// Verificación con parámetros</span>
+</span><span id="__span-7-23"><a href="#__codelineno-7-23" id="__codelineno-7-23" name="__codelineno-7-23"></a>        <span class="k">if</span> <span class="p">(</span><span class="nx">auth</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">can</span><span class="p">(</span><span class="s1">'download-report'</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span> <span class="p">{</span>
+</span><span id="__span-7-24"><a href="#__codelineno-7-24" id="__codelineno-7-24" name="__codelineno-7-24"></a>            <span class="c1">// ...</span>
+</span><span id="__span-7-25"><a href="#__codelineno-7-25" id="__codelineno-7-25" name="__codelineno-7-25"></a>        <span class="p">}</span>
+</span><span id="__span-7-26"><a href="#__codelineno-7-26" id="__codelineno-7-26" name="__codelineno-7-26"></a>    <span class="p">}</span>
+</span><span id="__span-7-27"><a href="#__codelineno-7-27" id="__codelineno-7-27" name="__codelineno-7-27"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<p>Además de esto, Laravel proporciona directivas de compilación específicas para condicionar la renderización de elementos HTML basándose en los permisos del usuario.</p>
+<div class="language-html highlight"><pre><span></span><code><span id="__span-8-1"><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="p">&lt;</span><span class="nt">nav</span><span class="p">&gt;</span>
+</span><span id="__span-8-2"><a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a>    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"/home"</span><span class="p">&gt;</span>Inicio<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</span><span id="__span-8-3"><a href="#__codelineno-8-3" id="__codelineno-8-3" name="__codelineno-8-3"></a>
+</span><span id="__span-8-4"><a href="#__codelineno-8-4" id="__codelineno-8-4" name="__codelineno-8-4"></a>    {{-- Solo se renderiza si el Gate 'access-admin-panel' retorna true --}}
+</span><span id="__span-8-5"><a href="#__codelineno-8-5" id="__codelineno-8-5" name="__codelineno-8-5"></a>    @can('access-admin-panel')
+</span><span id="__span-8-6"><a href="#__codelineno-8-6" id="__codelineno-8-6" name="__codelineno-8-6"></a>        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"/admin"</span><span class="p">&gt;</span>Panel de Control<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</span><span id="__span-8-7"><a href="#__codelineno-8-7" id="__codelineno-8-7" name="__codelineno-8-7"></a>    @endcan
+</span><span id="__span-8-8"><a href="#__codelineno-8-8" id="__codelineno-8-8" name="__codelineno-8-8"></a>
+</span><span id="__span-8-9"><a href="#__codelineno-8-9" id="__codelineno-8-9" name="__codelineno-8-9"></a>    {{-- Directiva inversa --}}
+</span><span id="__span-8-10"><a href="#__codelineno-8-10" id="__codelineno-8-10" name="__codelineno-8-10"></a>    @cannot('download-report', 5)
+</span><span id="__span-8-11"><a href="#__codelineno-8-11" id="__codelineno-8-11" name="__codelineno-8-11"></a>        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"alert"</span><span class="p">&gt;</span>Necesitas una suscripción superior para descargar esto.<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-8-12"><a href="#__codelineno-8-12" id="__codelineno-8-12" name="__codelineno-8-12"></a>    @endcannot
+</span><span id="__span-8-13"><a href="#__codelineno-8-13" id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="p">&lt;/</span><span class="nt">nav</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<p>Un patrón común en aplicaciones empresariales es permitir que un "Super Administrador" tenga acceso total, ignorando las validaciones individuales. <code>Gate::before</code> permite definir una regla que se ejecuta antes que cualquier otro Gate.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-9-1"><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-9-2"><a href="#__codelineno-9-2" id="__codelineno-9-2" name="__codelineno-9-2"></a>    <span class="c1">// En el método boot() del Provider</span>
+</span><span id="__span-9-3"><a href="#__codelineno-9-3" id="__codelineno-9-3" name="__codelineno-9-3"></a>    <span class="nx">Gate</span><span class="o">::</span><span class="na">before</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">User</span> <span class="nv">$user</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$ability</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-9-4"><a href="#__codelineno-9-4" id="__codelineno-9-4" name="__codelineno-9-4"></a>        <span class="k">if</span> <span class="p">(</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">isSuperAdmin</span><span class="p">())</span> <span class="p">{</span>
+</span><span id="__span-9-5"><a href="#__codelineno-9-5" id="__codelineno-9-5" name="__codelineno-9-5"></a>            <span class="k">return</span> <span class="k">true</span><span class="p">;</span> <span class="c1">// Autoriza inmediatamente cualquier acción</span>
+</span><span id="__span-9-6"><a href="#__codelineno-9-6" id="__codelineno-9-6" name="__codelineno-9-6"></a>        <span class="p">}</span>
+</span><span id="__span-9-7"><a href="#__codelineno-9-7" id="__codelineno-9-7" name="__codelineno-9-7"></a>        <span class="c1">// Si retorna null, continúa con la verificación normal del Gate</span>
+</span><span id="__span-9-8"><a href="#__codelineno-9-8" id="__codelineno-9-8" name="__codelineno-9-8"></a>    <span class="p">});</span>
+</span><span id="__span-9-9"><a href="#__codelineno-9-9" id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<hr/>
+<h3 id="policies-politicas">Policies (Políticas)</h3>
+<p>Mientras que los Gates son excelentes para acciones aisladas, las <strong>Policies</strong> (Políticas) son la solución arquitectónica para gestionar la autorización en torno a entidades complejas. Funcionan como una clase espejo de un Modelo Eloquent: si tienes un modelo <code>Post</code> y un <code>PostController</code>, lo natural es tener una <code>PostPolicy</code> que gestione los permisos de cada operación CRUD (Create, Read, Update, Delete) sobre ese recurso.</p>
+<p>Este enfoque promueve la cohesión del código, manteniendo las reglas de negocio encapsuladas junto al modelo que protegen, en lugar de dispersas en los controladores.</p>
+<p>Laravel facilita la creación de estas clases mediante Artisan. Al utilizar la bandera <code>--model</code>, el comando pre-generará automáticamente los métodos correspondientes a las acciones estándar de un controlador de recursos (<code>view</code>, <code>create</code>, <code>update</code>, <code>delete</code>, <code>restore</code>, <code>forceDelete</code>).</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a>php<span class="w"> </span>artisan<span class="w"> </span>make:policy<span class="w"> </span>PostPolicy<span class="w"> </span>--model<span class="o">=</span>Post
+</span></code></pre></div>
+<p>En versiones modernas de Laravel, no es necesario registrar manualmente las políticas en el <code>AuthServiceProvider</code> si sigues la convención de nombres estándar. Si el modelo está en <code>app/Models/Post</code> y la política en <code>app/Policies/PostPolicy</code>, Laravel resolverá la relación automáticamente.</p>
+<p>Por defecto, si no hay un usuario autenticado, todos los métodos de la política devuelven <code>false</code> automáticamente (ni siquiera se ejecutan). Si deseas permitir el acceso a invitados (por ejemplo, para la acción <code>view</code>), debes declarar el argumento de usuario como opcional (<code>?User $user</code>).</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-11-1"><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-11-2"><a href="#__codelineno-11-2" id="__codelineno-11-2" name="__codelineno-11-2"></a>
+</span><span id="__span-11-3"><a href="#__codelineno-11-3" id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="k">namespace</span> <span class="nx">App\Policies</span><span class="p">;</span>
+</span><span id="__span-11-4"><a href="#__codelineno-11-4" id="__codelineno-11-4" name="__codelineno-11-4"></a>
+</span><span id="__span-11-5"><a href="#__codelineno-11-5" id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="k">use</span> <span class="nx">App\Models\Post</span><span class="p">;</span>
+</span><span id="__span-11-6"><a href="#__codelineno-11-6" id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="k">use</span> <span class="nx">App\Models\User</span><span class="p">;</span>
+</span><span id="__span-11-7"><a href="#__codelineno-11-7" id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="k">use</span> <span class="nx">Illuminate\Auth\Access\HandlesAuthorization</span><span class="p">;</span>
+</span><span id="__span-11-8"><a href="#__codelineno-11-8" id="__codelineno-11-8" name="__codelineno-11-8"></a>
+</span><span id="__span-11-9"><a href="#__codelineno-11-9" id="__codelineno-11-9" name="__codelineno-11-9"></a><span class="k">class</span> <span class="nc">PostPolicy</span>
+</span><span id="__span-11-10"><a href="#__codelineno-11-10" id="__codelineno-11-10" name="__codelineno-11-10"></a><span class="p">{</span>
+</span><span id="__span-11-11"><a href="#__codelineno-11-11" id="__codelineno-11-11" name="__codelineno-11-11"></a>    <span class="k">use</span> <span class="nx">HandlesAuthorization</span><span class="p">;</span>
+</span><span id="__span-11-12"><a href="#__codelineno-11-12" id="__codelineno-11-12" name="__codelineno-11-12"></a>
+</span><span id="__span-11-13"><a href="#__codelineno-11-13" id="__codelineno-11-13" name="__codelineno-11-13"></a>    <span class="sd">/**</span>
+</span><span id="__span-11-14"><a href="#__codelineno-11-14" id="__codelineno-11-14" name="__codelineno-11-14"></a><span class="sd">     * FILTRO PREVIO (Gate::before)</span>
+</span><span id="__span-11-15"><a href="#__codelineno-11-15" id="__codelineno-11-15" name="__codelineno-11-15"></a><span class="sd">     * Se ejecuta antes que cualquier otra regla de esta política.</span>
+</span><span id="__span-11-16"><a href="#__codelineno-11-16" id="__codelineno-11-16" name="__codelineno-11-16"></a><span class="sd">     * * @param User $user El usuario autenticado.</span>
+</span><span id="__span-11-17"><a href="#__codelineno-11-17" id="__codelineno-11-17" name="__codelineno-11-17"></a><span class="sd">     * @param string $ability El nombre del método que se intenta ejecutar (ej: 'update').</span>
+</span><span id="__span-11-18"><a href="#__codelineno-11-18" id="__codelineno-11-18" name="__codelineno-11-18"></a><span class="sd">     * @return bool|null Devuelve true para autorizar inmediatamente, o null para continuar.</span>
+</span><span id="__span-11-19"><a href="#__codelineno-11-19" id="__codelineno-11-19" name="__codelineno-11-19"></a><span class="sd">     */</span>
+</span><span id="__span-11-20"><a href="#__codelineno-11-20" id="__codelineno-11-20" name="__codelineno-11-20"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">before</span><span class="p">(</span><span class="nx">User</span> <span class="nv">$user</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$ability</span><span class="p">)</span><span class="o">:</span> <span class="nx">bool</span><span class="o">|</span><span class="k">null</span>
+</span><span id="__span-11-21"><a href="#__codelineno-11-21" id="__codelineno-11-21" name="__codelineno-11-21"></a>    <span class="p">{</span>
+</span><span id="__span-11-22"><a href="#__codelineno-11-22" id="__codelineno-11-22" name="__codelineno-11-22"></a>        <span class="k">if</span> <span class="p">(</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">hasRole</span><span class="p">(</span><span class="s1">'admin'</span><span class="p">))</span> <span class="p">{</span>
+</span><span id="__span-11-23"><a href="#__codelineno-11-23" id="__codelineno-11-23" name="__codelineno-11-23"></a>            <span class="k">return</span> <span class="k">true</span><span class="p">;</span> <span class="c1">// El administrador tiene acceso total ("God Mode")</span>
+</span><span id="__span-11-24"><a href="#__codelineno-11-24" id="__codelineno-11-24" name="__codelineno-11-24"></a>        <span class="p">}</span>
+</span><span id="__span-11-25"><a href="#__codelineno-11-25" id="__codelineno-11-25" name="__codelineno-11-25"></a>
+</span><span id="__span-11-26"><a href="#__codelineno-11-26" id="__codelineno-11-26" name="__codelineno-11-26"></a>        <span class="c1">// Si retorna null, la ejecución continúa hacia el método específico (update, view, etc.)</span>
+</span><span id="__span-11-27"><a href="#__codelineno-11-27" id="__codelineno-11-27" name="__codelineno-11-27"></a>        <span class="k">return</span> <span class="k">null</span><span class="p">;</span> 
+</span><span id="__span-11-28"><a href="#__codelineno-11-28" id="__codelineno-11-28" name="__codelineno-11-28"></a>    <span class="p">}</span>
+</span><span id="__span-11-29"><a href="#__codelineno-11-29" id="__codelineno-11-29" name="__codelineno-11-29"></a>
+</span><span id="__span-11-30"><a href="#__codelineno-11-30" id="__codelineno-11-30" name="__codelineno-11-30"></a>    <span class="sd">/**</span>
+</span><span id="__span-11-31"><a href="#__codelineno-11-31" id="__codelineno-11-31" name="__codelineno-11-31"></a><span class="sd">     * Determina si el usuario puede ver el LISTADO de posts (index).</span>
+</span><span id="__span-11-32"><a href="#__codelineno-11-32" id="__codelineno-11-32" name="__codelineno-11-32"></a><span class="sd">     * El tipo ?User indica que el usuario es opcional (permite invitados).</span>
+</span><span id="__span-11-33"><a href="#__codelineno-11-33" id="__codelineno-11-33" name="__codelineno-11-33"></a><span class="sd">     */</span>
+</span><span id="__span-11-34"><a href="#__codelineno-11-34" id="__codelineno-11-34" name="__codelineno-11-34"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">viewAny</span><span class="p">(</span><span class="o">?</span><span class="nx">User</span> <span class="nv">$user</span><span class="p">)</span><span class="o">:</span> <span class="nx">bool</span>
+</span><span id="__span-11-35"><a href="#__codelineno-11-35" id="__codelineno-11-35" name="__codelineno-11-35"></a>    <span class="p">{</span>
+</span><span id="__span-11-36"><a href="#__codelineno-11-36" id="__codelineno-11-36" name="__codelineno-11-36"></a>        <span class="k">return</span> <span class="k">true</span><span class="p">;</span> <span class="c1">// El blog es público, cualquiera puede ver el índice.</span>
+</span><span id="__span-11-37"><a href="#__codelineno-11-37" id="__codelineno-11-37" name="__codelineno-11-37"></a>    <span class="p">}</span>
+</span><span id="__span-11-38"><a href="#__codelineno-11-38" id="__codelineno-11-38" name="__codelineno-11-38"></a>
+</span><span id="__span-11-39"><a href="#__codelineno-11-39" id="__codelineno-11-39" name="__codelineno-11-39"></a>    <span class="sd">/**</span>
+</span><span id="__span-11-40"><a href="#__codelineno-11-40" id="__codelineno-11-40" name="__codelineno-11-40"></a><span class="sd">     * Determina si el usuario puede ver un post ESPECÍFICO (show).</span>
+</span><span id="__span-11-41"><a href="#__codelineno-11-41" id="__codelineno-11-41" name="__codelineno-11-41"></a><span class="sd">     */</span>
+</span><span id="__span-11-42"><a href="#__codelineno-11-42" id="__codelineno-11-42" name="__codelineno-11-42"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">view</span><span class="p">(</span><span class="o">?</span><span class="nx">User</span> <span class="nv">$user</span><span class="p">,</span> <span class="nx">Post</span> <span class="nv">$post</span><span class="p">)</span><span class="o">:</span> <span class="nx">bool</span>
+</span><span id="__span-11-43"><a href="#__codelineno-11-43" id="__codelineno-11-43" name="__codelineno-11-43"></a>    <span class="p">{</span>
+</span><span id="__span-11-44"><a href="#__codelineno-11-44" id="__codelineno-11-44" name="__codelineno-11-44"></a>        <span class="k">if</span> <span class="p">(</span><span class="nv">$post</span><span class="o">-&gt;</span><span class="na">is_published</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-11-45"><a href="#__codelineno-11-45" id="__codelineno-11-45" name="__codelineno-11-45"></a>            <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+</span><span id="__span-11-46"><a href="#__codelineno-11-46" id="__codelineno-11-46" name="__codelineno-11-46"></a>        <span class="p">}</span>
+</span><span id="__span-11-47"><a href="#__codelineno-11-47" id="__codelineno-11-47" name="__codelineno-11-47"></a>
+</span><span id="__span-11-48"><a href="#__codelineno-11-48" id="__codelineno-11-48" name="__codelineno-11-48"></a>        <span class="c1">// Si es un borrador, solo el dueño (autenticado) puede verlo.</span>
+</span><span id="__span-11-49"><a href="#__codelineno-11-49" id="__codelineno-11-49" name="__codelineno-11-49"></a>        <span class="k">return</span> <span class="nv">$user</span> <span class="o">!==</span> <span class="k">null</span> <span class="o">&amp;&amp;</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">===</span> <span class="nv">$post</span><span class="o">-&gt;</span><span class="na">user_id</span><span class="p">;</span>
+</span><span id="__span-11-50"><a href="#__codelineno-11-50" id="__codelineno-11-50" name="__codelineno-11-50"></a>    <span class="p">}</span>
+</span><span id="__span-11-51"><a href="#__codelineno-11-51" id="__codelineno-11-51" name="__codelineno-11-51"></a>
+</span><span id="__span-11-52"><a href="#__codelineno-11-52" id="__codelineno-11-52" name="__codelineno-11-52"></a>    <span class="sd">/**</span>
+</span><span id="__span-11-53"><a href="#__codelineno-11-53" id="__codelineno-11-53" name="__codelineno-11-53"></a><span class="sd">     * Determina si el usuario puede CREAR posts.</span>
+</span><span id="__span-11-54"><a href="#__codelineno-11-54" id="__codelineno-11-54" name="__codelineno-11-54"></a><span class="sd">     * No recibe una instancia de Post porque aún no existe.</span>
+</span><span id="__span-11-55"><a href="#__codelineno-11-55" id="__codelineno-11-55" name="__codelineno-11-55"></a><span class="sd">     */</span>
+</span><span id="__span-11-56"><a href="#__codelineno-11-56" id="__codelineno-11-56" name="__codelineno-11-56"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">create</span><span class="p">(</span><span class="nx">User</span> <span class="nv">$user</span><span class="p">)</span><span class="o">:</span> <span class="nx">bool</span>
+</span><span id="__span-11-57"><a href="#__codelineno-11-57" id="__codelineno-11-57" name="__codelineno-11-57"></a>    <span class="p">{</span>
+</span><span id="__span-11-58"><a href="#__codelineno-11-58" id="__codelineno-11-58" name="__codelineno-11-58"></a>        <span class="c1">// Regla de negocio: Solo usuarios con email verificado pueden publicar.</span>
+</span><span id="__span-11-59"><a href="#__codelineno-11-59" id="__codelineno-11-59" name="__codelineno-11-59"></a>        <span class="k">return</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">hasVerifiedEmail</span><span class="p">();</span>
+</span><span id="__span-11-60"><a href="#__codelineno-11-60" id="__codelineno-11-60" name="__codelineno-11-60"></a>    <span class="p">}</span>
+</span><span id="__span-11-61"><a href="#__codelineno-11-61" id="__codelineno-11-61" name="__codelineno-11-61"></a>
+</span><span id="__span-11-62"><a href="#__codelineno-11-62" id="__codelineno-11-62" name="__codelineno-11-62"></a>    <span class="sd">/**</span>
+</span><span id="__span-11-63"><a href="#__codelineno-11-63" id="__codelineno-11-63" name="__codelineno-11-63"></a><span class="sd">     * Determina si el usuario puede ACTUALIZAR el post.</span>
+</span><span id="__span-11-64"><a href="#__codelineno-11-64" id="__codelineno-11-64" name="__codelineno-11-64"></a><span class="sd">     */</span>
+</span><span id="__span-11-65"><a href="#__codelineno-11-65" id="__codelineno-11-65" name="__codelineno-11-65"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">update</span><span class="p">(</span><span class="nx">User</span> <span class="nv">$user</span><span class="p">,</span> <span class="nx">Post</span> <span class="nv">$post</span><span class="p">)</span><span class="o">:</span> <span class="nx">bool</span>
+</span><span id="__span-11-66"><a href="#__codelineno-11-66" id="__codelineno-11-66" name="__codelineno-11-66"></a>    <span class="p">{</span>
+</span><span id="__span-11-67"><a href="#__codelineno-11-67" id="__codelineno-11-67" name="__codelineno-11-67"></a>        <span class="c1">// Regla de propiedad: Solo el autor puede editar su propio contenido.</span>
+</span><span id="__span-11-68"><a href="#__codelineno-11-68" id="__codelineno-11-68" name="__codelineno-11-68"></a>        <span class="k">return</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">===</span> <span class="nv">$post</span><span class="o">-&gt;</span><span class="na">user_id</span><span class="p">;</span>
+</span><span id="__span-11-69"><a href="#__codelineno-11-69" id="__codelineno-11-69" name="__codelineno-11-69"></a>    <span class="p">}</span>
+</span><span id="__span-11-70"><a href="#__codelineno-11-70" id="__codelineno-11-70" name="__codelineno-11-70"></a>
+</span><span id="__span-11-71"><a href="#__codelineno-11-71" id="__codelineno-11-71" name="__codelineno-11-71"></a>    <span class="sd">/**</span>
+</span><span id="__span-11-72"><a href="#__codelineno-11-72" id="__codelineno-11-72" name="__codelineno-11-72"></a><span class="sd">     * Determina si el usuario puede ELIMINAR el post (Soft Delete).</span>
+</span><span id="__span-11-73"><a href="#__codelineno-11-73" id="__codelineno-11-73" name="__codelineno-11-73"></a><span class="sd">     */</span>
+</span><span id="__span-11-74"><a href="#__codelineno-11-74" id="__codelineno-11-74" name="__codelineno-11-74"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">delete</span><span class="p">(</span><span class="nx">User</span> <span class="nv">$user</span><span class="p">,</span> <span class="nx">Post</span> <span class="nv">$post</span><span class="p">)</span><span class="o">:</span> <span class="nx">bool</span>
+</span><span id="__span-11-75"><a href="#__codelineno-11-75" id="__codelineno-11-75" name="__codelineno-11-75"></a>    <span class="p">{</span>
+</span><span id="__span-11-76"><a href="#__codelineno-11-76" id="__codelineno-11-76" name="__codelineno-11-76"></a>        <span class="c1">// Misma lógica: solo el autor puede enviarlo a la papelera.</span>
+</span><span id="__span-11-77"><a href="#__codelineno-11-77" id="__codelineno-11-77" name="__codelineno-11-77"></a>        <span class="k">return</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">===</span> <span class="nv">$post</span><span class="o">-&gt;</span><span class="na">user_id</span><span class="p">;</span>
+</span><span id="__span-11-78"><a href="#__codelineno-11-78" id="__codelineno-11-78" name="__codelineno-11-78"></a>    <span class="p">}</span>
+</span><span id="__span-11-79"><a href="#__codelineno-11-79" id="__codelineno-11-79" name="__codelineno-11-79"></a>
+</span><span id="__span-11-80"><a href="#__codelineno-11-80" id="__codelineno-11-80" name="__codelineno-11-80"></a>    <span class="sd">/**</span>
+</span><span id="__span-11-81"><a href="#__codelineno-11-81" id="__codelineno-11-81" name="__codelineno-11-81"></a><span class="sd">     * Determina si el usuario puede RESTAURAR un post eliminado.</span>
+</span><span id="__span-11-82"><a href="#__codelineno-11-82" id="__codelineno-11-82" name="__codelineno-11-82"></a><span class="sd">     * Solo aplica si usas SoftDeletes en tu modelo.</span>
+</span><span id="__span-11-83"><a href="#__codelineno-11-83" id="__codelineno-11-83" name="__codelineno-11-83"></a><span class="sd">     */</span>
+</span><span id="__span-11-84"><a href="#__codelineno-11-84" id="__codelineno-11-84" name="__codelineno-11-84"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">restore</span><span class="p">(</span><span class="nx">User</span> <span class="nv">$user</span><span class="p">,</span> <span class="nx">Post</span> <span class="nv">$post</span><span class="p">)</span><span class="o">:</span> <span class="nx">bool</span>
+</span><span id="__span-11-85"><a href="#__codelineno-11-85" id="__codelineno-11-85" name="__codelineno-11-85"></a>    <span class="p">{</span>
+</span><span id="__span-11-86"><a href="#__codelineno-11-86" id="__codelineno-11-86" name="__codelineno-11-86"></a>        <span class="k">return</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">===</span> <span class="nv">$post</span><span class="o">-&gt;</span><span class="na">user_id</span><span class="p">;</span>
+</span><span id="__span-11-87"><a href="#__codelineno-11-87" id="__codelineno-11-87" name="__codelineno-11-87"></a>    <span class="p">}</span>
+</span><span id="__span-11-88"><a href="#__codelineno-11-88" id="__codelineno-11-88" name="__codelineno-11-88"></a>
+</span><span id="__span-11-89"><a href="#__codelineno-11-89" id="__codelineno-11-89" name="__codelineno-11-89"></a>    <span class="sd">/**</span>
+</span><span id="__span-11-90"><a href="#__codelineno-11-90" id="__codelineno-11-90" name="__codelineno-11-90"></a><span class="sd">     * Determina si el usuario puede ELIMINAR PERMANENTEMENTE el post.</span>
+</span><span id="__span-11-91"><a href="#__codelineno-11-91" id="__codelineno-11-91" name="__codelineno-11-91"></a><span class="sd">     * (Vaciar de la papelera / Hard Delete).</span>
+</span><span id="__span-11-92"><a href="#__codelineno-11-92" id="__codelineno-11-92" name="__codelineno-11-92"></a><span class="sd">     */</span>
+</span><span id="__span-11-93"><a href="#__codelineno-11-93" id="__codelineno-11-93" name="__codelineno-11-93"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">forceDelete</span><span class="p">(</span><span class="nx">User</span> <span class="nv">$user</span><span class="p">,</span> <span class="nx">Post</span> <span class="nv">$post</span><span class="p">)</span><span class="o">:</span> <span class="nx">bool</span>
+</span><span id="__span-11-94"><a href="#__codelineno-11-94" id="__codelineno-11-94" name="__codelineno-11-94"></a>    <span class="p">{</span>
+</span><span id="__span-11-95"><a href="#__codelineno-11-95" id="__codelineno-11-95" name="__codelineno-11-95"></a>        <span class="c1">// Regla estricta: Incluso el dueño tiene prohibido borrar físicamente el registro.</span>
+</span><span id="__span-11-96"><a href="#__codelineno-11-96" id="__codelineno-11-96" name="__codelineno-11-96"></a>        <span class="c1">// Solo los administradores (capturados en el método 'before') pueden hacer esto.</span>
+</span><span id="__span-11-97"><a href="#__codelineno-11-97" id="__codelineno-11-97" name="__codelineno-11-97"></a>        <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+</span><span id="__span-11-98"><a href="#__codelineno-11-98" id="__codelineno-11-98" name="__codelineno-11-98"></a>    <span class="p">}</span>
+</span><span id="__span-11-99"><a href="#__codelineno-11-99" id="__codelineno-11-99" name="__codelineno-11-99"></a><span class="p">}</span>
+</span><span id="__span-11-100"><a href="#__codelineno-11-100" id="__codelineno-11-100" name="__codelineno-11-100"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<p>Existen múltiples puntos de entrada para invocar estas reglas de autorización, dependiendo de la capa de la aplicación en la que te encuentres. El método <code>authorize</code> (disponible en los controladores que extienden de <code>App\Http\Controllers\Controller</code>) infiere automáticamente qué política usar basándose en el modelo pasado como argumento.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-12-1"><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-12-2"><a href="#__codelineno-12-2" id="__codelineno-12-2" name="__codelineno-12-2"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">update</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Post</span> <span class="nv">$post</span><span class="p">)</span>
+</span><span id="__span-12-3"><a href="#__codelineno-12-3" id="__codelineno-12-3" name="__codelineno-12-3"></a>    <span class="p">{</span>
+</span><span id="__span-12-4"><a href="#__codelineno-12-4" id="__codelineno-12-4" name="__codelineno-12-4"></a>        <span class="c1">// Busca PostPolicy, ejecuta el método 'update' pasando ($user, $post).</span>
+</span><span id="__span-12-5"><a href="#__codelineno-12-5" id="__codelineno-12-5" name="__codelineno-12-5"></a>        <span class="c1">// Si falla, lanza automáticamente una HttpResponseException (403 Forbidden).</span>
+</span><span id="__span-12-6"><a href="#__codelineno-12-6" id="__codelineno-12-6" name="__codelineno-12-6"></a>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">authorize</span><span class="p">(</span><span class="s1">'update'</span><span class="p">,</span> <span class="nv">$post</span><span class="p">);</span>
+</span><span id="__span-12-7"><a href="#__codelineno-12-7" id="__codelineno-12-7" name="__codelineno-12-7"></a>
+</span><span id="__span-12-8"><a href="#__codelineno-12-8" id="__codelineno-12-8" name="__codelineno-12-8"></a>        <span class="c1">// El flujo solo llega aquí si la autorización fue exitosa.</span>
+</span><span id="__span-12-9"><a href="#__codelineno-12-9" id="__codelineno-12-9" name="__codelineno-12-9"></a>        <span class="nv">$post</span><span class="o">-&gt;</span><span class="na">update</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">validated</span><span class="p">());</span>
+</span><span id="__span-12-10"><a href="#__codelineno-12-10" id="__codelineno-12-10" name="__codelineno-12-10"></a>
+</span><span id="__span-12-11"><a href="#__codelineno-12-11" id="__codelineno-12-11" name="__codelineno-12-11"></a>        <span class="k">return</span> <span class="nx">redirect</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">route</span><span class="p">(</span><span class="s1">'posts.show'</span><span class="p">,</span> <span class="nv">$post</span><span class="p">);</span>
+</span><span id="__span-12-12"><a href="#__codelineno-12-12" id="__codelineno-12-12" name="__codelineno-12-12"></a>    <span class="p">}</span>
+</span><span id="__span-12-13"><a href="#__codelineno-12-13" id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<p>También puedes proteger rutas enteras sin siquiera entrar al controlador utilizando el middleware <code>can</code>.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-13-1"><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-13-2"><a href="#__codelineno-13-2" id="__codelineno-13-2" name="__codelineno-13-2"></a>    <span class="k">use</span> <span class="nx">App\Models\Post</span><span class="p">;</span>
+</span><span id="__span-13-3"><a href="#__codelineno-13-3" id="__codelineno-13-3" name="__codelineno-13-3"></a>
+</span><span id="__span-13-4"><a href="#__codelineno-13-4" id="__codelineno-13-4" name="__codelineno-13-4"></a>    <span class="c1">// Laravel usa "Route Model Binding" para obtener el post y pasárselo a la Policy.</span>
+</span><span id="__span-13-5"><a href="#__codelineno-13-5" id="__codelineno-13-5" name="__codelineno-13-5"></a>    <span class="nx">Route</span><span class="o">::</span><span class="na">put</span><span class="p">(</span><span class="s1">'/post/{post}'</span><span class="p">,</span> <span class="p">[</span><span class="nx">PostController</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="s1">'update'</span><span class="p">])</span>
+</span><span id="__span-13-6"><a href="#__codelineno-13-6" id="__codelineno-13-6" name="__codelineno-13-6"></a>        <span class="o">-&gt;</span><span class="na">middleware</span><span class="p">(</span><span class="s1">'can:update,post'</span><span class="p">);</span>
+</span><span id="__span-13-7"><a href="#__codelineno-13-7" id="__codelineno-13-7" name="__codelineno-13-7"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<p>Finalmente para ocultar elementos de la interfaz de usuario (botones de editar/borrar) a usuarios que no tienen permiso para usarlos utilizamos <code>@can</code>.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a href="#__codelineno-14-1" id="__codelineno-14-1" name="__codelineno-14-1"></a>&lt;h1&gt;{{ $post-&gt;title }}&lt;/h1&gt;
+</span><span id="__span-14-2"><a href="#__codelineno-14-2" id="__codelineno-14-2" name="__codelineno-14-2"></a>
+</span><span id="__span-14-3"><a href="#__codelineno-14-3" id="__codelineno-14-3" name="__codelineno-14-3"></a>&lt;div class="actions"&gt;
+</span><span id="__span-14-4"><a href="#__codelineno-14-4" id="__codelineno-14-4" name="__codelineno-14-4"></a>    @can('update', $post)
+</span><span id="__span-14-5"><a href="#__codelineno-14-5" id="__codelineno-14-5" name="__codelineno-14-5"></a>        &lt;a href="{{ route('posts.edit', $post) }}" class="btn btn-primary"&gt;
+</span><span id="__span-14-6"><a href="#__codelineno-14-6" id="__codelineno-14-6" name="__codelineno-14-6"></a>            Editar Post
+</span><span id="__span-14-7"><a href="#__codelineno-14-7" id="__codelineno-14-7" name="__codelineno-14-7"></a>        &lt;/a&gt;
+</span><span id="__span-14-8"><a href="#__codelineno-14-8" id="__codelineno-14-8" name="__codelineno-14-8"></a>    @endcan
+</span><span id="__span-14-9"><a href="#__codelineno-14-9" id="__codelineno-14-9" name="__codelineno-14-9"></a>
+</span><span id="__span-14-10"><a href="#__codelineno-14-10" id="__codelineno-14-10" name="__codelineno-14-10"></a>    @can('delete', $post)
+</span><span id="__span-14-11"><a href="#__codelineno-14-11" id="__codelineno-14-11" name="__codelineno-14-11"></a>        &lt;button wire:click="deletePost" class="btn btn-danger"&gt;
+</span><span id="__span-14-12"><a href="#__codelineno-14-12" id="__codelineno-14-12" name="__codelineno-14-12"></a>            Eliminar
+</span><span id="__span-14-13"><a href="#__codelineno-14-13" id="__codelineno-14-13" name="__codelineno-14-13"></a>        &lt;/button&gt;
+</span><span id="__span-14-14"><a href="#__codelineno-14-14" id="__codelineno-14-14" name="__codelineno-14-14"></a>    @endcan
+</span><span id="__span-14-15"><a href="#__codelineno-14-15" id="__codelineno-14-15" name="__codelineno-14-15"></a>&lt;/div&gt;
+</span></code></pre></div>
+<h2 id="roles-integrando-permisos-basados-en-roles">Roles: Integrando Permisos Basados en Roles</h2>
+<p>Mientras que los Gates y Policies gestionan permisos granulares ("¿puede editar este post específico?"), los <strong>Roles</strong> son una abstracción de nivel superior que agrupa esos permisos. Asignar un rol de "Editor" es mucho más eficiente que asignar manualmente 20 permisos individuales a cada usuario.</p>
+<p>En la arquitectura de Laravel, no existe una tabla de roles "nativa" por defecto. Eres tú, como arquitecto, quien decide la complejidad de la implementación según las necesidades del proyecto:</p>
+<ol>
+<li><strong>Columna Simple (Jerarquía Plana):</strong> Añadir una columna <code>role</code> (string/enum) en la tabla <code>users</code>. Ideal para aplicaciones donde un usuario solo puede ser una cosa a la vez (o es Admin o es Usuario).</li>
+<li><strong>Relación Muchos a Muchos (RBAC):</strong> Tablas <code>roles</code>, <code>permissions</code> y tablas pivote. Necesario cuando un usuario puede tener múltiples roles simultáneos (ej. ser "Editor" y "Contable" a la vez).</li>
+</ol>
+<p>Para este apartado, implementaremos la estrategia de <strong>Columna Simple</strong>, que cubre el 80% de los casos de uso habituales.</p>
+<hr/>
+<h3 id="implementacion-de-roles-ejemplo-simple">Implementación de Roles (Ejemplo Simple)</h3>
+<p>Para evitar ensuciar nuestro código con comparaciones de cadenas repetitivas (<code>if ($user-&gt;role === 'admin')</code>), centralizamos la lógica en el modelo <code>User</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>En PHP 8.1+, se recomienda encarecidamente usar Enums para evitar "Magic Strings", pero para este ejemplo usaremos strings por simplicidad.</p>
+</div>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-15-1"><a href="#__codelineno-15-1" id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-15-2"><a href="#__codelineno-15-2" id="__codelineno-15-2" name="__codelineno-15-2"></a>    <span class="k">namespace</span> <span class="nx">App\Models</span><span class="p">;</span>
+</span><span id="__span-15-3"><a href="#__codelineno-15-3" id="__codelineno-15-3" name="__codelineno-15-3"></a>
+</span><span id="__span-15-4"><a href="#__codelineno-15-4" id="__codelineno-15-4" name="__codelineno-15-4"></a>    <span class="k">use</span> <span class="nx">Illuminate\Foundation\Auth\User</span> <span class="k">as</span> <span class="nx">Authenticatable</span><span class="p">;</span>
+</span><span id="__span-15-5"><a href="#__codelineno-15-5" id="__codelineno-15-5" name="__codelineno-15-5"></a>
+</span><span id="__span-15-6"><a href="#__codelineno-15-6" id="__codelineno-15-6" name="__codelineno-15-6"></a>    <span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">Authenticatable</span>
+</span><span id="__span-15-7"><a href="#__codelineno-15-7" id="__codelineno-15-7" name="__codelineno-15-7"></a>    <span class="p">{</span>
+</span><span id="__span-15-8"><a href="#__codelineno-15-8" id="__codelineno-15-8" name="__codelineno-15-8"></a>        <span class="sd">/**</span>
+</span><span id="__span-15-9"><a href="#__codelineno-15-9" id="__codelineno-15-9" name="__codelineno-15-9"></a><span class="sd">         * Verifica si el usuario tiene un rol específico.</span>
+</span><span id="__span-15-10"><a href="#__codelineno-15-10" id="__codelineno-15-10" name="__codelineno-15-10"></a><span class="sd">         */</span>
+</span><span id="__span-15-11"><a href="#__codelineno-15-11" id="__codelineno-15-11" name="__codelineno-15-11"></a>        <span class="k">public</span> <span class="k">function</span> <span class="nf">hasRole</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$role</span><span class="p">)</span><span class="o">:</span> <span class="nx">bool</span>
+</span><span id="__span-15-12"><a href="#__codelineno-15-12" id="__codelineno-15-12" name="__codelineno-15-12"></a>        <span class="p">{</span>
+</span><span id="__span-15-13"><a href="#__codelineno-15-13" id="__codelineno-15-13" name="__codelineno-15-13"></a>            <span class="c1">// Comparación estricta del valor de la columna</span>
+</span><span id="__span-15-14"><a href="#__codelineno-15-14" id="__codelineno-15-14" name="__codelineno-15-14"></a>            <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">role</span> <span class="o">===</span> <span class="nv">$role</span><span class="p">;</span>
+</span><span id="__span-15-15"><a href="#__codelineno-15-15" id="__codelineno-15-15" name="__codelineno-15-15"></a>        <span class="p">}</span>
+</span><span id="__span-15-16"><a href="#__codelineno-15-16" id="__codelineno-15-16" name="__codelineno-15-16"></a>
+</span><span id="__span-15-17"><a href="#__codelineno-15-17" id="__codelineno-15-17" name="__codelineno-15-17"></a>        <span class="sd">/**</span>
+</span><span id="__span-15-18"><a href="#__codelineno-15-18" id="__codelineno-15-18" name="__codelineno-15-18"></a><span class="sd">         * Helper semántico para verificar privilegios de administrador.</span>
+</span><span id="__span-15-19"><a href="#__codelineno-15-19" id="__codelineno-15-19" name="__codelineno-15-19"></a><span class="sd">         * Centraliza la lógica: si mañana el rol cambia de 'admin' a 'super-admin',</span>
+</span><span id="__span-15-20"><a href="#__codelineno-15-20" id="__codelineno-15-20" name="__codelineno-15-20"></a><span class="sd">         * solo cambias este método.</span>
+</span><span id="__span-15-21"><a href="#__codelineno-15-21" id="__codelineno-15-21" name="__codelineno-15-21"></a><span class="sd">         */</span>
+</span><span id="__span-15-22"><a href="#__codelineno-15-22" id="__codelineno-15-22" name="__codelineno-15-22"></a>        <span class="k">public</span> <span class="k">function</span> <span class="nf">isAdmin</span><span class="p">()</span><span class="o">:</span> <span class="nx">bool</span>
+</span><span id="__span-15-23"><a href="#__codelineno-15-23" id="__codelineno-15-23" name="__codelineno-15-23"></a>        <span class="p">{</span>
+</span><span id="__span-15-24"><a href="#__codelineno-15-24" id="__codelineno-15-24" name="__codelineno-15-24"></a>            <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">hasRole</span><span class="p">(</span><span class="s1">'admin'</span><span class="p">);</span>
+</span><span id="__span-15-25"><a href="#__codelineno-15-25" id="__codelineno-15-25" name="__codelineno-15-25"></a>        <span class="p">}</span>
+</span><span id="__span-15-26"><a href="#__codelineno-15-26" id="__codelineno-15-26" name="__codelineno-15-26"></a>    <span class="p">}</span>
+</span><span id="__span-15-27"><a href="#__codelineno-15-27" id="__codelineno-15-27" name="__codelineno-15-27"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<h3 id="uso-de-roles-en-gates">Uso de Roles en Gates</h3>
+<p>Los Roles brillan cuando se combinan con Gates para definir barreras arquitectónicas amplias.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-16-1"><a href="#__codelineno-16-1" id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-16-2"><a href="#__codelineno-16-2" id="__codelineno-16-2" name="__codelineno-16-2"></a>    <span class="c1">// En app/Providers/AuthServiceProvider.php</span>
+</span><span id="__span-16-3"><a href="#__codelineno-16-3" id="__codelineno-16-3" name="__codelineno-16-3"></a>    <span class="k">use</span> <span class="nx">Illuminate\Support\Facades\Gate</span><span class="p">;</span>
+</span><span id="__span-16-4"><a href="#__codelineno-16-4" id="__codelineno-16-4" name="__codelineno-16-4"></a>    <span class="k">use</span> <span class="nx">App\Models\User</span><span class="p">;</span>
+</span><span id="__span-16-5"><a href="#__codelineno-16-5" id="__codelineno-16-5" name="__codelineno-16-5"></a>
+</span><span id="__span-16-6"><a href="#__codelineno-16-6" id="__codelineno-16-6" name="__codelineno-16-6"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">boot</span><span class="p">()</span><span class="o">:</span> <span class="nx">void</span>
+</span><span id="__span-16-7"><a href="#__codelineno-16-7" id="__codelineno-16-7" name="__codelineno-16-7"></a>    <span class="p">{</span>
+</span><span id="__span-16-8"><a href="#__codelineno-16-8" id="__codelineno-16-8" name="__codelineno-16-8"></a>        <span class="c1">// Definimos un Gate que agrupa múltiples roles</span>
+</span><span id="__span-16-9"><a href="#__codelineno-16-9" id="__codelineno-16-9" name="__codelineno-16-9"></a>        <span class="nx">Gate</span><span class="o">::</span><span class="na">define</span><span class="p">(</span><span class="s1">'access-backend'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">User</span> <span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-16-10"><a href="#__codelineno-16-10" id="__codelineno-16-10" name="__codelineno-16-10"></a>            <span class="k">return</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">hasRole</span><span class="p">(</span><span class="s1">'admin'</span><span class="p">)</span> <span class="o">||</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">hasRole</span><span class="p">(</span><span class="s1">'editor'</span><span class="p">);</span>
+</span><span id="__span-16-11"><a href="#__codelineno-16-11" id="__codelineno-16-11" name="__codelineno-16-11"></a>        <span class="p">});</span>
+</span><span id="__span-16-12"><a href="#__codelineno-16-12" id="__codelineno-16-12" name="__codelineno-16-12"></a>
+</span><span id="__span-16-13"><a href="#__codelineno-16-13" id="__codelineno-16-13" name="__codelineno-16-13"></a>        <span class="c1">// Gate crítico restringido solo a administradores</span>
+</span><span id="__span-16-14"><a href="#__codelineno-16-14" id="__codelineno-16-14" name="__codelineno-16-14"></a>        <span class="nx">Gate</span><span class="o">::</span><span class="na">define</span><span class="p">(</span><span class="s1">'manage-system-settings'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">User</span> <span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-16-15"><a href="#__codelineno-16-15" id="__codelineno-16-15" name="__codelineno-16-15"></a>            <span class="k">return</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">isAdmin</span><span class="p">();</span>
+</span><span id="__span-16-16"><a href="#__codelineno-16-16" id="__codelineno-16-16" name="__codelineno-16-16"></a>        <span class="p">});</span>
+</span><span id="__span-16-17"><a href="#__codelineno-16-17" id="__codelineno-16-17" name="__codelineno-16-17"></a>    <span class="p">}</span>
+</span><span id="__span-16-18"><a href="#__codelineno-16-18" id="__codelineno-16-18" name="__codelineno-16-18"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<h3 id="uso-de-roles-en-policies">Uso de Roles en Policies</h3>
+<p>Uno de los patrones más potentes es utilizar los roles para "bypassear" (saltar) las reglas granulares. Si tienes un Administrador que debe tener control total, no tiene sentido escribir lógica de autorización en cada método (<code>update</code>, <code>delete</code>, etc.).</p>
+<p>Utilizamos el método <code>before</code> de la Policy para interceptar la llamada antes de que llegue a la lógica normal.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-17-1"><a href="#__codelineno-17-1" id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-17-2"><a href="#__codelineno-17-2" id="__codelineno-17-2" name="__codelineno-17-2"></a>    <span class="k">namespace</span> <span class="nx">App\Policies</span><span class="p">;</span>
+</span><span id="__span-17-3"><a href="#__codelineno-17-3" id="__codelineno-17-3" name="__codelineno-17-3"></a>
+</span><span id="__span-17-4"><a href="#__codelineno-17-4" id="__codelineno-17-4" name="__codelineno-17-4"></a>    <span class="k">use</span> <span class="nx">App\Models\Post</span><span class="p">;</span>
+</span><span id="__span-17-5"><a href="#__codelineno-17-5" id="__codelineno-17-5" name="__codelineno-17-5"></a>    <span class="k">use</span> <span class="nx">App\Models\User</span><span class="p">;</span>
+</span><span id="__span-17-6"><a href="#__codelineno-17-6" id="__codelineno-17-6" name="__codelineno-17-6"></a>
+</span><span id="__span-17-7"><a href="#__codelineno-17-7" id="__codelineno-17-7" name="__codelineno-17-7"></a>    <span class="k">class</span> <span class="nc">PostPolicy</span>
+</span><span id="__span-17-8"><a href="#__codelineno-17-8" id="__codelineno-17-8" name="__codelineno-17-8"></a>    <span class="p">{</span>
+</span><span id="__span-17-9"><a href="#__codelineno-17-9" id="__codelineno-17-9" name="__codelineno-17-9"></a>        <span class="sd">/**</span>
+</span><span id="__span-17-10"><a href="#__codelineno-17-10" id="__codelineno-17-10" name="__codelineno-17-10"></a><span class="sd">         * Interceptor Previo.</span>
+</span><span id="__span-17-11"><a href="#__codelineno-17-11" id="__codelineno-17-11" name="__codelineno-17-11"></a><span class="sd">         * @return bool|null</span>
+</span><span id="__span-17-12"><a href="#__codelineno-17-12" id="__codelineno-17-12" name="__codelineno-17-12"></a><span class="sd">         * - true: Autoriza inmediatamente (salta el resto de métodos).</span>
+</span><span id="__span-17-13"><a href="#__codelineno-17-13" id="__codelineno-17-13" name="__codelineno-17-13"></a><span class="sd">         * - false: Deniega inmediatamente.</span>
+</span><span id="__span-17-14"><a href="#__codelineno-17-14" id="__codelineno-17-14" name="__codelineno-17-14"></a><span class="sd">         * - null: Continúa con la comprobación normal del método solicitado (view, update...).</span>
+</span><span id="__span-17-15"><a href="#__codelineno-17-15" id="__codelineno-17-15" name="__codelineno-17-15"></a><span class="sd">         */</span>
+</span><span id="__span-17-16"><a href="#__codelineno-17-16" id="__codelineno-17-16" name="__codelineno-17-16"></a>        <span class="k">public</span> <span class="k">function</span> <span class="nf">before</span><span class="p">(</span><span class="nx">User</span> <span class="nv">$user</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$ability</span><span class="p">)</span><span class="o">:</span> <span class="nx">bool</span><span class="o">|</span><span class="k">null</span>
+</span><span id="__span-17-17"><a href="#__codelineno-17-17" id="__codelineno-17-17" name="__codelineno-17-17"></a>        <span class="p">{</span>
+</span><span id="__span-17-18"><a href="#__codelineno-17-18" id="__codelineno-17-18" name="__codelineno-17-18"></a>            <span class="k">if</span> <span class="p">(</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">isAdmin</span><span class="p">())</span> <span class="p">{</span>
+</span><span id="__span-17-19"><a href="#__codelineno-17-19" id="__codelineno-17-19" name="__codelineno-17-19"></a>                <span class="k">return</span> <span class="k">true</span><span class="p">;</span> <span class="c1">// El admin puede hacer TODO con los posts.</span>
+</span><span id="__span-17-20"><a href="#__codelineno-17-20" id="__codelineno-17-20" name="__codelineno-17-20"></a>            <span class="p">}</span>
+</span><span id="__span-17-21"><a href="#__codelineno-17-21" id="__codelineno-17-21" name="__codelineno-17-21"></a>
+</span><span id="__span-17-22"><a href="#__codelineno-17-22" id="__codelineno-17-22" name="__codelineno-17-22"></a>            <span class="k">return</span> <span class="k">null</span><span class="p">;</span> <span class="c1">// El usuario normal debe pasar las validaciones siguientes.</span>
+</span><span id="__span-17-23"><a href="#__codelineno-17-23" id="__codelineno-17-23" name="__codelineno-17-23"></a>        <span class="p">}</span>
+</span><span id="__span-17-24"><a href="#__codelineno-17-24" id="__codelineno-17-24" name="__codelineno-17-24"></a>
+</span><span id="__span-17-25"><a href="#__codelineno-17-25" id="__codelineno-17-25" name="__codelineno-17-25"></a>        <span class="sd">/**</span>
+</span><span id="__span-17-26"><a href="#__codelineno-17-26" id="__codelineno-17-26" name="__codelineno-17-26"></a><span class="sd">         * Regla específica para usuarios normales.</span>
+</span><span id="__span-17-27"><a href="#__codelineno-17-27" id="__codelineno-17-27" name="__codelineno-17-27"></a><span class="sd">         */</span>
+</span><span id="__span-17-28"><a href="#__codelineno-17-28" id="__codelineno-17-28" name="__codelineno-17-28"></a>        <span class="k">public</span> <span class="k">function</span> <span class="nf">update</span><span class="p">(</span><span class="nx">User</span> <span class="nv">$user</span><span class="p">,</span> <span class="nx">Post</span> <span class="nv">$post</span><span class="p">)</span><span class="o">:</span> <span class="nx">bool</span>
+</span><span id="__span-17-29"><a href="#__codelineno-17-29" id="__codelineno-17-29" name="__codelineno-17-29"></a>        <span class="p">{</span>
+</span><span id="__span-17-30"><a href="#__codelineno-17-30" id="__codelineno-17-30" name="__codelineno-17-30"></a>            <span class="c1">// Esta línea solo se ejecuta si el usuario NO es admin.</span>
+</span><span id="__span-17-31"><a href="#__codelineno-17-31" id="__codelineno-17-31" name="__codelineno-17-31"></a>            <span class="k">return</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">===</span> <span class="nv">$post</span><span class="o">-&gt;</span><span class="na">user_id</span><span class="p">;</span>
+</span><span id="__span-17-32"><a href="#__codelineno-17-32" id="__codelineno-17-32" name="__codelineno-17-32"></a>        <span class="p">}</span>
+</span><span id="__span-17-33"><a href="#__codelineno-17-33" id="__codelineno-17-33" name="__codelineno-17-33"></a>
+</span><span id="__span-17-34"><a href="#__codelineno-17-34" id="__codelineno-17-34" name="__codelineno-17-34"></a>        <span class="sd">/**</span>
+</span><span id="__span-17-35"><a href="#__codelineno-17-35" id="__codelineno-17-35" name="__codelineno-17-35"></a><span class="sd">         * Ejemplo de combinación: Rol específico + Regla de negocio.</span>
+</span><span id="__span-17-36"><a href="#__codelineno-17-36" id="__codelineno-17-36" name="__codelineno-17-36"></a><span class="sd">         */</span>
+</span><span id="__span-17-37"><a href="#__codelineno-17-37" id="__codelineno-17-37" name="__codelineno-17-37"></a>        <span class="k">public</span> <span class="k">function</span> <span class="nf">publish</span><span class="p">(</span><span class="nx">User</span> <span class="nv">$user</span><span class="p">,</span> <span class="nx">Post</span> <span class="nv">$post</span><span class="p">)</span><span class="o">:</span> <span class="nx">bool</span>
+</span><span id="__span-17-38"><a href="#__codelineno-17-38" id="__codelineno-17-38" name="__codelineno-17-38"></a>        <span class="p">{</span>
+</span><span id="__span-17-39"><a href="#__codelineno-17-39" id="__codelineno-17-39" name="__codelineno-17-39"></a>            <span class="c1">// Solo los editores pueden publicar, y solo si son dueños del post.</span>
+</span><span id="__span-17-40"><a href="#__codelineno-17-40" id="__codelineno-17-40" name="__codelineno-17-40"></a>            <span class="k">return</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">hasRole</span><span class="p">(</span><span class="s1">'editor'</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">===</span> <span class="nv">$post</span><span class="o">-&gt;</span><span class="na">user_id</span><span class="p">;</span>
+</span><span id="__span-17-41"><a href="#__codelineno-17-41" id="__codelineno-17-41" name="__codelineno-17-41"></a>        <span class="p">}</span>
+</span><span id="__span-17-42"><a href="#__codelineno-17-42" id="__codelineno-17-42" name="__codelineno-17-42"></a>    <span class="p">}</span>
+</span><span id="__span-17-43"><a href="#__codelineno-17-43" id="__codelineno-17-43" name="__codelineno-17-43"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Manuel Sánchez Gomis
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["search.suggest", "search.highlight", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "content.code.copy", "content.tabs.link", "content.tooltips"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../../assets/_markdown_exec_pyodide.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../../_static/js/notebook.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,139 @@
+::1. Modelos de Ejecución (Cliente)::¿Qué tecnologías, de las siguientes, se ejecutan exclusivamente en el **cliente** (navegador web)?{
+=HTML, CSS y JavaScript
+~PHP, HTML y CSS
+~Python, JavaScript y HTML
+~Java, CSS y JavaScript
+}
+
+::2. Modelos de Ejecución (Visibilidad)::¿Cuál es una diferencia fundamental en la visibilidad del código entre el cliente y el servidor?{
+=El código del servidor (PHP, Python) nunca es visible para el usuario, mientras que el del cliente (HTML, CSS, JS) sí lo es.
+~El código del cliente nunca es visible para el usuario.
+~Ambos códigos, cliente y servidor, son siempre visibles para el usuario.
+~Solo el código JavaScript es visible para el usuario.
+}
+
+::3. Ventajas Generación Dinámica::¿Cuál es una de las principales ventajas de la generación dinámica de páginas web?{
+=Permite personalizar el contenido para cada usuario, como mostrar su nombre o información de su cuenta.
+~Hace que las páginas web carguen más rápido al no necesitar un servidor.
+~Asegura que todos los usuarios vean exactamente la misma información, garantizando la consistencia.
+~Simplifica el código HTML al eliminar la necesidad de usar CSS.
+}
+
+::4. Mecanismos de Ejecución (CGI)::¿Qué mecanismo de ejecución de código es conocido por su ineficiencia al crear un proceso del sistema operativo completamente nuevo por cada petición?{
+=CGI (Common Gateway Interface)
+~FastCGI
+~Módulo Embebido
+~Servlets
+}
+
+::5. Mecanismos de Ejecución (FastCGI)::¿Qué mecanismo, estándar en arquitecturas modernas con Nginx, reutiliza un pool de procesos persistentes para atender las peticiones de forma eficiente?{
+=FastCGI
+~CGI
+~mod_php
+~Docker
+}
+
+::6. Funcionalidades Servidores de Aplicaciones::¿Qué funcionalidad clave aporta un servidor de aplicaciones para gestionar la integridad de los datos en operaciones complejas como una compra online?{
+=La transaccionalidad, asegurando que una serie de pasos se completen todos o ninguno.
+~La capacidad de servir ficheros estáticos como imágenes y CSS.
+~La interpretación de código HTML.
+~La gestión de peticiones del protocolo FTP.
+}
+
+::7. Integración Servidores (Proxy Inverso)::En una arquitectura de proxy inverso, ¿cuál es la función del servidor web (como Nginx) que se sitúa frente al servidor de aplicaciones?{
+=Servir contenido estático (CSS, imágenes) y reenviar las peticiones dinámicas al servidor de aplicaciones.
+~Ejecutar toda la lógica de negocio de la aplicación.
+~Conectarse directamente a la base de datos para obtener los datos.
+~Renderizar el HTML final que se envía al cliente.
+}
+
+::8. Lenguajes (PHP)::¿Qué lenguaje, diseñado específicamente para la web, utiliza de forma nativa el modelo de código embebido con etiquetas `<?php ... ?>`?{
+=PHP
+~Python
+~Java
+~JavaScript
+}
+
+::9. Lenguajes (Python)::¿Qué framework de Python sigue la filosofía de "baterías incluidas", proporcionando una solución completa y opinada para el desarrollo web?{
+=Django
+~Flask
+~FastAPI
+~Pyramid
+}
+
+::10. Lenguajes (Node.js)::¿Cuál es la característica técnica de Node.js que lo hace especialmente eficiente para aplicaciones en tiempo real y con muchas conexiones concurrentes?{
+=Su modelo de E/S no bloqueante y su bucle de eventos (event loop).
+~Su sistema de plantillas integrado.
+~Su fuerte tipado estático heredado de C++.
+~Su ejecución dentro de la Java Virtual Machine (JVM).
+}
+
+::11. Lenguajes (Java)::¿En qué ecosistema de lenguaje es **Spring Boot** la tecnología dominante para crear aplicaciones web robustas y auto-ejecutables con un servidor embebido?{
+=Java
+~Python
+~Ruby
+~C#
+}
+
+::12. Integración (Código Embebido)::¿Qué método de integración de código es propenso a generar "código espagueti" al mezclar lógica, acceso a datos y presentación en un mismo fichero?{
+=Código embebido
+~Motores de Plantillas
+~APIs REST
+~WebSockets
+}
+
+::13. Integración (Motores de Plantillas)::¿Qué enfoque moderno promueve una estricta separación de intereses, donde el código de servidor prepara los datos y se los pasa a una "Vista" para que los renderice?{
+=Motores de Plantillas (Templating Engines)
+~Código Embebido
+~Single-Page Applications (SPA)
+~CGI
+}
+
+::14. Integración (API+SPA)::En una arquitectura con una SPA (Single-Page Application), ¿qué formato de datos utiliza típicamente el servidor para responder a las peticiones del cliente?{
+=JSON
+~HTML
+~XML
+~CSS
+}
+
+::15. Herramientas (Control de Versiones)::¿Qué herramienta es el estándar de la industria para el control de versiones, permitiendo registrar cambios y colaborar en equipo mediante ramas?{
+=Git
+~Docker
+~npm
+~Xdebug
+}
+
+::16. Herramientas (Frameworks - MVC)::¿Qué patrón de arquitectura, fundamental en la mayoría de frameworks modernos, separa la aplicación en tres componentes: Modelo, Vista y Controlador?{
+=MVC (Modelo-Vista-Controlador)
+~API REST
+~CI/CD
+~Singleton
+}
+
+::17. Herramientas (Frameworks - ORM)::¿Qué es un ORM (Object-Relational Mapper)?{
+=Una técnica que permite al desarrollador interactuar con la base de datos usando objetos del lenguaje de programación en lugar de escribir SQL.
+~Un motor de plantillas para generar HTML.
+~Un servidor web de alto rendimiento.
+~Un sistema para gestionar las rutas de la aplicación.
+}
+
+::18. Herramientas (Despliegue - Contenedores)::¿Qué tecnología resuelve el problema de "en mi máquina funciona" al empaquetar una aplicación con todas sus dependencias en una unidad autónoma y ejecutable?{
+=Contenedores (específicamente Docker)
+~Git
+~Un IDE como Visual Studio Code
+~Un depurador como Xdebug
+}
+
+::19. Herramientas (Ciclo de Vida - CI)::¿Cómo se denomina la práctica que automatiza la ejecución de tests cada vez que un desarrollador sube cambios a un repositorio central?{
+=Integración Continua (CI)
+~Despliegue Continuo (CD)
+~Control de Versiones
+~Orquestación de contenedores
+}
+
+::20. HTTP (Stateless)::¿Qué significa que el protocolo HTTP es "stateless" (sin estado)?{
+=Que cada ciclo de petición-respuesta es independiente y el servidor no guarda memoria de interacciones previas.
+~Que el servidor recuerda a cada usuario entre peticiones.
+~Que la conexión entre cliente y servidor nunca se cierra.
+~Que el protocolo no permite enviar datos complejos.
+}
