@@ -1,0 +1,2751 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Manuel Sánchez Gomis">
+      
+      
+      
+        <link rel="prev" href="../../../aplicaciones_web/markdowns/98%20-%20ejercicios_persistencia/">
+      
+      
+        <link rel="next" href="../02%20-%20instalacion/">
+      
+      
+      <link rel="icon" href="../../../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.46">
+    
+    
+      
+        <title>Introducción - Desarrollo Web en entorno servidor</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/_markdown_exec_pyodide.css">
+    
+      <link rel="stylesheet" href="../../../_static/css/notebook.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduccion" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Desarrollo Web en entorno servidor" class="md-header__button md-logo" aria-label="Desarrollo Web en entorno servidor" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Desarrollo Web en entorno servidor
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Introducción
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber"  aria-label="Cambiar a modo brillante"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo brillante" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="amber"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Bienvenido
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../introduccion/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Introduccion
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../php/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Php
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../aplicaciones_web/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Aplicaciones Web con Php
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+    
+  
+  Laravel
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../servicios_web/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Servicios Web
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../webs_dinamicas/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Webs Dinámicas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../aplicaciones_web_hibridas/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Aplicaciones Web Híbridas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../bibliografia/" class="md-tabs__link">
+        
+  
+    
+  
+  Bibliografia
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Desarrollo Web en entorno servidor" class="md-nav__button md-logo" aria-label="Desarrollo Web en entorno servidor" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    Desarrollo Web en entorno servidor
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bienvenido
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Introduccion
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Introduccion
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../introduccion/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Conceptos básicos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../introduccion/markdowns/02%20-%20lenguajes_programacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lenguajes de programación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../introduccion/markdowns/03%20-%20herramientas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Herramientas y frameworks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Php
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Php
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/02%20-%20primeros_pasos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primeros pasos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/03%20-%20estructuras_control/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Estructuras de Control en PHP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/04%20-%20arrays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Arrays
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/05%20-%20funciones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Funciones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/06%20-%20poo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Programación orientada a objetos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/07%20-%20excepciones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Excepciones y errores
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/08%20-%20directivas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Directivas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/09%20-%20codigo_embebido/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Código embebido
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Aplicaciones Web con Php
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Aplicaciones Web con Php
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/02%20-%20formularios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Formularios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/03%20-%20sesiones_cookies/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cookies y Sesiones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/04%20-%20seguridad/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Seguridad
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/05%20-%20ficheros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ficheros
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/06%20-%20bases_datos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bases de datos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/07%20-%20estructura_proyecto/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Organizando el código
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/98%20-%20ejercicios_persistencia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios persistencia
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Laravel
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Laravel
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#la-arquitectura-mvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      La Arquitectura MVC
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="La Arquitectura MVC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-traductor-magico-que-es-un-orm" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Traductor Mágico: ¿Qué es un ORM?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="El Traductor Mágico: ¿Qué es un ORM?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#la-brecha-entre-objetos-y-tablas" class="md-nav__link">
+    <span class="md-ellipsis">
+      La Brecha entre Objetos y Tablas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ventajas-de-usar-un-orm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ventajas de Usar un ORM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#desventajas-y-consideraciones-de-un-orm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Desventajas y Consideraciones de un ORM
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#composer-el-gestor-de-dependencias-de-php" class="md-nav__link">
+    <span class="md-ellipsis">
+      Composer: El Gestor de Dependencias de PHP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Composer: El Gestor de Dependencias de PHP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#la-solucion-composer-al-rescate" class="md-nav__link">
+    <span class="md-ellipsis">
+      La Solución: Composer al Rescate
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="La Solución: Composer al Rescate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-fichero-composerjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      El fichero composer.json
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#packagist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Packagist
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-fichero-composerlock" class="md-nav__link">
+    <span class="md-ellipsis">
+      El fichero composer.lock
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-flujo-de-trabajo-y-la-magia-del-autoloading" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Flujo de Trabajo y la Magia del Autoloading
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instalacion-de-composer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación de composer
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Instalación de composer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#instalacion-en-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación en Windows
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instalacion-en-linux-y-macos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación en Linux y macOS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verificacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verificación
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02%20-%20instalacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instalación y primeros pasos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03%20-%20rutas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rutas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04%20-%20controladores/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Controladores
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05%20-%20vistas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vistas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06%20-%20formularios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Formularios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07%20-%20modelos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modelos de Eloquent
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14%20-%20response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Respuestas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08%20-%20cookies_sesiones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cookies y Sesiones en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09%20-%20servicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Servicios en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10%20-%20seguridad/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Seguridad en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11%20-%20inyeccion_dependencias/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inyección de Dependencias en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12%20-%20testing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pruebas y documentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13%20-%20fechas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fechas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15%20-%20migrations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Migraciones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Servicios Web
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Servicios Web
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/02%20-%20tecnologias/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tecnologías y Estándares
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/03%20-%20creando_servicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creando un Servicio Web
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/04%20-%20probando_servicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Probando el Servicio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/05%20-%20documentando_servicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Documentando un Servicio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Webs Dinámicas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Webs Dinámicas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/02%20-%20ajax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AJAX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/03%20-%20validacion_formularios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Validación de Formularios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/04%20-%20modificacion_dom/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modificación del DOM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/05%20-%20async_patrones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Patrones Async
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Aplicaciones Web Híbridas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Aplicaciones Web Híbridas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/02%20-%20apis_terceros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    APIs de Terceros
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/03%20-%20creando_apis_propias/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creando APIs Propias
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/04%20-%20sdks_frameworks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SDKs y Frameworks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/05%20-%20big_data_ia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Big Data e IA
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/06%20-%20testing_depuracion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Testing y Depuración
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/07%20-%20autenticacion_apis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Autenticación de APIs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/08%20-%20versionado_webhooks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Versionado y Webhooks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../bibliografia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bibliografia
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#la-arquitectura-mvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      La Arquitectura MVC
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="La Arquitectura MVC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-traductor-magico-que-es-un-orm" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Traductor Mágico: ¿Qué es un ORM?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="El Traductor Mágico: ¿Qué es un ORM?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#la-brecha-entre-objetos-y-tablas" class="md-nav__link">
+    <span class="md-ellipsis">
+      La Brecha entre Objetos y Tablas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ventajas-de-usar-un-orm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ventajas de Usar un ORM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#desventajas-y-consideraciones-de-un-orm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Desventajas y Consideraciones de un ORM
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#composer-el-gestor-de-dependencias-de-php" class="md-nav__link">
+    <span class="md-ellipsis">
+      Composer: El Gestor de Dependencias de PHP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Composer: El Gestor de Dependencias de PHP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#la-solucion-composer-al-rescate" class="md-nav__link">
+    <span class="md-ellipsis">
+      La Solución: Composer al Rescate
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="La Solución: Composer al Rescate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-fichero-composerjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      El fichero composer.json
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#packagist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Packagist
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-fichero-composerlock" class="md-nav__link">
+    <span class="md-ellipsis">
+      El fichero composer.lock
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-flujo-de-trabajo-y-la-magia-del-autoloading" class="md-nav__link">
+    <span class="md-ellipsis">
+      El Flujo de Trabajo y la Magia del Autoloading
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instalacion-de-composer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación de composer
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Instalación de composer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#instalacion-en-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación en Windows
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instalacion-en-linux-y-macos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación en Linux y macOS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verificacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verificación
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="introduccion">Introducción</h1>
+<p>Hasta ahora, hemos aprendido a construir aplicaciones escribiendo código PHP desde cero, gestionando manualmente la inclusión de ficheros, las conexiones a la base de datos y el flujo de la aplicación. Este enfoque, conocido como "PHP Vainilla", es fundamental para entender cómo funciona el lenguaje. Sin embargo, a medida que las aplicaciones crecen, este método presenta desafíos significativos: el código puede volverse desorganizado ("código espagueti"), las tareas comunes se vuelven repetitivas y garantizar la seguridad se convierte en una tarea compleja y propensa a errores.</p>
+<p>Para solucionar estos problemas y profesionalizar el proceso de desarrollo, la comunidad de PHP, al igual que la de otros lenguajes, ha creado los <strong>frameworks</strong>. Un framework es un esqueleto o andamiaje de software que proporciona una estructura estándar y un conjunto de herramientas y librerías para construir aplicaciones. En lugar de empezar con una carpeta vacía, partimos de una base sólida que ya resuelve los problemas más comunes y nos guía para que sigamos las mejores prácticas de la industria.</p>
+<p>La mayoría de los frameworks de PHP modernos se basan en la arquitectura <strong>Modelo-Vista-Controlador (MVC)</strong>, que separa la lógica de negocio (Modelo) de la presentación (Vista) y el control del flujo (Controlador). Además, ofrecen componentes ya construidos para tareas como el enrutamiento de URLs, el acceso a bases de datos (mediante ORMs), la validación de formularios, la autenticación de usuarios y la protección contra vulnerabilidades comunes.</p>
+<p>Aunque existen varias opciones excelentes como Symfony o CodeIgniter, en las siguientes secciones nos centraremos en el framework más popular y con mayor crecimiento en el ecosistema PHP actual: <strong>Laravel</strong>. Exploraremos su filosofía, sus componentes principales y cómo nos permite construir aplicaciones complejas de forma rápida, elegante y segura.</p>
+<h2 id="la-arquitectura-mvc">La Arquitectura MVC</h2>
+<p>A medida que una aplicación web crece, el mayor desafío es mantener el código organizado y mantenible. En un proyecto sin estructura, es muy común acabar con ficheros que mezclan lógica de negocio, consultas a la base de datos y código HTML. Este fenómeno, conocido como <strong>"código espagueti"</strong>, hace que la aplicación sea frágil, difícil de depurar y casi imposible de escalar.</p>
+<p>Para resolver este problema, la industria del software adoptó un patrón de diseño arquitectónico llamado <strong>MVC (Modelo-Vista-Controlador)</strong>. MVC no es un lenguaje ni un framework, sino una filosofía para organizar el código que se basa en un principio fundamental: la <strong>Separación de Intereses</strong>. La idea es dividir la aplicación en tres componentes principales, cada uno con una responsabilidad única y bien definida.</p>
+<figure>
+<img alt="" src="../../images/01.png" width="100%"/>
+</figure>
+<p>El <strong>Modelo</strong> es el cerebro de la aplicación, la capa donde reside toda la lógica de negocio y la gestión de los datos. Sus responsabilidades incluyen definir la estructura de la información (por ejemplo, un modelo <code>Articulo</code> con sus propiedades), implementar las reglas de negocio (como una función que determine si un usuario puede publicar) y ser el único componente que interactúa directamente con la base de datos, a menudo a través de un ORM. Es fundamental entender que el Modelo es completamente agnóstico a la presentación; no sabe ni le importa cómo se mostrarán los datos en el HTML.</p>
+<p>En el extremo opuesto se encuentra la <strong>Vista</strong>, que constituye la cara visible de la aplicación, es decir, la capa de presentación que ve el usuario. Generalmente es un fichero de plantilla HTML que recibe datos y los muestra. La Vista debe ser "tonta", su única responsabilidad es presentar la información que le llega, utilizando bucles o condicionales simples si es necesario para el renderizado, pero sin contener lógica de negocio ni realizar consultas a la base de datos.</p>
+<p>El nexo de unión entre ambos es el <strong>Controlador</strong>, que actúa como un director de orquesta. Cuando una petición de un usuario llega, un sistema de enrutamiento la dirige a un método específico de un Controlador. Este, a su vez, le pide al Modelo los datos que necesita, selecciona la Vista apropiada para la respuesta y le pasa los datos que ha recibido del Modelo. Finalmente, la Vista se renderiza como un documento HTML completo y el Controlador lo envía de vuelta al navegador como la respuesta final a la petición.</p>
+<p>La adopción de esta arquitectura se traduce en beneficios directos y significativos. La estricta separación de intereses resulta en una mejor <strong>organización</strong> del código y una <strong>mantenibilidad</strong> superior, ya que un cambio en la interfaz (la Vista) no requiere modificar la lógica de negocio (el Modelo). Este desacoplamiento también fomenta la <strong>reutilización de código</strong>, permitiendo que un mismo Modelo sirva datos a múltiples Controladores y Vistas. Finalmente, esta clara división de tareas facilita el <strong>trabajo en paralelo</strong>, posibilitando que los equipos de frontend y backend puedan desarrollar sus respectivas capas de forma concurrente.</p>
+<h3 id="el-traductor-magico-que-es-un-orm">El Traductor Mágico: ¿Qué es un ORM?</h3>
+<p>Cuando trabajamos con la arquitectura MVC, dijimos que el <strong>Modelo</strong> es el responsable de interactuar con la base de datos. Históricamente, esto significaba escribir sentencias SQL en nuestro código PHP, ejecutar las consultas y mapear manualmente los resultados a objetos o arrays. Este proceso es tedioso, repetitivo y propenso a errores.</p>
+<figure>
+<img alt="" src="../../images/02.png" width="100%"/>
+</figure>
+<p>Para resolver este problema, los frameworks modernos utilizan una técnica llamada <strong>ORM (Object-Relational Mapping o Mapeo Objeto-Relacional)</strong>. Un ORM es una capa de abstracción, un "traductor" mágico que se sitúa entre nuestra aplicación (que piensa en <strong>Objetos</strong>) y la base de datos (que piensa en <strong>Tablas Relacionales</strong>).</p>
+<hr/>
+<h4 id="la-brecha-entre-objetos-y-tablas">La Brecha entre Objetos y Tablas</h4>
+<p>En nuestro código PHP, nos gusta trabajar con objetos: tenemos una clase <code>Usuario</code>, creamos un objeto <code>$usuario</code> y accedemos a sus propiedades como <code>$usuario-&gt;nombre</code>. En la base de datos, sin embargo, esa información está guardada en una tabla <code>usuarios</code> con filas y columnas. Sin un ORM, para obtener los datos de un usuario y convertirlos en un objeto, tendríamos que:</p>
+<ol>
+<li>Escribir una consulta <code>SELECT * FROM usuarios WHERE id = 1</code>.</li>
+<li>Ejecutar la consulta con PDO.</li>
+<li>Obtener el resultado como un array asociativo.</li>
+<li>Crear un nuevo objeto <code>new Usuario()</code> y asignar manualmente cada valor del array a cada propiedad del objeto.</li>
+</ol>
+<p>Para guardar los cambios, tendríamos que hacer el proceso inverso: tomar las propiedades del objeto y construir una sentencia <code>UPDATE</code>.</p>
+<p>Un ORM automatiza por completo el proceso de traducción entre la base de datos y la aplicación al establecer un mapeo directo y coherente. Por ejemplo, una tabla de la base de datos llamada <code>usuarios</code> se corresponde directamente con una clase <code>Usuario</code> en nuestro código. Gracias a esta conexión, el ORM se encarga de que cada <strong>fila</strong> de esa tabla sea tratada como un <strong>objeto</strong> individual (una instancia) de la clase <code>Usuario</code>, y que cada <strong>columna</strong> de la tabla se corresponda con una <strong>propiedad</strong> de dicho objeto.</p>
+<p>Este mapeo es lo que nos permite abandonar las sentencias SQL manuales y, en su lugar, interactuar con nuestros datos utilizando una sintaxis de objetos fluida y expresiva. El desarrollador simplemente manipula los objetos y sus propiedades, y el ORM se encarga de generar y ejecutar las consultas SQL necesarias por debajo, haciendo que el acceso a los datos sea una parte natural e integrada del lenguaje de programación.</p>
+<p>Los frameworks que hemos mencionado tienen sus propios ORMs o se integran con los más populares. <strong>Laravel</strong> usa <strong>Eloquent</strong>, que es conocido por su sintaxis simple y elegante. <strong>Symfony</strong> se integra a la perfección con <strong>Doctrine</strong>, un ORM muy potente y robusto de nivel empresarial.</p>
+<hr/>
+<h4 id="ventajas-de-usar-un-orm">Ventajas de Usar un ORM</h4>
+<p>El principal beneficio de adoptar un ORM se manifiesta en un aumento drástico de la <strong>productividad</strong>, ya que reduce la cantidad de código repetitivo y manual necesario para las operaciones CRUD. Más allá de la velocidad de desarrollo, un ORM proporciona una valiosa <strong>abstracción de la base de datos</strong>, lo que significa que nuestro código se vuelve agnóstico al sistema de base de datos subyacente. Esto nos permite, por ejemplo, cambiar de MySQL a PostgreSQL con modificaciones mínimas en la configuración, sin necesidad de reescribir la lógica de la aplicación. </p>
+<p>Esta capa de abstracción también introduce mejoras de <strong>seguridad</strong> de forma automática, ya que los ORMs modernos utilizan sentencias preparadas por defecto, eliminando prácticamente el riesgo de inyección SQL. Finalmente, todos estos factores convergen en un <strong>código más legible y mantenible</strong>, donde la lógica de negocio se expresa de forma limpia en el paradigma de objetos, en lugar de estar mezclada con cadenas de texto de sentencias SQL.</p>
+<hr/>
+<h4 id="desventajas-y-consideraciones-de-un-orm">Desventajas y Consideraciones de un ORM</h4>
+<p>Sin embargo, la comodidad de un ORM introduce una nueva capa de abstracción que conlleva sus propias desventajas, empezando por su <strong>curva de aprendizaje y complejidad</strong>. Aunque las operaciones CRUD básicas se simplifican, realizar consultas complejas con uniones (<code>JOINs</code>) o agregaciones puede requerir un conocimiento profundo de la herramienta, y en ocasiones, el esfuerzo para forzar al ORM a generar un SQL óptimo es mayor que el de escribir la consulta directamente. </p>
+<p>Esta misma capa de abstracción puede generar una <strong>sobrecarga de rendimiento</strong>, ya que el SQL generado automáticamente puede no ser tan eficiente como una consulta escrita a mano por un experto. Si no se utilizan con cuidado, los ORMs pueden incluso provocar problemas graves como el famoso <strong>"problema N+1"</strong>, donde una sola operación en el código desencadena una cascada de consultas ineficientes a la base de datos.</p>
+<p>Quizás uno de los riesgos más sutiles a largo plazo es la <strong>pérdida de cercanía con la base de datos</strong>. Al depender de la "magia" del ORM, los desarrolladores pueden perder fluidez en el lenguaje SQL, lo que dificulta la depuración de consultas lentas y la optimización a bajo nivel. Finalmente, aunque agilizan el desarrollo una vez en marcha, la <strong>configuración inicial</strong> de un ORM, con el mapeo de todas las entidades y la definición de sus relaciones, puede añadir una notable capa de complejidad y código repetitivo al inicio de un proyecto.</p>
+<h2 id="composer-el-gestor-de-dependencias-de-php">Composer: El Gestor de Dependencias de PHP</h2>
+<p>En el apartado sobre herramientas, mencionamos los gestores de paquetes como una pieza esencial del desarrollo moderno. Para PHP, la herramienta estándar y fundamental que cumple esta función es <strong>Composer</strong>. Entender qué es y cómo funciona es un requisito indispensable para cualquier desarrollador de PHP actual.</p>
+<figure>
+<img alt="" src="../../images/03.png" width="100%"/>
+</figure>
+<p>Antes de la llegada de Composer, si un desarrollador quería usar una librería externa (por ejemplo, una para enviar correos electrónicos), el proceso era manual y caótico. Había que buscar la librería, descargar un fichero ZIP, descomprimirlo en una carpeta del proyecto (normalmente <code>libs/</code> o <code>includes/</code>) y luego gestionar manualmente las sentencias <code>require</code> para cargar sus ficheros.</p>
+<p>Este enfoque manual para la gestión de librerías presentaba una serie de problemas graves que hacían que el desarrollo en PHP a gran escala fuera frágil y poco fiable. Las <strong>actualizaciones</strong> eran un proceso completamente manual y propenso a errores, que implicaba reemplazar ficheros con el riesgo de introducir cambios incompatibles sin un método sencillo para revertirlos. </p>
+<p>El problema se agravaba con las <strong>dependencias transitivas</strong>; si la librería que habíamos descargado necesitaba, a su vez, otra librería para funcionar, el desarrollador era el único responsable de descubrir, encontrar y gestionar también esa segunda dependencia, un proceso que podía volverse exponencialmente complejo. </p>
+<p>Finalmente, este método generaba una falta de <strong>consistencia</strong> crítica entre los entornos, haciendo muy difícil asegurar que todos los miembros del equipo y el servidor de producción utilizaran exactamente las mismas versiones de cada componente, lo que a menudo resultaba en errores difíciles de reproducir y solucionar.</p>
+<h3 id="la-solucion-composer-al-rescate">La Solución: Composer al Rescate</h3>
+<p><strong>Composer</strong> es un <strong>gestor de dependencias para PHP</strong>. Esto significa que su trabajo es gestionar las librerías de las que depende nuestro proyecto. Es importante destacar que gestiona las dependencias <strong>por proyecto</strong>, no a nivel global del sistema.</p>
+<p>Su funcionamiento se basa en tres componentes clave:</p>
+<h4 id="el-fichero-composerjson">El fichero <code>composer.json</code></h4>
+<p>Este es el fichero de manifiesto de nuestro proyecto. En él, nosotros <strong>declaramos</strong> qué librerías necesita nuestro proyecto y qué versiones son compatibles (por ejemplo, "necesito la librería <code>monolog/monolog</code> en cualquier versión a partir de la <code>2.0</code>").</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="p">{</span>
+</span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mi-proyecto/aplicacion-web"</span><span class="p">,</span>
+</span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="w">    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Un proyecto de ejemplo para demostrar el uso de Composer."</span><span class="p">,</span>
+</span><span id="__span-0-4"><a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project"</span><span class="p">,</span>
+</span><span id="__span-0-5"><a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="w">    </span><span class="nt">"license"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MIT"</span><span class="p">,</span>
+</span><span id="__span-0-6"><a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="w">    </span><span class="nt">"authors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-0-7"><a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-0-8"><a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="w">            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tu Nombre"</span><span class="p">,</span>
+</span><span id="__span-0-9"><a href="#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="w">            </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tu@email.com"</span>
+</span><span id="__span-0-10"><a href="#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-0-11"><a href="#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="w">    </span><span class="p">],</span>
+</span><span id="__span-0-12"><a href="#__codelineno-0-12" id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="w">    </span><span class="nt">"require"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-13"><a href="#__codelineno-0-13" id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="w">        </span><span class="nt">"php"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^8.0"</span><span class="p">,</span>
+</span><span id="__span-0-14"><a href="#__codelineno-0-14" id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="w">        </span><span class="nt">"monolog/monolog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^2.3"</span><span class="p">,</span>
+</span><span id="__span-0-15"><a href="#__codelineno-0-15" id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="w">        </span><span class="nt">"vlucas/phpdotenv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^5.4"</span>
+</span><span id="__span-0-16"><a href="#__codelineno-0-16" id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-0-17"><a href="#__codelineno-0-17" id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="w">    </span><span class="nt">"require-dev"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-18"><a href="#__codelineno-0-18" id="__codelineno-0-18" name="__codelineno-0-18"></a><span class="w">        </span><span class="nt">"phpunit/phpunit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^9.5"</span>
+</span><span id="__span-0-19"><a href="#__codelineno-0-19" id="__codelineno-0-19" name="__codelineno-0-19"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-0-20"><a href="#__codelineno-0-20" id="__codelineno-0-20" name="__codelineno-0-20"></a><span class="w">    </span><span class="nt">"autoload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-21"><a href="#__codelineno-0-21" id="__codelineno-0-21" name="__codelineno-0-21"></a><span class="w">        </span><span class="nt">"psr-4"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-22"><a href="#__codelineno-0-22" id="__codelineno-0-22" name="__codelineno-0-22"></a><span class="w">            </span><span class="nt">"App\\"</span><span class="p">:</span><span class="w"> </span><span class="s2">"src/"</span>
+</span><span id="__span-0-23"><a href="#__codelineno-0-23" id="__codelineno-0-23" name="__codelineno-0-23"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-0-24"><a href="#__codelineno-0-24" id="__codelineno-0-24" name="__codelineno-0-24"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-0-25"><a href="#__codelineno-0-25" id="__codelineno-0-25" name="__codelineno-0-25"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Un fichero <code>composer.json</code> es el corazón de un proyecto PHP moderno, actuando como un manifiesto que define tanto su identidad como sus dependencias. Las claves iniciales, como <code>name</code>, <code>description</code> y <code>type</code>, sirven como <strong>metadatos</strong> básicos que identifican el paquete, siguiendo el formato estándar de <code>vendedor/nombre-del-paquete</code>.</p>
+<p>La sección más importante es, sin duda, la clave <strong><code>require</code></strong>, donde se declaran las dependencias de producción, es decir, las librerías externas que la aplicación necesita para funcionar. Dentro de este objeto, cada entrada especifica el nombre del paquete y una restricción de versión. Por ejemplo, <code>"php": "^8.0"</code> indica que el proyecto requiere como mínimo la versión 8.0 de PHP, mientras que <code>"monolog/monolog": "^2.3"</code> utiliza el símbolo caret (<code>^</code>) para permitir la instalación de cualquier versión estable desde la 2.3 hasta la siguiente versión mayor (sin incluir la 3.0), garantizando así la retrocompatibilidad.</p>
+<p>De forma similar, la sección <strong><code>require-dev</code></strong> lista las dependencias necesarias únicamente para el entorno de desarrollo, como frameworks de testing (p. ej., PHPUnit). Estas herramientas no se instalan en un entorno de producción si se utiliza la opción <code>--no-dev</code>, manteniendo la aplicación final más ligera. Finalmente, la sección <strong><code>autoload</code></strong> es fundamental para la organización del código propio del proyecto. La configuración <code>psr-4</code> establece un mapa entre un namespace (como <code>App\\</code>) y un directorio (como <code>src/</code>), permitiendo que Composer cargue automáticamente las clases del proyecto sin necesidad de sentencias <code>require_once</code> manuales.</p>
+<hr/>
+<h4 id="packagist">Packagist</h4>
+<p>Es el <strong>repositorio principal</strong> de paquetes de Composer. Es una inmensa biblioteca online (<code>packagist.org</code>) donde Composer busca las librerías que hemos declarado en <code>composer.json</code>.</p>
+<hr/>
+<h4 id="el-fichero-composerlock">El fichero <code>composer.lock</code></h4>
+<p>Cuando definimos nuestras dependencias en el fichero <code>composer.json</code>, a menudo utilizamos rangos de versiones flexibles, como <code>^2.3</code>, que significa "cualquier versión desde la 2.3 hasta la 2.9.9, pero no la 3.0". Esto presenta un problema potencial de <strong>consistencia</strong>:</p>
+<ul>
+<li>Un desarrollador que instala el proyecto hoy podría obtener la versión <code>2.4</code>.</li>
+<li>Otro desarrollador que lo instale en un mes podría obtener la <code>2.5</code>, que acaba de ser lanzada.</li>
+<li>El servidor de producción podría tener una tercera versión.</li>
+</ul>
+<p>Estas pequeñas diferencias pueden introducir bugs difíciles de rastrear, rompiendo el principio de tener entornos de desarrollo idénticos y <strong>reproducibles</strong>.</p>
+<p>Para resolver este problema, Composer utiliza un segundo fichero llamado <strong><code>composer.lock</code></strong>. Este fichero <strong>no se edita manualmente</strong>, es generado y gestionado por Composer.</p>
+<p>El fichero <code>composer.lock</code> actúa como una "fotografía" o un registro exacto de <strong>todas las dependencias y sus versiones específicas</strong> que se instalaron en un momento dado. No dice "instala una versión compatible con la 2.3", sino que dice "instala exactamente la versión <code>2.4.1</code>".</p>
+<p>La existencia del <code>composer.lock</code> cambia por completo el comportamiento de los comandos de Composer. Es crucial entender la diferencia:</p>
+<ul>
+<li>
+<p><strong><code>composer install</code></strong>: Este es el comando que usarás el 99% del tiempo (al clonar un proyecto, al desplegar en producción, etc.).</p>
+<ul>
+<li><strong>Si <code>composer.lock</code> existe</strong>, este comando <strong>ignora por completo</strong> lo que dice <code>composer.json</code>. Lee el fichero <code>.lock</code> e instala las versiones exactas que están registradas en él. Esto garantiza que todos los miembros del equipo y el servidor de producción tengan un entorno idéntico.</li>
+<li><strong>Si <code>composer.lock</code> no existe</strong>, entonces (y solo entonces) Composer leerá <code>composer.json</code>, calculará las dependencias, instalará las últimas versiones disponibles que cumplan los requisitos y, finalmente, <strong>creará el fichero <code>composer.lock</code></strong> a partir de lo que ha instalado.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>composer update</code></strong>: Este comando se usa de forma deliberada cuando quieres <strong>actualizar tus dependencias</strong>.</p>
+<ul>
+<li>Ignora el <code>composer.lock</code> existente.</li>
+<li>Lee <code>composer.json</code>, busca las últimas versiones permitidas por tus rangos de versiones.</li>
+<li>Instala las nuevas versiones.</li>
+<li><strong>Sobrescribe el fichero <code>composer.lock</code></strong> con las nuevas versiones instaladas.</li>
+</ul>
+</li>
+</ul>
+<p>Para asegurar la consistencia de una aplicación, el fichero <strong><code>composer.lock</code> siempre debe ser incluido en el sistema de control de versiones (Git)</strong>. De esta forma, cuando otro desarrollador clone el proyecto y ejecute <code>composer install</code>, se asegurará de estar trabajando con el mismo código base y las mismas dependencias que el resto del equipo.</p>
+<h3 id="el-flujo-de-trabajo-y-la-magia-del-autoloading">El Flujo de Trabajo y la Magia del Autoloading</h3>
+<p>El uso de Composer es sencillo. Desde la terminal, en la raíz de nuestro proyecto, usamos comandos como:</p>
+<ul>
+<li><strong><code>composer require monolog/monolog</code></strong>: Este comando añade una nueva dependencia. Automáticamente modifica el <code>composer.json</code>, busca el paquete en Packagist, lo descarga y actualiza el <code>composer.lock</code>.</li>
+<li><strong><code>composer install</code></strong>: Se usa al clonar un proyecto existente que ya tiene un <code>composer.lock</code>. Lee este fichero e instala las versiones exactas de las dependencias.</li>
+<li><strong><code>composer update</code></strong>: Actualiza las dependencias a las últimas versiones permitidas por <code>composer.json</code> y regenera el <code>composer.lock</code>.</li>
+</ul>
+<p>Cuando Composer instala las librerías, las descarga en una carpeta llamada <strong><code>vendor/</code></strong>. Dentro de esta carpeta, genera un fichero "mágico": <strong><code>vendor/autoload.php</code></strong>.</p>
+<p>Al incluir este único fichero al principio de nuestro script principal (p. ej., <code>index.php</code>) con la línea:</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="x">require_once __DIR__ . '/vendor/autoload.php';</span>
+</span></code></pre></div>
+<p>obtenemos acceso a todas las clases de todas las librerías instaladas sin necesidad de escribir ni un solo <code>include</code> o <code>require</code> más. Este mecanismo, conocido como <strong>autoloading</strong>, es el que permite que el ecosistema de PHP moderno sea tan potente y modular. Composer no es solo una herramienta, es la base sobre la que se construyen todos los frameworks y aplicaciones de PHP actuales.</p>
+<h3 id="instalacion-de-composer">Instalación de composer</h3>
+<p>Composer es una herramienta que se gestiona desde la <strong>línea de comandos (terminal)</strong>. El proceso de instalación es sencillo, aunque varía ligeramente dependiendo de tu sistema operativo. La fuente oficial y más segura para las instrucciones es siempre la página web de Composer: <strong>getcomposer.org</strong>.</p>
+<hr/>
+<h4 id="instalacion-en-windows">Instalación en Windows</h4>
+<p>Para Windows, el proceso es el más simple, ya que existe un instalador oficial.</p>
+<ol>
+<li><strong>Descargar el Instalador:</strong> Ve a la página de descargas de Composer (<a href="https://getcomposer.org/download/">getcomposer.org/download/</a>) y busca el enlace al instalador de Windows, que será un fichero llamado <code>Composer-Setup.exe</code>.</li>
+<li><strong>Ejecutar el Instalador:</strong> Ejecuta el fichero <code>.exe</code> que has descargado. El instalador te guiará.<ul>
+<li>Un paso importante es que te pedirá que localices el ejecutable de PHP (<code>php.exe</code>). Si usas un entorno como XAMPP, normalmente se encuentra en <code>C:\xampp\php\php.exe</code>.</li>
+</ul>
+</li>
+<li><strong>Finalizar:</strong> El instalador se encargará de descargar Composer y, lo más importante, de añadirlo al <code>PATH</code> de tu sistema. Esto permite que puedas llamar al comando <code>composer</code> desde cualquier carpeta en tu terminal.</li>
+</ol>
+<hr/>
+<h4 id="instalacion-en-linux-y-macos">Instalación en Linux y macOS</h4>
+<p>En sistemas basados en Unix, la instalación se realiza directamente desde la terminal ejecutando unos pocos comandos que proporciona la página oficial.</p>
+<ol>
+<li><strong>Descargar el Instalador:</strong> La página de descargas de Composer te dará un comando para descargar el instalador (<code>composer-setup.php</code>) de forma segura usando PHP.
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>php<span class="w"> </span>-r<span class="w"> </span><span class="s2">"copy('[https://getcomposer.org/installer](https://getcomposer.org/installer)', 'composer-setup.php');"</span>
+</span></code></pre></div></li>
+<li><strong>Ejecutar el Instalador:</strong> Una vez descargado, ejecutas el script con PHP. Esto descargará el fichero <code>composer.phar</code>.
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>php<span class="w"> </span>composer-setup.php
+</span></code></pre></div></li>
+<li>
+<p><strong>Limpiar:</strong> Ya puedes borrar el fichero de instalación.
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>php<span class="w"> </span>-r<span class="w"> </span><span class="s2">"unlink('composer-setup.php');"</span>
+</span></code></pre></div>
+    Ahora tendrás un fichero llamado <code>composer.phar</code> en tu directorio actual. Un <code>.phar</code> es un "Archivo PHP", un paquete ejecutable.</p>
+</li>
+<li>
+<p><strong>Hacerlo Global (Paso Crucial):</strong> Para poder escribir <code>composer</code> en lugar de <code>php composer.phar</code>, debes mover este fichero a un directorio que esté en el <code>PATH</code> de tu sistema y renombrarlo.
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>sudo<span class="w"> </span>mv<span class="w"> </span>composer.phar<span class="w"> </span>/usr/local/bin/composer
+</span></code></pre></div>
+    Este comando mueve <code>composer.phar</code> a <code>/usr/local/bin</code> y lo renombra a <code>composer</code>, haciéndolo un comando global. Puede que necesites privilegios de administrador (<code>sudo</code>).</p>
+</li>
+</ol>
+<hr/>
+<h4 id="verificacion">Verificación</h4>
+<p>Para comprobar que la instalación se ha realizado correctamente en cualquier sistema operativo, abre una <strong>nueva ventana de la terminal</strong> y ejecuta:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>composer<span class="w"> </span>--version
+</span></code></pre></div>
+<p>Si todo ha ido bien, verás la versión de Composer que se ha instalado. Es importante que sea una nueva terminal para que reconozga los cambios en el <code>PATH</code> del sistema.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Manuel Sánchez Gomis
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["search.suggest", "search.highlight", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "content.code.copy", "content.tabs.link", "content.tooltips"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../../assets/_markdown_exec_pyodide.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../../_static/js/notebook.js"></script>
+      
+    
+  </body>
+</html>

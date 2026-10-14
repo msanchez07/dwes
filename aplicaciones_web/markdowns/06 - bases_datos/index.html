@@ -1,0 +1,3159 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Manuel Sánchez Gomis">
+      
+      
+      
+        <link rel="prev" href="../05%20-%20ficheros/">
+      
+      
+        <link rel="next" href="../07%20-%20estructura_proyecto/">
+      
+      
+      <link rel="icon" href="../../../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.46">
+    
+    
+      
+        <title>Bases de datos - Desarrollo Web en entorno servidor</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/_markdown_exec_pyodide.css">
+    
+      <link rel="stylesheet" href="../../../_static/css/notebook.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#bases-de-datos" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Desarrollo Web en entorno servidor" class="md-header__button md-logo" aria-label="Desarrollo Web en entorno servidor" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Desarrollo Web en entorno servidor
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Bases de datos
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber"  aria-label="Cambiar a modo brillante"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo brillante" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="amber"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Bienvenido
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../introduccion/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Introduccion
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../php/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Php
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Aplicaciones Web con Php
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../laravel/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Laravel
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../servicios_web/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Servicios Web
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../webs_dinamicas/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Webs Dinámicas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../aplicaciones_web_hibridas/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Aplicaciones Web Híbridas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../bibliografia/" class="md-tabs__link">
+        
+  
+    
+  
+  Bibliografia
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Desarrollo Web en entorno servidor" class="md-nav__button md-logo" aria-label="Desarrollo Web en entorno servidor" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    Desarrollo Web en entorno servidor
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bienvenido
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Introduccion
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Introduccion
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../introduccion/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Conceptos básicos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../introduccion/markdowns/02%20-%20lenguajes_programacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lenguajes de programación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../introduccion/markdowns/03%20-%20herramientas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Herramientas y frameworks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Php
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Php
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/02%20-%20primeros_pasos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primeros pasos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/03%20-%20estructuras_control/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Estructuras de Control en PHP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/04%20-%20arrays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Arrays
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/05%20-%20funciones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Funciones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/06%20-%20poo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Programación orientada a objetos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/07%20-%20excepciones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Excepciones y errores
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/08%20-%20directivas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Directivas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/09%20-%20codigo_embebido/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Código embebido
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Aplicaciones Web con Php
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Aplicaciones Web con Php
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02%20-%20formularios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Formularios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03%20-%20sesiones_cookies/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cookies y Sesiones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04%20-%20seguridad/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Seguridad
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05%20-%20ficheros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ficheros
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Bases de datos
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Bases de datos
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      MySQL
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MySQL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#consultar-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Consultar datos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#insertar-nuevos-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Insertar nuevos datos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modificar-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modificar datos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eliminar-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eliminar datos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabla-resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tabla resumen
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conectando-a-bases-de-datos-nosql-mongodb" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conectando a Bases de Datos NoSQL: MongoDB
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conectando a Bases de Datos NoSQL: MongoDB">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#consultando-datos-en-mongodb" class="md-nav__link">
+    <span class="md-ellipsis">
+      Consultando Datos en MongoDB
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-insercion-de-documentos" class="md-nav__link">
+    <span class="md-ellipsis">
+      La Inserción de Documentos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-actualizacion-de-documentos" class="md-nav__link">
+    <span class="md-ellipsis">
+      La Actualización de Documentos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-eliminacion-de-documentos" class="md-nav__link">
+    <span class="md-ellipsis">
+      La Eliminación de Documentos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabla-resumen_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tabla resumen
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07%20-%20estructura_proyecto/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Organizando el código
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../98%20-%20ejercicios_persistencia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios persistencia
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Laravel
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Laravel
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/02%20-%20instalacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instalación y primeros pasos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/03%20-%20rutas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rutas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/04%20-%20controladores/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Controladores
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/05%20-%20vistas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vistas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/06%20-%20formularios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Formularios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/07%20-%20modelos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modelos de Eloquent
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/14%20-%20response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Respuestas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/08%20-%20cookies_sesiones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cookies y Sesiones en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/09%20-%20servicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Servicios en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/10%20-%20seguridad/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Seguridad en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/11%20-%20inyeccion_dependencias/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inyección de Dependencias en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/12%20-%20testing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pruebas y documentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/13%20-%20fechas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fechas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../laravel/markdowns/15%20-%20migrations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Migraciones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Servicios Web
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Servicios Web
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/02%20-%20tecnologias/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tecnologías y Estándares
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/03%20-%20creando_servicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creando un Servicio Web
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/04%20-%20probando_servicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Probando el Servicio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/05%20-%20documentando_servicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Documentando un Servicio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Webs Dinámicas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Webs Dinámicas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/02%20-%20ajax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AJAX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/03%20-%20validacion_formularios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Validación de Formularios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/04%20-%20modificacion_dom/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modificación del DOM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/05%20-%20async_patrones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Patrones Async
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Aplicaciones Web Híbridas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Aplicaciones Web Híbridas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/02%20-%20apis_terceros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    APIs de Terceros
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/03%20-%20creando_apis_propias/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creando APIs Propias
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/04%20-%20sdks_frameworks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SDKs y Frameworks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/05%20-%20big_data_ia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Big Data e IA
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/06%20-%20testing_depuracion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Testing y Depuración
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/07%20-%20autenticacion_apis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Autenticación de APIs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/08%20-%20versionado_webhooks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Versionado y Webhooks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../bibliografia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bibliografia
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      MySQL
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MySQL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#consultar-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Consultar datos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#insertar-nuevos-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Insertar nuevos datos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modificar-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modificar datos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eliminar-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eliminar datos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabla-resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tabla resumen
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conectando-a-bases-de-datos-nosql-mongodb" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conectando a Bases de Datos NoSQL: MongoDB
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conectando a Bases de Datos NoSQL: MongoDB">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#consultando-datos-en-mongodb" class="md-nav__link">
+    <span class="md-ellipsis">
+      Consultando Datos en MongoDB
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-insercion-de-documentos" class="md-nav__link">
+    <span class="md-ellipsis">
+      La Inserción de Documentos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-actualizacion-de-documentos" class="md-nav__link">
+    <span class="md-ellipsis">
+      La Actualización de Documentos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-eliminacion-de-documentos" class="md-nav__link">
+    <span class="md-ellipsis">
+      La Eliminación de Documentos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabla-resumen_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tabla resumen
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="bases-de-datos">Bases de datos</h1>
+<p>En el apartado anterior, exploramos cómo guardar información de forma permanente utilizando ficheros. Si bien este método es útil para aplicaciones simples, registros (logs) o configuraciones, presenta serias limitaciones a medida que un proyecto crece. ¿Qué ocurre si dos usuarios intentan escribir en el mismo fichero a la vez? ¿Cómo realizamos búsquedas complejas y eficientes sin tener que leer un fichero gigante en memoria? ¿Cómo gestionamos las relaciones entre diferentes tipos de datos, como usuarios y sus pedidos?</p>
+<p>Para resolver estos desafíos, la industria del software utiliza <strong>Sistemas Gestores de Bases de Datos (SGBD o DBMS en inglés)</strong>. Un SGBD es un software altamente especializado cuyo único propósito es almacenar, gestionar y recuperar grandes volúmenes de datos de forma segura, eficiente y concurrente. Son la columna vertebral de prácticamente todas las aplicaciones web modernas.</p>
+<p>La mayoría de las bases de datos utilizadas en el desarrollo web son <strong>bases de datos relacionales</strong>. Este modelo organiza los datos en tablas estructuradas, compuestas por filas (registros) y columnas (campos). Para comunicarnos con la base de datos, utilizamos un lenguaje estándar llamado <strong>SQL (Structured Query Language)</strong>, que nos permite definir la estructura de nuestros datos y realizar operaciones sobre ellos.</p>
+<p>En este capítulo, daremos el paso definitivo en la persistencia de datos. Aprenderemos cómo conectar nuestra aplicación PHP a una base de datos <strong>MySQL</strong> (uno de los SGBD más populares del mundo), cómo ejecutar consultas SQL para crear, leer, actualizar y borrar datos, y cómo integrar esta información en nuestras páginas web dinámicas.</p>
+<h2 id="mysql">MySQL</h2>
+<p>Para que nuestra aplicación PHP pueda comunicarse con un servidor de bases de datos MySQL, primero debe establecer una conexión. PHP ofrece varias formas de hacerlo, pero el método moderno, seguro y recomendado es utilizar la extensión <strong>PDO (PHP Data Objects)</strong>.</p>
+<p>PDO es una <strong>capa de abstracción de acceso a datos</strong>, lo que significa que nos proporciona un conjunto de funciones consistente para hablar con diferentes tipos de bases de datos (MySQL, PostgreSQL, SQLite, etc.). Esto hace que nuestro código sea más portable. Su principal ventaja es su excelente soporte para <strong>sentencias preparadas</strong>, que es la técnica fundamental para prevenir ataques de inyección SQL.</p>
+<p>Para establecer una conexión exitosa con una base de datos, nuestra aplicación necesita presentar las credenciales correctas, de forma muy similar a como un usuario necesita una llave y una dirección para entrar en una casa. Estos cuatro datos son indispensables.</p>
+<p>El primero es el <strong>Host</strong> o servidor, que es la dirección de red de la máquina donde se está ejecutando el sistema gestor de bases de datos. En un entorno de desarrollo local, este valor es casi siempre <code>localhost</code> o <code>127.0.0.1</code>, que apunta a la propia máquina. Una vez localizado el servidor, debemos especificar el <strong>Nombre de la Base de Datos</strong>, ya que un mismo servidor puede alojar múltiples bases de datos para diferentes aplicaciones. Finalmente, para la autenticación, debemos proporcionar el <strong>Usuario</strong> y la <strong>Contraseña</strong> que han sido configurados con los permisos necesarios para acceder y operar sobre esa base de datos específica.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>    <span class="c1">// 1. Datos de conexión</span>
+</span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>    <span class="nv">$host</span> <span class="o">=</span> <span class="s1">'localhost'</span><span class="p">;</span>
+</span><span id="__span-0-4"><a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a>    <span class="nv">$dbname</span> <span class="o">=</span> <span class="s1">'mi_tienda'</span><span class="p">;</span>
+</span><span id="__span-0-5"><a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a>    <span class="nv">$usuario</span> <span class="o">=</span> <span class="s1">'root'</span><span class="p">;</span>
+</span><span id="__span-0-6"><a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a>    <span class="nv">$contraseña</span> <span class="o">=</span> <span class="s1">'tu_contraseña_secreta'</span><span class="p">;</span> <span class="c1">// Reemplazar con tu contraseña</span>
+</span><span id="__span-0-7"><a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a>
+</span><span id="__span-0-8"><a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a>    <span class="k">try</span> <span class="p">{</span>
+</span><span id="__span-0-9"><a href="#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a>        <span class="c1">// 2. Crear la conexión PDO</span>
+</span><span id="__span-0-10"><a href="#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a>
+</span><span id="__span-0-11"><a href="#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a>        <span class="c1">// El DSN (Data Source Name) es una cadena que especifica el tipo de BBDD,</span>
+</span><span id="__span-0-12"><a href="#__codelineno-0-12" id="__codelineno-0-12" name="__codelineno-0-12"></a>        <span class="c1">// el host y el nombre de la base de datos.</span>
+</span><span id="__span-0-13"><a href="#__codelineno-0-13" id="__codelineno-0-13" name="__codelineno-0-13"></a>        <span class="nv">$dsn</span> <span class="o">=</span> <span class="s2">"mysql:host=</span><span class="si">$host</span><span class="s2">;dbname=</span><span class="si">$dbname</span><span class="s2">;charset=utf8mb4"</span><span class="p">;</span>
+</span><span id="__span-0-14"><a href="#__codelineno-0-14" id="__codelineno-0-14" name="__codelineno-0-14"></a>
+</span><span id="__span-0-15"><a href="#__codelineno-0-15" id="__codelineno-0-15" name="__codelineno-0-15"></a>        <span class="c1">// Opciones de PDO para la conexión.</span>
+</span><span id="__span-0-16"><a href="#__codelineno-0-16" id="__codelineno-0-16" name="__codelineno-0-16"></a>        <span class="nv">$opciones</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="__span-0-17"><a href="#__codelineno-0-17" id="__codelineno-0-17" name="__codelineno-0-17"></a>            <span class="nx">PDO</span><span class="o">::</span><span class="na">ATTR_ERRMODE</span>            <span class="o">=&gt;</span> <span class="nx">PDO</span><span class="o">::</span><span class="na">ERRMODE_EXCEPTION</span><span class="p">,</span> <span class="c1">// Lanza excepciones en errores</span>
+</span><span id="__span-0-18"><a href="#__codelineno-0-18" id="__codelineno-0-18" name="__codelineno-0-18"></a>            <span class="nx">PDO</span><span class="o">::</span><span class="na">ATTR_DEFAULT_FETCH_MODE</span> <span class="o">=&gt;</span> <span class="nx">PDO</span><span class="o">::</span><span class="na">FETCH_ASSOC</span><span class="p">,</span>       <span class="c1">// Devuelve los resultados como arrays asociativos</span>
+</span><span id="__span-0-19"><a href="#__codelineno-0-19" id="__codelineno-0-19" name="__codelineno-0-19"></a>            <span class="nx">PDO</span><span class="o">::</span><span class="na">ATTR_EMULATE_PREPARES</span>   <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>                  <span class="c1">// Desactiva la emulación de sentencias preparadas</span>
+</span><span id="__span-0-20"><a href="#__codelineno-0-20" id="__codelineno-0-20" name="__codelineno-0-20"></a>        <span class="p">];</span>
+</span><span id="__span-0-21"><a href="#__codelineno-0-21" id="__codelineno-0-21" name="__codelineno-0-21"></a>
+</span><span id="__span-0-22"><a href="#__codelineno-0-22" id="__codelineno-0-22" name="__codelineno-0-22"></a>        <span class="c1">// Creamos la instancia de PDO. La variable $pdo contendrá el objeto de conexión.</span>
+</span><span id="__span-0-23"><a href="#__codelineno-0-23" id="__codelineno-0-23" name="__codelineno-0-23"></a>        <span class="nv">$pdo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PDO</span><span class="p">(</span><span class="nv">$dsn</span><span class="p">,</span> <span class="nv">$usuario</span><span class="p">,</span> <span class="nv">$contraseña</span><span class="p">,</span> <span class="nv">$opciones</span><span class="p">);</span>
+</span><span id="__span-0-24"><a href="#__codelineno-0-24" id="__codelineno-0-24" name="__codelineno-0-24"></a>
+</span><span id="__span-0-25"><a href="#__codelineno-0-25" id="__codelineno-0-25" name="__codelineno-0-25"></a>        <span class="c1">// Si llegamos aquí, la conexión fue exitosa.</span>
+</span><span id="__span-0-26"><a href="#__codelineno-0-26" id="__codelineno-0-26" name="__codelineno-0-26"></a>        <span class="c1">// En una aplicación real, no mostraríamos este mensaje.</span>
+</span><span id="__span-0-27"><a href="#__codelineno-0-27" id="__codelineno-0-27" name="__codelineno-0-27"></a>        <span class="c1">// echo "Conexión a la base de datos '$dbname' establecida con éxito.";</span>
+</span><span id="__span-0-28"><a href="#__codelineno-0-28" id="__codelineno-0-28" name="__codelineno-0-28"></a>
+</span><span id="__span-0-29"><a href="#__codelineno-0-29" id="__codelineno-0-29" name="__codelineno-0-29"></a>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">PDOException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-0-30"><a href="#__codelineno-0-30" id="__codelineno-0-30" name="__codelineno-0-30"></a>        <span class="c1">// Si algo sale mal, se captura la excepción.</span>
+</span><span id="__span-0-31"><a href="#__codelineno-0-31" id="__codelineno-0-31" name="__codelineno-0-31"></a>        <span class="c1">// En producción, no deberíamos mostrar los detalles del error al usuario.</span>
+</span><span id="__span-0-32"><a href="#__codelineno-0-32" id="__codelineno-0-32" name="__codelineno-0-32"></a>        <span class="c1">// En su lugar, lo registraríamos en un fichero de log.</span>
+</span><span id="__span-0-33"><a href="#__codelineno-0-33" id="__codelineno-0-33" name="__codelineno-0-33"></a>        <span class="k">echo</span> <span class="s2">"Error al conectar con la base de datos: "</span> <span class="o">.</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">();</span>
+</span><span id="__span-0-34"><a href="#__codelineno-0-34" id="__codelineno-0-34" name="__codelineno-0-34"></a>        <span class="k">die</span><span class="p">();</span> <span class="c1">// Detenemos la ejecución del script.</span>
+</span><span id="__span-0-35"><a href="#__codelineno-0-35" id="__codelineno-0-35" name="__codelineno-0-35"></a>    <span class="p">}</span>
+</span><span id="__span-0-36"><a href="#__codelineno-0-36" id="__codelineno-0-36" name="__codelineno-0-36"></a>
+</span><span id="__span-0-37"><a href="#__codelineno-0-37" id="__codelineno-0-37" name="__codelineno-0-37"></a>    <span class="c1">// A partir de aquí, la variable $pdo está disponible para ser usada en otros scripts.</span>
+</span><span id="__span-0-38"><a href="#__codelineno-0-38" id="__codelineno-0-38" name="__codelineno-0-38"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<p>Observa la cadena <code>mysql:host=...</code>, que es específica para <strong>MySQL</strong>. Si quisiéramos conectar a <strong>PostgreSQL</strong>, cambiaría a <code>pgsql:host=...</code>. Por otro lado, el <code>charset=utf8mb4</code> es muy importante para asegurar que los caracteres especiales (como acentos o emojis) se manejen correctamente.</p>
+<p>Por otro lado, la opción <code>PDO::ATTR_ERRMODE =&gt; PDO::ERRMODE_EXCEPTION</code> es crucial. Le dice a PDO que, en lugar de generar un Warning, debe lanzar una <code>PDOException</code> si algo falla. Esto nos permite capturar el error con el bloque <code>catch</code> y manejarlo de forma controlada.</p>
+<p>Hay que tener en cuenta que el código anterior es perfecto para guardarlo en un fichero llamado <code>conexion.php</code> o similar. Luego, en cualquier otro script donde necesites acceder a la base de datos, simplemente tienes que incluir este fichero al principio con <code>require_once 'conexion.php';</code> y la variable <code>$pdo</code> estará lista para ser utilizada.</p>
+<p>Una vez visto como se crea una nueva conexión, ahora nos centraremos en la consulta, inserción, modificación y eliminación de los datos. </p>
+<h4 id="consultar-datos">Consultar datos</h4>
+<p>Una vez que tenemos nuestro objeto de conexión en la variable <code>$pdo</code>, podemos utilizarlo para enviar consultas a la base de datos. Sin embargo, antes de ver el método correcto, es <strong>absolutamente crucial</strong> entender el principal riesgo de seguridad en las aplicaciones web: la <strong>inyección SQL</strong>.</p>
+<p>Un error de principiante sería construir una consulta insertando variables directamente en el string de SQL, así:
+<code>$sql = "SELECT * FROM usuarios WHERE id = $id_usuario"; // ¡INCORRECTO Y PELIGROSO!</code></p>
+<p>Si un atacante lograra manipular el valor de <code>$id_usuario</code>, podría "inyectar" código SQL malicioso y corromper o robar toda tu base de datos. Por esta razón, <strong>nunca debes insertar variables directamente en una consulta</strong>. La forma correcta y segura de ejecutar consultas es mediante <strong>sentencias preparadas (prepared statements)</strong>. Es un proceso de dos pasos que separa la consulta (la instrucción) de los datos (los parámetros). </p>
+<p>El proceso de una sentencia preparada se divide en dos fases distintas, una separación que es la clave de su seguridad y eficiencia. En la primera fase, la de <strong>preparación</strong>, la aplicación no envía los datos del usuario, sino únicamente la plantilla de la consulta SQL al servidor de la base de datos. Esta plantilla contiene <strong>marcadores de posición</strong> (como <code>?</code> o <code>:nombre</code>) en lugar de los valores reales. Al recibir esta estructura, el motor de la base de datos la analiza, comprueba su sintaxis y compila un plan de ejecución optimizado, dejando huecos donde irán los datos.</p>
+<p>La segunda fase es la de <strong>ejecución</strong>. En este paso, la aplicación envía los valores de los parámetros por separado. El servidor de la base de datos, que ya tiene la estructura de la consulta pre-compilada y validada, simplemente toma estos valores y los inserta de forma segura en los espacios reservados, tratándolos siempre como datos literales y nunca como parte del código SQL. Esta estricta separación entre la instrucción y los datos garantiza que un atacante no pueda "inyectar" código malicioso, ya que su entrada nunca será interpretada como un comando.</p>
+<p>Este método es inmune a la inyección SQL porque los datos de los parámetros nunca se interpretan como código SQL; siempre se tratan como valores literales. Veamos un ejemplo de obtención de un único registro, cuyo proceso se basa en utilizar el método <code>fetch()</code> (por ejemplo, al buscar un usuario por su ID único):</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>    <span class="c1">// 1. Incluimos nuestro fichero de conexión.</span>
+</span><span id="__span-1-3"><a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>    <span class="k">require_once</span> <span class="s1">'conexion.php'</span><span class="p">;</span>
+</span><span id="__span-1-4"><a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a>    <span class="nv">$id_usuario_a_buscar</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-1-6"><a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a>
+</span><span id="__span-1-7"><a href="#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a>    <span class="k">try</span> <span class="p">{</span>
+</span><span id="__span-1-8"><a href="#__codelineno-1-8" id="__codelineno-1-8" name="__codelineno-1-8"></a>        <span class="c1">// 2. Preparamos la consulta SQL con un marcador de posición nombrado (:id).</span>
+</span><span id="__span-1-9"><a href="#__codelineno-1-9" id="__codelineno-1-9" name="__codelineno-1-9"></a>        <span class="nv">$sql</span> <span class="o">=</span> <span class="s2">"SELECT id, nombre, email FROM usuarios WHERE id = :id"</span><span class="p">;</span>
+</span><span id="__span-1-10"><a href="#__codelineno-1-10" id="__codelineno-1-10" name="__codelineno-1-10"></a>        <span class="nv">$stmt</span> <span class="o">=</span> <span class="nv">$pdo</span><span class="o">-&gt;</span><span class="na">prepare</span><span class="p">(</span><span class="nv">$sql</span><span class="p">);</span>
+</span><span id="__span-1-11"><a href="#__codelineno-1-11" id="__codelineno-1-11" name="__codelineno-1-11"></a>
+</span><span id="__span-1-12"><a href="#__codelineno-1-12" id="__codelineno-1-12" name="__codelineno-1-12"></a>        <span class="c1">// 3. Ejecutamos la consulta, pasando los parámetros en un array.</span>
+</span><span id="__span-1-13"><a href="#__codelineno-1-13" id="__codelineno-1-13" name="__codelineno-1-13"></a>        <span class="c1">// La clave del array debe coincidir con el nombre del marcador.</span>
+</span><span id="__span-1-14"><a href="#__codelineno-1-14" id="__codelineno-1-14" name="__codelineno-1-14"></a>        <span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">([</span><span class="s1">':id'</span> <span class="o">=&gt;</span> <span class="nv">$id_usuario_a_buscar</span><span class="p">]);</span>
+</span><span id="__span-1-15"><a href="#__codelineno-1-15" id="__codelineno-1-15" name="__codelineno-1-15"></a>
+</span><span id="__span-1-16"><a href="#__codelineno-1-16" id="__codelineno-1-16" name="__codelineno-1-16"></a>        <span class="c1">// 4. Obtenemos el resultado. fetch() devuelve una fila.</span>
+</span><span id="__span-1-17"><a href="#__codelineno-1-17" id="__codelineno-1-17" name="__codelineno-1-17"></a>        <span class="nv">$usuario</span> <span class="o">=</span> <span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">fetch</span><span class="p">();</span>
+</span><span id="__span-1-18"><a href="#__codelineno-1-18" id="__codelineno-1-18" name="__codelineno-1-18"></a>
+</span><span id="__span-1-19"><a href="#__codelineno-1-19" id="__codelineno-1-19" name="__codelineno-1-19"></a>        <span class="c1">// 5. Mostramos los datos.</span>
+</span><span id="__span-1-20"><a href="#__codelineno-1-20" id="__codelineno-1-20" name="__codelineno-1-20"></a>        <span class="k">if</span> <span class="p">(</span><span class="nv">$usuario</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-1-21"><a href="#__codelineno-1-21" id="__codelineno-1-21" name="__codelineno-1-21"></a>            <span class="k">echo</span> <span class="s2">"&lt;h1&gt;Datos del Usuario&lt;/h1&gt;"</span><span class="p">;</span>
+</span><span id="__span-1-22"><a href="#__codelineno-1-22" id="__codelineno-1-22" name="__codelineno-1-22"></a>            <span class="k">echo</span> <span class="s2">"ID: "</span> <span class="o">.</span> <span class="nv">$usuario</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span> <span class="o">.</span> <span class="s2">"&lt;br&gt;"</span><span class="p">;</span>
+</span><span id="__span-1-23"><a href="#__codelineno-1-23" id="__codelineno-1-23" name="__codelineno-1-23"></a>            <span class="k">echo</span> <span class="s2">"Nombre: "</span> <span class="o">.</span> <span class="nv">$usuario</span><span class="p">[</span><span class="s1">'nombre'</span><span class="p">]</span> <span class="o">.</span> <span class="s2">"&lt;br&gt;"</span><span class="p">;</span>
+</span><span id="__span-1-24"><a href="#__codelineno-1-24" id="__codelineno-1-24" name="__codelineno-1-24"></a>            <span class="k">echo</span> <span class="s2">"Email: "</span> <span class="o">.</span> <span class="nv">$usuario</span><span class="p">[</span><span class="s1">'email'</span><span class="p">]</span> <span class="o">.</span> <span class="s2">"&lt;br&gt;"</span><span class="p">;</span>
+</span><span id="__span-1-25"><a href="#__codelineno-1-25" id="__codelineno-1-25" name="__codelineno-1-25"></a>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span id="__span-1-26"><a href="#__codelineno-1-26" id="__codelineno-1-26" name="__codelineno-1-26"></a>            <span class="k">echo</span> <span class="s2">"No se encontró ningún usuario con el ID "</span> <span class="o">.</span> <span class="nv">$id_usuario_a_buscar</span><span class="p">;</span>
+</span><span id="__span-1-27"><a href="#__codelineno-1-27" id="__codelineno-1-27" name="__codelineno-1-27"></a>        <span class="p">}</span>
+</span><span id="__span-1-28"><a href="#__codelineno-1-28" id="__codelineno-1-28" name="__codelineno-1-28"></a>
+</span><span id="__span-1-29"><a href="#__codelineno-1-29" id="__codelineno-1-29" name="__codelineno-1-29"></a>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">PDOException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-1-30"><a href="#__codelineno-1-30" id="__codelineno-1-30" name="__codelineno-1-30"></a>        <span class="k">die</span><span class="p">(</span><span class="s2">"Error al realizar la consulta: "</span> <span class="o">.</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">());</span>
+</span><span id="__span-1-31"><a href="#__codelineno-1-31" id="__codelineno-1-31" name="__codelineno-1-31"></a>    <span class="p">}</span>
+</span><span id="__span-1-32"><a href="#__codelineno-1-32" id="__codelineno-1-32" name="__codelineno-1-32"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<p>En caso de  que necesitemos recuperar más de un resultado, vamos a utilizar el método <code>fetchAll()</code> (por ejemplo, todos los productos de una categoría). <code>fetchAll()</code> devuelve un array multidimensional con todos los resultados.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-2-2"><a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a>    <span class="k">require_once</span> <span class="s1">'conexion.php'</span><span class="p">;</span>
+</span><span id="__span-2-3"><a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a>    <span class="nv">$categoria_a_buscar</span> <span class="o">=</span> <span class="s2">"electrónica"</span><span class="p">;</span>
+</span><span id="__span-2-5"><a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a>
+</span><span id="__span-2-6"><a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a>    <span class="k">try</span> <span class="p">{</span>
+</span><span id="__span-2-7"><a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a>        <span class="c1">// 2. Preparamos la consulta.</span>
+</span><span id="__span-2-8"><a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a>        <span class="nv">$sql</span> <span class="o">=</span> <span class="s2">"SELECT nombre, precio FROM productos WHERE categoria = :categoria ORDER BY nombre ASC"</span><span class="p">;</span>
+</span><span id="__span-2-9"><a href="#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a>        <span class="nv">$stmt</span> <span class="o">=</span> <span class="nv">$pdo</span><span class="o">-&gt;</span><span class="na">prepare</span><span class="p">(</span><span class="nv">$sql</span><span class="p">);</span>
+</span><span id="__span-2-10"><a href="#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a>
+</span><span id="__span-2-11"><a href="#__codelineno-2-11" id="__codelineno-2-11" name="__codelineno-2-11"></a>        <span class="c1">// 3. Ejecutamos.</span>
+</span><span id="__span-2-12"><a href="#__codelineno-2-12" id="__codelineno-2-12" name="__codelineno-2-12"></a>        <span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">([</span><span class="s1">':categoria'</span> <span class="o">=&gt;</span> <span class="nv">$categoria_a_buscar</span><span class="p">]);</span>
+</span><span id="__span-2-13"><a href="#__codelineno-2-13" id="__codelineno-2-13" name="__codelineno-2-13"></a>
+</span><span id="__span-2-14"><a href="#__codelineno-2-14" id="__codelineno-2-14" name="__codelineno-2-14"></a>        <span class="c1">// 4. Obtenemos TODOS los resultados en un array.</span>
+</span><span id="__span-2-15"><a href="#__codelineno-2-15" id="__codelineno-2-15" name="__codelineno-2-15"></a>        <span class="nv">$productos</span> <span class="o">=</span> <span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">fetchAll</span><span class="p">();</span>
+</span><span id="__span-2-16"><a href="#__codelineno-2-16" id="__codelineno-2-16" name="__codelineno-2-16"></a>
+</span><span id="__span-2-17"><a href="#__codelineno-2-17" id="__codelineno-2-17" name="__codelineno-2-17"></a>        <span class="c1">// 5. Mostramos los datos.</span>
+</span><span id="__span-2-18"><a href="#__codelineno-2-18" id="__codelineno-2-18" name="__codelineno-2-18"></a>        <span class="k">if</span> <span class="p">(</span><span class="nv">$productos</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-2-19"><a href="#__codelineno-2-19" id="__codelineno-2-19" name="__codelineno-2-19"></a>            <span class="k">echo</span> <span class="s2">"&lt;h1&gt;Productos de la categoría: "</span> <span class="o">.</span> <span class="nb">ucfirst</span><span class="p">(</span><span class="nv">$categoria_a_buscar</span><span class="p">)</span> <span class="o">.</span> <span class="s2">"&lt;/h1&gt;"</span><span class="p">;</span>
+</span><span id="__span-2-20"><a href="#__codelineno-2-20" id="__codelineno-2-20" name="__codelineno-2-20"></a>            <span class="k">echo</span> <span class="s2">"&lt;ul&gt;"</span><span class="p">;</span>
+</span><span id="__span-2-21"><a href="#__codelineno-2-21" id="__codelineno-2-21" name="__codelineno-2-21"></a>            <span class="k">foreach</span> <span class="p">(</span><span class="nv">$productos</span> <span class="k">as</span> <span class="nv">$producto</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-2-22"><a href="#__codelineno-2-22" id="__codelineno-2-22" name="__codelineno-2-22"></a>                <span class="k">echo</span> <span class="s2">"&lt;li&gt;"</span> <span class="o">.</span> <span class="nv">$producto</span><span class="p">[</span><span class="s1">'nombre'</span><span class="p">]</span> <span class="o">.</span> <span class="s2">" - "</span> <span class="o">.</span> <span class="nv">$producto</span><span class="p">[</span><span class="s1">'precio'</span><span class="p">]</span> <span class="o">.</span> <span class="s2">" €&lt;/li&gt;"</span><span class="p">;</span>
+</span><span id="__span-2-23"><a href="#__codelineno-2-23" id="__codelineno-2-23" name="__codelineno-2-23"></a>            <span class="p">}</span>
+</span><span id="__span-2-24"><a href="#__codelineno-2-24" id="__codelineno-2-24" name="__codelineno-2-24"></a>            <span class="k">echo</span> <span class="s2">"&lt;/ul&gt;"</span><span class="p">;</span>
+</span><span id="__span-2-25"><a href="#__codelineno-2-25" id="__codelineno-2-25" name="__codelineno-2-25"></a>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span id="__span-2-26"><a href="#__codelineno-2-26" id="__codelineno-2-26" name="__codelineno-2-26"></a>            <span class="k">echo</span> <span class="s2">"No se encontraron productos en la categoría "</span> <span class="o">.</span> <span class="nv">$categoria_a_buscar</span><span class="p">;</span>
+</span><span id="__span-2-27"><a href="#__codelineno-2-27" id="__codelineno-2-27" name="__codelineno-2-27"></a>        <span class="p">}</span>
+</span><span id="__span-2-28"><a href="#__codelineno-2-28" id="__codelineno-2-28" name="__codelineno-2-28"></a>
+</span><span id="__span-2-29"><a href="#__codelineno-2-29" id="__codelineno-2-29" name="__codelineno-2-29"></a>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">PDOException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-2-30"><a href="#__codelineno-2-30" id="__codelineno-2-30" name="__codelineno-2-30"></a>        <span class="k">die</span><span class="p">(</span><span class="s2">"Error al realizar la consulta: "</span> <span class="o">.</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">());</span>
+</span><span id="__span-2-31"><a href="#__codelineno-2-31" id="__codelineno-2-31" name="__codelineno-2-31"></a>    <span class="p">}</span>
+</span><span id="__span-2-32"><a href="#__codelineno-2-32" id="__codelineno-2-32" name="__codelineno-2-32"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<hr/>
+<h4 id="insertar-nuevos-datos">Insertar nuevos datos</h4>
+<p>La inserción de nuevos registros es la operación que nos permite añadir datos a nuestra base de datos, por ejemplo, cuando un nuevo usuario se registra o cuando se publica un nuevo producto. Esta operación se realiza con la sentencia <code>INSERT</code> de SQL. Dado que los datos a insertar casi siempre provienen de una fuente externa (como un formulario rellenado por un usuario), es <strong>absolutamente obligatorio</strong> utilizar <strong>sentencias preparadas</strong> para prevenir la inyección SQL.</p>
+<p>El proceso es muy similar al que vimos para las consultas <code>SELECT</code>: preparamos una plantilla de la consulta con marcadores de posición y luego la ejecutamos pasándole los datos de forma segura.</p>
+<p>Imaginemos que hemos recibido los datos de un formulario de registro. El siguiente script se encargaría de insertar un nuevo usuario en la tabla <code>usuarios</code>.</p>
+<p><strong><code>insertar_usuario.php</code></strong>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>    <span class="c1">// 1. Incluimos el fichero de conexión.</span>
+</span><span id="__span-3-3"><a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a>    <span class="k">require_once</span> <span class="s1">'conexion.php'</span><span class="p">;</span>
+</span><span id="__span-3-4"><a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a>
+</span><span id="__span-3-5"><a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a>    <span class="c1">// 2. Datos del nuevo usuario (estos vendrían de un $_POST en un caso real).</span>
+</span><span id="__span-3-6"><a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a>    <span class="nv">$nombre</span> <span class="o">=</span> <span class="s2">"Carlos Ruiz"</span><span class="p">;</span>
+</span><span id="__span-3-7"><a href="#__codelineno-3-7" id="__codelineno-3-7" name="__codelineno-3-7"></a>    <span class="nv">$email</span> <span class="o">=</span> <span class="s2">"carlos.ruiz@email.com"</span><span class="p">;</span>
+</span><span id="__span-3-8"><a href="#__codelineno-3-8" id="__codelineno-3-8" name="__codelineno-3-8"></a>    <span class="nv">$password_texto_plano</span> <span class="o">=</span> <span class="s2">"secreto123"</span><span class="p">;</span>
+</span><span id="__span-3-9"><a href="#__codelineno-3-9" id="__codelineno-3-9" name="__codelineno-3-9"></a>
+</span><span id="__span-3-10"><a href="#__codelineno-3-10" id="__codelineno-3-10" name="__codelineno-3-10"></a>    <span class="c1">// ¡IMPORTANTE! Nunca guardes contraseñas en texto plano.</span>
+</span><span id="__span-3-11"><a href="#__codelineno-3-11" id="__codelineno-3-11" name="__codelineno-3-11"></a>    <span class="c1">// Usa password_hash() para crear un hash seguro.</span>
+</span><span id="__span-3-12"><a href="#__codelineno-3-12" id="__codelineno-3-12" name="__codelineno-3-12"></a>    <span class="nv">$password_hasheada</span> <span class="o">=</span> <span class="nb">password_hash</span><span class="p">(</span><span class="nv">$password_texto_plano</span><span class="p">,</span> <span class="nx">PASSWORD_DEFAULT</span><span class="p">);</span>
+</span><span id="__span-3-13"><a href="#__codelineno-3-13" id="__codelineno-3-13" name="__codelineno-3-13"></a>
+</span><span id="__span-3-14"><a href="#__codelineno-3-14" id="__codelineno-3-14" name="__codelineno-3-14"></a>    <span class="k">try</span> <span class="p">{</span>
+</span><span id="__span-3-15"><a href="#__codelineno-3-15" id="__codelineno-3-15" name="__codelineno-3-15"></a>        <span class="c1">// 3. Preparamos la consulta SQL de inserción.</span>
+</span><span id="__span-3-16"><a href="#__codelineno-3-16" id="__codelineno-3-16" name="__codelineno-3-16"></a>        <span class="c1">// Usamos marcadores de posición nombrados para cada valor.</span>
+</span><span id="__span-3-17"><a href="#__codelineno-3-17" id="__codelineno-3-17" name="__codelineno-3-17"></a>        <span class="nv">$sql</span> <span class="o">=</span> <span class="s2">"INSERT INTO usuarios (nombre, email, password) VALUES (:nombre, :email, :password)"</span><span class="p">;</span>
+</span><span id="__span-3-18"><a href="#__codelineno-3-18" id="__codelineno-3-18" name="__codelineno-3-18"></a>        <span class="nv">$stmt</span> <span class="o">=</span> <span class="nv">$pdo</span><span class="o">-&gt;</span><span class="na">prepare</span><span class="p">(</span><span class="nv">$sql</span><span class="p">);</span>
+</span><span id="__span-3-19"><a href="#__codelineno-3-19" id="__codelineno-3-19" name="__codelineno-3-19"></a>
+</span><span id="__span-3-20"><a href="#__codelineno-3-20" id="__codelineno-3-20" name="__codelineno-3-20"></a>        <span class="c1">// 4. Ejecutamos la consulta, pasando los datos en un array asociativo.</span>
+</span><span id="__span-3-21"><a href="#__codelineno-3-21" id="__codelineno-3-21" name="__codelineno-3-21"></a>        <span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">([</span>
+</span><span id="__span-3-22"><a href="#__codelineno-3-22" id="__codelineno-3-22" name="__codelineno-3-22"></a>            <span class="s1">':nombre'</span> <span class="o">=&gt;</span> <span class="nv">$nombre</span><span class="p">,</span>
+</span><span id="__span-3-23"><a href="#__codelineno-3-23" id="__codelineno-3-23" name="__codelineno-3-23"></a>            <span class="s1">':email'</span> <span class="o">=&gt;</span> <span class="nv">$email</span><span class="p">,</span>
+</span><span id="__span-3-24"><a href="#__codelineno-3-24" id="__codelineno-3-24" name="__codelineno-3-24"></a>            <span class="s1">':password'</span> <span class="o">=&gt;</span> <span class="nv">$password_hasheada</span>
+</span><span id="__span-3-25"><a href="#__codelineno-3-25" id="__codelineno-3-25" name="__codelineno-3-25"></a>        <span class="p">]);</span>
+</span><span id="__span-3-26"><a href="#__codelineno-3-26" id="__codelineno-3-26" name="__codelineno-3-26"></a>
+</span><span id="__span-3-27"><a href="#__codelineno-3-27" id="__codelineno-3-27" name="__codelineno-3-27"></a>        <span class="c1">// 5. Comprobamos si la inserción fue exitosa y obtenemos el ID.</span>
+</span><span id="__span-3-28"><a href="#__codelineno-3-28" id="__codelineno-3-28" name="__codelineno-3-28"></a>        <span class="nv">$filas_afectadas</span> <span class="o">=</span> <span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">rowCount</span><span class="p">();</span>
+</span><span id="__span-3-29"><a href="#__codelineno-3-29" id="__codelineno-3-29" name="__codelineno-3-29"></a>
+</span><span id="__span-3-30"><a href="#__codelineno-3-30" id="__codelineno-3-30" name="__codelineno-3-30"></a>        <span class="k">if</span> <span class="p">(</span><span class="nv">$filas_afectadas</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-3-31"><a href="#__codelineno-3-31" id="__codelineno-3-31" name="__codelineno-3-31"></a>            <span class="nv">$nuevo_id</span> <span class="o">=</span> <span class="nv">$pdo</span><span class="o">-&gt;</span><span class="na">lastInsertId</span><span class="p">();</span>
+</span><span id="__span-3-32"><a href="#__codelineno-3-32" id="__codelineno-3-32" name="__codelineno-3-32"></a>            <span class="k">echo</span> <span class="s2">"¡Usuario registrado con éxito! Su nuevo ID es: "</span> <span class="o">.</span> <span class="nv">$nuevo_id</span><span class="p">;</span>
+</span><span id="__span-3-33"><a href="#__codelineno-3-33" id="__codelineno-3-33" name="__codelineno-3-33"></a>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span id="__span-3-34"><a href="#__codelineno-3-34" id="__codelineno-3-34" name="__codelineno-3-34"></a>            <span class="k">echo</span> <span class="s2">"Error: No se pudo insertar el registro."</span><span class="p">;</span>
+</span><span id="__span-3-35"><a href="#__codelineno-3-35" id="__codelineno-3-35" name="__codelineno-3-35"></a>        <span class="p">}</span>
+</span><span id="__span-3-36"><a href="#__codelineno-3-36" id="__codelineno-3-36" name="__codelineno-3-36"></a>
+</span><span id="__span-3-37"><a href="#__codelineno-3-37" id="__codelineno-3-37" name="__codelineno-3-37"></a>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">PDOException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-3-38"><a href="#__codelineno-3-38" id="__codelineno-3-38" name="__codelineno-3-38"></a>        <span class="c1">// Manejo de errores (p. ej., un email duplicado).</span>
+</span><span id="__span-3-39"><a href="#__codelineno-3-39" id="__codelineno-3-39" name="__codelineno-3-39"></a>        <span class="k">die</span><span class="p">(</span><span class="s2">"Error al insertar el usuario: "</span> <span class="o">.</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">());</span>
+</span><span id="__span-3-40"><a href="#__codelineno-3-40" id="__codelineno-3-40" name="__codelineno-3-40"></a>    <span class="p">}</span>
+</span><span id="__span-3-41"><a href="#__codelineno-3-41" id="__codelineno-3-41" name="__codelineno-3-41"></a><span class="cp">?&gt;</span>
+</span></code></pre></div></p>
+<p>Una vez que se ejecuta una sentencia de modificación de datos como <code>INSERT</code>, <code>UPDATE</code> o <code>DELETE</code>, es fundamental verificar si la operación tuvo el efecto esperado. Para ello, el objeto <em>statement</em> nos proporciona el método <strong><code>rowCount()</code></strong>, que devuelve el número exacto de filas que fueron afectadas por la consulta. En el caso de una inserción, esperaríamos que este valor fuera <code>1</code>, lo que nos da una confirmación fiable de que el nuevo registro se ha añadido correctamente a la base de datos.</p>
+<p>Tras confirmar la creación de un nuevo registro, a menudo surge una necesidad inmediata: conocer el identificador único que la base de datos le ha asignado, especialmente si la tabla utiliza una clave primaria con <code>AUTO_INCREMENT</code>. Para esta tarea, el objeto de <strong>conexión</strong> (<code>$pdo</code>) nos ofrece el método <strong><code>lastInsertId()</code></strong>. Al llamarlo inmediatamente después de una inserción exitosa, nos devolverá el ID del registro recién creado, un dato fundamental para operaciones posteriores, como redirigir al usuario a la página de su nuevo perfil.</p>
+<p>Finalmente, al hablar de la inserción de datos de usuario, es ineludible abordar una práctica de seguridad no negociable que precede a la propia consulta. Las contraseñas <strong>nunca deben guardarse en texto plano</strong>. Para ello, PHP proporciona la función <strong><code>password_hash()</code></strong>, que convierte la contraseña en un "hash" criptográfico seguro e irreversible. Este hash es lo que se almacena en la base de datos. Posteriormente, para verificar un inicio de sesión, se utiliza la función <code>password_verify()</code>, que compara de forma segura la contraseña introducida por el usuario con el hash almacenado, sin necesidad de revertir el proceso.</p>
+<hr/>
+<h4 id="modificar-datos">Modificar datos</h4>
+<p>La actualización de registros es una de las operaciones más comunes en cualquier aplicación. Se utiliza para modificar datos que ya existen en la base de datos, como cuando un usuario cambia su dirección de correo electrónico o se actualiza el stock de un producto. La sentencia SQL para esta tarea es <code>UPDATE</code>.</p>
+<p>Al igual que con la inserción, los datos para la actualización suelen provenir del usuario, por lo que el uso de <strong>sentencias preparadas es obligatorio</strong> para garantizar la seguridad. Además, en una consulta <code>UPDATE</code>, la cláusula <code>WHERE</code> es de <strong>vital importancia</strong>, ya que especifica qué registro o registros deben ser modificados. Omitir la cláusula <code>WHERE</code> resultaría en la actualización de <strong>todas las filas de la tabla</strong>.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-4-2"><a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a>    <span class="c1">// 1. Incluimos el fichero de conexión.</span>
+</span><span id="__span-4-3"><a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a>    <span class="k">require_once</span> <span class="s1">'conexion.php'</span><span class="p">;</span>
+</span><span id="__span-4-4"><a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a>
+</span><span id="__span-4-5"><a href="#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a>    <span class="c1">// 2. Datos para la actualización (vendrían de un formulario).</span>
+</span><span id="__span-4-6"><a href="#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a>    <span class="nv">$id_usuario_a_modificar</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-4-7"><a href="#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a>    <span class="nv">$nuevo_email</span> <span class="o">=</span> <span class="s2">"ana.garcia.nuevo@email.com"</span><span class="p">;</span>
+</span><span id="__span-4-8"><a href="#__codelineno-4-8" id="__codelineno-4-8" name="__codelineno-4-8"></a>
+</span><span id="__span-4-9"><a href="#__codelineno-4-9" id="__codelineno-4-9" name="__codelineno-4-9"></a>    <span class="k">try</span> <span class="p">{</span>
+</span><span id="__span-4-10"><a href="#__codelineno-4-10" id="__codelineno-4-10" name="__codelineno-4-10"></a>        <span class="c1">// 3. Preparamos la consulta SQL de actualización.</span>
+</span><span id="__span-4-11"><a href="#__codelineno-4-11" id="__codelineno-4-11" name="__codelineno-4-11"></a>        <span class="c1">// Se especifican las columnas a cambiar en SET y el registro a modificar en WHERE.</span>
+</span><span id="__span-4-12"><a href="#__codelineno-4-12" id="__codelineno-4-12" name="__codelineno-4-12"></a>        <span class="nv">$sql</span> <span class="o">=</span> <span class="s2">"UPDATE usuarios SET email = :email WHERE id = :id"</span><span class="p">;</span>
+</span><span id="__span-4-13"><a href="#__codelineno-4-13" id="__codelineno-4-13" name="__codelineno-4-13"></a>        <span class="nv">$stmt</span> <span class="o">=</span> <span class="nv">$pdo</span><span class="o">-&gt;</span><span class="na">prepare</span><span class="p">(</span><span class="nv">$sql</span><span class="p">);</span>
+</span><span id="__span-4-14"><a href="#__codelineno-4-14" id="__codelineno-4-14" name="__codelineno-4-14"></a>
+</span><span id="__span-4-15"><a href="#__codelineno-4-15" id="__codelineno-4-15" name="__codelineno-4-15"></a>        <span class="c1">// 4. Ejecutamos la consulta, pasando un array con los nuevos datos y el ID.</span>
+</span><span id="__span-4-16"><a href="#__codelineno-4-16" id="__codelineno-4-16" name="__codelineno-4-16"></a>        <span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">([</span>
+</span><span id="__span-4-17"><a href="#__codelineno-4-17" id="__codelineno-4-17" name="__codelineno-4-17"></a>            <span class="s1">':email'</span> <span class="o">=&gt;</span> <span class="nv">$nuevo_email</span><span class="p">,</span>
+</span><span id="__span-4-18"><a href="#__codelineno-4-18" id="__codelineno-4-18" name="__codelineno-4-18"></a>            <span class="s1">':id'</span>    <span class="o">=&gt;</span> <span class="nv">$id_usuario_a_modificar</span>
+</span><span id="__span-4-19"><a href="#__codelineno-4-19" id="__codelineno-4-19" name="__codelineno-4-19"></a>        <span class="p">]);</span>
+</span><span id="__span-4-20"><a href="#__codelineno-4-20" id="__codelineno-4-20" name="__codelineno-4-20"></a>
+</span><span id="__span-4-21"><a href="#__codelineno-4-21" id="__codelineno-4-21" name="__codelineno-4-21"></a>        <span class="c1">// 5. Verificamos el resultado con rowCount().</span>
+</span><span id="__span-4-22"><a href="#__codelineno-4-22" id="__codelineno-4-22" name="__codelineno-4-22"></a>        <span class="nv">$filas_afectadas</span> <span class="o">=</span> <span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">rowCount</span><span class="p">();</span>
+</span><span id="__span-4-23"><a href="#__codelineno-4-23" id="__codelineno-4-23" name="__codelineno-4-23"></a>
+</span><span id="__span-4-24"><a href="#__codelineno-4-24" id="__codelineno-4-24" name="__codelineno-4-24"></a>        <span class="k">if</span> <span class="p">(</span><span class="nv">$filas_afectadas</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-4-25"><a href="#__codelineno-4-25" id="__codelineno-4-25" name="__codelineno-4-25"></a>            <span class="k">echo</span> <span class="s2">"¡El email del usuario con ID </span><span class="si">$id_usuario_a_modificar</span><span class="s2"> ha sido actualizado con éxito!"</span><span class="p">;</span>
+</span><span id="__span-4-26"><a href="#__codelineno-4-26" id="__codelineno-4-26" name="__codelineno-4-26"></a>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span id="__span-4-27"><a href="#__codelineno-4-27" id="__codelineno-4-27" name="__codelineno-4-27"></a>            <span class="k">echo</span> <span class="s2">"No se encontró ningún usuario con el ID </span><span class="si">$id_usuario_a_modificar</span><span class="s2"> o el email ya era el mismo."</span><span class="p">;</span>
+</span><span id="__span-4-28"><a href="#__codelineno-4-28" id="__codelineno-4-28" name="__codelineno-4-28"></a>        <span class="p">}</span>
+</span><span id="__span-4-29"><a href="#__codelineno-4-29" id="__codelineno-4-29" name="__codelineno-4-29"></a>
+</span><span id="__span-4-30"><a href="#__codelineno-4-30" id="__codelineno-4-30" name="__codelineno-4-30"></a>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">PDOException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-4-31"><a href="#__codelineno-4-31" id="__codelineno-4-31" name="__codelineno-4-31"></a>        <span class="k">die</span><span class="p">(</span><span class="s2">"Error al actualizar el registro: "</span> <span class="o">.</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">());</span>
+</span><span id="__span-4-32"><a href="#__codelineno-4-32" id="__codelineno-4-32" name="__codelineno-4-32"></a>    <span class="p">}</span>
+</span><span id="__span-4-33"><a href="#__codelineno-4-33" id="__codelineno-4-33" name="__codelineno-4-33"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<p>Al ejecutar una sentencia <code>UPDATE</code>, la cláusula <strong><code>WHERE</code></strong> es el componente de mayor importancia estratégica. Esta cláusula define la condición precisa que debe cumplir un registro para ser objeto de la modificación. En nuestro ejemplo, <code>WHERE id = :id</code> actúa como un filtro de alta precisión, garantizando que la operación de escritura afecte única y exclusivamente al usuario con ese identificador. Omitir o definir incorrectamente esta cláusula es uno de los errores más peligrosos en SQL, ya que podría resultar en la modificación no intencionada de miles o incluso de todos los registros de la tabla.</p>
+<p>Para verificar el resultado de la operación, se utiliza el método <strong><code>rowCount()</code></strong>, aunque su interpretación en un <code>UPDATE</code> es más sutil que en un <code>INSERT</code>. Este método no devuelve si la consulta se ejecutó, sino el número de filas que fueron <strong>efectivamente alteradas</strong>. Si se intenta actualizar un registro con valores que ya posee, la consulta se ejecutará con éxito, pero <code>rowCount()</code> devolverá <code>0</code> porque no se produjo ningún cambio real en los datos. Por lo tanto, un resultado de <code>0</code> no necesariamente indica un fallo; puede significar simplemente que no había ninguna modificación que realizar, una distinción clave para manejar correctamente la lógica de la aplicación.</p>
+<hr/>
+<h4 id="eliminar-datos">Eliminar datos</h4>
+<p>La operación de borrado, realizada con la sentencia <code>DELETE</code> de SQL, es la más crítica y peligrosa de todas, ya que es <strong>irreversible</strong>. Una vez que un registro ha sido eliminado, recuperarlo puede ser imposible. Por esta razón, es fundamental manejar esta operación con el máximo cuidado, asegurándose de que la cláusula <code>WHERE</code> especifique de forma inequívoca el registro o registros que se desean eliminar.</p>
+<p>Omitir la cláusula <code>WHERE</code> en una sentencia <code>DELETE</code> es uno de los errores más catastróficos que se pueden cometer, ya que <strong>eliminaría todos los registros de la tabla</strong>. Al igual que en las operaciones anteriores, el uso de sentencias preparadas es esencial para el <code>WHERE</code>.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-5-2"><a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a>    <span class="c1">// 1. Incluimos el fichero de conexión.</span>
+</span><span id="__span-5-3"><a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a>    <span class="k">require_once</span> <span class="s1">'conexion.php'</span><span class="p">;</span>
+</span><span id="__span-5-4"><a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a>
+</span><span id="__span-5-5"><a href="#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a>    <span class="c1">// 2. ID del usuario a eliminar (en un caso real, vendría de una petición GET o POST).</span>
+</span><span id="__span-5-6"><a href="#__codelineno-5-6" id="__codelineno-5-6" name="__codelineno-5-6"></a>    <span class="nv">$id_usuario_a_eliminar</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</span><span id="__span-5-7"><a href="#__codelineno-5-7" id="__codelineno-5-7" name="__codelineno-5-7"></a>
+</span><span id="__span-5-8"><a href="#__codelineno-5-8" id="__codelineno-5-8" name="__codelineno-5-8"></a>    <span class="k">try</span> <span class="p">{</span>
+</span><span id="__span-5-9"><a href="#__codelineno-5-9" id="__codelineno-5-9" name="__codelineno-5-9"></a>        <span class="c1">// 3. Preparamos la consulta SQL de eliminación.</span>
+</span><span id="__span-5-10"><a href="#__codelineno-5-10" id="__codelineno-5-10" name="__codelineno-5-10"></a>        <span class="c1">// La cláusula WHERE es absolutamente crucial.</span>
+</span><span id="__span-5-11"><a href="#__codelineno-5-11" id="__codelineno-5-11" name="__codelineno-5-11"></a>        <span class="nv">$sql</span> <span class="o">=</span> <span class="s2">"DELETE FROM usuarios WHERE id = :id"</span><span class="p">;</span>
+</span><span id="__span-5-12"><a href="#__codelineno-5-12" id="__codelineno-5-12" name="__codelineno-5-12"></a>        <span class="nv">$stmt</span> <span class="o">=</span> <span class="nv">$pdo</span><span class="o">-&gt;</span><span class="na">prepare</span><span class="p">(</span><span class="nv">$sql</span><span class="p">);</span>
+</span><span id="__span-5-13"><a href="#__codelineno-5-13" id="__codelineno-5-13" name="__codelineno-5-13"></a>
+</span><span id="__span-5-14"><a href="#__codelineno-5-14" id="__codelineno-5-14" name="__codelineno-5-14"></a>        <span class="c1">// 4. Ejecutamos la consulta, pasando el ID del usuario.</span>
+</span><span id="__span-5-15"><a href="#__codelineno-5-15" id="__codelineno-5-15" name="__codelineno-5-15"></a>        <span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">([</span><span class="s1">':id'</span> <span class="o">=&gt;</span> <span class="nv">$id_usuario_a_eliminar</span><span class="p">]);</span>
+</span><span id="__span-5-16"><a href="#__codelineno-5-16" id="__codelineno-5-16" name="__codelineno-5-16"></a>
+</span><span id="__span-5-17"><a href="#__codelineno-5-17" id="__codelineno-5-17" name="__codelineno-5-17"></a>        <span class="c1">// 5. Verificamos cuántas filas fueron eliminadas.</span>
+</span><span id="__span-5-18"><a href="#__codelineno-5-18" id="__codelineno-5-18" name="__codelineno-5-18"></a>        <span class="nv">$filas_afectadas</span> <span class="o">=</span> <span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">rowCount</span><span class="p">();</span>
+</span><span id="__span-5-19"><a href="#__codelineno-5-19" id="__codelineno-5-19" name="__codelineno-5-19"></a>
+</span><span id="__span-5-20"><a href="#__codelineno-5-20" id="__codelineno-5-20" name="__codelineno-5-20"></a>        <span class="k">if</span> <span class="p">(</span><span class="nv">$filas_afectadas</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-5-21"><a href="#__codelineno-5-21" id="__codelineno-5-21" name="__codelineno-5-21"></a>            <span class="k">echo</span> <span class="s2">"El usuario con ID </span><span class="si">$id_usuario_a_eliminar</span><span class="s2"> ha sido eliminado con éxito."</span><span class="p">;</span>
+</span><span id="__span-5-22"><a href="#__codelineno-5-22" id="__codelineno-5-22" name="__codelineno-5-22"></a>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span id="__span-5-23"><a href="#__codelineno-5-23" id="__codelineno-5-23" name="__codelineno-5-23"></a>            <span class="k">echo</span> <span class="s2">"No se encontró ningún usuario con el ID </span><span class="si">$id_usuario_a_eliminar</span><span class="s2">. No se ha borrado nada."</span><span class="p">;</span>
+</span><span id="__span-5-24"><a href="#__codelineno-5-24" id="__codelineno-5-24" name="__codelineno-5-24"></a>        <span class="p">}</span>
+</span><span id="__span-5-25"><a href="#__codelineno-5-25" id="__codelineno-5-25" name="__codelineno-5-25"></a>
+</span><span id="__span-5-26"><a href="#__codelineno-5-26" id="__codelineno-5-26" name="__codelineno-5-26"></a>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">PDOException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-5-27"><a href="#__codelineno-5-27" id="__codelineno-5-27" name="__codelineno-5-27"></a>        <span class="k">die</span><span class="p">(</span><span class="s2">"Error al eliminar el registro: "</span> <span class="o">.</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">());</span>
+</span><span id="__span-5-28"><a href="#__codelineno-5-28" id="__codelineno-5-28" name="__codelineno-5-28"></a>    <span class="p">}</span>
+</span><span id="__span-5-29"><a href="#__codelineno-5-29" id="__codelineno-5-29" name="__codelineno-5-29"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<p>La confirmación de una operación de borrado se realiza, al igual que con <code>UPDATE</code>, a través del método <strong><code>rowCount()</code></strong>. Este nos informa del número de filas que fueron eliminadas por la consulta. Un valor de <code>1</code> nos asegura que el registro que buscábamos fue encontrado y eliminado con éxito, mientras que un resultado de <code>0</code> indica que ningún registro cumplió la condición de la cláusula <code>WHERE</code>, probablemente porque el ID especificado ya no existía en la tabla.</p>
+<p>Dada la naturaleza irreversible y peligrosa de la sentencia <code>DELETE</code>, en la mayoría de las aplicaciones profesionales se evita su uso directo mediante una técnica llamada <strong>borrado lógico ("soft delete")</strong>. En lugar de eliminar permanentemente un registro de la base de datos, simplemente se le "marca como borrado". Esto se implementa añadiendo una columna a la tabla, como por ejemplo <code>fecha_borrado</code> (que por defecto es <code>NULL</code>). Así, la operación de "borrar" se convierte en un <code>UPDATE</code> que establece la fecha actual en esa columna (<code>UPDATE usuarios SET fecha_borrado = NOW() WHERE id = :id</code>). Para que el resto de la aplicación funcione como si el registro no existiera, todas las consultas de lectura (<code>SELECT</code>) se modifican para que solo recuperen las filas <code>WHERE fecha_borrado IS NULL</code>. Este enfoque es mucho más seguro y robusto, ya que preserva la integridad histórica de los datos y permite recuperar registros "borrados" de forma sencilla.</p>
+<hr/>
+<h4 id="tabla-resumen">Tabla resumen</h4>
+<p>Aquí tienes una tabla resumen que compara las operaciones CRUD (Crear, Leer, Actualizar, Borrar) en SQL con PDO:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Operación</th>
+<th style="text-align: left;">Sentencia SQL</th>
+<th style="text-align: left;">Métodos PDO Principales</th>
+<th style="text-align: left;">Verificación / Resultado Clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Crear</strong></td>
+<td style="text-align: left;"><code>INSERT INTO ...</code></td>
+<td style="text-align: left;"><code>prepare()</code>, <code>execute()</code></td>
+<td style="text-align: left;"><code>$pdo-&gt;lastInsertId()</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Leer</strong></td>
+<td style="text-align: left;"><code>SELECT ... FROM ...</code></td>
+<td style="text-align: left;"><code>prepare()</code>, <code>execute()</code>, <code>fetch()</code>/<code>fetchAll()</code></td>
+<td style="text-align: left;">Devuelve el array de resultados</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Actualizar</strong></td>
+<td style="text-align: left;"><code>UPDATE ... SET ...</code></td>
+<td style="text-align: left;"><code>prepare()</code>, <code>execute()</code></td>
+<td style="text-align: left;"><code>$stmt-&gt;rowCount()</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Borrar</strong></td>
+<td style="text-align: left;"><code>DELETE FROM ...</code></td>
+<td style="text-align: left;"><code>prepare()</code>, <code>execute()</code></td>
+<td style="text-align: left;"><code>$stmt-&gt;rowCount()</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="conectando-a-bases-de-datos-nosql-mongodb"><strong>Conectando a Bases de Datos NoSQL: MongoDB</strong></h2>
+<p>Hasta ahora, nos hemos centrado en las bases de datos relacionales (como MySQL), que organizan los datos en tablas con filas y columnas. Sin embargo, existe otra familia de bases de datos muy popular, conocida como <strong>NoSQL</strong>. Dentro de esta familia, <strong>MongoDB</strong> es una de las más utilizadas.</p>
+<p>MongoDB es una base de datos <strong>orientada a documentos</strong>. En lugar de tablas y filas, almacena los datos en <strong>colecciones</strong> y <strong>documentos</strong>. Un documento es una estructura de datos similar a un JSON (técnicamente, se guarda en un formato binario llamado BSON), lo que le da una gran flexibilidad y hace que se mapee de forma muy natural con los objetos y arrays de los lenguajes de programación modernos.</p>
+<p>Para interactuar con MongoDB desde PHP, no se utiliza PDO. MongoDB tiene su propio <strong>driver oficial</strong>. En el desarrollo moderno, este driver se gestiona a través de <strong>Composer</strong>. Para empezar un proyecto, primero necesitaríamos instalar la librería correspondiente en nuestra terminal:
+<code>composer require mongodb/mongodb</code>. Una vez instalada, podemos usar el autoloader de Composer para cargar las clases necesarias.</p>
+<p>La conexión a MongoDB se realiza creando una instancia de la clase <code>MongoDB\Client</code>. Esta clase necesita una <strong>URI (Uniform Resource Identifier)</strong> de conexión que le indique dónde se encuentra el servidor de la base de datos. Una vez conectado al servidor, podemos seleccionar la base de datos y la colección con la que queremos trabajar.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="x">    </span><span class="cp">&lt;?php</span>
+</span><span id="__span-6-2"><a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a>    <span class="c1">// 1. Incluimos el autoloader de Composer.</span>
+</span><span id="__span-6-3"><a href="#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a>    <span class="c1">// Esto es esencial para que PHP pueda encontrar la clase MongoDB\Client.</span>
+</span><span id="__span-6-4"><a href="#__codelineno-6-4" id="__codelineno-6-4" name="__codelineno-6-4"></a>    <span class="k">require_once</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+</span><span id="__span-6-5"><a href="#__codelineno-6-5" id="__codelineno-6-5" name="__codelineno-6-5"></a>
+</span><span id="__span-6-6"><a href="#__codelineno-6-6" id="__codelineno-6-6" name="__codelineno-6-6"></a>    <span class="c1">// 2. URI de conexión.</span>
+</span><span id="__span-6-7"><a href="#__codelineno-6-7" id="__codelineno-6-7" name="__codelineno-6-7"></a>    <span class="c1">// Por defecto, MongoDB se ejecuta en el puerto 27017.</span>
+</span><span id="__span-6-8"><a href="#__codelineno-6-8" id="__codelineno-6-8" name="__codelineno-6-8"></a>    <span class="nv">$uri</span> <span class="o">=</span> <span class="s1">'mongodb://localhost:27017'</span><span class="p">;</span>
+</span><span id="__span-6-9"><a href="#__codelineno-6-9" id="__codelineno-6-9" name="__codelineno-6-9"></a>
+</span><span id="__span-6-10"><a href="#__codelineno-6-10" id="__codelineno-6-10" name="__codelineno-6-10"></a>    <span class="k">try</span> <span class="p">{</span>
+</span><span id="__span-6-11"><a href="#__codelineno-6-11" id="__codelineno-6-11" name="__codelineno-6-11"></a>        <span class="c1">// 3. Crear una nueva instancia del cliente.</span>
+</span><span id="__span-6-12"><a href="#__codelineno-6-12" id="__codelineno-6-12" name="__codelineno-6-12"></a>        <span class="c1">// Esto establece la conexión con el servidor de MongoDB.</span>
+</span><span id="__span-6-13"><a href="#__codelineno-6-13" id="__codelineno-6-13" name="__codelineno-6-13"></a>        <span class="nv">$cliente</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MongoDB\Client</span><span class="p">(</span><span class="nv">$uri</span><span class="p">);</span>
+</span><span id="__span-6-14"><a href="#__codelineno-6-14" id="__codelineno-6-14" name="__codelineno-6-14"></a>
+</span><span id="__span-6-15"><a href="#__codelineno-6-15" id="__codelineno-6-15" name="__codelineno-6-15"></a>        <span class="c1">// 4. Seleccionar una base de datos y una colección.</span>
+</span><span id="__span-6-16"><a href="#__codelineno-6-16" id="__codelineno-6-16" name="__codelineno-6-16"></a>        <span class="c1">// Si la base de datos o la colección no existen, MongoDB las creará</span>
+</span><span id="__span-6-17"><a href="#__codelineno-6-17" id="__codelineno-6-17" name="__codelineno-6-17"></a>        <span class="c1">// automáticamente en el momento en que se inserte el primer documento.</span>
+</span><span id="__span-6-18"><a href="#__codelineno-6-18" id="__codelineno-6-18" name="__codelineno-6-18"></a>        <span class="nv">$coleccion</span> <span class="o">=</span> <span class="nv">$cliente</span><span class="o">-&gt;</span><span class="na">mi_tienda</span><span class="o">-&gt;</span><span class="na">usuarios</span><span class="p">;</span>
+</span><span id="__span-6-19"><a href="#__codelineno-6-19" id="__codelineno-6-19" name="__codelineno-6-19"></a>
+</span><span id="__span-6-20"><a href="#__codelineno-6-20" id="__codelineno-6-20" name="__codelineno-6-20"></a>        <span class="c1">// Si llegamos aquí, la conexión fue exitosa.</span>
+</span><span id="__span-6-21"><a href="#__codelineno-6-21" id="__codelineno-6-21" name="__codelineno-6-21"></a>        <span class="c1">// Para verificar, podemos contar los documentos en la colección.</span>
+</span><span id="__span-6-22"><a href="#__codelineno-6-22" id="__codelineno-6-22" name="__codelineno-6-22"></a>        <span class="nv">$num_documentos</span> <span class="o">=</span> <span class="nv">$coleccion</span><span class="o">-&gt;</span><span class="na">countDocuments</span><span class="p">();</span>
+</span><span id="__span-6-23"><a href="#__codelineno-6-23" id="__codelineno-6-23" name="__codelineno-6-23"></a>        <span class="k">echo</span> <span class="s2">"Conexión a MongoDB exitosa. La colección 'usuarios' tiene "</span> <span class="o">.</span> <span class="nv">$num_documentos</span> <span class="o">.</span> <span class="s2">" documentos."</span><span class="p">;</span>
+</span><span id="__span-6-24"><a href="#__codelineno-6-24" id="__codelineno-6-24" name="__codelineno-6-24"></a>
+</span><span id="__span-6-25"><a href="#__codelineno-6-25" id="__codelineno-6-25" name="__codelineno-6-25"></a>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-6-26"><a href="#__codelineno-6-26" id="__codelineno-6-26" name="__codelineno-6-26"></a>        <span class="c1">// Manejo de errores de conexión.</span>
+</span><span id="__span-6-27"><a href="#__codelineno-6-27" id="__codelineno-6-27" name="__codelineno-6-27"></a>        <span class="k">die</span><span class="p">(</span><span class="s2">"Error al conectar con MongoDB: "</span> <span class="o">.</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">());</span>
+</span><span id="__span-6-28"><a href="#__codelineno-6-28" id="__codelineno-6-28" name="__codelineno-6-28"></a>    <span class="p">}</span>
+</span><span id="__span-6-29"><a href="#__codelineno-6-29" id="__codelineno-6-29" name="__codelineno-6-29"></a>
+</span><span id="__span-6-30"><a href="#__codelineno-6-30" id="__codelineno-6-30" name="__codelineno-6-30"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<p>El proceso de conexión a MongoDB se apoya en varias prácticas del desarrollo moderno en PHP. La primera es el uso del <strong>autoloader de Composer</strong>. La línea <code>require_once 'vendor/autoload.php';</code> es un paso crucial que delega a Composer la responsabilidad de la carga de clases. En lugar de tener que escribir manualmente sentencias <code>include</code> o <code>require</code> para cada clase que necesitemos, el autoloader localiza y carga automáticamente las clases (como <code>MongoDB\Client</code>) en el momento exacto en que son utilizadas por primera vez, simplificando enormemente la gestión de dependencias.</p>
+<p>El modelo de conexión presenta una <strong>selección diferida</strong>, a diferencia del enfoque más directo de PDO. Con MongoDB, el proceso se divide en dos etapas claras: primero, se establece una conexión general con el servidor de bases de datos al crear el objeto <code>new MongoDB\Client</code>, y solo después se selecciona la base de datos y la colección específicas con las que se va a trabajar, utilizando una sintaxis de objeto como <code>$cliente-&gt;mi_tienda-&gt;usuarios</code>.</p>
+<p>Finalmente, este proceso se beneficia de la naturaleza <strong>flexible y sin esquema (schemaless)</strong> de MongoDB. No es necesario definir una estructura de tablas o una base de datos de antemano. Si al seleccionar la base de datos <code>mi_tienda</code> o la colección <code>usuarios</code> estas no existen, MongoDB no genera un error. En su lugar, las creará implícitamente en el momento en que se realice la primera operación de escritura, ofreciendo un flujo de desarrollo más ágil y adaptable.</p>
+<h4 id="consultando-datos-en-mongodb"><strong>Consultando Datos en MongoDB</strong></h4>
+<p>La consulta de datos en MongoDB difiere fundamentalmente del modelo SQL. En lugar de escribir una cadena de texto con una consulta <code>SELECT</code>, en MongoDB se consultan los datos construyendo un <strong>documento de filtro</strong> en formato de array asociativo de PHP. Este filtro especifica las condiciones que deben cumplir los documentos para ser seleccionados.</p>
+<p>Las dos operaciones principales para leer datos son <code>findOne()</code>, para obtener un único documento, y <code>find()</code>, para obtener múltiples documentos.</p>
+<p>El método <code>findOne()</code> es ideal cuando buscas un documento específico y sabes que solo habrá un resultado (o solo te interesa el primero), como al buscar un usuario por su <code>email</code>. Devuelve un único documento (como un array asociativo) o <code>null</code> si no encuentra ninguna coincidencia.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-7-2"><a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a>    <span class="k">require_once</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+</span><span id="__span-7-3"><a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a>
+</span><span id="__span-7-4"><a href="#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a>    <span class="k">try</span> <span class="p">{</span>
+</span><span id="__span-7-5"><a href="#__codelineno-7-5" id="__codelineno-7-5" name="__codelineno-7-5"></a>        <span class="nv">$cliente</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MongoDB\Client</span><span class="p">(</span><span class="s1">'mongodb://localhost:27017'</span><span class="p">);</span>
+</span><span id="__span-7-6"><a href="#__codelineno-7-6" id="__codelineno-7-6" name="__codelineno-7-6"></a>        <span class="nv">$coleccion</span> <span class="o">=</span> <span class="nv">$cliente</span><span class="o">-&gt;</span><span class="na">mi_tienda</span><span class="o">-&gt;</span><span class="na">usuarios</span><span class="p">;</span>
+</span><span id="__span-7-7"><a href="#__codelineno-7-7" id="__codelineno-7-7" name="__codelineno-7-7"></a>
+</span><span id="__span-7-8"><a href="#__codelineno-7-8" id="__codelineno-7-8" name="__codelineno-7-8"></a>        <span class="c1">// 1. Definimos el filtro de búsqueda.</span>
+</span><span id="__span-7-9"><a href="#__codelineno-7-9" id="__codelineno-7-9" name="__codelineno-7-9"></a>        <span class="c1">// Buscamos un documento cuya clave 'email' sea igual a 'luis.soler@email.com'.</span>
+</span><span id="__span-7-10"><a href="#__codelineno-7-10" id="__codelineno-7-10" name="__codelineno-7-10"></a>        <span class="nv">$filtro</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="s1">'luis.soler@email.com'</span><span class="p">];</span>
+</span><span id="__span-7-11"><a href="#__codelineno-7-11" id="__codelineno-7-11" name="__codelineno-7-11"></a>
+</span><span id="__span-7-12"><a href="#__codelineno-7-12" id="__codelineno-7-12" name="__codelineno-7-12"></a>        <span class="c1">// 2. Ejecutamos la consulta.</span>
+</span><span id="__span-7-13"><a href="#__codelineno-7-13" id="__codelineno-7-13" name="__codelineno-7-13"></a>        <span class="nv">$usuario</span> <span class="o">=</span> <span class="nv">$coleccion</span><span class="o">-&gt;</span><span class="na">findOne</span><span class="p">(</span><span class="nv">$filtro</span><span class="p">);</span>
+</span><span id="__span-7-14"><a href="#__codelineno-7-14" id="__codelineno-7-14" name="__codelineno-7-14"></a>
+</span><span id="__span-7-15"><a href="#__codelineno-7-15" id="__codelineno-7-15" name="__codelineno-7-15"></a>        <span class="c1">// 3. Mostramos el resultado.</span>
+</span><span id="__span-7-16"><a href="#__codelineno-7-16" id="__codelineno-7-16" name="__codelineno-7-16"></a>        <span class="k">if</span> <span class="p">(</span><span class="nv">$usuario</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-7-17"><a href="#__codelineno-7-17" id="__codelineno-7-17" name="__codelineno-7-17"></a>            <span class="k">echo</span> <span class="s2">"&lt;h1&gt;Usuario Encontrado&lt;/h1&gt;"</span><span class="p">;</span>
+</span><span id="__span-7-18"><a href="#__codelineno-7-18" id="__codelineno-7-18" name="__codelineno-7-18"></a>            <span class="k">echo</span> <span class="s2">"Nombre: "</span> <span class="o">.</span> <span class="nv">$usuario</span><span class="p">[</span><span class="s1">'nombre'</span><span class="p">]</span> <span class="o">.</span> <span class="s2">"&lt;br&gt;"</span><span class="p">;</span>
+</span><span id="__span-7-19"><a href="#__codelineno-7-19" id="__codelineno-7-19" name="__codelineno-7-19"></a>            <span class="k">echo</span> <span class="s2">"Email: "</span> <span class="o">.</span> <span class="nv">$usuario</span><span class="p">[</span><span class="s1">'email'</span><span class="p">]</span> <span class="o">.</span> <span class="s2">"&lt;br&gt;"</span><span class="p">;</span>
+</span><span id="__span-7-20"><a href="#__codelineno-7-20" id="__codelineno-7-20" name="__codelineno-7-20"></a>            <span class="c1">// El _id es un objeto especial, para verlo como string usamos __toString()</span>
+</span><span id="__span-7-21"><a href="#__codelineno-7-21" id="__codelineno-7-21" name="__codelineno-7-21"></a>            <span class="k">echo</span> <span class="s2">"ID: "</span> <span class="o">.</span> <span class="nv">$usuario</span><span class="p">[</span><span class="s1">'_id'</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">__toString</span><span class="p">()</span> <span class="o">.</span> <span class="s2">"&lt;br&gt;"</span><span class="p">;</span>
+</span><span id="__span-7-22"><a href="#__codelineno-7-22" id="__codelineno-7-22" name="__codelineno-7-22"></a>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span id="__span-7-23"><a href="#__codelineno-7-23" id="__codelineno-7-23" name="__codelineno-7-23"></a>            <span class="k">echo</span> <span class="s2">"No se ha encontrado ningún usuario con ese email."</span><span class="p">;</span>
+</span><span id="__span-7-24"><a href="#__codelineno-7-24" id="__codelineno-7-24" name="__codelineno-7-24"></a>        <span class="p">}</span>
+</span><span id="__span-7-25"><a href="#__codelineno-7-25" id="__codelineno-7-25" name="__codelineno-7-25"></a>
+</span><span id="__span-7-26"><a href="#__codelineno-7-26" id="__codelineno-7-26" name="__codelineno-7-26"></a>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-7-27"><a href="#__codelineno-7-27" id="__codelineno-7-27" name="__codelineno-7-27"></a>        <span class="k">die</span><span class="p">(</span><span class="s2">"Error al consultar los datos: "</span> <span class="o">.</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">());</span>
+</span><span id="__span-7-28"><a href="#__codelineno-7-28" id="__codelineno-7-28" name="__codelineno-7-28"></a>    <span class="p">}</span>
+</span><span id="__span-7-29"><a href="#__codelineno-7-29" id="__codelineno-7-29" name="__codelineno-7-29"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<p>Por su parte, el método principal para realizar consultas es <code>find()</code>. A diferencia de <code>findOne()</code>, <code>find()</code> no devuelve los datos directamente, sino un objeto especial llamado <strong>cursor</strong>. Un cursor es un puntero eficiente al conjunto de resultados en el servidor de la base de datos. Para obtener los documentos, simplemente tenemos que iterar sobre este cursor con un bucle <code>foreach</code>.</p>
+<p>El método <code>find()</code> acepta un segundo argumento opcional, un array de opciones, que nos permite ordenar los resultados (<code>sort</code>), limitar el número de documentos devueltos (<code>limit</code>), o seleccionar solo ciertos campos (<code>projection</code>).</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-8-1"><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-8-2"><a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a>    <span class="k">require_once</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+</span><span id="__span-8-3"><a href="#__codelineno-8-3" id="__codelineno-8-3" name="__codelineno-8-3"></a>
+</span><span id="__span-8-4"><a href="#__codelineno-8-4" id="__codelineno-8-4" name="__codelineno-8-4"></a>    <span class="k">try</span> <span class="p">{</span>
+</span><span id="__span-8-5"><a href="#__codelineno-8-5" id="__codelineno-8-5" name="__codelineno-8-5"></a>        <span class="nv">$cliente</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MongoDB\Client</span><span class="p">(</span><span class="s1">'mongodb://localhost:27017'</span><span class="p">);</span>
+</span><span id="__span-8-6"><a href="#__codelineno-8-6" id="__codelineno-8-6" name="__codelineno-8-6"></a>        <span class="nv">$coleccion</span> <span class="o">=</span> <span class="nv">$cliente</span><span class="o">-&gt;</span><span class="na">mi_tienda</span><span class="o">-&gt;</span><span class="na">usuarios</span><span class="p">;</span>
+</span><span id="__span-8-7"><a href="#__codelineno-8-7" id="__codelineno-8-7" name="__codelineno-8-7"></a>
+</span><span id="__span-8-8"><a href="#__codelineno-8-8" id="__codelineno-8-8" name="__codelineno-8-8"></a>        <span class="c1">// 1. Definimos el filtro: queremos todos los usuarios que estén activos.</span>
+</span><span id="__span-8-9"><a href="#__codelineno-8-9" id="__codelineno-8-9" name="__codelineno-8-9"></a>        <span class="nv">$filtro</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'activo'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">];</span>
+</span><span id="__span-8-10"><a href="#__codelineno-8-10" id="__codelineno-8-10" name="__codelineno-8-10"></a>
+</span><span id="__span-8-11"><a href="#__codelineno-8-11" id="__codelineno-8-11" name="__codelineno-8-11"></a>        <span class="c1">// 2. Definimos las opciones: ordenar por nombre de forma ascendente (1) y limitar a 5 resultados.</span>
+</span><span id="__span-8-12"><a href="#__codelineno-8-12" id="__codelineno-8-12" name="__codelineno-8-12"></a>        <span class="nv">$opciones</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="__span-8-13"><a href="#__codelineno-8-13" id="__codelineno-8-13" name="__codelineno-8-13"></a>            <span class="s1">'sort'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'nombre'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">],</span>
+</span><span id="__span-8-14"><a href="#__codelineno-8-14" id="__codelineno-8-14" name="__codelineno-8-14"></a>            <span class="s1">'limit'</span> <span class="o">=&gt;</span> <span class="mi">5</span>
+</span><span id="__span-8-15"><a href="#__codelineno-8-15" id="__codelineno-8-15" name="__codelineno-8-15"></a>        <span class="p">];</span>
+</span><span id="__span-8-16"><a href="#__codelineno-8-16" id="__codelineno-8-16" name="__codelineno-8-16"></a>
+</span><span id="__span-8-17"><a href="#__codelineno-8-17" id="__codelineno-8-17" name="__codelineno-8-17"></a>        <span class="c1">// 3. Ejecutamos la consulta find(), que nos devuelve un cursor.</span>
+</span><span id="__span-8-18"><a href="#__codelineno-8-18" id="__codelineno-8-18" name="__codelineno-8-18"></a>        <span class="nv">$cursor</span> <span class="o">=</span> <span class="nv">$coleccion</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="nv">$filtro</span><span class="p">,</span> <span class="nv">$opciones</span><span class="p">);</span>
+</span><span id="__span-8-19"><a href="#__codelineno-8-19" id="__codelineno-8-19" name="__codelineno-8-19"></a>
+</span><span id="__span-8-20"><a href="#__codelineno-8-20" id="__codelineno-8-20" name="__codelineno-8-20"></a>        <span class="c1">// 4. Iteramos sobre el cursor para obtener cada documento.</span>
+</span><span id="__span-8-21"><a href="#__codelineno-8-21" id="__codelineno-8-21" name="__codelineno-8-21"></a>        <span class="k">echo</span> <span class="s2">"&lt;h1&gt;Usuarios Activos (limitado a 5)&lt;/h1&gt;"</span><span class="p">;</span>
+</span><span id="__span-8-22"><a href="#__codelineno-8-22" id="__codelineno-8-22" name="__codelineno-8-22"></a>        <span class="k">echo</span> <span class="s2">"&lt;ul&gt;"</span><span class="p">;</span>
+</span><span id="__span-8-23"><a href="#__codelineno-8-23" id="__codelineno-8-23" name="__codelineno-8-23"></a>        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$cursor</span> <span class="k">as</span> <span class="nv">$usuario</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-8-24"><a href="#__codelineno-8-24" id="__codelineno-8-24" name="__codelineno-8-24"></a>            <span class="k">echo</span> <span class="s2">"&lt;li&gt;"</span> <span class="o">.</span> <span class="nv">$usuario</span><span class="p">[</span><span class="s1">'nombre'</span><span class="p">]</span> <span class="o">.</span> <span class="s2">" ("</span> <span class="o">.</span> <span class="nv">$usuario</span><span class="p">[</span><span class="s1">'email'</span><span class="p">]</span> <span class="o">.</span> <span class="s2">")&lt;/li&gt;"</span><span class="p">;</span>
+</span><span id="__span-8-25"><a href="#__codelineno-8-25" id="__codelineno-8-25" name="__codelineno-8-25"></a>        <span class="p">}</span>
+</span><span id="__span-8-26"><a href="#__codelineno-8-26" id="__codelineno-8-26" name="__codelineno-8-26"></a>        <span class="k">echo</span> <span class="s2">"&lt;/ul&gt;"</span><span class="p">;</span>
+</span><span id="__span-8-27"><a href="#__codelineno-8-27" id="__codelineno-8-27" name="__codelineno-8-27"></a>
+</span><span id="__span-8-28"><a href="#__codelineno-8-28" id="__codelineno-8-28" name="__codelineno-8-28"></a>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-8-29"><a href="#__codelineno-8-29" id="__codelineno-8-29" name="__codelineno-8-29"></a>        <span class="k">die</span><span class="p">(</span><span class="s2">"Error al consultar los datos: "</span> <span class="o">.</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">());</span>
+</span><span id="__span-8-30"><a href="#__codelineno-8-30" id="__codelineno-8-30" name="__codelineno-8-30"></a>    <span class="p">}</span>
+</span><span id="__span-8-31"><a href="#__codelineno-8-31" id="__codelineno-8-31" name="__codelineno-8-31"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>El campo <code>_id</code> de MongoDB no es un simple string o número, sino un tipo de dato especial BSON llamado <code>ObjectId</code>. Si quieres buscar un documento por su <code>_id</code>, debes convertir el string del ID a un objeto <code>ObjectId</code> primero.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-9-1"><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-9-2"><a href="#__codelineno-9-2" id="__codelineno-9-2" name="__codelineno-9-2"></a>    <span class="c1">// ¡Incorrecto! Esto no encontrará nada.</span>
+</span><span id="__span-9-3"><a href="#__codelineno-9-3" id="__codelineno-9-3" name="__codelineno-9-3"></a>    <span class="c1">// $usuario = $coleccion-&gt;findOne(['_id' =&gt; '63c8a0b5f1a1b2c3d4e5f6g7']);</span>
+</span><span id="__span-9-4"><a href="#__codelineno-9-4" id="__codelineno-9-4" name="__codelineno-9-4"></a>
+</span><span id="__span-9-5"><a href="#__codelineno-9-5" id="__codelineno-9-5" name="__codelineno-9-5"></a>    <span class="c1">// ¡Correcto! Usamos la clase ObjectId del driver.</span>
+</span><span id="__span-9-6"><a href="#__codelineno-9-6" id="__codelineno-9-6" name="__codelineno-9-6"></a>    <span class="k">use</span> <span class="nx">MongoDB\BSON\ObjectId</span><span class="p">;</span>
+</span><span id="__span-9-7"><a href="#__codelineno-9-7" id="__codelineno-9-7" name="__codelineno-9-7"></a>    <span class="nv">$id_string</span> <span class="o">=</span> <span class="s1">'5f8d6b9f3c7b2a1b3c4d5e6f'</span><span class="p">;</span> <span class="c1">// Un ID de ejemplo</span>
+</span><span id="__span-9-8"><a href="#__codelineno-9-8" id="__codelineno-9-8" name="__codelineno-9-8"></a>    <span class="nv">$usuario</span> <span class="o">=</span> <span class="nv">$coleccion</span><span class="o">-&gt;</span><span class="na">findOne</span><span class="p">([</span><span class="s1">'_id'</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">ObjectId</span><span class="p">(</span><span class="nv">$id_string</span><span class="p">)]);</span>
+</span><span id="__span-9-9"><a href="#__codelineno-9-9" id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+</div>
+<hr/>
+<h4 id="la-insercion-de-documentos">La Inserción de Documentos</h4>
+<p>La inserción de datos en MongoDB es un proceso muy directo que refleja la naturaleza del formato de documentos. En lugar de construir una sentencia <code>INSERT</code> de SQL, se construye un <strong>documento</strong> (un array asociativo en PHP) y se le pasa a un método de inserción. Si la colección en la que intentamos insertar no existe, MongoDB la creará automáticamente.</p>
+<p>Para insertar un único documento utilizamos el método <code>insertOne</code>. Una vez insertado un nuevo documento, devuelve un objeto con información sobre la operación, incluyendo el <code>_id</code> único que MongoDB ha asignado automáticamente al nuevo documento.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-10-1"><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-10-2"><a href="#__codelineno-10-2" id="__codelineno-10-2" name="__codelineno-10-2"></a>    <span class="k">require_once</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+</span><span id="__span-10-3"><a href="#__codelineno-10-3" id="__codelineno-10-3" name="__codelineno-10-3"></a>
+</span><span id="__span-10-4"><a href="#__codelineno-10-4" id="__codelineno-10-4" name="__codelineno-10-4"></a>    <span class="k">try</span> <span class="p">{</span>
+</span><span id="__span-10-5"><a href="#__codelineno-10-5" id="__codelineno-10-5" name="__codelineno-10-5"></a>        <span class="nv">$cliente</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MongoDB\Client</span><span class="p">(</span><span class="s1">'mongodb://localhost:27017'</span><span class="p">);</span>
+</span><span id="__span-10-6"><a href="#__codelineno-10-6" id="__codelineno-10-6" name="__codelineno-10-6"></a>        <span class="nv">$coleccion</span> <span class="o">=</span> <span class="nv">$cliente</span><span class="o">-&gt;</span><span class="na">mi_tienda</span><span class="o">-&gt;</span><span class="na">usuarios</span><span class="p">;</span>
+</span><span id="__span-10-7"><a href="#__codelineno-10-7" id="__codelineno-10-7" name="__codelineno-10-7"></a>
+</span><span id="__span-10-8"><a href="#__codelineno-10-8" id="__codelineno-10-8" name="__codelineno-10-8"></a>        <span class="c1">// 1. Creamos el documento como un array asociativo en PHP.</span>
+</span><span id="__span-10-9"><a href="#__codelineno-10-9" id="__codelineno-10-9" name="__codelineno-10-9"></a>        <span class="nv">$nuevo_usuario</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="__span-10-10"><a href="#__codelineno-10-10" id="__codelineno-10-10" name="__codelineno-10-10"></a>            <span class="s1">'nombre'</span> <span class="o">=&gt;</span> <span class="s1">'Elena Pascual'</span><span class="p">,</span>
+</span><span id="__span-10-11"><a href="#__codelineno-10-11" id="__codelineno-10-11" name="__codelineno-10-11"></a>            <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="s1">'elena.pascual@email.com'</span><span class="p">,</span>
+</span><span id="__span-10-12"><a href="#__codelineno-10-12" id="__codelineno-10-12" name="__codelineno-10-12"></a>            <span class="s1">'activo'</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+</span><span id="__span-10-13"><a href="#__codelineno-10-13" id="__codelineno-10-13" name="__codelineno-10-13"></a>            <span class="s1">'fecha_registro'</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">MongoDB\BSON\UTCDateTime</span><span class="p">()</span>
+</span><span id="__span-10-14"><a href="#__codelineno-10-14" id="__codelineno-10-14" name="__codelineno-10-14"></a>        <span class="p">];</span>
+</span><span id="__span-10-15"><a href="#__codelineno-10-15" id="__codelineno-10-15" name="__codelineno-10-15"></a>
+</span><span id="__span-10-16"><a href="#__codelineno-10-16" id="__codelineno-10-16" name="__codelineno-10-16"></a>        <span class="c1">// 2. Ejecutamos la inserción.</span>
+</span><span id="__span-10-17"><a href="#__codelineno-10-17" id="__codelineno-10-17" name="__codelineno-10-17"></a>        <span class="nv">$resultado</span> <span class="o">=</span> <span class="nv">$coleccion</span><span class="o">-&gt;</span><span class="na">insertOne</span><span class="p">(</span><span class="nv">$nuevo_usuario</span><span class="p">);</span>
+</span><span id="__span-10-18"><a href="#__codelineno-10-18" id="__codelineno-10-18" name="__codelineno-10-18"></a>
+</span><span id="__span-10-19"><a href="#__codelineno-10-19" id="__codelineno-10-19" name="__codelineno-10-19"></a>        <span class="c1">// 3. Obtenemos el ID del documento recién insertado.</span>
+</span><span id="__span-10-20"><a href="#__codelineno-10-20" id="__codelineno-10-20" name="__codelineno-10-20"></a>        <span class="nv">$id_insertado</span> <span class="o">=</span> <span class="nv">$resultado</span><span class="o">-&gt;</span><span class="na">getInsertedId</span><span class="p">();</span>
+</span><span id="__span-10-21"><a href="#__codelineno-10-21" id="__codelineno-10-21" name="__codelineno-10-21"></a>
+</span><span id="__span-10-22"><a href="#__codelineno-10-22" id="__codelineno-10-22" name="__codelineno-10-22"></a>        <span class="k">echo</span> <span class="s2">"Usuario insertado con éxito.&lt;br&gt;"</span><span class="p">;</span>
+</span><span id="__span-10-23"><a href="#__codelineno-10-23" id="__codelineno-10-23" name="__codelineno-10-23"></a>        <span class="k">echo</span> <span class="s2">"El ID del nuevo usuario es: "</span> <span class="o">.</span> <span class="nv">$id_insertado</span><span class="p">;</span>
+</span><span id="__span-10-24"><a href="#__codelineno-10-24" id="__codelineno-10-24" name="__codelineno-10-24"></a>
+</span><span id="__span-10-25"><a href="#__codelineno-10-25" id="__codelineno-10-25" name="__codelineno-10-25"></a>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-10-26"><a href="#__codelineno-10-26" id="__codelineno-10-26" name="__codelineno-10-26"></a>        <span class="k">die</span><span class="p">(</span><span class="s2">"Error al insertar el documento: "</span> <span class="o">.</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">());</span>
+</span><span id="__span-10-27"><a href="#__codelineno-10-27" id="__codelineno-10-27" name="__codelineno-10-27"></a>    <span class="p">}</span>
+</span><span id="__span-10-28"><a href="#__codelineno-10-28" id="__codelineno-10-28" name="__codelineno-10-28"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<p>Por otro lado, si necesitas insertar múltiples documentos a la vez, el método <code>insertMany()</code> es mucho más eficiente que llamar a <code>insertOne()</code> en un bucle, ya que reduce el número de viajes de ida y vuelta a la base de datos. Este método acepta un array de documentos.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-11-1"><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-11-2"><a href="#__codelineno-11-2" id="__codelineno-11-2" name="__codelineno-11-2"></a>    <span class="k">require_once</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+</span><span id="__span-11-3"><a href="#__codelineno-11-3" id="__codelineno-11-3" name="__codelineno-11-3"></a>
+</span><span id="__span-11-4"><a href="#__codelineno-11-4" id="__codelineno-11-4" name="__codelineno-11-4"></a>    <span class="k">try</span> <span class="p">{</span>
+</span><span id="__span-11-5"><a href="#__codelineno-11-5" id="__codelineno-11-5" name="__codelineno-11-5"></a>        <span class="nv">$cliente</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MongoDB\Client</span><span class="p">(</span><span class="s1">'mongodb://localhost:27017'</span><span class="p">);</span>
+</span><span id="__span-11-6"><a href="#__codelineno-11-6" id="__codelineno-11-6" name="__codelineno-11-6"></a>        <span class="nv">$coleccion</span> <span class="o">=</span> <span class="nv">$cliente</span><span class="o">-&gt;</span><span class="na">mi_tienda</span><span class="o">-&gt;</span><span class="na">usuarios</span><span class="p">;</span>
+</span><span id="__span-11-7"><a href="#__codelineno-11-7" id="__codelineno-11-7" name="__codelineno-11-7"></a>
+</span><span id="__span-11-8"><a href="#__codelineno-11-8" id="__codelineno-11-8" name="__codelineno-11-8"></a>        <span class="c1">// 1. Creamos un array que contiene los documentos a insertar.</span>
+</span><span id="__span-11-9"><a href="#__codelineno-11-9" id="__codelineno-11-9" name="__codelineno-11-9"></a>        <span class="nv">$nuevos_usuarios</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="__span-11-10"><a href="#__codelineno-11-10" id="__codelineno-11-10" name="__codelineno-11-10"></a>            <span class="p">[</span>
+</span><span id="__span-11-11"><a href="#__codelineno-11-11" id="__codelineno-11-11" name="__codelineno-11-11"></a>                <span class="s1">'nombre'</span> <span class="o">=&gt;</span> <span class="s1">'Pedro Jimenez'</span><span class="p">,</span>
+</span><span id="__span-11-12"><a href="#__codelineno-11-12" id="__codelineno-11-12" name="__codelineno-11-12"></a>                <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="s1">'pedro.j@email.com'</span><span class="p">,</span>
+</span><span id="__span-11-13"><a href="#__codelineno-11-13" id="__codelineno-11-13" name="__codelineno-11-13"></a>                <span class="s1">'activo'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span id="__span-11-14"><a href="#__codelineno-11-14" id="__codelineno-11-14" name="__codelineno-11-14"></a>                <span class="s1">'fecha_registro'</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">MongoDB\BSON\UTCDateTime</span><span class="p">()</span>
+</span><span id="__span-11-15"><a href="#__codelineno-11-15" id="__codelineno-11-15" name="__codelineno-11-15"></a>            <span class="p">],</span>
+</span><span id="__span-11-16"><a href="#__codelineno-11-16" id="__codelineno-11-16" name="__codelineno-11-16"></a>            <span class="p">[</span>
+</span><span id="__span-11-17"><a href="#__codelineno-11-17" id="__codelineno-11-17" name="__codelineno-11-17"></a>                <span class="s1">'nombre'</span> <span class="o">=&gt;</span> <span class="s1">'Sofia Lopez'</span><span class="p">,</span>
+</span><span id="__span-11-18"><a href="#__codelineno-11-18" id="__codelineno-11-18" name="__codelineno-11-18"></a>                <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="s1">'sofia.l@email.com'</span><span class="p">,</span>
+</span><span id="__span-11-19"><a href="#__codelineno-11-19" id="__codelineno-11-19" name="__codelineno-11-19"></a>                <span class="s1">'activo'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span id="__span-11-20"><a href="#__codelineno-11-20" id="__codelineno-11-20" name="__codelineno-11-20"></a>                <span class="s1">'fecha_registro'</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">MongoDB\BSON\UTCDateTime</span><span class="p">()</span>
+</span><span id="__span-11-21"><a href="#__codelineno-11-21" id="__codelineno-11-21" name="__codelineno-11-21"></a>            <span class="p">]</span>
+</span><span id="__span-11-22"><a href="#__codelineno-11-22" id="__codelineno-11-22" name="__codelineno-11-22"></a>        <span class="p">];</span>
+</span><span id="__span-11-23"><a href="#__codelineno-11-23" id="__codelineno-11-23" name="__codelineno-11-23"></a>
+</span><span id="__span-11-24"><a href="#__codelineno-11-24" id="__codelineno-11-24" name="__codelineno-11-24"></a>        <span class="c1">// 2. Ejecutamos la inserción múltiple.</span>
+</span><span id="__span-11-25"><a href="#__codelineno-11-25" id="__codelineno-11-25" name="__codelineno-11-25"></a>        <span class="nv">$resultado</span> <span class="o">=</span> <span class="nv">$coleccion</span><span class="o">-&gt;</span><span class="na">insertMany</span><span class="p">(</span><span class="nv">$nuevos_usuarios</span><span class="p">);</span>
+</span><span id="__span-11-26"><a href="#__codelineno-11-26" id="__codelineno-11-26" name="__codelineno-11-26"></a>
+</span><span id="__span-11-27"><a href="#__codelineno-11-27" id="__codelineno-11-27" name="__codelineno-11-27"></a>        <span class="c1">// 3. Obtenemos el número de documentos insertados y sus IDs.</span>
+</span><span id="__span-11-28"><a href="#__codelineno-11-28" id="__codelineno-11-28" name="__codelineno-11-28"></a>        <span class="nv">$documentos_insertados</span> <span class="o">=</span> <span class="nv">$resultado</span><span class="o">-&gt;</span><span class="na">getInsertedCount</span><span class="p">();</span>
+</span><span id="__span-11-29"><a href="#__codelineno-11-29" id="__codelineno-11-29" name="__codelineno-11-29"></a>        <span class="nv">$ids_insertados</span> <span class="o">=</span> <span class="nv">$resultado</span><span class="o">-&gt;</span><span class="na">getInsertedIds</span><span class="p">();</span>
+</span><span id="__span-11-30"><a href="#__codelineno-11-30" id="__codelineno-11-30" name="__codelineno-11-30"></a>
+</span><span id="__span-11-31"><a href="#__codelineno-11-31" id="__codelineno-11-31" name="__codelineno-11-31"></a>        <span class="k">echo</span> <span class="nv">$documentos_insertados</span> <span class="o">.</span> <span class="s2">" usuarios han sido insertados con éxito.&lt;br&gt;"</span><span class="p">;</span>
+</span><span id="__span-11-32"><a href="#__codelineno-11-32" id="__codelineno-11-32" name="__codelineno-11-32"></a>        <span class="k">echo</span> <span class="s2">"Los nuevos IDs son:&lt;br&gt;"</span><span class="p">;</span>
+</span><span id="__span-11-33"><a href="#__codelineno-11-33" id="__codelineno-11-33" name="__codelineno-11-33"></a>
+</span><span id="__span-11-34"><a href="#__codelineno-11-34" id="__codelineno-11-34" name="__codelineno-11-34"></a>        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$ids_insertados</span> <span class="k">as</span> <span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-11-35"><a href="#__codelineno-11-35" id="__codelineno-11-35" name="__codelineno-11-35"></a>            <span class="k">echo</span> <span class="s2">"- "</span> <span class="o">.</span> <span class="nv">$id</span> <span class="o">.</span> <span class="s2">"&lt;br&gt;"</span><span class="p">;</span>
+</span><span id="__span-11-36"><a href="#__codelineno-11-36" id="__codelineno-11-36" name="__codelineno-11-36"></a>        <span class="p">}</span>
+</span><span id="__span-11-37"><a href="#__codelineno-11-37" id="__codelineno-11-37" name="__codelineno-11-37"></a>
+</span><span id="__span-11-38"><a href="#__codelineno-11-38" id="__codelineno-11-38" name="__codelineno-11-38"></a>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-11-39"><a href="#__codelineno-11-39" id="__codelineno-11-39" name="__codelineno-11-39"></a>        <span class="k">die</span><span class="p">(</span><span class="s2">"Error al insertar los documentos: "</span> <span class="o">.</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">());</span>
+</span><span id="__span-11-40"><a href="#__codelineno-11-40" id="__codelineno-11-40" name="__codelineno-11-40"></a>    <span class="p">}</span>
+</span><span id="__span-11-41"><a href="#__codelineno-11-41" id="__codelineno-11-41" name="__codelineno-11-41"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<hr/>
+<h4 id="la-actualizacion-de-documentos">La Actualización de Documentos</h4>
+<p>La actualización de datos en MongoDB es una operación muy potente. A diferencia de SQL, donde se construye una sentencia <code>UPDATE</code>, en MongoDB se utilizan dos arrays asociativos: un <strong>filtro</strong> para especificar <em>qué</em> documentos se van a modificar, y un <strong>documento de actualización</strong> para especificar <em>cómo</em> se van a modificar.</p>
+<p>La clave del documento de actualización son los <strong>operadores de actualización</strong>. El más común es <strong><code>$set</code></strong>, que se utiliza para modificar el valor de campos específicos sin tener que reemplazar el documento entero.</p>
+<p>El método <code>updateOne</code> busca el primer documento que coincida con el filtro y le aplica la actualización. Es ideal para modificar un registro específico, por ejemplo, un usuario identificado por su <code>_id</code>.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-12-1"><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-12-2"><a href="#__codelineno-12-2" id="__codelineno-12-2" name="__codelineno-12-2"></a>    <span class="k">require_once</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+</span><span id="__span-12-3"><a href="#__codelineno-12-3" id="__codelineno-12-3" name="__codelineno-12-3"></a>    <span class="k">use</span> <span class="nx">MongoDB\BSON\ObjectId</span><span class="p">;</span>
+</span><span id="__span-12-4"><a href="#__codelineno-12-4" id="__codelineno-12-4" name="__codelineno-12-4"></a>
+</span><span id="__span-12-5"><a href="#__codelineno-12-5" id="__codelineno-12-5" name="__codelineno-12-5"></a>    <span class="k">try</span> <span class="p">{</span>
+</span><span id="__span-12-6"><a href="#__codelineno-12-6" id="__codelineno-12-6" name="__codelineno-12-6"></a>        <span class="nv">$cliente</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MongoDB\Client</span><span class="p">(</span><span class="s1">'mongodb://localhost:27017'</span><span class="p">);</span>
+</span><span id="__span-12-7"><a href="#__codelineno-12-7" id="__codelineno-12-7" name="__codelineno-12-7"></a>        <span class="nv">$coleccion</span> <span class="o">=</span> <span class="nv">$cliente</span><span class="o">-&gt;</span><span class="na">mi_tienda</span><span class="o">-&gt;</span><span class="na">usuarios</span><span class="p">;</span>
+</span><span id="__span-12-8"><a href="#__codelineno-12-8" id="__codelineno-12-8" name="__codelineno-12-8"></a>
+</span><span id="__span-12-9"><a href="#__codelineno-12-9" id="__codelineno-12-9" name="__codelineno-12-9"></a>        <span class="c1">// 1. Filtro: Seleccionamos al usuario por su ID.</span>
+</span><span id="__span-12-10"><a href="#__codelineno-12-10" id="__codelineno-12-10" name="__codelineno-12-10"></a>        <span class="nv">$filtro</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'_id'</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">ObjectId</span><span class="p">(</span><span class="s1">'ID_DEL_USUARIO_A_CAMBIAR'</span><span class="p">)];</span>
+</span><span id="__span-12-11"><a href="#__codelineno-12-11" id="__codelineno-12-11" name="__codelineno-12-11"></a>
+</span><span id="__span-12-12"><a href="#__codelineno-12-12" id="__codelineno-12-12" name="__codelineno-12-12"></a>        <span class="c1">// 2. Documento de Actualización: Usamos $set para cambiar el email y el estado.</span>
+</span><span id="__span-12-13"><a href="#__codelineno-12-13" id="__codelineno-12-13" name="__codelineno-12-13"></a>        <span class="nv">$actualizacion</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="__span-12-14"><a href="#__codelineno-12-14" id="__codelineno-12-14" name="__codelineno-12-14"></a>            <span class="s1">'$set'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+</span><span id="__span-12-15"><a href="#__codelineno-12-15" id="__codelineno-12-15" name="__codelineno-12-15"></a>                <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="s1">'nuevo.email.elena@email.com'</span><span class="p">,</span>
+</span><span id="__span-12-16"><a href="#__codelineno-12-16" id="__codelineno-12-16" name="__codelineno-12-16"></a>                <span class="s1">'activo'</span> <span class="o">=&gt;</span> <span class="k">true</span>
+</span><span id="__span-12-17"><a href="#__codelineno-12-17" id="__codelineno-12-17" name="__codelineno-12-17"></a>            <span class="p">]</span>
+</span><span id="__span-12-18"><a href="#__codelineno-12-18" id="__codelineno-12-18" name="__codelineno-12-18"></a>        <span class="p">];</span>
+</span><span id="__span-12-19"><a href="#__codelineno-12-19" id="__codelineno-12-19" name="__codelineno-12-19"></a>
+</span><span id="__span-12-20"><a href="#__codelineno-12-20" id="__codelineno-12-20" name="__codelineno-12-20"></a>        <span class="c1">// 3. Ejecutamos la actualización.</span>
+</span><span id="__span-12-21"><a href="#__codelineno-12-21" id="__codelineno-12-21" name="__codelineno-12-21"></a>        <span class="nv">$resultado</span> <span class="o">=</span> <span class="nv">$coleccion</span><span class="o">-&gt;</span><span class="na">updateOne</span><span class="p">(</span><span class="nv">$filtro</span><span class="p">,</span> <span class="nv">$actualizacion</span><span class="p">);</span>
+</span><span id="__span-12-22"><a href="#__codelineno-12-22" id="__codelineno-12-22" name="__codelineno-12-22"></a>
+</span><span id="__span-12-23"><a href="#__codelineno-12-23" id="__codelineno-12-23" name="__codelineno-12-23"></a>        <span class="c1">// 4. Verificamos el resultado.</span>
+</span><span id="__span-12-24"><a href="#__codelineno-12-24" id="__codelineno-12-24" name="__codelineno-12-24"></a>        <span class="nv">$documentos_modificados</span> <span class="o">=</span> <span class="nv">$resultado</span><span class="o">-&gt;</span><span class="na">getModifiedCount</span><span class="p">();</span>
+</span><span id="__span-12-25"><a href="#__codelineno-12-25" id="__codelineno-12-25" name="__codelineno-12-25"></a>
+</span><span id="__span-12-26"><a href="#__codelineno-12-26" id="__codelineno-12-26" name="__codelineno-12-26"></a>        <span class="k">if</span> <span class="p">(</span><span class="nv">$documentos_modificados</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-12-27"><a href="#__codelineno-12-27" id="__codelineno-12-27" name="__codelineno-12-27"></a>            <span class="k">echo</span> <span class="s2">"El usuario ha sido actualizado con éxito."</span><span class="p">;</span>
+</span><span id="__span-12-28"><a href="#__codelineno-12-28" id="__codelineno-12-28" name="__codelineno-12-28"></a>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span id="__span-12-29"><a href="#__codelineno-12-29" id="__codelineno-12-29" name="__codelineno-12-29"></a>            <span class="k">echo</span> <span class="s2">"No se encontró el usuario o los datos ya eran los mismos."</span><span class="p">;</span>
+</span><span id="__span-12-30"><a href="#__codelineno-12-30" id="__codelineno-12-30" name="__codelineno-12-30"></a>        <span class="p">}</span>
+</span><span id="__span-12-31"><a href="#__codelineno-12-31" id="__codelineno-12-31" name="__codelineno-12-31"></a>
+</span><span id="__span-12-32"><a href="#__codelineno-12-32" id="__codelineno-12-32" name="__codelineno-12-32"></a>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-12-33"><a href="#__codelineno-12-33" id="__codelineno-12-33" name="__codelineno-12-33"></a>        <span class="k">die</span><span class="p">(</span><span class="s2">"Error al actualizar el documento: "</span> <span class="o">.</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">());</span>
+</span><span id="__span-12-34"><a href="#__codelineno-12-34" id="__codelineno-12-34" name="__codelineno-12-34"></a>    <span class="p">}</span>
+</span><span id="__span-12-35"><a href="#__codelineno-12-35" id="__codelineno-12-35" name="__codelineno-12-35"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<p>Por su parte, el método <code>updateMany()</code> aplica la actualización a todos los documentos que coincidan con el criterio del filtro. Es muy potente para realizar cambios en lote.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-13-1"><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-13-2"><a href="#__codelineno-13-2" id="__codelineno-13-2" name="__codelineno-13-2"></a>    <span class="k">require_once</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+</span><span id="__span-13-3"><a href="#__codelineno-13-3" id="__codelineno-13-3" name="__codelineno-13-3"></a>    <span class="k">use</span> <span class="nx">MongoDB\BSON\UTCDateTime</span><span class="p">;</span>
+</span><span id="__span-13-4"><a href="#__codelineno-13-4" id="__codelineno-13-4" name="__codelineno-13-4"></a>
+</span><span id="__span-13-5"><a href="#__codelineno-13-5" id="__codelineno-13-5" name="__codelineno-13-5"></a>    <span class="k">try</span> <span class="p">{</span>
+</span><span id="__span-13-6"><a href="#__codelineno-13-6" id="__codelineno-13-6" name="__codelineno-13-6"></a>        <span class="nv">$cliente</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MongoDB\Client</span><span class="p">(</span><span class="s1">'mongodb://localhost:27017'</span><span class="p">);</span>
+</span><span id="__span-13-7"><a href="#__codelineno-13-7" id="__codelineno-13-7" name="__codelineno-13-7"></a>        <span class="nv">$coleccion</span> <span class="o">=</span> <span class="nv">$cliente</span><span class="o">-&gt;</span><span class="na">mi_tienda</span><span class="o">-&gt;</span><span class="na">usuarios</span><span class="p">;</span>
+</span><span id="__span-13-8"><a href="#__codelineno-13-8" id="__codelineno-13-8" name="__codelineno-13-8"></a>
+</span><span id="__span-13-9"><a href="#__codelineno-13-9" id="__codelineno-13-9" name="__codelineno-13-9"></a>        <span class="c1">// 1. Filtro: Seleccionamos a todos los usuarios que estén inactivos.</span>
+</span><span id="__span-13-10"><a href="#__codelineno-13-10" id="__codelineno-13-10" name="__codelineno-13-10"></a>        <span class="nv">$filtro</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'activo'</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">];</span>
+</span><span id="__span-13-11"><a href="#__codelineno-13-11" id="__codelineno-13-11" name="__codelineno-13-11"></a>
+</span><span id="__span-13-12"><a href="#__codelineno-13-12" id="__codelineno-13-12" name="__codelineno-13-12"></a>        <span class="c1">// 2. Actualización: Los activamos y añadimos un campo con la fecha de modificación.</span>
+</span><span id="__span-13-13"><a href="#__codelineno-13-13" id="__codelineno-13-13" name="__codelineno-13-13"></a>        <span class="nv">$actualizacion</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="__span-13-14"><a href="#__codelineno-13-14" id="__codelineno-13-14" name="__codelineno-13-14"></a>            <span class="s1">'$set'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+</span><span id="__span-13-15"><a href="#__codelineno-13-15" id="__codelineno-13-15" name="__codelineno-13-15"></a>                <span class="s1">'activo'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span id="__span-13-16"><a href="#__codelineno-13-16" id="__codelineno-13-16" name="__codelineno-13-16"></a>                <span class="s1">'ultima_modificacion'</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">UTCDateTime</span><span class="p">()</span>
+</span><span id="__span-13-17"><a href="#__codelineno-13-17" id="__codelineno-13-17" name="__codelineno-13-17"></a>            <span class="p">]</span>
+</span><span id="__span-13-18"><a href="#__codelineno-13-18" id="__codelineno-13-18" name="__codelineno-13-18"></a>        <span class="p">];</span>
+</span><span id="__span-13-19"><a href="#__codelineno-13-19" id="__codelineno-13-19" name="__codelineno-13-19"></a>
+</span><span id="__span-13-20"><a href="#__codelineno-13-20" id="__codelineno-13-20" name="__codelineno-13-20"></a>        <span class="c1">// 3. Ejecutamos la actualización múltiple.</span>
+</span><span id="__span-13-21"><a href="#__codelineno-13-21" id="__codelineno-13-21" name="__codelineno-13-21"></a>        <span class="nv">$resultado</span> <span class="o">=</span> <span class="nv">$coleccion</span><span class="o">-&gt;</span><span class="na">updateMany</span><span class="p">(</span><span class="nv">$filtro</span><span class="p">,</span> <span class="nv">$actualizacion</span><span class="p">);</span>
+</span><span id="__span-13-22"><a href="#__codelineno-13-22" id="__codelineno-13-22" name="__codelineno-13-22"></a>
+</span><span id="__span-13-23"><a href="#__codelineno-13-23" id="__codelineno-13-23" name="__codelineno-13-23"></a>        <span class="c1">// 4. Verificamos cuántos documentos se modificaron.</span>
+</span><span id="__span-13-24"><a href="#__codelineno-13-24" id="__codelineno-13-24" name="__codelineno-13-24"></a>        <span class="nv">$documentos_modificados</span> <span class="o">=</span> <span class="nv">$resultado</span><span class="o">-&gt;</span><span class="na">getModifiedCount</span><span class="p">();</span>
+</span><span id="__span-13-25"><a href="#__codelineno-13-25" id="__codelineno-13-25" name="__codelineno-13-25"></a>
+</span><span id="__span-13-26"><a href="#__codelineno-13-26" id="__codelineno-13-26" name="__codelineno-13-26"></a>        <span class="k">echo</span> <span class="nv">$documentos_modificados</span> <span class="o">.</span> <span class="s2">" usuarios han sido activados."</span><span class="p">;</span>
+</span><span id="__span-13-27"><a href="#__codelineno-13-27" id="__codelineno-13-27" name="__codelineno-13-27"></a>
+</span><span id="__span-13-28"><a href="#__codelineno-13-28" id="__codelineno-13-28" name="__codelineno-13-28"></a>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-13-29"><a href="#__codelineno-13-29" id="__codelineno-13-29" name="__codelineno-13-29"></a>        <span class="k">die</span><span class="p">(</span><span class="s2">"Error al actualizar los documentos: "</span> <span class="o">.</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">());</span>
+</span><span id="__span-13-30"><a href="#__codelineno-13-30" id="__codelineno-13-30" name="__codelineno-13-30"></a>    <span class="p">}</span>
+</span><span id="__span-13-31"><a href="#__codelineno-13-31" id="__codelineno-13-31" name="__codelineno-13-31"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<p>La pieza central de una operación de actualización en MongoDB es el operador <strong><code>$set</code></strong>. Esta es la forma más común y eficiente de modificar un documento, ya que realiza un cambio a nivel de campo. Esto significa que solo altera los campos especificados en el documento de actualización, dejando el resto de la estructura y los datos del documento intactos. MongoDB ofrece un rico lenguaje de actualización con muchos otros operadores atómicos, como <code>$inc</code> para incrementar valores numéricos o <code>$push</code> para añadir elementos a un array, lo que permite realizar modificaciones de datos muy potentes y específicas.</p>
+<p>Para verificar el resultado de la operación, el objeto devuelto por los métodos <code>updateOne</code> o <code>updateMany</code> nos ofrece el método <strong><code>getModifiedCount()</code></strong>. Es importante entender que este método informa de cuántos documentos fueron <strong>efectivamente cambiados</strong>. Si un documento coincide con el filtro de búsqueda pero ya contiene los valores que se intentan establecer, la operación tendrá éxito, pero <code>getModifiedCount()</code> devolverá <code>0</code>, proporcionando una retroalimentación precisa sobre si la operación resultó en un cambio real en los datos.</p>
+<p>Finalmente, es importante conocer una alternativa a la actualización por campos: el método <strong><code>replaceOne()</code></strong>. A diferencia de <code>updateOne</code>, que modifica partes de un documento, <code>replaceOne()</code> reemplaza por completo el primer documento que coincide con el filtro por un nuevo documento que le proporcionamos, conservando únicamente el <code>_id</code> original. Aunque puede ser útil en ciertos casos, generalmente es menos eficiente que usar <code>updateOne</code> con el operador <code>$set</code> si el objetivo es solo cambiar algunos campos, ya que implica reescribir el documento entero.</p>
+<hr/>
+<h4 id="la-eliminacion-de-documentos">La Eliminación de Documentos</h4>
+<p>La eliminación de datos es la operación final del ciclo CRUD (Crear, Leer, Actualizar, Borrar). En MongoDB, al igual que en las operaciones de lectura y actualización, se utiliza un <strong>documento de filtro</strong> para especificar qué documentos deben ser eliminados. Es una operación <strong>permanente e irreversible</strong>, por lo que debe ser manejada con extremo cuidado.</p>
+<p>Al igual que ocurre con las anteriores operaciones del CRUD, existe el método <code>deleteOne</code> que busca el primer documento que coincida con el filtro y lo elimina de la colección. Es la operación segura para borrar un registro específico.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-14-1"><a href="#__codelineno-14-1" id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-14-2"><a href="#__codelineno-14-2" id="__codelineno-14-2" name="__codelineno-14-2"></a>    <span class="k">require_once</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+</span><span id="__span-14-3"><a href="#__codelineno-14-3" id="__codelineno-14-3" name="__codelineno-14-3"></a>    <span class="k">use</span> <span class="nx">MongoDB\BSON\ObjectId</span><span class="p">;</span>
+</span><span id="__span-14-4"><a href="#__codelineno-14-4" id="__codelineno-14-4" name="__codelineno-14-4"></a>
+</span><span id="__span-14-5"><a href="#__codelineno-14-5" id="__codelineno-14-5" name="__codelineno-14-5"></a>    <span class="k">try</span> <span class="p">{</span>
+</span><span id="__span-14-6"><a href="#__codelineno-14-6" id="__codelineno-14-6" name="__codelineno-14-6"></a>        <span class="nv">$cliente</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MongoDB\Client</span><span class="p">(</span><span class="s1">'mongodb://localhost:27017'</span><span class="p">);</span>
+</span><span id="__span-14-7"><a href="#__codelineno-14-7" id="__codelineno-14-7" name="__codelineno-14-7"></a>        <span class="nv">$coleccion</span> <span class="o">=</span> <span class="nv">$cliente</span><span class="o">-&gt;</span><span class="na">mi_tienda</span><span class="o">-&gt;</span><span class="na">usuarios</span><span class="p">;</span>
+</span><span id="__span-14-8"><a href="#__codelineno-14-8" id="__codelineno-14-8" name="__codelineno-14-8"></a>
+</span><span id="__span-14-9"><a href="#__codelineno-14-9" id="__codelineno-14-9" name="__codelineno-14-9"></a>        <span class="c1">// 1. Filtro: Seleccionamos al usuario que queremos eliminar por su ID.</span>
+</span><span id="__span-14-10"><a href="#__codelineno-14-10" id="__codelineno-14-10" name="__codelineno-14-10"></a>        <span class="nv">$filtro</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'_id'</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">ObjectId</span><span class="p">(</span><span class="s1">'ID_DEL_USUARIO_A_ELIMINAR'</span><span class="p">)];</span>
+</span><span id="__span-14-11"><a href="#__codelineno-14-11" id="__codelineno-14-11" name="__codelineno-14-11"></a>
+</span><span id="__span-14-12"><a href="#__codelineno-14-12" id="__codelineno-14-12" name="__codelineno-14-12"></a>        <span class="c1">// 2. Ejecutamos la eliminación.</span>
+</span><span id="__span-14-13"><a href="#__codelineno-14-13" id="__codelineno-14-13" name="__codelineno-14-13"></a>        <span class="nv">$resultado</span> <span class="o">=</span> <span class="nv">$coleccion</span><span class="o">-&gt;</span><span class="na">deleteOne</span><span class="p">(</span><span class="nv">$filtro</span><span class="p">);</span>
+</span><span id="__span-14-14"><a href="#__codelineno-14-14" id="__codelineno-14-14" name="__codelineno-14-14"></a>
+</span><span id="__span-14-15"><a href="#__codelineno-14-15" id="__codelineno-14-15" name="__codelineno-14-15"></a>        <span class="c1">// 3. Verificamos el resultado.</span>
+</span><span id="__span-14-16"><a href="#__codelineno-14-16" id="__codelineno-14-16" name="__codelineno-14-16"></a>        <span class="nv">$documentos_eliminados</span> <span class="o">=</span> <span class="nv">$resultado</span><span class="o">-&gt;</span><span class="na">getDeletedCount</span><span class="p">();</span>
+</span><span id="__span-14-17"><a href="#__codelineno-14-17" id="__codelineno-14-17" name="__codelineno-14-17"></a>
+</span><span id="__span-14-18"><a href="#__codelineno-14-18" id="__codelineno-14-18" name="__codelineno-14-18"></a>        <span class="k">if</span> <span class="p">(</span><span class="nv">$documentos_eliminados</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-14-19"><a href="#__codelineno-14-19" id="__codelineno-14-19" name="__codelineno-14-19"></a>            <span class="k">echo</span> <span class="s2">"El usuario ha sido eliminado con éxito."</span><span class="p">;</span>
+</span><span id="__span-14-20"><a href="#__codelineno-14-20" id="__codelineno-14-20" name="__codelineno-14-20"></a>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span id="__span-14-21"><a href="#__codelineno-14-21" id="__codelineno-14-21" name="__codelineno-14-21"></a>            <span class="k">echo</span> <span class="s2">"No se encontró ningún usuario con ese ID."</span><span class="p">;</span>
+</span><span id="__span-14-22"><a href="#__codelineno-14-22" id="__codelineno-14-22" name="__codelineno-14-22"></a>        <span class="p">}</span>
+</span><span id="__span-14-23"><a href="#__codelineno-14-23" id="__codelineno-14-23" name="__codelineno-14-23"></a>
+</span><span id="__span-14-24"><a href="#__codelineno-14-24" id="__codelineno-14-24" name="__codelineno-14-24"></a>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-14-25"><a href="#__codelineno-14-25" id="__codelineno-14-25" name="__codelineno-14-25"></a>        <span class="k">die</span><span class="p">(</span><span class="s2">"Error al eliminar el documento: "</span> <span class="o">.</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">());</span>
+</span><span id="__span-14-26"><a href="#__codelineno-14-26" id="__codelineno-14-26" name="__codelineno-14-26"></a>    <span class="p">}</span>
+</span><span id="__span-14-27"><a href="#__codelineno-14-27" id="__codelineno-14-27" name="__codelineno-14-27"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<p>También está el método <code>deleteMany</code> que elimina <strong>todos</strong> los documentos que coincidan con el criterio del filtro. Es una operación muy potente y potencialmente peligrosa si el filtro no es lo suficientemente específico.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-15-1"><a href="#__codelineno-15-1" id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-15-2"><a href="#__codelineno-15-2" id="__codelineno-15-2" name="__codelineno-15-2"></a>    <span class="k">require_once</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+</span><span id="__span-15-3"><a href="#__codelineno-15-3" id="__codelineno-15-3" name="__codelineno-15-3"></a>
+</span><span id="__span-15-4"><a href="#__codelineno-15-4" id="__codelineno-15-4" name="__codelineno-15-4"></a>    <span class="k">try</span> <span class="p">{</span>
+</span><span id="__span-15-5"><a href="#__codelineno-15-5" id="__codelineno-15-5" name="__codelineno-15-5"></a>        <span class="nv">$cliente</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MongoDB\Client</span><span class="p">(</span><span class="s1">'mongodb://localhost:27017'</span><span class="p">);</span>
+</span><span id="__span-15-6"><a href="#__codelineno-15-6" id="__codelineno-15-6" name="__codelineno-15-6"></a>        <span class="nv">$coleccion</span> <span class="o">=</span> <span class="nv">$cliente</span><span class="o">-&gt;</span><span class="na">mi_tienda</span><span class="o">-&gt;</span><span class="na">usuarios</span><span class="p">;</span>
+</span><span id="__span-15-7"><a href="#__codelineno-15-7" id="__codelineno-15-7" name="__codelineno-15-7"></a>
+</span><span id="__span-15-8"><a href="#__codelineno-15-8" id="__codelineno-15-8" name="__codelineno-15-8"></a>        <span class="c1">// 1. Filtro: Seleccionamos a todos los usuarios que estén marcados como inactivos.</span>
+</span><span id="__span-15-9"><a href="#__codelineno-15-9" id="__codelineno-15-9" name="__codelineno-15-9"></a>        <span class="nv">$filtro</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'activo'</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">];</span>
+</span><span id="__span-15-10"><a href="#__codelineno-15-10" id="__codelineno-15-10" name="__codelineno-15-10"></a>
+</span><span id="__span-15-11"><a href="#__codelineno-15-11" id="__codelineno-15-11" name="__codelineno-15-11"></a>        <span class="c1">// 2. Ejecutamos la eliminación múltiple.</span>
+</span><span id="__span-15-12"><a href="#__codelineno-15-12" id="__codelineno-15-12" name="__codelineno-15-12"></a>        <span class="nv">$resultado</span> <span class="o">=</span> <span class="nv">$coleccion</span><span class="o">-&gt;</span><span class="na">deleteMany</span><span class="p">(</span><span class="nv">$filtro</span><span class="p">);</span>
+</span><span id="__span-15-13"><a href="#__codelineno-15-13" id="__codelineno-15-13" name="__codelineno-15-13"></a>
+</span><span id="__span-15-14"><a href="#__codelineno-15-14" id="__codelineno-15-14" name="__codelineno-15-14"></a>        <span class="c1">// 3. Verificamos cuántos documentos se eliminaron.</span>
+</span><span id="__span-15-15"><a href="#__codelineno-15-15" id="__codelineno-15-15" name="__codelineno-15-15"></a>        <span class="nv">$documentos_eliminados</span> <span class="o">=</span> <span class="nv">$resultado</span><span class="o">-&gt;</span><span class="na">getDeletedCount</span><span class="p">();</span>
+</span><span id="__span-15-16"><a href="#__codelineno-15-16" id="__codelineno-15-16" name="__codelineno-15-16"></a>
+</span><span id="__span-15-17"><a href="#__codelineno-15-17" id="__codelineno-15-17" name="__codelineno-15-17"></a>        <span class="k">echo</span> <span class="nv">$documentos_eliminados</span> <span class="o">.</span> <span class="s2">" usuarios inactivos han sido eliminados."</span><span class="p">;</span>
+</span><span id="__span-15-18"><a href="#__codelineno-15-18" id="__codelineno-15-18" name="__codelineno-15-18"></a>
+</span><span id="__span-15-19"><a href="#__codelineno-15-19" id="__codelineno-15-19" name="__codelineno-15-19"></a>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-15-20"><a href="#__codelineno-15-20" id="__codelineno-15-20" name="__codelineno-15-20"></a>        <span class="k">die</span><span class="p">(</span><span class="s2">"Error al eliminar los documentos: "</span> <span class="o">.</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">());</span>
+</span><span id="__span-15-21"><a href="#__codelineno-15-21" id="__codelineno-15-21" name="__codelineno-15-21"></a>    <span class="p">}</span>
+</span><span id="__span-15-22"><a href="#__codelineno-15-22" id="__codelineno-15-22" name="__codelineno-15-22"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Advertencia</p>
+<p>Ejecutar <code>$coleccion-&gt;deleteMany([]);</code> (con un filtro vacío) eliminará TODOS los documentos de la colección. Es una operación extremadamente destructiva que debe ser utilizada con la máxima precaución..</p>
+</div>
+<p>Al igual que con las bases de datos SQL, la práctica profesional recomendada es a menudo evitar el borrado físico. La técnica del <strong>borrado lógico</strong> es perfectamente aplicable a MongoDB. En lugar de ejecutar un <code>deleteOne</code> o <code>deleteMany</code>, se realizaría una operación <code>updateOne</code> o <code>updateMany</code> para añadir un campo que marque el documento como borrado, por ejemplo:</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-16-1"><a href="#__codelineno-16-1" id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="x">['$set' =&gt; ['fecha_borrado' =&gt; new MongoDB\BSON\UTCDateTime()]]</span>
+</span></code></pre></div>
+<p>Posteriormente, todas las consultas de la aplicación (<code>find</code>, <code>findOne</code>, etc.) deberían incluir un filtro para excluir estos documentos, como <code>['fecha_borrado' =&gt; ['$exists' =&gt; false]]</code>. Esto preserva los datos y hace la aplicación mucho más robusta y segura.</p>
+<hr/>
+<h4 id="tabla-resumen_1">Tabla resumen</h4>
+<p>Aquí tienes una tabla resumen que compara las operaciones CRUD (Crear, Leer, Actualizar, Borrar) en MongoDB:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Operación</th>
+<th style="text-align: left;">Métodos del Driver</th>
+<th style="text-align: left;">Argumentos Principales</th>
+<th style="text-align: left;">Verificación / Resultado Clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Crear</strong></td>
+<td style="text-align: left;"><code>insertOne()</code>, <code>insertMany()</code></td>
+<td style="text-align: left;"><code>(documento)</code> o <code>(array_de_documentos)</code></td>
+<td style="text-align: left;"><code>$resultado-&gt;getInsertedId()</code> o <code>getInsertedIds()</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Leer</strong></td>
+<td style="text-align: left;"><code>findOne()</code>, <code>find()</code></td>
+<td style="text-align: left;"><code>(filtro, [opciones])</code></td>
+<td style="text-align: left;">Devuelve el documento o un cursor</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Actualizar</strong></td>
+<td style="text-align: left;"><code>updateOne()</code>, <code>updateMany()</code></td>
+<td style="text-align: left;"><code>(filtro, documento_de_actualización)</code></td>
+<td style="text-align: left;"><code>$resultado-&gt;getModifiedCount()</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Borrar</strong></td>
+<td style="text-align: left;"><code>deleteOne()</code>, <code>deleteMany()</code></td>
+<td style="text-align: left;"><code>(filtro)</code></td>
+<td style="text-align: left;"><code>$resultado-&gt;getDeletedCount()</code></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Manuel Sánchez Gomis
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["search.suggest", "search.highlight", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "content.code.copy", "content.tabs.link", "content.tooltips"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../../assets/_markdown_exec_pyodide.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../../_static/js/notebook.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2822 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Manuel Sánchez Gomis">
+      
+      
+      
+        <link rel="prev" href="../14%20-%20response/">
+      
+      
+        <link rel="next" href="../09%20-%20servicios/">
+      
+      
+      <link rel="icon" href="../../../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.46">
+    
+    
+      
+        <title>Cookies y Sesiones en Laravel - Desarrollo Web en entorno servidor</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/_markdown_exec_pyodide.css">
+    
+      <link rel="stylesheet" href="../../../_static/css/notebook.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cookies-y-sesiones-en-laravel" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Desarrollo Web en entorno servidor" class="md-header__button md-logo" aria-label="Desarrollo Web en entorno servidor" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Desarrollo Web en entorno servidor
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cookies y Sesiones en Laravel
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber"  aria-label="Cambiar a modo brillante"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo brillante" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="amber"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Bienvenido
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../introduccion/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Introduccion
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../php/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Php
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../aplicaciones_web/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Aplicaciones Web con Php
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Laravel
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../servicios_web/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Servicios Web
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../webs_dinamicas/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Webs Dinámicas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../aplicaciones_web_hibridas/markdowns/01%20-%20index/" class="md-tabs__link">
+          
+  
+    
+  
+  Aplicaciones Web Híbridas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../bibliografia/" class="md-tabs__link">
+        
+  
+    
+  
+  Bibliografia
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Desarrollo Web en entorno servidor" class="md-nav__button md-logo" aria-label="Desarrollo Web en entorno servidor" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    Desarrollo Web en entorno servidor
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bienvenido
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Introduccion
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Introduccion
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../introduccion/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Conceptos básicos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../introduccion/markdowns/02%20-%20lenguajes_programacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lenguajes de programación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../introduccion/markdowns/03%20-%20herramientas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Herramientas y frameworks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Php
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Php
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/02%20-%20primeros_pasos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primeros pasos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/03%20-%20estructuras_control/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Estructuras de Control en PHP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/04%20-%20arrays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Arrays
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/05%20-%20funciones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Funciones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/06%20-%20poo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Programación orientada a objetos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/07%20-%20excepciones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Excepciones y errores
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/08%20-%20directivas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Directivas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/09%20-%20codigo_embebido/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Código embebido
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../php/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Aplicaciones Web con Php
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Aplicaciones Web con Php
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/02%20-%20formularios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Formularios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/03%20-%20sesiones_cookies/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cookies y Sesiones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/04%20-%20seguridad/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Seguridad
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/05%20-%20ficheros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ficheros
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/06%20-%20bases_datos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bases de datos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/07%20-%20estructura_proyecto/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Organizando el código
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web/markdowns/98%20-%20ejercicios_persistencia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios persistencia
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Laravel
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Laravel
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02%20-%20instalacion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instalación y primeros pasos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03%20-%20rutas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rutas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04%20-%20controladores/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Controladores
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05%20-%20vistas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vistas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06%20-%20formularios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Formularios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07%20-%20modelos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modelos de Eloquent
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14%20-%20response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Respuestas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Cookies y Sesiones en Laravel
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Cookies y Sesiones en Laravel
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cookies-mensajes-seguros-para-el-navegador" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cookies: Mensajes Seguros para el Navegador
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cookies: Mensajes Seguros para el Navegador">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuracion-de-cookies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración de Cookies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#establecer-cookies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Establecer Cookies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recuperar-cookies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recuperar Cookies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eliminar-cookies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eliminar Cookies
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sesiones-almacenamiento-persistente-en-el-servidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sesiones: Almacenamiento Persistente en el Servidor
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sesiones: Almacenamiento Persistente en el Servidor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#drivers-de-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Drivers de Sesión
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interaccion-con-la-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interacción con la Sesión
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Interacción con la Sesión">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-persistencia-de-datos-put" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Persistencia de Datos (put)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-datos-efimeros-flash" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Datos Efímeros (flash)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-recuperacion-y-consumo-get-y-pull" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Recuperación y Consumo (get y pull)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-mantenimiento-y-limpieza" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Mantenimiento y Limpieza
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-seguridad-defensa-contra-la-fijacion-de-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Seguridad: Defensa contra la Fijación de Sesión
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09%20-%20servicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Servicios en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10%20-%20seguridad/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Seguridad en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11%20-%20inyeccion_dependencias/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inyección de Dependencias en Laravel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12%20-%20testing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pruebas y documentación
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13%20-%20fechas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fechas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15%20-%20migrations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Migraciones
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Servicios Web
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Servicios Web
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/02%20-%20tecnologias/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tecnologías y Estándares
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/03%20-%20creando_servicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creando un Servicio Web
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/04%20-%20probando_servicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Probando el Servicio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../servicios_web/markdowns/05%20-%20documentando_servicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Documentando un Servicio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Webs Dinámicas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Webs Dinámicas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/02%20-%20ajax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AJAX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/03%20-%20validacion_formularios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Validación de Formularios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/04%20-%20modificacion_dom/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modificación del DOM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/05%20-%20async_patrones/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Patrones Async
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webs_dinamicas/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Aplicaciones Web Híbridas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Aplicaciones Web Híbridas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/01%20-%20index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/02%20-%20apis_terceros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    APIs de Terceros
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/03%20-%20creando_apis_propias/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creando APIs Propias
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/04%20-%20sdks_frameworks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SDKs y Frameworks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/05%20-%20big_data_ia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Big Data e IA
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/06%20-%20testing_depuracion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Testing y Depuración
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/07%20-%20autenticacion_apis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Autenticación de APIs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/08%20-%20versionado_webhooks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Versionado y Webhooks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aplicaciones_web_hibridas/markdowns/99%20-%20ejercicios/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejercicios
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../bibliografia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bibliografia
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cookies-mensajes-seguros-para-el-navegador" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cookies: Mensajes Seguros para el Navegador
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cookies: Mensajes Seguros para el Navegador">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuracion-de-cookies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración de Cookies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#establecer-cookies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Establecer Cookies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recuperar-cookies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recuperar Cookies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eliminar-cookies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eliminar Cookies
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sesiones-almacenamiento-persistente-en-el-servidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sesiones: Almacenamiento Persistente en el Servidor
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sesiones: Almacenamiento Persistente en el Servidor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#drivers-de-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Drivers de Sesión
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interaccion-con-la-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interacción con la Sesión
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Interacción con la Sesión">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-persistencia-de-datos-put" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Persistencia de Datos (put)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-datos-efimeros-flash" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Datos Efímeros (flash)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-recuperacion-y-consumo-get-y-pull" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Recuperación y Consumo (get y pull)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-mantenimiento-y-limpieza" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Mantenimiento y Limpieza
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-seguridad-defensa-contra-la-fijacion-de-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Seguridad: Defensa contra la Fijación de Sesión
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="cookies-y-sesiones-en-laravel">Cookies y Sesiones en Laravel</h1>
+<p>Como hemos explorado anteriormente, el protocolo HTTP actúa como el sistema nervioso de la web, pero posee una característica fundamental que define su comportamiento: es, por naturaleza, <strong>stateless</strong> (sin estado). Cada vez que un navegador realiza una petición a un servidor, se trata de un evento cósmico aislado, completamente desconectado del anterior. El servidor web padece, en esencia, de amnesia permanente; por defecto, no tiene capacidad para recordar quién eres, qué páginas visitaste hace un segundo o qué artículos añadiste a tu carrito de compra. Sin mecanismos adicionales, la web sería una colección de documentos estáticos incapaz de sostener aplicaciones complejas.</p>
+<p>En el ecosistema tradicional de PHP, el intento de dotar de memoria a este protocolo implicaba una gestión manual y a menudo tediosa. Nuestra caja de herramientas se limitaba al array superglobal <code>$_SESSION</code> y la función primitiva <code>setcookie()</code>. Aunque funcionales, estos mecanismos delegaban toda la carga cognitiva en el desarrollador: la obligación de invocar <code>session_start()</code> religiosamente al inicio de cada script, la gestión de la compleja matriz de parámetros de seguridad de las cookies y la manipulación directa de arrays globales propensos al caos. Era una programación de "fontanería", donde pasábamos más tiempo asegurando las tuberías que construyendo la aplicación.</p>
+<p>Laravel aborda este desafío estructural proporcionando una capa de abstracción elegante y segura. En lugar de luchar con funciones nativas y arrays desordenados, el framework nos ofrece dos APIs robustas que tratan a las <strong>cookies</strong> y las <strong>sesiones</strong> no como simples variables, sino como objetos configurables e inteligentes. Esta evolución nos permite interactuar con la persistencia de datos de una manera agnóstica al almacenamiento subyacente y, lo que es más crucial, con una postura de seguridad proactiva desde la primera línea de código. A continuación, profundizaremos en cómo Laravel transforma la gestión del estado, elevándola de una tarea manual a un componente arquitectónico fiable y escalable.</p>
+<h2 id="cookies-mensajes-seguros-para-el-navegador">Cookies: Mensajes Seguros para el Navegador</h2>
+<p>Centrándonos en el primero de estos pilares, el problema de las cookies tradicionales trasciende la mera incomodidad sintáctica o el "trabajo de fontanería" que mencionamos en la introducción. El verdadero riesgo histórico reside en la exposición de los datos. En una implementación estándar de PHP, las cookies suelen viajar y almacenarse en el navegador en <strong>texto plano</strong>. Esto equivale a entregarle al usuario una nota adhesiva con instrucciones sensibles; cualquier persona con conocimientos básicos puede leer el contenido e, incluso peor, editarlo arbitrariamente para intentar suplantar identidades o alterar la lógica del negocio.</p>
+<p>Laravel transforma radicalmente este escenario, elevando la seguridad a un estándar militar sin que el desarrollador tenga que escribir una sola línea de código criptográfico. El framework aplica una política de "confianza cero" por defecto: <strong>todas las cookies generadas son automáticamente encriptadas y firmadas digitalmente</strong>.</p>
+<p>Esta doble capa de protección tiene implicaciones profundas para la integridad de tu aplicación. Por un lado, la <strong>encriptación</strong> garantiza la confidencialidad: aunque los datos residan físicamente en el dispositivo del usuario, su contenido es ilegible para él. Por otro lado, la <strong>firma digital</strong> actúa como un sello de inviolabilidad. Si un usuario malicioso intentara modificar siquiera un byte del contenido cifrado (un ataque de manipulación común), Laravel detectará la discrepancia matemática en la firma al recibir la petición y rechazará la cookie de inmediato, neutralizando la amenaza antes de que esta pueda siquiera tocar la lógica de tu controlador.</p>
+<hr/>
+<h3 id="configuracion-de-cookies">Configuración de Cookies</h3>
+<p>Esta protección invisible no es fruto de la magia, sino de uno de los patrones arquitectónicos más potentes de Laravel: el <strong>Middleware</strong>. Específicamente, el guardián encargado de esta tarea es la clase <code>Illuminate\Cookie\Middleware\EncryptCookies</code>. Este componente actúa como una aduana fronteriza que intercepta automáticamente cada petición: al salir la respuesta del servidor, cifra las cookies; al entrar una nueva petición del navegador, las descifra. Todo esto ocurre de forma transparente, permitiendo que tu código PHP trabaje con los datos cómodamente mientras el cliente solo recibe cadenas criptográficas ininteligibles.</p>
+<p>Sin embargo, el desarrollo de software real rara vez es absoluto. Existen escenarios legítimos donde esta encriptación forzosa se convierte en un obstáculo técnico en lugar de una ventaja. Un caso clásico es la <strong>interoperabilidad</strong>: es posible que necesites que una librería de JavaScript en el <em>frontend</em> lea una cookie específica para gestionar la interfaz, o que estés integrando un servicio de análisis de terceros que espera recibir un identificador en texto plano. En estas situaciones, si Laravel encriptara esos datos, rompería la comunicación con esas herramientas externas.</p>
+<p>Laravel reconoce esta necesidad de pragmatismo y nos permite definir "conductos seguros" a través de su configuración. En la arquitectura moderna del framework, esto se gestiona en el archivo de arranque <code>bootstrap/app.php</code>. Aquí podemos instruir al Middleware para que ignore selectivamente ciertas cookies, permitiéndoles viajar en texto plano solo cuando sea estrictamente necesario.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>    <span class="c1">// bootstrap/app.php (fragmento)</span>
+</span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a>    <span class="k">use</span> <span class="nx">Illuminate\Foundation\Application</span><span class="p">;</span>
+</span><span id="__span-0-5"><a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a>    <span class="k">use</span> <span class="nx">Illuminate\Foundation\Configuration\Middleware</span><span class="p">;</span>
+</span><span id="__span-0-6"><a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a>    <span class="k">return</span> <span class="nx">Application</span><span class="o">::</span><span class="na">configure</span><span class="p">(</span><span class="nx">basePath</span><span class="o">:</span> <span class="nb">dirname</span><span class="p">(</span><span class="no">__DIR__</span><span class="p">))</span>
+</span><span id="__span-0-8"><a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a>        <span class="c1">// ... otros métodos de configuración ...</span>
+</span><span id="__span-0-9"><a href="#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a>        <span class="o">-&gt;</span><span class="na">withMiddleware</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">Middleware</span> <span class="nv">$middleware</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-0-10"><a href="#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a>            <span class="nv">$middleware</span><span class="o">-&gt;</span><span class="na">encryptCookies</span><span class="p">(</span><span class="nx">except</span><span class="o">:</span> <span class="p">[</span>
+</span><span id="__span-0-11"><a href="#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a>                <span class="s1">'nombre_de_tu_cookie_sin_encriptar'</span><span class="p">,</span>
+</span><span id="__span-0-12"><a href="#__codelineno-0-12" id="__codelineno-0-12" name="__codelineno-0-12"></a>                <span class="s1">'otra_cookie'</span><span class="p">,</span>
+</span><span id="__span-0-13"><a href="#__codelineno-0-13" id="__codelineno-0-13" name="__codelineno-0-13"></a>            <span class="p">]);</span>
+</span><span id="__span-0-14"><a href="#__codelineno-0-14" id="__codelineno-0-14" name="__codelineno-0-14"></a>        <span class="p">});</span>
+</span><span id="__span-0-15"><a href="#__codelineno-0-15" id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<hr/>
+<h3 id="establecer-cookies">Establecer Cookies</h3>
+<p>En la arquitectura de Laravel, la acción de establecer una cookie cambia fundamentalmente respecto al PHP nativo. Ya no se trata de una instrucción imperativa que "dispara" una cabecera HTTP en el momento exacto de la ejecución (lo que provocaba los temidos errores de <em>"Headers already sent"</em> si había cualquier salida previa). En su lugar, Laravel introduce una capa de abstracción intermedia conocida coloquialmente como el <strong>Cookie Jar</strong> (tarro de galletas).</p>
+<p>Cuando defines una cookie en tu código, Laravel no la envía al navegador inmediatamente. Simplemente la deposita en esta "cola de espera" en memoria. Solo al final del ciclo de vida de la petición, justo cuando el framework está listo para devolver la respuesta final al cliente, revisa este tarro, extrae todas las cookies acumuladas y las inyecta automáticamente en las cabeceras HTTP de una sola vez. Este diseño desacopla la lógica de negocio de la lógica de transporte, permitiéndote definir cookies en cualquier punto de tu aplicación sin preocuparte por el orden de salida.</p>
+<p>La forma más explícita y "pura" desde el punto de vista del protocolo HTTP es adjuntar la cookie directamente al objeto que será devuelto al usuario. Gracias a la interfaz fluida de Laravel, podemos encadenar la definición de la cookie al final de cualquier respuesta, ya sea una vista, un JSON o una redirección.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>    <span class="k">use</span> <span class="nx">Illuminate\Http\Response</span><span class="p">;</span>
+</span><span id="__span-1-3"><a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>    <span class="k">use</span> <span class="nx">Illuminate\Support\Facades\Route</span><span class="p">;</span>
+</span><span id="__span-1-4"><a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a>    <span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">'/set-cookie'</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span id="__span-1-6"><a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a>        <span class="c1">// Creamos la respuesta base</span>
+</span><span id="__span-1-7"><a href="#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a>        <span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">'¡Cookie establecida correctamente!'</span><span class="p">);</span>
+</span><span id="__span-1-8"><a href="#__codelineno-1-8" id="__codelineno-1-8" name="__codelineno-1-8"></a>
+</span><span id="__span-1-9"><a href="#__codelineno-1-9" id="__codelineno-1-9" name="__codelineno-1-9"></a>        <span class="c1">// Adjuntamos la cookie al objeto de respuesta antes de devolverlo.</span>
+</span><span id="__span-1-10"><a href="#__codelineno-1-10" id="__codelineno-1-10" name="__codelineno-1-10"></a>        <span class="c1">// Parámetros: nombre, valor, duración en minutos.</span>
+</span><span id="__span-1-11"><a href="#__codelineno-1-11" id="__codelineno-1-11" name="__codelineno-1-11"></a>        <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">cookie</span><span class="p">(</span><span class="s1">'user_preference'</span><span class="p">,</span> <span class="s1">'dark_mode'</span><span class="p">,</span> <span class="mi">60</span><span class="p">);</span>
+</span><span id="__span-1-12"><a href="#__codelineno-1-12" id="__codelineno-1-12" name="__codelineno-1-12"></a>
+</span><span id="__span-1-13"><a href="#__codelineno-1-13" id="__codelineno-1-13" name="__codelineno-1-13"></a>        <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+</span><span id="__span-1-14"><a href="#__codelineno-1-14" id="__codelineno-1-14" name="__codelineno-1-14"></a>    <span class="p">});</span>
+</span><span id="__span-1-15"><a href="#__codelineno-1-15" id="__codelineno-1-15" name="__codelineno-1-15"></a>
+</span><span id="__span-1-16"><a href="#__codelineno-1-16" id="__codelineno-1-16" name="__codelineno-1-16"></a>    <span class="c1">// La sintaxis fluida brilla especialmente en las redirecciones</span>
+</span><span id="__span-1-17"><a href="#__codelineno-1-17" id="__codelineno-1-17" name="__codelineno-1-17"></a>    <span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">'/login'</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span id="__span-1-18"><a href="#__codelineno-1-18" id="__codelineno-1-18" name="__codelineno-1-18"></a>        <span class="c1">// Redirige al home y "pega" una cookie de idioma en el proceso</span>
+</span><span id="__span-1-19"><a href="#__codelineno-1-19" id="__codelineno-1-19" name="__codelineno-1-19"></a>        <span class="k">return</span> <span class="nx">redirect</span><span class="p">(</span><span class="s1">'/home'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">cookie</span><span class="p">(</span><span class="s1">'language'</span><span class="p">,</span> <span class="s1">'es'</span><span class="p">,</span> <span class="mi">120</span><span class="p">);</span>
+</span><span id="__span-1-20"><a href="#__codelineno-1-20" id="__codelineno-1-20" name="__codelineno-1-20"></a>    <span class="p">});</span>
+</span><span id="__span-1-21"><a href="#__codelineno-1-21" id="__codelineno-1-21" name="__codelineno-1-21"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<p>A veces, la arquitectura de tu código hace que no tengas acceso inmediato al objeto <code>Response</code> (por ejemplo, dentro de un Servicio, un Evento o un Middleware previo). Para estos casos, Laravel ofrece la fachada <code>Cookie::queue</code>. Este método actúa como un buzón global: "encola" la cookie en el sistema para que Laravel la recoja automáticamente más tarde, cuando esté construyendo la respuesta final.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-2-2"><a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a>    <span class="k">use</span> <span class="nx">Illuminate\Support\Facades\Cookie</span><span class="p">;</span>
+</span><span id="__span-2-3"><a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a>    <span class="k">use</span> <span class="nx">Illuminate\Support\Facades\Route</span><span class="p">;</span>
+</span><span id="__span-2-4"><a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a>
+</span><span id="__span-2-5"><a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a>    <span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">'/queue-cookie'</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span id="__span-2-6"><a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a>        <span class="c1">// No necesitamos devolver esta cookie manualmente; </span>
+</span><span id="__span-2-7"><a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a>        <span class="c1">// Laravel la inyectará en la respuesta al terminar la ejecución del script.</span>
+</span><span id="__span-2-8"><a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a>        <span class="nx">Cookie</span><span class="o">::</span><span class="na">queue</span><span class="p">(</span><span class="s1">'promo_code'</span><span class="p">,</span> <span class="s1">'SUMMER2024'</span><span class="p">,</span> <span class="mi">1440</span><span class="p">);</span> <span class="c1">// 1440 min = 24 horas</span>
+</span><span id="__span-2-9"><a href="#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a>
+</span><span id="__span-2-10"><a href="#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a>        <span class="k">return</span> <span class="s1">'El código promocional se ha guardado en segundo plano.'</span><span class="p">;</span>
+</span><span id="__span-2-11"><a href="#__codelineno-2-11" id="__codelineno-2-11" name="__codelineno-2-11"></a>    <span class="p">});</span>
+</span><span id="__span-2-12"><a href="#__codelineno-2-12" id="__codelineno-2-12" name="__codelineno-2-12"></a>
+</span><span id="__span-2-13"><a href="#__codelineno-2-13" id="__codelineno-2-13" name="__codelineno-2-13"></a>    <span class="c1">// Caso de uso común: Cookies de larga duración ("Forever")</span>
+</span><span id="__span-2-14"><a href="#__codelineno-2-14" id="__codelineno-2-14" name="__codelineno-2-14"></a>    <span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">'/accept-cookies'</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span id="__span-2-15"><a href="#__codelineno-2-15" id="__codelineno-2-15" name="__codelineno-2-15"></a>        <span class="c1">// El helper 'forever' establece una duración de 5 años (2.6 millones de minutos)</span>
+</span><span id="__span-2-16"><a href="#__codelineno-2-16" id="__codelineno-2-16" name="__codelineno-2-16"></a>        <span class="nv">$cookie</span> <span class="o">=</span> <span class="nx">Cookie</span><span class="o">::</span><span class="na">forever</span><span class="p">(</span><span class="s1">'cookie_consent'</span><span class="p">,</span> <span class="s1">'accepted'</span><span class="p">);</span>
+</span><span id="__span-2-17"><a href="#__codelineno-2-17" id="__codelineno-2-17" name="__codelineno-2-17"></a>
+</span><span id="__span-2-18"><a href="#__codelineno-2-18" id="__codelineno-2-18" name="__codelineno-2-18"></a>        <span class="nx">Cookie</span><span class="o">::</span><span class="na">queue</span><span class="p">(</span><span class="nv">$cookie</span><span class="p">);</span>
+</span><span id="__span-2-19"><a href="#__codelineno-2-19" id="__codelineno-2-19" name="__codelineno-2-19"></a>
+</span><span id="__span-2-20"><a href="#__codelineno-2-20" id="__codelineno-2-20" name="__codelineno-2-20"></a>        <span class="k">return</span> <span class="s1">'Consentimiento registrado indefinidamente.'</span><span class="p">;</span>
+</span><span id="__span-2-21"><a href="#__codelineno-2-21" id="__codelineno-2-21" name="__codelineno-2-21"></a>    <span class="p">});</span>
+</span><span id="__span-2-22"><a href="#__codelineno-2-22" id="__codelineno-2-22" name="__codelineno-2-22"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<hr/>
+<h3 id="recuperar-cookies">Recuperar Cookies</h3>
+<p>Cerrando el ciclo de la comunicación, nos enfrentamos a la tarea de leer esa información persistente. Cuando el usuario navega de vuelta a nuestra aplicación, su navegador adjunta automáticamente todas las cookies válidas a la petición. Aquí es donde la "magia" del cifrado que discutimos anteriormente se hace transparente: aunque los datos viajan por la red como cadenas criptográficas ininteligibles, cuando solicitas una cookie en tu código, Laravel ya se ha encargado de interceptarla, verificar su firma y descifrarla. Tú recibes el valor limpio y original, tal como lo guardaste, sin tener que preocuparte por la criptografía.</p>
+<p>Para acceder a estos datos, nuestra fuente de verdad es el objeto <code>Illuminate\Http\Request</code>. A diferencia de los arrays superglobales de PHP (<code>$_COOKIE</code>), que pueden contener datos "sucios" o no verificados, el método <code>cookie()</code> de la instancia <code>Request</code> nos proporciona una interfaz segura y orientada a objetos. Además, este método implementa una defensa básica contra la incertidumbre: dado que las cookies pueden expirar o ser borradas por el usuario manualmente en cualquier momento, el sistema nos permite definir "valores por defecto" (fallbacks) para asegurar que nuestra lógica no se rompa si la clave buscada ha desaparecido.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>    <span class="k">use</span> <span class="nx">Illuminate\Http\Request</span><span class="p">;</span>
+</span><span id="__span-3-3"><a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a>    <span class="k">use</span> <span class="nx">Illuminate\Support\Facades\Route</span><span class="p">;</span>
+</span><span id="__span-3-4"><a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a>
+</span><span id="__span-3-5"><a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a>    <span class="c1">// Opción A: Inyección de Dependencias (Estándar en Controladores)</span>
+</span><span id="__span-3-6"><a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a>    <span class="c1">// Laravel inyecta automáticamente la instancia actual de Request</span>
+</span><span id="__span-3-7"><a href="#__codelineno-3-7" id="__codelineno-3-7" name="__codelineno-3-7"></a>    <span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">'/get-cookie'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-3-8"><a href="#__codelineno-3-8" id="__codelineno-3-8" name="__codelineno-3-8"></a>
+</span><span id="__span-3-9"><a href="#__codelineno-3-9" id="__codelineno-3-9" name="__codelineno-3-9"></a>        <span class="c1">// 1. Recuperación simple:</span>
+</span><span id="__span-3-10"><a href="#__codelineno-3-10" id="__codelineno-3-10" name="__codelineno-3-10"></a>        <span class="c1">// Intenta obtener la cookie. Si no existe, devuelve null.</span>
+</span><span id="__span-3-11"><a href="#__codelineno-3-11" id="__codelineno-3-11" name="__codelineno-3-11"></a>        <span class="nv">$userSession</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">cookie</span><span class="p">(</span><span class="s1">'session_token'</span><span class="p">);</span>
+</span><span id="__span-3-12"><a href="#__codelineno-3-12" id="__codelineno-3-12" name="__codelineno-3-12"></a>
+</span><span id="__span-3-13"><a href="#__codelineno-3-13" id="__codelineno-3-13" name="__codelineno-3-13"></a>        <span class="c1">// 2. Recuperación robusta (con valor por defecto):</span>
+</span><span id="__span-3-14"><a href="#__codelineno-3-14" id="__codelineno-3-14" name="__codelineno-3-14"></a>        <span class="c1">// Si la cookie 'idioma' no existe, asumimos que es 'es' (español).</span>
+</span><span id="__span-3-15"><a href="#__codelineno-3-15" id="__codelineno-3-15" name="__codelineno-3-15"></a>        <span class="c1">// Esto evita tener que escribir "if ($idioma == null)" manualmente.</span>
+</span><span id="__span-3-16"><a href="#__codelineno-3-16" id="__codelineno-3-16" name="__codelineno-3-16"></a>        <span class="nv">$locale</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">cookie</span><span class="p">(</span><span class="s1">'language_pref'</span><span class="p">,</span> <span class="s1">'es'</span><span class="p">);</span>
+</span><span id="__span-3-17"><a href="#__codelineno-3-17" id="__codelineno-3-17" name="__codelineno-3-17"></a>
+</span><span id="__span-3-18"><a href="#__codelineno-3-18" id="__codelineno-3-18" name="__codelineno-3-18"></a>        <span class="k">return</span> <span class="s2">"Sesión: </span><span class="si">{</span><span class="nv">$userSession</span><span class="si">}</span><span class="s2">, Idioma activo: </span><span class="si">{</span><span class="nv">$locale</span><span class="si">}</span><span class="s2">"</span><span class="p">;</span>
+</span><span id="__span-3-19"><a href="#__codelineno-3-19" id="__codelineno-3-19" name="__codelineno-3-19"></a>    <span class="p">});</span>
+</span><span id="__span-3-20"><a href="#__codelineno-3-20" id="__codelineno-3-20" name="__codelineno-3-20"></a>
+</span><span id="__span-3-21"><a href="#__codelineno-3-21" id="__codelineno-3-21" name="__codelineno-3-21"></a>    <span class="c1">// Opción B: El Helper Global (Acceso rápido)</span>
+</span><span id="__span-3-22"><a href="#__codelineno-3-22" id="__codelineno-3-22" name="__codelineno-3-22"></a>    <span class="c1">// Útil cuando no estamos en un contexto donde sea fácil inyectar Request</span>
+</span><span id="__span-3-23"><a href="#__codelineno-3-23" id="__codelineno-3-23" name="__codelineno-3-23"></a>    <span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">'/get-cookie-helper'</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span id="__span-3-24"><a href="#__codelineno-3-24" id="__codelineno-3-24" name="__codelineno-3-24"></a>        <span class="c1">// La función request() nos da acceso a la misma instancia</span>
+</span><span id="__span-3-25"><a href="#__codelineno-3-25" id="__codelineno-3-25" name="__codelineno-3-25"></a>        <span class="nv">$theme</span> <span class="o">=</span> <span class="nx">request</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">cookie</span><span class="p">(</span><span class="s1">'theme_mode'</span><span class="p">,</span> <span class="s1">'light'</span><span class="p">);</span>
+</span><span id="__span-3-26"><a href="#__codelineno-3-26" id="__codelineno-3-26" name="__codelineno-3-26"></a>
+</span><span id="__span-3-27"><a href="#__codelineno-3-27" id="__codelineno-3-27" name="__codelineno-3-27"></a>        <span class="k">return</span> <span class="s2">"Preferencia visual: </span><span class="si">{</span><span class="nv">$theme</span><span class="si">}</span><span class="s2">"</span><span class="p">;</span>
+</span><span id="__span-3-28"><a href="#__codelineno-3-28" id="__codelineno-3-28" name="__codelineno-3-28"></a>    <span class="p">});</span>
+</span><span id="__span-3-29"><a href="#__codelineno-3-29" id="__codelineno-3-29" name="__codelineno-3-29"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<hr/>
+<h3 id="eliminar-cookies">Eliminar Cookies</h3>
+<p>Finalmente, llegamos al ciclo de vida terminal de una cookie: su eliminación. Es importante comprender una distinción técnica sutil pero crucial: el servidor no tiene "manos" para alcanzar el disco duro del usuario y borrar un archivo. El protocolo HTTP no tiene un comando <code>DELETE COOKIE</code>.</p>
+<p>Para lograr el efecto de eliminación, lo que hacemos en realidad es un acto de sobreescritura. Enviamos una cookie con el mismo nombre, pero con un valor vacío y, lo más importante, con una <strong>fecha de expiración en el pasado</strong> (típicamente hace unos segundos o años atrás). Cuando el navegador recibe esta instrucción, se da cuenta de que la cookie ya ha caducado y procede a purgarla de su almacenamiento interno inmediatamente.</p>
+<p>Siguiendo la lógica fluida del objeto <code>Response</code>, si estamos devolviendo una vista o una redirección, podemos usar el método <code>withoutCookie</code>. Esto es extremadamente común en flujos como el "Cerrar Sesión" (Logout), donde queremos redirigir al usuario al inicio y limpiar sus credenciales en el mismo movimiento.</p>
+<p><div class="language-php highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-4-2"><a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a>    <span class="k">use</span> <span class="nx">Illuminate\Support\Facades\Route</span><span class="p">;</span>
+</span><span id="__span-4-3"><a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a>
+</span><span id="__span-4-4"><a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a>    <span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">'/logout'</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span id="__span-4-5"><a href="#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a>        <span class="c1">// Redirigimos al usuario y adjuntamos la orden de "olvidar" la cookie.</span>
+</span><span id="__span-4-6"><a href="#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a>        <span class="c1">// El navegador recibirá una cookie con fecha de caducidad pasada.</span>
+</span><span id="__span-4-7"><a href="#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a>        <span class="k">return</span> <span class="nx">redirect</span><span class="p">(</span><span class="s1">'/login'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">withoutCookie</span><span class="p">(</span><span class="s1">'session_token'</span><span class="p">);</span>
+</span><span id="__span-4-8"><a href="#__codelineno-4-8" id="__codelineno-4-8" name="__codelineno-4-8"></a>    <span class="p">});</span>
+</span><span id="__span-4-9"><a href="#__codelineno-4-9" id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+Si necesitamos realizar esta acción sin tener la respuesta final lista (por ejemplo, en medio de un controlador o servicio), recurrimos nuevamente a la fachada <code>Cookie</code>. Aquí usamos el método <code>forget()</code>.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-5-2"><a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a>    <span class="k">use</span> <span class="nx">Illuminate\Support\Facades\Cookie</span><span class="p">;</span>
+</span><span id="__span-5-3"><a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a>    <span class="k">use</span> <span class="nx">Illuminate\Support\Facades\Route</span><span class="p">;</span>
+</span><span id="__span-5-4"><a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a>
+</span><span id="__span-5-5"><a href="#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a>    <span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">'/forget-preference'</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span id="__span-5-6"><a href="#__codelineno-5-6" id="__codelineno-5-6" name="__codelineno-5-6"></a>        <span class="c1">// 1. Generamos la cookie "asesina" (con fecha expirada)</span>
+</span><span id="__span-5-7"><a href="#__codelineno-5-7" id="__codelineno-5-7" name="__codelineno-5-7"></a>        <span class="nv">$cookieOlvido</span> <span class="o">=</span> <span class="nx">Cookie</span><span class="o">::</span><span class="na">forget</span><span class="p">(</span><span class="s1">'user_theme'</span><span class="p">);</span>
+</span><span id="__span-5-8"><a href="#__codelineno-5-8" id="__codelineno-5-8" name="__codelineno-5-8"></a>
+</span><span id="__span-5-9"><a href="#__codelineno-5-9" id="__codelineno-5-9" name="__codelineno-5-9"></a>        <span class="c1">// 2. La ponemos en la cola para que salga con la siguiente respuesta</span>
+</span><span id="__span-5-10"><a href="#__codelineno-5-10" id="__codelineno-5-10" name="__codelineno-5-10"></a>        <span class="nx">Cookie</span><span class="o">::</span><span class="na">queue</span><span class="p">(</span><span class="nv">$cookieOlvido</span><span class="p">);</span>
+</span><span id="__span-5-11"><a href="#__codelineno-5-11" id="__codelineno-5-11" name="__codelineno-5-11"></a>
+</span><span id="__span-5-12"><a href="#__codelineno-5-12" id="__codelineno-5-12" name="__codelineno-5-12"></a>        <span class="k">return</span> <span class="s1">'La preferencia de tema ha sido eliminada.'</span><span class="p">;</span>
+</span><span id="__span-5-13"><a href="#__codelineno-5-13" id="__codelineno-5-13" name="__codelineno-5-13"></a>    <span class="p">});</span>
+</span><span id="__span-5-14"><a href="#__codelineno-5-14" id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<h2 id="sesiones-almacenamiento-persistente-en-el-servidor">Sesiones: Almacenamiento Persistente en el Servidor</h2>
+<p>Si las cookies funcionan como pequeñas "notas adhesivas" que le entregamos al usuario para que nos las traiga de vuelta, las <strong>Sesiones</strong> representan nuestro propio archivo de seguridad privado dentro del servidor. En este modelo, la información real nunca abandona nuestra infraestructura. Laravel simplemente le entrega al cliente una única llave maestra: un identificador de sesión único (Session ID) que viaja dentro de una cookie encriptada llamada <code>laravel_session</code>.</p>
+<p>Cuando el usuario realiza una petición, nos muestra esa llave. Laravel verifica su validez, abre el casillero correspondiente en el servidor y pone a disposición de tu código todos los datos asociados a ese usuario. Este enfoque supera las limitaciones de tamaño de las cookies (que solo soportan 4KB) y elimina el riesgo de que el usuario manipule los datos, ya que él nunca tiene acceso físico a ellos.</p>
+<p>La genialidad de la arquitectura de Laravel frente al <code>$_SESSION</code> nativo de PHP reside en su flexibilidad. El framework desacopla la <em>lógica</em> de la sesión del <em>almacenamiento</em> de la misma. A través del archivo de configuración <code>config/session.php</code>, podemos cambiar radicalmente dónde y cómo se guardan estos datos sin tener que reescribir una sola línea de nuestro código, simplemente eligiendo un <strong>Driver</strong> diferente.</p>
+<hr/>
+<h3 id="drivers-de-sesion">Drivers de Sesión</h3>
+<p>La elección del driver define la escalabilidad y el rendimiento de tu aplicación. Laravel soporta los siguientes motores de fábrica:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Driver</th>
+<th style="text-align: left;">Mecanismo de Almacenamiento</th>
+<th style="text-align: left;">Caso de Uso Ideal</th>
+<th style="text-align: left;">Observaciones Clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong><code>file</code></strong></td>
+<td style="text-align: left;">Archivos encriptados guardados en <code>storage/framework/sessions</code>.</td>
+<td style="text-align: left;"><strong>Desarrollo local</strong> y aplicaciones pequeñas (un solo servidor).</td>
+<td style="text-align: left;">Es la opción <strong>por defecto</strong>. No requiere configuración extra pero es lento en sistemas con mucha carga de lectura/escritura en disco.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>database</code></strong></td>
+<td style="text-align: left;">Filas en una tabla de tu base de datos relacional (MySQL, Postgres, etc.).</td>
+<td style="text-align: left;"><strong>Escalado Horizontal</strong>. Apps con múltiples servidores tras un balanceador de carga.</td>
+<td style="text-align: left;">Permite que varios servidores compartan la sesión. Requiere crear la tabla: <code>php artisan session:table</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>redis</code></strong> / <strong><code>memcached</code></strong></td>
+<td style="text-align: left;">Almacenamiento en memoria RAM utilizando motores de caché.</td>
+<td style="text-align: left;"><strong>Alto Tráfico / Enterprise</strong>. Sistemas con miles de usuarios concurrentes.</td>
+<td style="text-align: left;">Ofrece la <strong>máxima velocidad</strong> de lectura/escritura. Requiere tener instalado y configurado el servidor de caché (ej. Redis).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>cookie</code></strong></td>
+<td style="text-align: left;">Serializa y encripta toda la sesión dentro de la cookie del navegador.</td>
+<td style="text-align: left;">Aplicaciones muy simples o "sin servidor" (Stateless).</td>
+<td style="text-align: left;"><strong>Límite estricto de 4KB</strong>. Seguro gracias a la encriptación, pero no apto para guardar listas o mucha información.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>dynamodb</code></strong></td>
+<td style="text-align: left;">Base de datos NoSQL de Amazon Web Services (AWS).</td>
+<td style="text-align: left;">Infraestructuras en la nube (AWS) y arquitecturas <strong>Serverless</strong>.</td>
+<td style="text-align: left;">Escalabilidad masiva automática sin necesidad de gestionar servidores de Redis propios.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>array</code></strong></td>
+<td style="text-align: left;">Array PHP volátil en la memoria del proceso actual.</td>
+<td style="text-align: left;"><strong>Testing (Pruebas Automatizadas)</strong>.</td>
+<td style="text-align: left;">Los datos <strong>no persisten</strong>; se evaporan al terminar la petición. Garantiza un estado limpio para cada test.</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h3 id="interaccion-con-la-sesion">Interacción con la Sesión</h3>
+<p>La verdadera elegancia de la arquitectura de sesión de Laravel radica en su <strong>consistencia</strong>. Independientemente de la complejidad que ocurra tras bambalinas —ya sea que estés guardando datos en un archivo de texto plano o distribuyéndolos en un clúster de Redis—, tu forma de interactuar con la sesión en el código permanece inmutable. No necesitas aprender comandos específicos para cada driver; Laravel abstrae toda esa complejidad bajo una interfaz fluida, accesible a través del helper global <code>session()</code> o la fachada <code>Session</code>.</p>
+<h4 id="1-persistencia-de-datos-put">1. Persistencia de Datos (<code>put</code>)</h4>
+<p>Para escribir en nuestro "casillero" del servidor, utilizamos el método <code>put</code>. A diferencia de los arrays planos de PHP, Laravel nos dota de la <strong>notación de puntos</strong>, permitiéndonos organizar la información en estructuras jerárquicas profundas de manera limpia y legible.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-6-2"><a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a>    <span class="c1">// Almacenamiento básico: Clave =&gt; Valor</span>
+</span><span id="__span-6-3"><a href="#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a>    <span class="nx">session</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">put</span><span class="p">(</span><span class="s1">'user_name'</span><span class="p">,</span> <span class="s1">'Alice'</span><span class="p">);</span>
+</span><span id="__span-6-4"><a href="#__codelineno-6-4" id="__codelineno-6-4" name="__codelineno-6-4"></a>
+</span><span id="__span-6-5"><a href="#__codelineno-6-5" id="__codelineno-6-5" name="__codelineno-6-5"></a>    <span class="c1">// Almacenamiento estructurado:</span>
+</span><span id="__span-6-6"><a href="#__codelineno-6-6" id="__codelineno-6-6" name="__codelineno-6-6"></a>    <span class="c1">// Guardamos un array completo bajo una clave.</span>
+</span><span id="__span-6-7"><a href="#__codelineno-6-7" id="__codelineno-6-7" name="__codelineno-6-7"></a>    <span class="nx">session</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">put</span><span class="p">(</span><span class="s1">'current_user'</span><span class="p">,</span> <span class="p">[</span>
+</span><span id="__span-6-8"><a href="#__codelineno-6-8" id="__codelineno-6-8" name="__codelineno-6-8"></a>        <span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="mi">42</span><span class="p">,</span>
+</span><span id="__span-6-9"><a href="#__codelineno-6-9" id="__codelineno-6-9" name="__codelineno-6-9"></a>        <span class="s1">'role'</span> <span class="o">=&gt;</span> <span class="s1">'editor'</span>
+</span><span id="__span-6-10"><a href="#__codelineno-6-10" id="__codelineno-6-10" name="__codelineno-6-10"></a>    <span class="p">]);</span>
+</span><span id="__span-6-11"><a href="#__codelineno-6-11" id="__codelineno-6-11" name="__codelineno-6-11"></a>
+</span><span id="__span-6-12"><a href="#__codelineno-6-12" id="__codelineno-6-12" name="__codelineno-6-12"></a>    <span class="c1">// El poder de la Notación de Puntos:</span>
+</span><span id="__span-6-13"><a href="#__codelineno-6-13" id="__codelineno-6-13" name="__codelineno-6-13"></a>    <span class="c1">// Podemos insertar datos directamente en un nivel profundo del array</span>
+</span><span id="__span-6-14"><a href="#__codelineno-6-14" id="__codelineno-6-14" name="__codelineno-6-14"></a>    <span class="c1">// sin tener que extraer, modificar y volver a guardar todo el objeto.</span>
+</span><span id="__span-6-15"><a href="#__codelineno-6-15" id="__codelineno-6-15" name="__codelineno-6-15"></a>    <span class="nx">session</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">put</span><span class="p">(</span><span class="s1">'shopping_cart.items.row_1'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="mi">101</span><span class="p">,</span> <span class="s1">'qty'</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">]);</span>
+</span><span id="__span-6-16"><a href="#__codelineno-6-16" id="__codelineno-6-16" name="__codelineno-6-16"></a>    <span class="nx">session</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">put</span><span class="p">(</span><span class="s1">'shopping_cart.items.row_2'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="mi">105</span><span class="p">,</span> <span class="s1">'qty'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">]);</span>
+</span><span id="__span-6-17"><a href="#__codelineno-6-17" id="__codelineno-6-17" name="__codelineno-6-17"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<h4 id="2-datos-efimeros-flash">2. Datos Efímeros (<code>flash</code>)</h4>
+<p>En el desarrollo de aplicaciones web, existe un patrón muy común: procesar un formulario, redirigir al usuario y mostrar un mensaje de éxito ("¡Perfil actualizado!"). Aquí surge un problema: si redirigimos, perdemos el estado de la petición anterior.</p>
+<p>Para solucionar esto sin llenar la sesión de basura que tendríamos que limpiar manualmente, Laravel ofrece los <strong>Datos Flash</strong>. Estos son datos de "un solo uso": se guardan en la sesión pero están programados para autodestruirse automáticamente después de la siguiente petición HTTP.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-7-2"><a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a>    <span class="c1">// En tu controlador, antes de redirigir:</span>
+</span><span id="__span-7-3"><a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a>    <span class="nx">session</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">flash</span><span class="p">(</span><span class="s1">'status'</span><span class="p">,</span> <span class="s1">'¡Producto añadido al carrito correctamente!'</span><span class="p">);</span>
+</span><span id="__span-7-4"><a href="#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a>
+</span><span id="__span-7-5"><a href="#__codelineno-7-5" id="__codelineno-7-5" name="__codelineno-7-5"></a>    <span class="c1">// Si algo sale mal:</span>
+</span><span id="__span-7-6"><a href="#__codelineno-7-6" id="__codelineno-7-6" name="__codelineno-7-6"></a>    <span class="nx">session</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">flash</span><span class="p">(</span><span class="s1">'error'</span><span class="p">,</span> <span class="s1">'El pago ha sido rechazado.'</span><span class="p">);</span>
+</span><span id="__span-7-7"><a href="#__codelineno-7-7" id="__codelineno-7-7" name="__codelineno-7-7"></a>
+</span><span id="__span-7-8"><a href="#__codelineno-7-8" id="__codelineno-7-8" name="__codelineno-7-8"></a>    <span class="k">return</span> <span class="nx">redirect</span><span class="p">(</span><span class="s1">'/dashboard'</span><span class="p">);</span> 
+</span><span id="__span-7-9"><a href="#__codelineno-7-9" id="__codelineno-7-9" name="__codelineno-7-9"></a>    <span class="c1">// Al llegar a /dashboard, los mensajes existen. </span>
+</span><span id="__span-7-10"><a href="#__codelineno-7-10" id="__codelineno-7-10" name="__codelineno-7-10"></a>    <span class="c1">// Si el usuario recarga la página, los mensajes desaparecerán.</span>
+</span><span id="__span-7-11"><a href="#__codelineno-7-11" id="__codelineno-7-11" name="__codelineno-7-11"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<p><em>Herramientas avanzadas de Flash:</em>
+* <strong><code>reflash()</code></strong>: "Pospone" la destrucción, manteniendo todos los datos flash actuales para una petición más.
+* <strong><code>keep(['clave'])</code></strong>: Salva datos flash específicos de la eliminación inminente.
+* <strong><code>now()</code></strong>: Crea un dato flash que vive <em>solo</em> en la petición actual (no espera a la siguiente). Útil cuando renderizas una vista directamente sin redirigir pero quieres usar la misma lógica de mensajes.</p>
+<h4 id="3-recuperacion-y-consumo-get-y-pull">3. Recuperación y Consumo (<code>get</code> y <code>pull</code>)</h4>
+<p>Para leer los datos, Laravel nos ofrece dos verbos distintos según nuestra intención: simplemente "mirar" o "consumir" el dato.</p>
+<ul>
+<li>
+<p><strong>Lectura (<code>get</code>):</strong> Recupera el valor pero lo deja intacto en la sesión. Soporta la notación de puntos y, crucialmente, un segundo parámetro para definir un <strong>valor por defecto</strong>, evitando los condicionales <code>if (isset(...))</code> que plagan el código PHP antiguo.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-8-1"><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-8-2"><a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a>    <span class="c1">// Si 'user_name' no existe, devuelve 'Invitado' automáticamente.</span>
+</span><span id="__span-8-3"><a href="#__codelineno-8-3" id="__codelineno-8-3" name="__codelineno-8-3"></a>    <span class="nv">$name</span> <span class="o">=</span> <span class="nx">session</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'user_name'</span><span class="p">,</span> <span class="s1">'Invitado'</span><span class="p">);</span>
+</span><span id="__span-8-4"><a href="#__codelineno-8-4" id="__codelineno-8-4" name="__codelineno-8-4"></a>
+</span><span id="__span-8-5"><a href="#__codelineno-8-5" id="__codelineno-8-5" name="__codelineno-8-5"></a>    <span class="c1">// Acceso profundo con notación de puntos</span>
+</span><span id="__span-8-6"><a href="#__codelineno-8-6" id="__codelineno-8-6" name="__codelineno-8-6"></a>    <span class="nv">$role</span> <span class="o">=</span> <span class="nx">session</span><span class="p">(</span><span class="s1">'current_user.role'</span><span class="p">);</span> 
+</span><span id="__span-8-7"><a href="#__codelineno-8-7" id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+</li>
+<li>
+<p><strong>Extracción (<code>pull</code>):</strong> Recupera el valor y <strong>lo elimina inmediatamente</strong> de la sesión. Es una operación de "leer y tirar", ideal para procesar tokens de un solo uso o métricas que no deben contarse dos veces.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-9-1"><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-9-2"><a href="#__codelineno-9-2" id="__codelineno-9-2" name="__codelineno-9-2"></a>    <span class="c1">// Obtiene el mensaje y limpia la sesión en una sola línea.</span>
+</span><span id="__span-9-3"><a href="#__codelineno-9-3" id="__codelineno-9-3" name="__codelineno-9-3"></a>    <span class="nv">$alert</span> <span class="o">=</span> <span class="nx">session</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">pull</span><span class="p">(</span><span class="s1">'status'</span><span class="p">);</span>
+</span><span id="__span-9-4"><a href="#__codelineno-9-4" id="__codelineno-9-4" name="__codelineno-9-4"></a>
+</span><span id="__span-9-5"><a href="#__codelineno-9-5" id="__codelineno-9-5" name="__codelineno-9-5"></a>    <span class="k">if</span> <span class="p">(</span><span class="nv">$alert</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-9-6"><a href="#__codelineno-9-6" id="__codelineno-9-6" name="__codelineno-9-6"></a>        <span class="c1">// Renderizamos la alerta...</span>
+</span><span id="__span-9-7"><a href="#__codelineno-9-7" id="__codelineno-9-7" name="__codelineno-9-7"></a>    <span class="p">}</span>
+</span><span id="__span-9-8"><a href="#__codelineno-9-8" id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+</li>
+</ul>
+<h4 id="4-mantenimiento-y-limpieza">4. Mantenimiento y Limpieza</h4>
+<p>Para la gestión del ciclo de vida de los datos, contamos con métodos semánticos para verificar existencia o realizar purgas.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-10-1"><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-10-2"><a href="#__codelineno-10-2" id="__codelineno-10-2" name="__codelineno-10-2"></a>    <span class="c1">// Verificación</span>
+</span><span id="__span-10-3"><a href="#__codelineno-10-3" id="__codelineno-10-3" name="__codelineno-10-3"></a>    <span class="k">if</span> <span class="p">(</span><span class="nx">session</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">has</span><span class="p">(</span><span class="s1">'shopping_cart'</span><span class="p">))</span> <span class="p">{</span>
+</span><span id="__span-10-4"><a href="#__codelineno-10-4" id="__codelineno-10-4" name="__codelineno-10-4"></a>        <span class="c1">// ... lógica del carrito</span>
+</span><span id="__span-10-5"><a href="#__codelineno-10-5" id="__codelineno-10-5" name="__codelineno-10-5"></a>    <span class="p">}</span>
+</span><span id="__span-10-6"><a href="#__codelineno-10-6" id="__codelineno-10-6" name="__codelineno-10-6"></a>
+</span><span id="__span-10-7"><a href="#__codelineno-10-7" id="__codelineno-10-7" name="__codelineno-10-7"></a>    <span class="c1">// Eliminación Quirúrgica</span>
+</span><span id="__span-10-8"><a href="#__codelineno-10-8" id="__codelineno-10-8" name="__codelineno-10-8"></a>    <span class="nx">session</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">forget</span><span class="p">(</span><span class="s1">'user_name'</span><span class="p">);</span> <span class="c1">// Borra una clave</span>
+</span><span id="__span-10-9"><a href="#__codelineno-10-9" id="__codelineno-10-9" name="__codelineno-10-9"></a>    <span class="nx">session</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">forget</span><span class="p">([</span><span class="s1">'temp_data'</span><span class="p">,</span> <span class="s1">'old_inputs'</span><span class="p">]);</span> <span class="c1">// Borra múltiples claves</span>
+</span><span id="__span-10-10"><a href="#__codelineno-10-10" id="__codelineno-10-10" name="__codelineno-10-10"></a>
+</span><span id="__span-10-11"><a href="#__codelineno-10-11" id="__codelineno-10-11" name="__codelineno-10-11"></a>    <span class="c1">// Eliminación Nuclear</span>
+</span><span id="__span-10-12"><a href="#__codelineno-10-12" id="__codelineno-10-12" name="__codelineno-10-12"></a>    <span class="nx">session</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">flush</span><span class="p">();</span> <span class="c1">// Vacía completamente la sesión (logout forzoso manual)</span>
+</span><span id="__span-10-13"><a href="#__codelineno-10-13" id="__codelineno-10-13" name="__codelineno-10-13"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+<h4 id="5-seguridad-defensa-contra-la-fijacion-de-sesion">5. Seguridad: Defensa contra la Fijación de Sesión</h4>
+<p>Finalmente, tocamos un aspecto crítico de seguridad. Un ataque común es la <strong>Fijación de Sesión</strong>, donde un atacante obtiene un ID de sesión válido y engaña a la víctima para que lo use. Si la víctima inicia sesión manteniendo ese ID, el atacante (que ya conoce el ID) ahora tiene acceso a la cuenta de la víctima.</p>
+<p>Para prevenir esto, es obligatorio regenerar el ID de la sesión cada vez que el usuario cambia su estado de privilegios (ej. al hacer Login). Laravel facilita esto con dos métodos:</p>
+<ul>
+<li>
+<p><strong><code>regenerate()</code></strong>: La opción estándar. Asigna un nuevo ID criptográfico a la sesión actual pero <strong>mantiene todos los datos</strong> que ya tenía guardados (como el contenido del carrito de compras antes de loguearse).</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-11-1"><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-11-2"><a href="#__codelineno-11-2" id="__codelineno-11-2" name="__codelineno-11-2"></a>    <span class="nx">session</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">regenerate</span><span class="p">();</span>
+</span><span id="__span-11-3"><a href="#__codelineno-11-3" id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+</li>
+<li>
+<p><strong><code>invalidate()</code></strong>: La opción "tierra quemada". Invalida la sesión actual, elimina todos los datos y genera un nuevo ID. Se usa típicamente al hacer <strong>Logout</strong> para asegurar que no quede rastro de la sesión anterior.</p>
+<div class="language-php highlight"><pre><span></span><code><span id="__span-12-1"><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="cp">&lt;?php</span>
+</span><span id="__span-12-2"><a href="#__codelineno-12-2" id="__codelineno-12-2" name="__codelineno-12-2"></a>    <span class="nx">session</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">invalidate</span><span class="p">();</span>
+</span><span id="__span-12-3"><a href="#__codelineno-12-3" id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="cp">?&gt;</span>
+</span></code></pre></div>
+</li>
+</ul>
+<p>Como podemos apreciar, la API de sesión de Laravel no solo es una mejora sintáctica sobre <code>$_SESSION</code>; es una reingeniería completa que prioriza la seguridad, la escalabilidad y la claridad del código, permitiendo que aplicaciones complejas crezcan sin que la gestión del estado se convierta en un cuello de botella.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Manuel Sánchez Gomis
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["search.suggest", "search.highlight", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "content.code.copy", "content.tabs.link", "content.tooltips"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../../assets/_markdown_exec_pyodide.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../../_static/js/notebook.js"></script>
+      
+    
+  </body>
+</html>
